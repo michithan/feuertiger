@@ -1,11 +1,18 @@
 overwrite: true
-schema: "./dist/schema.graphql"
+hooks:
+  afterAllFileWrite:
+    - prettier --write
 generates:
-  ./dist/graphql.tsx:
+  ./dist/index.ts:
+    schema: "./dist/schema.graphql"
+    declarationKind: "interface"
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
-  ./dist/graphql.schema.json:
+      - typescript
+      - typescript-operations
+      - typescript-resolvers
+  ./dist/schema.json:
+    schema: "./dist/schema.graphql"
+    config:
+      minify: false
     plugins:
-      - "introspection"
+      - introspection

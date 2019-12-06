@@ -1,6 +1,6 @@
 import { SchemaDirectiveVisitor } from "apollo-server";
 
-export class TyperesolverDirective extends SchemaDirectiveVisitor {
+class TyperesolverDirective extends SchemaDirectiveVisitor {
   public visitObject(object: any) {
     console.log("object: ", object);
   }
@@ -8,3 +8,7 @@ export class TyperesolverDirective extends SchemaDirectiveVisitor {
     console.log("interface: ", inter);
   }
 }
+
+export default {
+  typeresolver: TyperesolverDirective
+};
