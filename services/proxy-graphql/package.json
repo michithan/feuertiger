@@ -1,5 +1,5 @@
 {
-  "name": "proxy-graphql",
+  "name": "@feuertiger/proxy-graphql",
   "version": "1.0.0",
   "description": "graphql backend, proxy to database",
   "main": "index.js",
@@ -10,7 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.9.12",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "@feuertiger/schema-graphql": "1.0.0"
   },
   "devDependencies": {
     "typescript": "^3.7.3",

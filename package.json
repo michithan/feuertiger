@@ -1,10 +1,20 @@
 {
   "name": "feuertiger",
+  "private": true,
   "version": "1.0.0",
   "scripts": {},
   "author": "",
   "license": "ISC",
+  "packages": [
+    "packages/*",
+    "services/*"
+  ],
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
   "devDependencies": {
+    "yarn": "^1.21.0",
     "lerna": "^3.19.0"
   }
 }

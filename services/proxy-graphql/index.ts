@@ -1,8 +1,9 @@
 import { ApolloServer } from "apollo-server";
 
+import { TyperesolverDirective } from "@feuertiger/schema-graphql";
+import { Node, Edge, Connection } from "@feuertiger/schema-graphql";
+
 import { requireGraphql } from "./utils";
-import { TyperesolverDirective } from "./directives";
-import { Node, Edge, Connection } from "./types";
 import { GetNode } from "./resolver";
 
 const schema = requireGraphql("./schema.graphql");

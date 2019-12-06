@@ -1,8 +1,8 @@
 {
-  "name": "schema-graphql",
+  "name": "@feuertiger/schema-graphql",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "tsc": "tsc",
     "combine": "node ./combine.js",
