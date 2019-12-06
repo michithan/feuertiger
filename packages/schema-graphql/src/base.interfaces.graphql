@@ -1,0 +1,13 @@
+interface Node {
+    id: ID!
+}
+
+interface Edge {
+    cursor: String!
+    node: Node
+}
+
+interface Connection {
+    pageInfo: PageInfo!
+    edges: [Edge]
+}

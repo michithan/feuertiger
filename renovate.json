@@ -1,0 +1,5 @@
+{
+    "extends": ["config:base"],
+    "reviewers": ["MonoMichi"],
+    "automerge": true
+}
