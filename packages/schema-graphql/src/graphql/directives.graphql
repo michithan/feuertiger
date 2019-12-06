@@ -1,0 +1,1 @@
+directive @typeresolver(function: String = "node") on OBJECT | INTERFACE

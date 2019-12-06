@@ -1,0 +1,10 @@
+{
+  "name": "feuertiger",
+  "version": "1.0.0",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.19.0"
+  }
+}

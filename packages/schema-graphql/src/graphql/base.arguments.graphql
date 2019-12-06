@@ -1,0 +1,6 @@
+# import * from "directives.graphql"
+
+input Filter {
+  skip: Int
+  search: String
+}

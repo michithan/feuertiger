@@ -1,0 +1,16 @@
+# import * from "directives.graphql"
+# import * from "base.arguments.graphql"
+# import * from "base.interfaces.graphql"
+# import * from "base.types.graphql"
+# import * from "person.type.graphql"
+# import * from "exercise.type.graphql"
+
+##############
+# Root Query #
+##############
+
+type Query {
+  node(id: ID!): Node
+  allPersons(filter: Filter): PersonConnection
+  allExercises(filter: Filter): ExerciseConnection
+}
