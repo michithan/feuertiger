@@ -2,26 +2,30 @@
   "name": "@feuertiger/schema-graphql",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./dist/index.ts",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
-    "tsc": "tsc",
+    "clean": "rimraf dist/*",
     "combine": "node ./combine.js",
     "generate": "graphql-codegen --config codegen.yml",
-    "build": "npm run combine && npm run tsc && npm run generate"
+    "build": "npm run clean && npm run combine && npm run generate"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node-fetch": "^2.5.4",
-    "apollo-server": "^2.9.13",
     "graphql": "^14.5.8"
   },
   "devDependencies": {
-    "graphql-import": "^0.7.1",
+    "prettier": "^1.19.1",
     "@graphql-codegen/cli": "^1.9.1",
+    "@graphql-codegen/introspection": "1.0.0",
     "@graphql-codegen/typescript": "1.0.0",
     "@graphql-codegen/typescript-operations": "1.0.0",
     "@graphql-codegen/typescript-react-apollo": "1.0.0",
-    "@graphql-codegen/introspection": "1.0.0"
+    "@graphql-codegen/typescript-resolvers": "^1.9.1",
+    "graphql-import": "^0.7.1",
+    "rimraf": "^3.0.0"
   }
 }

@@ -1,13 +1,18 @@
-# import * from "directives.graphql"
-# import * from "base.arguments.graphql"
-# import * from "base.interfaces.graphql"
-# import * from "base.types.graphql"
-# import * from "exercise.type.graphql"
-
 type Person implements Node {
   id: ID!
   firstname: String
   lastname: String
+  exercises: PersonExerciseConnection
+}
+
+type PersonExerciseEdge implements Edge {
+  cursor: String!
+  node: Exercise
+}
+
+type PersonExerciseConnection implements Connection {
+  pageInfo: PageInfo!
+  edges: [PersonExerciseEdge]
 }
 
 type PersonEdge implements Edge {

@@ -4,14 +4,16 @@
   "description": "graphql backend, proxy to database",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev ./index.ts"
+    "start": "ts-node-dev ./src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@feuertiger/schema-graphql": "1.0.0",
+    "@feuertiger/data-access-firebase": "1.0.0",
     "apollo-server": "^2.9.12",
     "express": "^4.17.1",
-    "@feuertiger/schema-graphql": "1.0.0"
+    "graphql-import": "^0.7.1"
   },
   "devDependencies": {
     "typescript": "^3.7.3",
