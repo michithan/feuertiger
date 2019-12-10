@@ -1,31 +1,31 @@
 {
-  "name": "@feuertiger/schema-graphql",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./dist/index.ts",
-  "files": [
-    "./dist"
-  ],
-  "scripts": {
-    "clean": "rimraf dist/*",
-    "combine": "node ./combine.js",
-    "generate": "graphql-codegen --config codegen.yml",
-    "build": "npm run clean && npm run combine && npm run generate"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "graphql": "^14.5.8"
-  },
-  "devDependencies": {
-    "prettier": "^1.19.1",
-    "@graphql-codegen/cli": "^1.9.1",
-    "@graphql-codegen/introspection": "1.9.1",
-    "@graphql-codegen/typescript": "1.0.0",
-    "@graphql-codegen/typescript-operations": "1.0.0",
-    "@graphql-codegen/typescript-react-apollo": "1.0.0",
-    "@graphql-codegen/typescript-resolvers": "^1.9.1",
-    "graphql-import": "^0.7.1",
-    "rimraf": "^3.0.0"
-  }
+    "name": "@feuertiger/schema-graphql",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./dist/index.ts",
+    "files": [
+        "./dist"
+    ],
+    "scripts": {
+        "clean": "rimraf dist/*",
+        "combine": "node ./combine.js",
+        "generate": "graphql-codegen --config codegen.yml",
+        "build": "npm run clean && npm run combine && npm run generate"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "graphql": "^14.5.8"
+    },
+    "devDependencies": {
+        "prettier": "^1.19.1",
+        "@graphql-codegen/cli": "^1.9.1",
+        "@graphql-codegen/introspection": "1.9.1",
+        "@graphql-codegen/typescript": "1.0.0",
+        "@graphql-codegen/typescript-operations": "1.0.0",
+        "@graphql-codegen/typescript-react-apollo": "1.0.0",
+        "@graphql-codegen/typescript-resolvers": "^1.9.1",
+        "graphql-import": "^0.7.1",
+        "rimraf": "^3.0.0"
+    }
 }
