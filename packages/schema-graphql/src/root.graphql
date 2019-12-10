@@ -17,3 +17,7 @@ type Query {
     allPersons(filter: Filter): PersonConnection
     allExercises(filter: Filter): ExerciseConnection
 }
+
+type Mutation {
+    delete(id: ID!): Boolean
+}

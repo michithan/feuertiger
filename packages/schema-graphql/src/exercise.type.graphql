@@ -15,3 +15,19 @@ type ExerciseConnection implements Connection {
     pageInfo: PageInfo!
     edges: [ExerciseEdge]
 }
+
+input Exercise {
+    topic: String!
+    timeslot: Timeslot
+    leaders: PersonConnection
+    participants: PersonConnection
+}
+
+extend type Mutation {
+    createExercise(exercise: Exercise!): Exercise
+    updateExercise(exercise: Exercise!): Exercise
+    addLeadersToExercise(exerciseId: ID!, personId: [ID]!): boolean
+    addParticipantsToExercise(exerciseId: ID!, personId: [ID]!): boolean
+    removeLeadersFromExercise(exerciseId: ID!, personId: [ID]!): boolean
+    removeParticipantsFromExercise(exerciseId: ID!, personId: [ID]!): boolean
+}
