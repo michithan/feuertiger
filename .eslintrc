@@ -1,12 +1,12 @@
 {
-  "extends": [
-    "eslint-config-airbnb-base",
-    "eslint-plugin-import",
-    "eslint-plugin-jsx-a11y",
-    "eslint-plugin-react",
-    "eslint-plugin-react-hooks"
-  ],
-  "rules": {
-    "comma-dangle": 0
-  }
+    "extends": [
+        "eslint-config-airbnb-base",
+        "eslint-plugin-import",
+        "eslint-plugin-jsx-a11y",
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks"
+    ],
+    "rules": {
+        "comma-dangle": 0
+    }
 }
