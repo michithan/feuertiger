@@ -1,15 +1,15 @@
 {
-  "name": "@feuertiger/utils-graphql",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./dist/index.js",
-  "scripts": {
-    "build": "tsc"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@feuertiger/schema-graphql": "1.0.0",
-    "graphql": "^14.5.8"
-  }
+    "name": "@feuertiger/utils-graphql",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./dist/index.js",
+    "scripts": {
+        "build": "tsc"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@feuertiger/schema-graphql": "1.0.0",
+        "graphql": "^14.5.8"
+    }
 }
