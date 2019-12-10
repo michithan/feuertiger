@@ -9,7 +9,6 @@ import { Node, Connection } from '@feuertiger/schema-graphql';
 import { __schema } from '@feuertiger/schema-graphql/dist/schema.json';
 
 import { INodeService } from '../services/NodeService';
-import { IConnectionService } from '../services/ConnectionService';
 
 export const resolveObjectResolver = (
     field: IntrospectionField,
@@ -17,17 +16,14 @@ export const resolveObjectResolver = (
     fieldObject: IntrospectionObjectType,
     service: INodeService
 ) => async (
-    source: any,
+    parent: any,
     args: any,
     context: any,
     info: GraphQLResolveInfo & {
         mergeInfo: MergeInfo;
     }
 ): Promise<Node> => {
-    const id = args.id || source[field.name];
-
-    console.log('id: ', id);
-
+    const { id } = args || parent[field.name];
     return await service.GetById(id);
 };
 
@@ -35,21 +31,15 @@ export const resolveListResolver = (
     field: IntrospectionField,
     parentObject: IntrospectionObjectType,
     fieldObject: IntrospectionObjectType,
-    service: IConnectionService
-) => (
-    source: any,
+    service: INodeService
+) => async (
+    parent: any,
     args: any,
     context: any,
     info: GraphQLResolveInfo & {
         mergeInfo: MergeInfo;
     }
-): Connection => {
-    console.log('source: ', source);
-
-    return {
-        pageInfo: {
-            hasNextPage: false
-        },
-        edges: []
-    };
+): Promise<Connection> => {
+    const { id } = parent;
+    return await service.GetEdgesById(id, field.name);
 };

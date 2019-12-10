@@ -1,12 +1,6 @@
-import admin from 'firebase-admin';
-import { ServiceAccount } from 'firebase-admin';
-import {
-    CollectionReference,
-    DocumentSnapshot,
-    WriteResult
-} from '@google-cloud/firestore';
+import admin, { ServiceAccount } from 'firebase-admin';
 
-import { Firestore } from '@google-cloud/firestore';
+import { WriteResult, Firestore } from '@google-cloud/firestore';
 
 import personsSeed from './seeds/seed-persons.json';
 import exerciseSeed from './seeds/seed-exercise.json';
@@ -24,15 +18,9 @@ export const seed = (db: Firestore): void => {
         const id = `Person:${index}`;
         person.id = id;
 
-        const documentSnapshot: DocumentSnapshot = await personsCollection
+        const writeResult: WriteResult = await personsCollection
             .doc(id)
-            .get();
-
-        if (!documentSnapshot.exists) {
-            const writeResult: WriteResult = await personsCollection
-                .doc(id)
-                .set(person);
-        }
+            .set(person);
     });
 
     const exerciseCollection = db.collection('Exercise');
@@ -40,14 +28,8 @@ export const seed = (db: Firestore): void => {
         const id = `Exercise:${index}`;
         exercise.id = id;
 
-        const documentSnapshot: DocumentSnapshot = await exerciseCollection
+        const writeResult: WriteResult = await exerciseCollection
             .doc(id)
-            .get();
-
-        if (!documentSnapshot.exists) {
-            const writeResult: WriteResult = await exerciseCollection
-                .doc(id)
-                .set(exercise);
-        }
+            .set(exercise);
     });
 };

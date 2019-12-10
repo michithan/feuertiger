@@ -7,14 +7,19 @@ import { IResolvers, IResolverObject, IFieldResolver } from 'apollo-server';
 
 import {
     filterIntrospectionObjectTypes,
-    isConnectionObjectType
+    isConnectionObjectType,
+    isNodeObjectType,
+    isIntrospectionQueryObjectType
 } from '@feuertiger/utils-graphql';
 import { __schema } from '@feuertiger/schema-graphql/dist/schema.json';
 
-import { ResolveType, IServiceMap } from './ServiceMap';
+import { IServiceMap } from './ServiceMap';
 import { resolveObjectResolver, resolveListResolver } from './ServiceResolver';
-import { IConnectionService } from '../services/ConnectionService';
-import { INodeService } from '../services/NodeService';
+
+export enum ResolveType {
+    Node,
+    Connection
+}
 
 export interface FieldObjectTuple {
     field: IntrospectionField;
@@ -55,7 +60,10 @@ const mapFieldsToObjectType = (
         })
         .filter(({ fieldObject }) => !!fieldObject);
 
-const fieldObjectMap: Array<FieldObjectMapping> = allTypes.reduce(
+const fieldObjectMap: Array<FieldObjectMapping> = [
+    ...allTypes.filter(isNodeObjectType),
+    ...allTypes.filter(isIntrospectionQueryObjectType)
+].reduce(
     (
         fieldObjectMappings: Array<FieldObjectMapping>,
         object: IntrospectionObjectType
@@ -88,20 +96,12 @@ export const createResolvers = (serviceMap: IServiceMap): IResolvers =>
             resolvers: IResolvers,
             fieldObjectMapping: FieldObjectMapping
         ): IResolvers => {
-            const { service, type: serviceType } = serviceMap[
-                fieldObjectMapping.fieldObject.name
-            ];
-
             const {
                 field,
                 fieldObject,
                 parentObject,
-                type: fieldType
+                type
             } = fieldObjectMapping;
-
-            if (fieldType !== serviceType) {
-                throw 'internal Resolver-Service mapping exception!';
-            }
 
             const objectName = parentObject.name;
             const fieldName = field.name;
@@ -109,19 +109,22 @@ export const createResolvers = (serviceMap: IServiceMap): IResolvers =>
             const resolverObject = (resolvers[objectName] ||
                 {}) as IResolverObject;
 
-            if (serviceType === ResolveType.Connection) {
+            if (type === ResolveType.Connection) {
+                const service =
+                    serviceMap[fieldObjectMapping.parentObject.name];
                 resolverObject[fieldName] = resolveListResolver(
                     field,
                     fieldObject,
                     parentObject,
-                    service as IConnectionService
+                    service
                 );
             } else {
+                const service = serviceMap[fieldObjectMapping.fieldObject.name];
                 resolverObject[fieldName] = resolveObjectResolver(
                     field,
                     fieldObject,
                     parentObject,
-                    service as INodeService
+                    service
                 );
             }
 

@@ -10,6 +10,7 @@ import {
     IServiceMap,
     createResolvers
 } from '@feuertiger/data-access-firebase';
+import { ParseId } from '@feuertiger/utils-graphql';
 
 import { firebase as secrets } from '../../../secrets.json';
 
@@ -28,15 +29,7 @@ const typeResolvers: IResolvers = {
             abstractType: GraphQLAbstractType
         ) => {
             const { id } = source;
-            const type = id.split(':').shift();
-
-            console.log('source: ', source);
-            console.log('context: ', context);
-
-            if (!type) {
-                throw Error(`invalid globalid: ${id}`);
-            }
-
+            const { type } = ParseId(id);
             return type;
         }
     },
@@ -46,12 +39,7 @@ const typeResolvers: IResolvers = {
             context: any,
             info: GraphQLResolveInfo,
             abstractType: GraphQLAbstractType
-        ) => {
-            console.log('source: ', source);
-            console.log('context: ', context);
-
-            return 'Edge';
-        }
+        ) => 'Edge'
     },
     Connection: {
         __resolveType: () => (
@@ -59,12 +47,7 @@ const typeResolvers: IResolvers = {
             context: any,
             info: GraphQLResolveInfo,
             abstractType: GraphQLAbstractType
-        ) => {
-            console.log('source: ', source);
-            console.log('context: ', context);
-
-            return 'Connection';
-        }
+        ) => 'Connection'
     }
 };
 
