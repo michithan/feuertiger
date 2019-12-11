@@ -23,7 +23,7 @@ const Nav = () => (
             <StyledIconButton edge="start" color="inherit" aria-label="menu">
                 <MenuIcon />
             </StyledIconButton>
-            <StyledTypography variant="h6">News</StyledTypography>
+            <StyledTypography variant="h6">Feuertieger</StyledTypography>
             <Button color="inherit">Login</Button>
         </Toolbar>
     </AppBar>
