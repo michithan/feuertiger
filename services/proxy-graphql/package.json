@@ -4,7 +4,7 @@
     "description": "graphql backend, proxy to database",
     "main": "index.js",
     "scripts": {
-        "start": "ts-node-dev ./src/index.ts"
+        "dev": "ts-node-dev ./src/index.ts"
     },
     "author": "",
     "license": "ISC",
