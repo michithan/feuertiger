@@ -31,6 +31,6 @@
         "eslint-plugin-react-hooks": "^2.3.0",
         "lerna": "^3.19.0",
         "prettier": "^1.19.1",
-        "yarn": "^1.21.0"
+        "yarn": "^1.21.1"
     }
 }
