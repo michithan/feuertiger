@@ -10,6 +10,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '13.x'
+    - run: yarn global add lerna
     - run: yarn
     - run: lerna bootstrap
     - run: lerna run build
