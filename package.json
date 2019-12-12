@@ -5,10 +5,10 @@
     "author": "",
     "license": "ISC",
     "scripts": {
-        "link": "node ./scripts/linkdist.js",
+        "linkdist": "node ./scripts/linkdist.js",
         "lint": "eslint ./**/*.ts --fix",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.json ./**/*.graphql --write",
-        "bootstrap": "lerna bootstrap",
+        "link": "lerna link",
         "build": "lerna run build"
     },
     "packages": [
