@@ -10,6 +10,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '13.x'
-    - run: yarn --frozen-lockfile
+    - uses: bahmutov/npm-install@v1
     - run: yarn run link
     - run: yarn run build
