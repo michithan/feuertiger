@@ -8,6 +8,7 @@
         "link": "node ./scripts/linkdist.js",
         "lint": "eslint ./**/*.ts --fix",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.json ./**/*.graphql --write",
+        "bootstrap": "lerna run bootstrap",
         "build": "lerna run build"
     },
     "packages": [
