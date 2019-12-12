@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on: [push]
 
@@ -7,13 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Setup node
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v1
       with:
         node-version: '13.x'
-    - name: Install
-      run: yarn
-    - name: Bootstrap
-      run: lerna bootstrap
-    - name: Build
-      run: lerna run build
+    - run: yarn
+    - run: lerna bootstrap
+    - run: lerna run build
