@@ -1,4 +1,4 @@
-import { IntrospectionObjectType, IntrospectionSchema } from 'graphql';
+import { IntrospectionOutputType, IntrospectionSchema } from 'graphql';
 import { Firestore } from '@google-cloud/firestore';
 import { __schema } from '@feuertiger/schema-graphql/dist/schema.json';
 
@@ -25,13 +25,13 @@ const ServiceClassMap: IServiceClassMap = {
 };
 
 const graphQLSchema = (__schema as unknown) as IntrospectionSchema;
-const allTypes: IntrospectionObjectType[] = filterIntrospectionObjectTypes(
+const allTypes: IntrospectionOutputType[] = filterIntrospectionObjectTypes(
     graphQLSchema
 );
 
 export const injectServices = (db: Firestore): IServiceMap =>
     allTypes.reduce(
-        (serviceMap: IServiceMap, type: IntrospectionObjectType) => {
+        (serviceMap: IServiceMap, type: IntrospectionOutputType) => {
             const Service = ServiceClassMap[type.name] || ServiceClassMap.Node;
             serviceMap[type.name as string] = new Service(db, type.name);
             return serviceMap;

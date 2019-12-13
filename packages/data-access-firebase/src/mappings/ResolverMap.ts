@@ -1,6 +1,7 @@
 import {
     IntrospectionSchema,
     IntrospectionObjectType,
+    IntrospectionInterfaceType,
     IntrospectionField
 } from 'graphql';
 import { IResolvers, IResolverObject, IFieldResolver } from 'apollo-server';
@@ -28,13 +29,17 @@ export interface FieldObjectTuple {
 
 export interface FieldObjectMapping {
     field: IntrospectionField;
-    fieldObject: IntrospectionObjectType;
-    parentObject: IntrospectionObjectType;
+    fieldObject: ResolveableOutputType;
+    parentObject: ResolveableOutputType;
     type: ResolveType;
 }
 
+export type ResolveableOutputType =
+    | IntrospectionObjectType
+    | IntrospectionInterfaceType;
+
 const graphQLSchema = (__schema as unknown) as IntrospectionSchema;
-const allTypes: IntrospectionObjectType[] = filterIntrospectionObjectTypes(
+const allTypes: ResolveableOutputType[] = filterIntrospectionObjectTypes(
     graphQLSchema
 );
 
@@ -66,7 +71,7 @@ const fieldObjectMap: Array<FieldObjectMapping> = [
 ].reduce(
     (
         fieldObjectMappings: Array<FieldObjectMapping>,
-        object: IntrospectionObjectType
+        object: ResolveableOutputType
     ): Array<FieldObjectMapping> => {
         const fieldTuples: Array<FieldObjectTuple> = mapFieldsToObjectType(
             object.fields
