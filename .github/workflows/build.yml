@@ -1,0 +1,15 @@
+name: Build
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '13.x'
+    - uses: bahmutov/npm-install@v1
+    - run: yarn run link
+    - run: yarn run build

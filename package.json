@@ -5,9 +5,11 @@
     "author": "",
     "license": "ISC",
     "scripts": {
-        "link": "node ./scripts/linkdist.js",
+        "linkdist": "node ./scripts/linkdist.js",
         "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
-        "pretty": "prettier ./**/*.ts ./**/*.tsx ./**/*.js ./**/*.json ./**/*.graphql --write"
+        "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
+        "link": "lerna link",
+        "build": "lerna run build"
     },
     "packages": [
         "packages/*",
