@@ -6,8 +6,8 @@
     "license": "ISC",
     "scripts": {
         "link": "node ./scripts/linkdist.js",
-        "lint": "eslint ./**/*.ts --fix",
-        "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.json ./**/*.graphql --write"
+        "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
+        "pretty": "prettier ./**/*.ts ./**/*.tsx ./**/*.js ./**/*.json ./**/*.graphql --write"
     },
     "packages": [
         "packages/*",
