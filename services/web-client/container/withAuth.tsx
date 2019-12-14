@@ -17,7 +17,6 @@ export default (WrappedComponent: React.ComponentType<AppProps>) => {
     let firebaseApp: firebase.app.App;
 
     try {
-        console.log('firebaseConfig:', tokens);
         firebaseApp = firebase.initializeApp(tokens);
     } catch (error) {
         // we skip the "already exists" message which is
