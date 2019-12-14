@@ -13,7 +13,7 @@
         "@feuertiger/tools": "1.0.0",
         "@material-ui/core": "4.7.2",
         "@material-ui/icons": "4.5.1",
-        "@material-ui/styles": "^4.7.1",
+        "@material-ui/styles": "4.7.1",
         "apollo-cache-inmemory": "1.6.5",
         "apollo-client": "2.6.8",
         "apollo-link-http": "1.5.16",
