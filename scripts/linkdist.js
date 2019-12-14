@@ -12,17 +12,20 @@ const getPackagePath = name => {
     const cwd = process.cwd();
     const pkgs = await getPackages(cwd);
 
-    for (pkg of pkgs) {
+    [...pkgs].forEach(pkg => {
         const path = getPackagePath(pkg.name);
         const distpath = `${path}dist`;
         const distpathindex = `${distpath}/index.js`;
 
-        fs.existsSync(distpath) || fs.mkdirSync(distpath);
+        if (!fs.existsSync(distpath)) {
+            fs.mkdirSync(distpath);
+        }
         fs.writeFileSync(distpathindex, linkscript, {
             encoding: 'utf8',
             flag: 'w'
         });
 
+        // eslint-disable-next-line no-console
         console.log(`linked "${distpathindex}" to "../src/index.ts"`);
-    }
+    });
 })();

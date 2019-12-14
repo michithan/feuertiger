@@ -8,14 +8,12 @@ import {
     List,
     ListItem,
     ListItemIcon,
-    ListItemText,
-    ListSubheader
+    ListItemText
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const drawerWidth = 240;
 

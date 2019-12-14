@@ -4,7 +4,6 @@ import gql from 'graphql-tag';
 import { Grid, Paper, Button, CircularProgress, Fab } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
 import AddMember from './addMember';
 
 interface State {

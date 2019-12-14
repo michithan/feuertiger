@@ -1,1 +1,1 @@
-(() => require('./startup'))();
+export * from './server';
