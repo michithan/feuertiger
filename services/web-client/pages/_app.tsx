@@ -4,8 +4,9 @@ import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/react-hooks';
 import red from '@material-ui/core/colors/red';
+import Skeleton from '@material-ui/lab/Skeleton';
 
-import withAuth from '../container/withAuth';
+import withAuth, { AuthProps } from '../container/withAuth';
 import withApollo, { ApolloProps } from '../container/withApollo';
 import Content from '../container/content';
 
@@ -29,7 +30,7 @@ const theme = createMuiTheme({
     }
 });
 
-class App extends NextApp<AppInitialProps & ApolloProps> {
+class App extends NextApp<AppInitialProps & ApolloProps & AuthProps> {
     // remove it here
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
@@ -39,15 +40,50 @@ class App extends NextApp<AppInitialProps & ApolloProps> {
     }
 
     render() {
-        const { Component, pageProps, apollo } = this.props;
+        const {
+            Component,
+            pageProps,
+            apollo,
+            user,
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            signOut,
+            loading,
+            error
+        } = this.props;
+
+        const showLogin = !loading && !user;
+        const showSkeleton = loading || !user;
 
         return (
             <ApolloProvider client={apollo}>
                 <ThemeProvider theme={theme}>
                     <Head />
-                    <Login />
-                    <Content>
-                        <Component {...pageProps} />
+                    {showLogin && (
+                        <Login
+                            loading={loading}
+                            signInWithEmailAndPassword={
+                                signInWithEmailAndPassword
+                            }
+                            createUserWithEmailAndPassword={
+                                createUserWithEmailAndPassword
+                            }
+                            error={error}
+                        />
+                    )}
+                    <Content signOut={signOut}>
+                        {showSkeleton ? (
+                            <React.Fragment>
+                                <Skeleton height={40} />
+                                <Skeleton variant="rect" height={190} />
+                                <Skeleton height={40} />
+                                <Skeleton variant="rect" height={190} />
+                                <Skeleton height={40} />
+                                <Skeleton variant="rect" height={190} />
+                            </React.Fragment>
+                        ) : (
+                            <Component {...pageProps} />
+                        )}
                     </Content>
                 </ThemeProvider>
             </ApolloProvider>
@@ -56,4 +92,3 @@ class App extends NextApp<AppInitialProps & ApolloProps> {
 }
 
 export default withApollo(withAuth(App));
-// export default withApollo(App);

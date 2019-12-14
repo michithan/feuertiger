@@ -11,7 +11,7 @@ import withFirebaseAuth, {
 const { publicRuntimeConfig } = getConfig();
 const { tokens } = publicRuntimeConfig;
 
-interface AuthProps extends WrappedComponentProps, AppProps {}
+export interface AuthProps extends WrappedComponentProps, AppProps {}
 
 export default (WrappedComponent: React.ComponentType<AppProps>) => {
     let firebaseApp: firebase.app.App;
@@ -25,21 +25,13 @@ export default (WrappedComponent: React.ComponentType<AppProps>) => {
             console.error('Firebase initialization error', error.stack);
         }
     }
-    const firebaseAppAuth = firebaseApp && firebaseApp.auth();
-    const providers = {};
 
-    const authWrapper = ({
-        user,
-        signOut,
-        signInWithEmailAndPassword,
-        ...pageProps
-    }: AuthProps) => {
-        if (user) {
-            return <WrappedComponent {...pageProps} />;
-        }
-        return <WrappedComponent {...pageProps} />;
-        // return <div>Please sign in.</div>;
-    };
+    const providers = {};
+    const firebaseAppAuth = firebaseApp && firebaseApp.auth();
+
+    const authWrapper = (authProps: AuthProps) => (
+        <WrappedComponent {...authProps} />
+    );
 
     return (withFirebaseAuth({
         providers,

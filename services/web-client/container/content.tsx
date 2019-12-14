@@ -6,6 +6,7 @@ import SideBar from '../components/sideBar';
 
 type Props = {
     children?: ReactNode;
+    signOut: () => void;
 };
 
 type State = {
@@ -42,11 +43,15 @@ export default class Conntent extends React.Component<Props, State> {
 
     render() {
         const { open } = this.state;
-        const { children } = this.props;
+        const { children, signOut } = this.props;
         return (
             <RootDiv>
                 <CssBaseline />
-                <AppBar open={open} handleDrawerOpen={this.handleDrawerOpen} />
+                <AppBar
+                    open={open}
+                    handleDrawerOpen={this.handleDrawerOpen}
+                    signOut={signOut}
+                />
                 <SideBar
                     open={open}
                     handleDrawerClose={this.handleDrawerClose}

@@ -1,11 +1,5 @@
 import React from 'react';
 import {
-    Grid,
-    Box,
-    Paper,
-    Link,
-    Checkbox,
-    FormControlLabel,
     TextField,
     CssBaseline,
     Button,
@@ -38,7 +32,26 @@ const SubmitButton = styled(Button)`
     margin: ${({ theme }) => theme.spacing(3, 0, 2)};
 `;
 
-export default class Login extends React.Component {
+interface Props {
+    signInWithEmailAndPassword: (email: string, password: string) => void;
+    createUserWithEmailAndPassword: (email: string, password: string) => void;
+    error?: firebase.FirebaseError;
+    loading: boolean;
+}
+
+export default class Login extends React.Component<Props> {
+    handleLogin = event => {
+        event.preventDefault();
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+
+        try {
+            this.props.signInWithEmailAndPassword(email, password);
+        } catch (error) {
+            console.log('error:', error);
+        }
+    };
+
     render() {
         return (
             <Dialog aria-labelledby="simple-dialog-title" open>
@@ -51,7 +64,7 @@ export default class Login extends React.Component {
                         <Typography component="h1" variant="h5">
                             Login
                         </Typography>
-                        <StyledForm noValidate>
+                        <StyledForm noValidate onSubmit={this.handleLogin}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"

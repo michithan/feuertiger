@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import styled from 'styled-components';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -45,33 +44,39 @@ const StyledTypography = styled(Typography)`
 interface Props {
     open: boolean;
     handleDrawerOpen: () => void;
+    signOut: () => void;
 }
 
-export default ({ open, handleDrawerOpen }: Props) => (
-    <StyledAppBar position="absolute" open={open}>
-        <StyledToolbar>
-            <StyledIconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                open={open}
-            >
-                <MenuIcon />
-            </StyledIconButton>
-            <StyledTypography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-            >
-                Dashboard
-            </StyledTypography>
-            <Link href="/login">
-                <IconButton color="inherit">
-                    <ExitToAppIcon />
-                </IconButton>
-            </Link>
-        </StyledToolbar>
-    </StyledAppBar>
-);
+export default class Bar extends React.Component<Props> {
+    handleLogout = () => this.props.signOut();
+
+    render() {
+        const { open, handleDrawerOpen } = this.props;
+        return (
+            <StyledAppBar position="absolute" open={open}>
+                <StyledToolbar>
+                    <StyledIconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        open={open}
+                    >
+                        <MenuIcon />
+                    </StyledIconButton>
+                    <StyledTypography
+                        component="h1"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                    >
+                        Dashboard
+                    </StyledTypography>
+                    <IconButton color="inherit" onClick={this.handleLogout}>
+                        <ExitToAppIcon />
+                    </IconButton>
+                </StyledToolbar>
+            </StyledAppBar>
+        );
+    }
+}
