@@ -73,14 +73,14 @@ class App extends NextApp<AppInitialProps & ApolloProps & AuthProps> {
                     )}
                     <Content signOut={signOut}>
                         {showSkeleton ? (
-                            <React.Fragment>
+                            <>
                                 <Skeleton height={40} />
                                 <Skeleton variant="rect" height={190} />
                                 <Skeleton height={40} />
                                 <Skeleton variant="rect" height={190} />
                                 <Skeleton height={40} />
                                 <Skeleton variant="rect" height={190} />
-                            </React.Fragment>
+                            </>
                         ) : (
                             <Component {...pageProps} />
                         )}
