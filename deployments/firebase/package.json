@@ -8,7 +8,7 @@
         "deploy": "firebase deploy --only functions",
         "logs": "firebase functions:log"
     },
-    "main": "lib/index.js",
+    "main": "dist/index.js",
     "dependencies": {
         "@feuertiger/proxy-graphql": "1.0.0",
         "@feuertiger/web-client": "1.0.0",
