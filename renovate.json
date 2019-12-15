@@ -1,6 +1,5 @@
 {
     "extends": ["config:base"],
-    "assignees": ["MonoMichi"],
-    "assignAutomerge": true,
+    "reviewers": ["MonoMichi"],
     "automerge": true
 }
