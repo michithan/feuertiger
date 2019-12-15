@@ -25,6 +25,7 @@ const drawerClosed = ({ theme }) => css`
     }
 `;
 
+// eslint-disable-next-line
 const StyledDrawer = styled(({ open, ...props }) => <Drawer {...props} />)`
     > div {
         position: relative;

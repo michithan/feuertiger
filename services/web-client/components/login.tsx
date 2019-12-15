@@ -11,6 +11,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 
+import { AuthProps } from '../container/withAuth';
+
 const PaperDiv = styled.div`
     margin: ${({ theme }) => theme.spacing(8, 4)};
     display: flex;
@@ -32,21 +34,16 @@ const SubmitButton = styled(Button)`
     margin: ${({ theme }) => theme.spacing(3, 0, 2)};
 `;
 
-interface Props {
-    signInWithEmailAndPassword: (email: string, password: string) => void;
-    createUserWithEmailAndPassword: (email: string, password: string) => void;
-    error?: firebase.FirebaseError;
-    loading: boolean;
-}
+interface Props extends AuthProps {}
 
 export default class Login extends React.Component<Props> {
     handleLogin = event => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
-
+        const { auth } = this.props;
         try {
-            this.props.signInWithEmailAndPassword(email, password);
+            auth.signInWithEmailAndPassword(email, password);
         } catch (error) {
             console.log('error:', error);
         }

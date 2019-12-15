@@ -4,8 +4,11 @@ import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
+import { AuthProps } from '../container/withAuth';
+
 const drawerWidth = 240;
 
+// remove it here
 const StyledAppBar = styled(({ open, ...props }) => <AppBar {...props} />)`
     z-index: 1;
     transition: ${({ open, theme: { transitions } }) =>
@@ -30,6 +33,7 @@ const StyledToolbar = styled(Toolbar)`
     padding-right: 24;
 `;
 
+// remove it here
 const StyledIconButton = styled(({ open, ...props }) => (
     <IconButton {...props} />
 ))`
@@ -41,14 +45,16 @@ const StyledTypography = styled(Typography)`
     flex-grow: 1;
 `;
 
-interface Props {
+interface Props extends AuthProps {
     open: boolean;
     handleDrawerOpen: () => void;
-    signOut: () => void;
 }
 
 export default class Bar extends React.Component<Props> {
-    handleLogout = () => this.props.signOut();
+    handleLogout = () => {
+        const { auth } = this.props;
+        auth.signOut();
+    };
 
     render() {
         const { open, handleDrawerOpen } = this.props;

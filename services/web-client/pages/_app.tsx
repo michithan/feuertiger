@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import red from '@material-ui/core/colors/red';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import withAuth, { AuthProps } from '../container/withAuth';
+import withAuth, { AuthProps, AuthStateProps } from '../container/withAuth';
 import withApollo, { ApolloProps } from '../container/withApollo';
 import Content from '../container/content';
 
@@ -30,7 +30,13 @@ const theme = createMuiTheme({
     }
 });
 
-class App extends NextApp<AppInitialProps & ApolloProps & AuthProps> {
+interface Props
+    extends AppInitialProps,
+        ApolloProps,
+        AuthProps,
+        AuthStateProps {}
+
+class App extends NextApp<Props> {
     // remove it here
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
@@ -44,34 +50,20 @@ class App extends NextApp<AppInitialProps & ApolloProps & AuthProps> {
             Component,
             pageProps,
             apollo,
-            user,
-            signInWithEmailAndPassword,
-            createUserWithEmailAndPassword,
-            signOut,
-            loading,
-            error
+            auth,
+            isLoading,
+            isSignedIn
         } = this.props;
 
-        const showLogin = !loading && !user;
-        const showSkeleton = loading || !user;
+        const showLogin = !isLoading && !isSignedIn;
+        const showSkeleton = isLoading || !isSignedIn;
 
         return (
             <ApolloProvider client={apollo}>
                 <ThemeProvider theme={theme}>
                     <Head />
-                    {showLogin && (
-                        <Login
-                            loading={loading}
-                            signInWithEmailAndPassword={
-                                signInWithEmailAndPassword
-                            }
-                            createUserWithEmailAndPassword={
-                                createUserWithEmailAndPassword
-                            }
-                            error={error}
-                        />
-                    )}
-                    <Content signOut={signOut}>
+                    {showLogin && <Login auth={auth} />}
+                    <Content auth={auth}>
                         {showSkeleton ? (
                             <>
                                 <Skeleton height={40} />
@@ -82,6 +74,7 @@ class App extends NextApp<AppInitialProps & ApolloProps & AuthProps> {
                                 <Skeleton variant="rect" height={190} />
                             </>
                         ) : (
+                            // eslint-disable-next-line
                             <Component {...pageProps} />
                         )}
                     </Content>
@@ -91,4 +84,8 @@ class App extends NextApp<AppInitialProps & ApolloProps & AuthProps> {
     }
 }
 
-export default withApollo(withAuth(App));
+// const appWithApollo = withApollo(App);
+// export default withAuth(appWithApollo);
+
+const appWithAuth = (withAuth(App) as unknown) as typeof NextApp;
+export default withApollo(appWithAuth);

@@ -1,4 +1,5 @@
 (() =>
+    // remove it here
     require('./server')
         .gqlServer()
         .listen({ port: 4000 }, () =>

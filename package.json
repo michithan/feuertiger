@@ -7,7 +7,7 @@
     "scripts": {
         "linkdist": "node ./scripts/linkdist.js",
         "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
-        "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts,tsx}\"",
+        "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts}\"",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "link": "lerna link",
         "build": "lerna run build"
