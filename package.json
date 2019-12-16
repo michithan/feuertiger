@@ -9,8 +9,12 @@
         "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
         "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts}\"",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
+        "publish": "lerna publish from-package",
         "link": "lerna link",
         "build": "lerna run build"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
     },
     "packages": [
         "packages/*",
@@ -23,9 +27,8 @@
         "deployments/*"
     ],
     "dependencies": {
-        "@lerna/project": "3.18.0"
-    },
-    "devDependencies": {
+        "@lerna/project": "3.18.0",
+        "dotenv": "^8.2.0",
         "@lerna/package-graph": "3.18.5",
         "@typescript-eslint/eslint-plugin": "2.11.0",
         "@typescript-eslint/parser": "2.11.0",
