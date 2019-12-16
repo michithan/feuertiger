@@ -6,7 +6,7 @@
         "shell": "npm run build && firebase functions:shell",
         "start": "npm run shell",
         "deploy": "firebase deploy --only functions",
-        "logs": "firebase functions:log"
+        "logs": "npm login --registry=https://npm.pkg.github.com:_authToken=TOKEN firebase functions:log"
     },
     "main": "./dist/index.js",
     "dependencies": {
