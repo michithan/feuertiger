@@ -17,9 +17,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/schema-graphql": "1.0.0",
+        "@feuertiger/schema-graphql": "^1.0.0",
         "graphql": "^14.5.8",
         "uuid": "^3.3.3"
     },
-    "gitHead": "d8d6e969b2b166f7f319aed08a9a3789dbe6eecb"
+    "gitHead": "0e4f42b9013e550884aa296d0ff6f1f5ab0af81f"
 }

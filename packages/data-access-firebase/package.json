@@ -17,8 +17,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/schema-graphql": "1.0.0",
-        "@feuertiger/utils-graphql": "1.0.0",
+        "@feuertiger/schema-graphql": "^1.0.0",
+        "@feuertiger/utils-graphql": "^1.0.0",
         "apollo-server": "^2.9.13",
         "firebase": "^7.5.2",
         "firebase-admin": "^8.8.0",
@@ -28,5 +28,5 @@
         "@types/node-fetch": "2.5.4",
         "@types/uuid": "3.4.6"
     },
-    "gitHead": "d8d6e969b2b166f7f319aed08a9a3789dbe6eecb"
+    "gitHead": "0e4f42b9013e550884aa296d0ff6f1f5ab0af81f"
 }
