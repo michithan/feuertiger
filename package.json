@@ -9,7 +9,7 @@
         "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
         "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts}\"",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
-        "publish": "",
+        "publish": "lerna run publish from-package",
         "link": "lerna link",
         "build": "lerna run build"
     },
