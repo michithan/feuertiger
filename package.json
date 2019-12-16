@@ -9,12 +9,9 @@
         "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
         "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts}\"",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
-        "publish": "lerna publish from-package --registry https://npm.pkg.github.com/",
+        "publish": "",
         "link": "lerna link",
         "build": "lerna run build"
-    },
-    "publishConfig": {
-        "registry": "https://npm.pkg.github.com/"
     },
     "packages": [
         "packages/*",
