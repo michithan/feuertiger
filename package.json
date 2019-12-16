@@ -9,7 +9,7 @@
         "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
         "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts}\"",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
-        "publish:canary": "lerna publish --yes --canary --dist-tag canary",
+        "version:canary": "lerna version --yes --exact",
         "publish": "lerna publish",
         "link": "lerna link",
         "build": "lerna run build"
