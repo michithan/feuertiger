@@ -17,8 +17,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/schema-graphql": "^null-alpha.91+bc69dd1",
-        "@feuertiger/utils-graphql": "^null-alpha.91+bc69dd1",
+        "@feuertiger/schema-graphql": "^1.0.0-alpha.91+bc69dd1",
+        "@feuertiger/utils-graphql": "^1.0.0-alpha.91+bc69dd1",
         "apollo-server": "^2.9.13",
         "firebase": "^7.5.2",
         "firebase-admin": "^8.8.0",
