@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs: 
-  build:
+  build and publish:
     runs-on: ubuntu-latest    
     steps:
     - uses: actions/checkout@v1
@@ -16,20 +16,8 @@ jobs:
       env:
         FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
       run: yarn run build 
-    - name: Upload
-      uses: actions/upload-artifact@v1
-      with:
-        name: repository
-        path: ./
-  publish:
-    runs-on: ubuntu-latest
-    needs: [build]    
-    steps:
-    - name: Download
-      uses: actions/download-artifact@v1
-      with:
-        name: repository
-    - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-    - run: yarn run version:canary
-    - run: yarn run publish     
-       
+    - name: publish      
+      run: |
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+        yarn run version:canary
+        yarn run publish
