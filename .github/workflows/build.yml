@@ -7,8 +7,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2-beta
-              with:
-                  token: ${{ secrets.PRIVATE_TOKEN }}
             - run: |
                   git config --global user.name 'feuertiger'
                   git config --global user.email 'feuertiger@users.noreply.github.com'
@@ -23,11 +21,9 @@ jobs:
                   yarn run link
                   yarn run build
             - name: Publish
-              if: "!contains(github.commit_message, '***published packages***')"
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
-                  git add -A
                   git commit -am "published packages"
                   git push
     deploy_firebase:
