@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/utils-graphql",
-    "version": "1.0.7-master.faf8457.0",
+    "version": "1.0.8-master.75b1f19.0",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -17,9 +17,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/schema-graphql": "1.0.7-master.faf8457.0",
+        "@feuertiger/schema-graphql": "1.0.8-master.75b1f19.0",
         "graphql": "^14.5.8",
         "uuid": "^3.3.3"
     },
-    "gitHead": "8b67fe395a3f2bcd3d488b7a4127c017368d9169"
+    "gitHead": "25c99d49381d9dac5609b269e85f7da73306fb3b"
 }
