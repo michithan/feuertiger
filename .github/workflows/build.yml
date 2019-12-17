@@ -25,8 +25,11 @@ jobs:
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
-            - name: Push changes
-              run: |
                   git add .
                   git commit -m "published packaged" -a
-                  git push
+            - name: Push changes
+              uses: ad-m/github-push-action@master
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  force: true
+                  branch: ${{ GITHUB_REF##*/ }}
