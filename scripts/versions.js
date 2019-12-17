@@ -11,5 +11,5 @@ const branch = execSync('git rev-parse --abbrev-ref HEAD')
     .trim();
 
 execSync(
-    `lerna version prepatch --force-publis --yes --exact --amend --preid=${branch}.${commit}`
+    `lerna version prepatch --force-publish --yes --exact --amend --preid=${branch}.${commit}`
 );
