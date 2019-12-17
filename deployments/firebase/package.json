@@ -13,8 +13,8 @@
         "@feuertiger/proxy-graphql": "1.0.0",
         "@feuertiger/web-client": "1.0.0",
         "firebase-admin": "8.8.0",
-        "firebase-functions": "^3.3.0",
-        "tsc": "^1.20150623.0"
+        "firebase-functions": "3.3.0",
+        "tsc": "1.20150623.0"
     },
     "devDependencies": {
         "typescript": "3.7.3"
