@@ -11,5 +11,5 @@ const branch = execSync('git rev-parse --abbrev-ref HEAD')
     .shift();
 
 execSync(
-    `lerna publish prepatch --force-publish --yes --exact --no-push --no-git-reset --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
+    `lerna publish prepatch --yes --exact --no-push --no-git-reset --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
 );
