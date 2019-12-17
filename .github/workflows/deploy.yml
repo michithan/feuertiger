@@ -1,0 +1,34 @@
+name: CI
+
+on: [push]
+
+jobs:
+    build_and_publish:
+        runs-on: ubuntu-latest
+        if: "!contains(github.event.head_commit.message, '[published packaged]')"
+        steps:
+            - uses: actions/checkout@v2-beta
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
+            - run: |
+                  git config --global user.name 'feuertiger'
+                  git config --global user.email 'feuertiger@users.noreply.github.com'
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '13.x'
+            - uses: bahmutov/npm-install@v1
+            - name: Build
+              env:
+                  FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
+              run: |
+                  yarn run link
+                  yarn run build
+            - name: Publish
+              run: |
+                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+                  yarn run publish
+            - name: Push changes
+              run: |
+                  git add -A
+                  git commit -am "published packaged"
+                  git push
