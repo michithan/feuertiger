@@ -10,7 +10,7 @@
         "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts}\"",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "version:canary": "node ./scripts/versions.js",
-        "publish": "lerna publish",
+        "publish": "lerna publish --no-git-reset",
         "link": "lerna link",
         "build": "lerna run build"
     },
