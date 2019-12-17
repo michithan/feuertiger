@@ -2,9 +2,9 @@ name: CI
 
 on: [push]
 
-jobs: 
+jobs:
   build_and_publish:
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
@@ -12,12 +12,21 @@ jobs:
         node-version: '13.x'
     - uses: bahmutov/npm-install@v1
     - run: yarn run link
-    - name: build
+    - name: Build
       env:
         FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
       run: yarn run build 
-    - name: publish      
+    - name: Publish
       run: |
         echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
         yarn run version:canary
         yarn run publish
+    - name: Commit files
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "published packaged" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
