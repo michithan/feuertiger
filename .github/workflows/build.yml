@@ -2,9 +2,9 @@ name: CI
 
 on: [push]
 
-jobs:
+jobs: 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
@@ -18,9 +18,9 @@ jobs:
       run: yarn run build
   publish:
     runs-on: ubuntu-latest
+    needs: [build]    
     steps:
     - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
     - run: yarn run version:canary
-    - run: yarn run publish
-        
+    - run: yarn run publish     
        
