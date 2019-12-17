@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on: [push]
 
@@ -16,11 +16,11 @@ jobs:
       env:
         FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
       run: yarn run build
-    - name: setup .npmrc
-      run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-    - name: update versions
-      run: yarn run version:canary   
-    - name: publish
-      run: yarn run publish
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+    - run: yarn run version:canary
+    - run: yarn run publish
         
        
