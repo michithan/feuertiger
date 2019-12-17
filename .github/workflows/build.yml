@@ -7,7 +7,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v1
-            - run: git checkout "${GITHUB_REF:11}"
+            - run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git checkout "${GITHUB_REF:11}"
             - uses: actions/setup-node@v1
               with:
                   node-version: '13.x'
@@ -21,8 +24,6 @@ jobs:
             - name: Publish
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-                  git config --local user.email "action@github.com"
-                  git config --local user.name "GitHub Action"
                   yarn run version:canary
                   yarn run publish
                   git commit -m "published packaged" -a
