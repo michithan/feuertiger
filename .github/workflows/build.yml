@@ -5,7 +5,7 @@ on: [push]
 jobs:
     build_and_publish:
         runs-on: ubuntu-latest
-        if: !contains(github.commit_message , "***NO_CI***")
+        if: "!contains(github.commit_message , '***NO_CI***')"
         steps:
             - uses: actions/checkout@v2-beta
               with:
