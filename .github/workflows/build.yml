@@ -5,7 +5,6 @@ on: [push]
 jobs:
     build_and_publish:
         runs-on: ubuntu-latest
-        if: "!contains(github.commit_message , '***NO_CI***')"
         steps:
             - uses: actions/checkout@v2-beta
               with:
@@ -24,11 +23,27 @@ jobs:
                   yarn run link
                   yarn run build
             - name: Publish
+              if: "!contains(github.commit_message, '***published packages***')"
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
-            - name: Push changes
-              run: |
                   git add -A
-                  git commit -am "published packaged NO_CI"
+                  git commit -am "published packages"
                   git push
+    deploy_firebase:
+        needs: build_and_publish
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2-beta
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '13.x'
+            - name: Install
+              working-directory: ./deployments/firebase
+              run: npm install
+            - name: Build
+              working-directory: ./deployments/firebase
+              run: npm run build
+            - name: Deploy
+              working-directory: ./deployments/firebase
+              run: npm run deploy
