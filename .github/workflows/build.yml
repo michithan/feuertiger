@@ -31,8 +31,6 @@ jobs:
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
-                  git commit -am "published packages"
-                  git push
     deploy_firebase:
         needs: build_and_publish
         runs-on: ubuntu-latest
