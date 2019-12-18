@@ -1,0 +1,33 @@
+name: Continuous Delivery
+
+on:
+    push:
+        branches:
+            - 'master'
+            - 'dev'
+        tags:
+            - 'v*'
+
+jobs:
+    deploy_firebase:
+        needs: build_and_publish
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2-beta
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '13.x'
+                  registry-url: 'https://npm.pkg.github.com'
+            - name: Install
+              working-directory: ./deployments/firebase
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: npm install
+            - name: Build
+              working-directory: ./deployments/firebase
+              run: npm run build
+            - name: Deploy
+              working-directory: ./deployments/firebase
+              run: npm run deploy:ci
+              env:
+                  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
