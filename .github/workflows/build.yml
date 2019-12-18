@@ -39,10 +39,11 @@ jobs:
             - uses: actions/setup-node@v1
               with:
                   node-version: '13.x'
+                  registry-url: 'https://npm.pkg.github.com'
             - name: Install
               working-directory: ./deployments/firebase
               run: |
-                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }} \n registry=https://npm.pkg.github.com/feuertiger" > ~/.npmrc
+                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   npm install
             - name: Build
               working-directory: ./deployments/firebase
