@@ -50,4 +50,4 @@ jobs:
               run: npm run build
             - name: Deploy
               working-directory: ./deployments/firebase
-              run: npm run deploy
+              run: npm run deploy:ci
