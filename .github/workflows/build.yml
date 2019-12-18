@@ -1,10 +1,6 @@
 name: CI
 
-on:
-  push:
-    paths-ignore:
-      - '*/**/package.json'
-      - 'lerna.json'
+on: [push]
 
 jobs:
     build_and_publish:
