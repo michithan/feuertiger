@@ -6,7 +6,7 @@ on:
             - 'master'
             - 'dev'
         tags:
-            - 'v*'
+            - '*.*'
 
 jobs:
     deploy_firebase:
@@ -27,6 +27,6 @@ jobs:
               run: npm run build
             - name: Deploy
               working-directory: ./deployments/firebase
-              run: npm run deploy:ci
               env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+              run: npm run deploy:ci
