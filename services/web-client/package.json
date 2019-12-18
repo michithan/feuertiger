@@ -1,7 +1,6 @@
 {
     "name": "@feuertiger/web-client",
     "version": "1.0.9-dev.23819bf.0",
-    "private": true,
     "scripts": {
         "dev": "next dev",
         "build": "next build",
