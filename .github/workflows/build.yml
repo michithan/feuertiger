@@ -25,7 +25,23 @@ jobs:
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
                   git commit -am "published packages"
+            - name: Temporarily disable "include administrators" branch protection
+              uses: benjefferies/branch-protection-bot@master
+              if: always()
+              with:
+                  access-token: ${{ secrets.PRIVATE_TOKEN }}
+                  owner: feuertiger
+                  repo: feuertiger
+            - name: Push
+              run: |
                   git push --force
+            - name: Enable "include administrators" branch protection
+              uses: benjefferies/branch-protection-bot@master
+              if: always()  # Force to always run this step to ensure "include administrators" is always turned back on
+              with:
+                  access-token: ${{ secrets.PRIVATE_TOKEN }}
+                  owner: feuertiger
+                  repo: feuertiger
     deploy_firebase:
         needs: build_and_publish
         runs-on: ubuntu-latest
