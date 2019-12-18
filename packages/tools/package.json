@@ -38,5 +38,5 @@
         "dotenv": "^8.2.0",
         "firebase-admin": "^8.8.0"
     },
-    "gitHead": "696bb9ed54000dfc223bc771f668088f26b45079"
+    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }

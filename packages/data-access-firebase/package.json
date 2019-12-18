@@ -28,5 +28,5 @@
         "@types/node-fetch": "2.5.4",
         "@types/uuid": "3.4.6"
     },
-    "gitHead": "696bb9ed54000dfc223bc771f668088f26b45079"
+    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }
