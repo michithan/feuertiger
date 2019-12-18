@@ -10,7 +10,7 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/feuertiger/feuertiger",
-        "directory": "packages/web-client"
+        "directory": "services/web-client"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com"
