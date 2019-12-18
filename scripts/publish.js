@@ -4,10 +4,9 @@ const commit = execSync('git rev-parse HEAD')
     .toString()
     .trim()
     .substring(0, 7);
-const fullBranchName = execSync('git rev-parse --abbrev-ref HEAD')
+const branch = execSync('git rev-parse --abbrev-ref HEAD')
     .toString()
-    .trim();
-const branch = fullBranchName
+    .trim()
     .split('/')
     .shift();
 
