@@ -10,8 +10,8 @@
     },
     "main": "./dist/index.js",
     "dependencies": {
-        "@feuertiger/proxy-graphql": "1.0.9-dev.37a2974.0",
-        "@feuertiger/web-client": "1.0.9-dev.37a2974.0",
+        "@feuertiger/proxy-graphql": "1.0.9-dev.c01c152.0",
+        "@feuertiger/web-client": "1.0.9-dev.c01c152.0",
         "firebase-admin": "8.8.0",
         "firebase-functions": "3.3.0"
     },
