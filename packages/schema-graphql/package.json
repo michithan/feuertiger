@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/schema-graphql",
-    "version": "1.0.9-dev.4d3e0da.0",
+    "version": "1.0.9-dev.37a2974.0",
     "description": "",
     "main": "./dist/index.ts",
     "files": [
