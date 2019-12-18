@@ -43,7 +43,9 @@ jobs:
                   node-version: '13.x'
             - name: Install
               working-directory: ./deployments/firebase
-              run: npm install
+              run: |                  
+                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}\nregistry=https://npm.pkg.github.com/feuertiger" > ~/.npmrc
+                  npm install
             - name: Build
               working-directory: ./deployments/firebase
               run: npm run build
