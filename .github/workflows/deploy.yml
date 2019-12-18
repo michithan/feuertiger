@@ -10,7 +10,6 @@ on:
 
 jobs:
     deploy_firebase:
-        needs: build_and_publish
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2-beta
