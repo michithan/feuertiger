@@ -1,6 +1,6 @@
 {
     "npmClient": "yarn",
-    "version": "1.0.9-dev.6cf41c9.0",
+    "version": "1.0.9-dev.508dcdc.0",
     "useWorkspaces": true,
     "packages": [
         "packages/*",
