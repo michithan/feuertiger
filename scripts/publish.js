@@ -4,12 +4,13 @@ const commit = execSync('git rev-parse HEAD')
     .toString()
     .trim()
     .substring(0, 7);
-const branch = execSync('git rev-parse --abbrev-ref HEAD')
+const fullBranchName = execSync('git rev-parse --abbrev-ref HEAD')
     .toString()
-    .trim()
+    .trim();
+const branch = fullBranchName
     .split('/')
     .shift();
 
 execSync(
-    `lerna publish prerelease --yes --exact --no-push --no-git-reset --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
+    `lerna publish prerelease --yes --exact --no-push --no-git-reset --since ${fullBranchName} --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
 );
