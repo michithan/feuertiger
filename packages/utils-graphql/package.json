@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/utils-graphql",
-    "version": "1.0.9-dev.95df930.0",
+    "version": "1.0.9-dev.7c59fd3.0",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -17,7 +17,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/schema-graphql": "1.0.9-dev.95df930.0",
+        "@feuertiger/schema-graphql": "1.0.9-dev.7c59fd3.0",
         "graphql": "^14.5.8",
         "uuid": "^3.3.3"
     },
