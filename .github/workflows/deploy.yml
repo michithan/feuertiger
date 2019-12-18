@@ -3,10 +3,11 @@ name: Continuous Delivery
 on:
     push:
         branches-ignore:
+            - '*'
             - '!master'
             - '!dev'
-        tags-ignore:
-            - '!*.*'
+        tags:
+            - '*.*'
 
 jobs:
     deploy_firebase:

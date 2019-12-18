@@ -3,7 +3,7 @@ name: Continuous Integration
 on:
     push:
         tags-ignore:
-            - '!*.*'
+            - '*.*'
 
 jobs:
     build_and_publish:
