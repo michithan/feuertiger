@@ -1,10 +1,10 @@
 name: Continuous Delivery
 
 on:
-    push:
-        branches:
-            - 'master'
-            - 'dev'
+    release:
+        branches-ignore:
+            - '!master'
+            - '!dev'
         tags:
             - '*.*'
 
