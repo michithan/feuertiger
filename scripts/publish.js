@@ -12,5 +12,5 @@ const branch = fullBranchName
     .shift();
 
 execSync(
-    `lerna publish prerelease --yes --exact --no-push --no-git-reset --since ${fullBranchName} --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
+    `lerna publish prerelease --yes --exact --no-push --no-git-reset --dist-tag ${branch}.${commit} --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
 );
