@@ -1,9 +1,9 @@
 name: CI
 
 on:
-  push:
-    tags-ignore:
-      - '*.*'
+    push:
+        tags-ignore:
+            - '*'
 
 jobs:
     build_and_publish:
@@ -39,7 +39,7 @@ jobs:
                   node-version: '13.x'
             - name: Install
               working-directory: ./deployments/firebase
-              run: |                  
+              run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }} \n registry=https://npm.pkg.github.com/feuertiger" > ~/.npmrc
                   npm install
             - name: Build
