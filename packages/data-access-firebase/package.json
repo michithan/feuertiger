@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/data-access-firebase",
-    "version": "1.0.9-dev.23819bf.0",
+    "version": "1.0.9-dev.bcf2780.0",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -17,8 +17,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/schema-graphql": "1.0.9-dev.23819bf.0",
-        "@feuertiger/utils-graphql": "1.0.9-dev.23819bf.0",
+        "@feuertiger/schema-graphql": "1.0.9-dev.bcf2780.0",
+        "@feuertiger/utils-graphql": "1.0.9-dev.bcf2780.0",
         "apollo-server": "^2.9.13",
         "firebase": "^7.5.2",
         "firebase-admin": "^8.8.0",
