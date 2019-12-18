@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/firebase-functions",
     "scripts": {
-        "build": "npm i firebase-functions --no-save --no-package-lock",
+        "preinstall": "npm i -g firebase-tools && npm i firebase-functions --no-save --no-package-lock",
         "serve": "npm run build && firebase serve --only functions",
         "shell": "npm run build && firebase functions:shell",
         "start": "npm run shell",
