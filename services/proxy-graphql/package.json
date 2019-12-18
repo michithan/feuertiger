@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/proxy-graphql",
-    "version": "1.0.9-dev.1d10377.0",
+    "version": "1.0.9-dev.e31bf49.0",
     "private": true,
     "description": "graphql backend, proxy to database",
     "main": "./dist/index.js",
@@ -19,10 +19,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/data-access-firebase": "1.0.9-dev.1d10377.0",
-        "@feuertiger/schema-graphql": "1.0.9-dev.1d10377.0",
-        "@feuertiger/tools": "1.0.9-dev.1d10377.0",
-        "@feuertiger/utils-graphql": "1.0.9-dev.1d10377.0",
+        "@feuertiger/data-access-firebase": "1.0.9-dev.e31bf49.0",
+        "@feuertiger/schema-graphql": "1.0.9-dev.e31bf49.0",
+        "@feuertiger/tools": "1.0.9-dev.e31bf49.0",
+        "@feuertiger/utils-graphql": "1.0.9-dev.e31bf49.0",
         "apollo-server": "2.9.13",
         "apollo-server-express": "2.9.13",
         "express": "4.17.1",
