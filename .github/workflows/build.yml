@@ -2,10 +2,8 @@ name: Continuous Integration
 
 on:
     push:
-        branches:
-            - '*'
-        tags:
-            - '!refs/tags/*'
+        tags-ignore:
+            - 'refs/tags/*'
 
 jobs:
     build_and_publish:

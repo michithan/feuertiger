@@ -5,8 +5,8 @@ on:
         branches-ignore:
             - '!master'
             - '!dev'
-        tags:
-            - 'refs/tags/*'
+        tags-ignore:
+            - '!refs/tags/*'
 
 jobs:
     deploy_firebase:
