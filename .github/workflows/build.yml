@@ -4,7 +4,8 @@ on:
   push:
     paths-ignore:
       - '*/**/package.json'
-        
+      - 'lerna.json'
+
 jobs:
     build_and_publish:
         runs-on: ubuntu-latest
