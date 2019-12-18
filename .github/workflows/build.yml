@@ -1,12 +1,17 @@
 name: CI
 
-on: [push]
-
+on:
+  push:
+    paths-ignore:
+      - '*/**/package.json'
+        
 jobs:
     build_and_publish:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2-beta
+            - uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
             - run: |
                   git config --global user.name 'feuertiger'
                   git config --global user.email 'feuertiger@users.noreply.github.com'
