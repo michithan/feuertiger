@@ -6,7 +6,7 @@ on:
             - '!master'
             - '!dev'
         tags-ignore:
-            - '!refs/tags/*'
+            - '!*.*'
 
 jobs:
     deploy_firebase:
