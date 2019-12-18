@@ -5,7 +5,7 @@ on:
         branches:
             - '*'
         tags-ignore:
-            - '*.*'
+            - v*
 
 jobs:
     build_and_publish:
