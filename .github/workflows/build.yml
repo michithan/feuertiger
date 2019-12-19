@@ -1,18 +1,30 @@
-name: Build
+name: Continuous Integration
 
 on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '13.x'
-    - uses: bahmutov/npm-install@v1
-    - run: yarn run link
-    - name: build
-      env:
-        FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
-      run: yarn run build
+    build_and_publish:
+        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false  
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
+                  fetch-depth: 0
+            - run: |
+                  git config --global user.name 'robotiger'
+                  git config --global user.email 'robotiger@users.noreply.github.com'
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '13.x'
+            - uses: bahmutov/npm-install@v1
+            - name: Build
+              env:
+                  FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
+              run: |
+                  yarn run link
+                  yarn run build
+            - name: Publish
+              run: |
+                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+                  yarn run publish

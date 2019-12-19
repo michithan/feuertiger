@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/utils-graphql",
-    "version": "1.0.0",
-    "description": "",
+    "version": "1.0.9-dev.fc0583e.0",
+    "description": "utils",
     "main": "./dist/index.js",
     "scripts": {
         "build": "tsc"
@@ -17,8 +17,9 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/schema-graphql": "1.0.0",
-        "uuid": "^3.3.3",
-        "graphql": "^14.5.8"
-    }
+        "@feuertiger/schema-graphql": "1.0.9-dev.fc0583e.0",
+        "graphql": "^14.5.8",
+        "uuid": "^3.3.3"
+    },
+    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }
