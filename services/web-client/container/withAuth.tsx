@@ -4,6 +4,26 @@ import getConfig from 'next/config';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+export class AuthSingleton {
+    public firebaseAuth: firebase.auth.Auth;
+
+    static instance: AuthSingleton;
+
+    constructor() {
+        if (AuthSingleton.instance) {
+            return AuthSingleton.instance;
+        }
+
+        const { publicRuntimeConfig } = getConfig();
+        const { tokens } = publicRuntimeConfig;
+
+        const firebaseApp = firebase.initializeApp(tokens);
+        this.firebaseAuth = firebaseApp.auth();
+
+        AuthSingleton.instance = this;
+    }
+}
+
 export interface AuthProps {
     auth?: firebase.auth.Auth;
 }
@@ -13,13 +33,6 @@ export interface AuthStateProps {
     isLoading: boolean;
     error: any;
 }
-
-const updatetoken = async (user: firebase.User) => {
-    const token = await user.getIdToken();
-    localStorage.setItem('token', token);
-};
-
-const removeToken = () => localStorage.removeItem('token');
 
 interface State extends AuthProps, AuthStateProps {}
 
@@ -38,18 +51,12 @@ export default <TProps extends any>(
         }
 
         componentDidMount() {
-            const { publicRuntimeConfig } = getConfig();
-            const { tokens } = publicRuntimeConfig;
+            const authSignleton = new AuthSingleton();
+            const firebaseAuth: firebase.auth.Auth = authSignleton.firebaseAuth;
 
-            const firebaseApp = firebase.initializeApp(tokens);
-            const firebaseAuth: firebase.auth.Auth = firebaseApp.auth();
-
-            firebaseAuth.onAuthStateChanged(async user => {
-                if (user) {
-                    await updatetoken(user);
-                }
-                this.setState({ isSignedIn: !!user, isLoading: false });
-            });
+            firebaseAuth.onAuthStateChanged(async user =>
+                this.setState({ isSignedIn: !!user, isLoading: false })
+            );
             const auth: firebase.auth.Auth = {
                 ...firebaseAuth
             };
@@ -61,14 +68,10 @@ export default <TProps extends any>(
                         email,
                         password
                     );
-
-                    await updatetoken(credential.user);
-
                     this.setState({
                         isLoading: false,
                         isSignedIn: true
                     });
-
                     location.reload(true);
                     return credential;
                 } catch (error) {
@@ -79,7 +82,6 @@ export default <TProps extends any>(
 
             auth.signOut = async () => {
                 await firebaseAuth.signOut();
-                removeToken();
                 location.reload(true);
             };
 
