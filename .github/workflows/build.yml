@@ -14,7 +14,6 @@ jobs:
             - run: |
                   git config --global user.name 'robotiger'
                   git config --global user.email 'robotiger@users.noreply.github.com'
-                  git pull ${{ github.event.head_branch }}
             - uses: actions/setup-node@v1
               with:
                   node-version: '13.x'
@@ -30,5 +29,6 @@ jobs:
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
                   git status
+                  git pull
                   git commit -am 'publish\n\n\nskip-checks: true'
                   git push
