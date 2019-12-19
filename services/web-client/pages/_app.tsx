@@ -9,6 +9,7 @@ import withAuth from '../container/withAuth';
 import withApollo, { ApolloProps } from '../container/withApollo';
 import Content from '../container/content';
 
+import Login from '../components/login';
 import Head from '../components/head';
 
 const theme = createMuiTheme({
@@ -32,8 +33,9 @@ class App extends NextApp<AppInitialProps & ApolloProps> {
     // remove it here
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
-        if (jssStyles && jssStyles.parentNode)
+        if (jssStyles && jssStyles.parentNode) {
             jssStyles.parentNode.removeChild(jssStyles);
+        }
     }
 
     render() {
@@ -43,6 +45,7 @@ class App extends NextApp<AppInitialProps & ApolloProps> {
             <ApolloProvider client={apollo}>
                 <ThemeProvider theme={theme}>
                     <Head />
+                    <Login />
                     <Content>
                         <Component {...pageProps} />
                     </Content>
@@ -52,5 +55,5 @@ class App extends NextApp<AppInitialProps & ApolloProps> {
     }
 }
 
-// export default withApollo(withAuth(App));
-export default withApollo(App);
+export default withApollo(withAuth(App));
+// export default withApollo(App);

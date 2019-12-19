@@ -1,5 +1,11 @@
 import React from 'react';
 import {
+    Grid,
+    Box,
+    Paper,
+    Link,
+    Checkbox,
+    FormControlLabel,
     TextField,
     CssBaseline,
     Button,
@@ -10,8 +16,6 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
-
-import { AuthProps } from '../container/withAuth';
 
 const PaperDiv = styled.div`
     margin: ${({ theme }) => theme.spacing(8, 4)};
@@ -34,21 +38,7 @@ const SubmitButton = styled(Button)`
     margin: ${({ theme }) => theme.spacing(3, 0, 2)};
 `;
 
-interface Props extends AuthProps {}
-
-export default class Login extends React.Component<Props> {
-    handleLogin = event => {
-        event.preventDefault();
-        const email = event.target.email.value;
-        const password = event.target.password.value;
-        const { auth } = this.props;
-        try {
-            auth.signInWithEmailAndPassword(email, password);
-        } catch (error) {
-            console.log('error:', error);
-        }
-    };
-
+export default class Login extends React.Component {
     render() {
         return (
             <Dialog aria-labelledby="simple-dialog-title" open>
@@ -61,7 +51,7 @@ export default class Login extends React.Component<Props> {
                         <Typography component="h1" variant="h5">
                             Login
                         </Typography>
-                        <StyledForm noValidate onSubmit={this.handleLogin}>
+                        <StyledForm noValidate>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
