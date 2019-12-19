@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
     build_and_publish:
-        if: contains(github.event.committer.email, 'robotiger@users.noreply.github.com') == false  
+        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false  
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
