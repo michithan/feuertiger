@@ -6,7 +6,7 @@
     "license": "ISC",
     "scripts": {
         "link": "node ./scripts/linkdist.js",
-        "lint": "eslint ./**/*.ts",
+        "lint": "eslint ./**/*.ts --fix",
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.json ./**/*.graphql --write"
     },
     "packages": [

@@ -1,7 +1,6 @@
 import {
     IntrospectionType,
     IntrospectionObjectType,
-    IntrospectionField,
     IntrospectionSchema,
     IntrospectionInterfaceType
 } from 'graphql';
@@ -37,14 +36,6 @@ export const isIntrospectionQueryObjectType = (
     type: IntrospectionType
 ): type is IntrospectionObjectType =>
     type.kind === 'OBJECT' && type.name === 'Query';
-
-// FieldFilter
-export const isNodeIntrospectionField = (field: IntrospectionField): boolean =>
-    field.type.kind === 'OBJECT';
-
-export const isNodeListIntrospectionField = (
-    field: IntrospectionField
-): boolean => field.type.kind === 'OBJECT';
 
 // GlobalId Utils
 export const GenerateId = (type: string): Scalars['ID'] =>

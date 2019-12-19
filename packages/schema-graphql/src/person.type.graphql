@@ -2,17 +2,7 @@ type Person implements Node {
     id: ID!
     firstname: String
     lastname: String
-    exercises: PersonExerciseConnection
-}
-
-type PersonExerciseEdge implements Edge {
-    cursor: String!
-    node: Exercise
-}
-
-type PersonExerciseConnection implements Connection {
-    pageInfo: PageInfo!
-    edges: [PersonExerciseEdge]
+    exercises: ExerciseConnection
 }
 
 type PersonEdge implements Edge {
@@ -23,4 +13,17 @@ type PersonEdge implements Edge {
 type PersonConnection implements Connection {
     pageInfo: PageInfo!
     edges: [PersonEdge]
+}
+
+input Person {
+    firstname: String
+    lastname: String
+    exercises: ExerciseConnection
+}
+
+extend type Mutation {
+    createPerson(person: Person!): Person
+    updatePerson(exercise: Exercise!): Exercise
+    addExerciseToPerson(exerciseId: ID!, personId: [ID]!): boolean
+    removeExerciseFromPerson(exerciseId: ID!, personId: [ID]!): boolean
 }
