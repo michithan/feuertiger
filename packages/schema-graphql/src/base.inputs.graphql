@@ -1,4 +1,4 @@
 input Filter {
-  skip: Int
-  search: String
+    skip: Int
+    search: String
 }

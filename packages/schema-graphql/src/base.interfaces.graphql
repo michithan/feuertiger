@@ -1,13 +1,13 @@
 interface Node {
-  id: ID!
+    id: ID!
 }
 
 interface Edge {
-  cursor: String!
-  node: Node
+    cursor: String!
+    node: Node
 }
 
 interface Connection {
-  pageInfo: PageInfo!
-  edges: [Edge]
+    pageInfo: PageInfo!
+    edges: [Edge]
 }

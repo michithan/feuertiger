@@ -1,26 +1,26 @@
 type Person implements Node {
-  id: ID!
-  firstname: String
-  lastname: String
-  exercises: PersonExerciseConnection
+    id: ID!
+    firstname: String
+    lastname: String
+    exercises: PersonExerciseConnection
 }
 
 type PersonExerciseEdge implements Edge {
-  cursor: String!
-  node: Exercise
+    cursor: String!
+    node: Exercise
 }
 
 type PersonExerciseConnection implements Connection {
-  pageInfo: PageInfo!
-  edges: [PersonExerciseEdge]
+    pageInfo: PageInfo!
+    edges: [PersonExerciseEdge]
 }
 
 type PersonEdge implements Edge {
-  cursor: String!
-  node: Person
+    cursor: String!
+    node: Person
 }
 
 type PersonConnection implements Connection {
-  pageInfo: PageInfo!
-  edges: [PersonEdge]
+    pageInfo: PageInfo!
+    edges: [PersonEdge]
 }
