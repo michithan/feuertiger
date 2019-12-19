@@ -6,7 +6,7 @@ on:
             - 'dev'
             - 'master'
         paths:
-            - './deployments/firebase/package.json'
+            - 'deployments/firebase/package.json'
 
 jobs:
     deploy_firebase:
