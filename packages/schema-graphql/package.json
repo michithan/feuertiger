@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/schema-graphql",
-    "version": "1.0.0",
+    "version": "1.0.0-test",
     "description": "",
     "main": "./dist/index.ts",
     "files": [
@@ -26,7 +26,6 @@
         "graphql": "^14.5.8"
     },
     "devDependencies": {
-        "prettier": "1.19.1",
         "@graphql-codegen/cli": "1.9.1",
         "@graphql-codegen/introspection": "1.9.1",
         "@graphql-codegen/typescript": "1.9.1",
@@ -34,6 +33,8 @@
         "@graphql-codegen/typescript-react-apollo": "1.9.1",
         "@graphql-codegen/typescript-resolvers": "1.9.1",
         "graphql-import": "0.7.1",
+        "prettier": "1.19.1",
         "rimraf": "3.0.0"
-    }
+    },
+    "gitHead": "bc69dd135a9d8e5144c9e582179749ba65b6c448"
 }
