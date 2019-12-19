@@ -10,6 +10,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '13.x'
-    - run: yarn
-    - run: lerna bootstrap
-    - run: lerna run build
+    - uses: bahmutov/npm-install@v1
+    - run: yarn run link
+    - run: yarn run build
