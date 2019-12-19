@@ -1,5 +1,5 @@
 import {
-    IntrospectionObjectType,
+    IntrospectionOutputType,
     GraphQLResolveInfo,
     IntrospectionField
 } from 'graphql';
@@ -12,8 +12,8 @@ import { INodeService } from '../services/NodeService';
 
 export const resolveObjectResolver = (
     field: IntrospectionField,
-    parentObject: IntrospectionObjectType,
-    fieldObject: IntrospectionObjectType,
+    parentObject: IntrospectionOutputType,
+    fieldObject: IntrospectionOutputType,
     service: INodeService
 ) => async (
     parent: any,
@@ -29,8 +29,8 @@ export const resolveObjectResolver = (
 
 export const resolveListResolver = (
     field: IntrospectionField,
-    parentObject: IntrospectionObjectType,
-    fieldObject: IntrospectionObjectType,
+    parentObject: IntrospectionOutputType,
+    fieldObject: IntrospectionOutputType,
     service: INodeService
 ) => async (
     parent: any,
