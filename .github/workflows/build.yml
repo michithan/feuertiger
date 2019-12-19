@@ -7,7 +7,12 @@ jobs:
         if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false
         runs-on: ubuntu-latest
         steps:
+            # Checkout one with GITHUB_TOKEN to prevent loop
             - uses: actions/checkout@v2
+            - uses: actions/checkout@v2
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
+                  fetch-depth: 0
             - uses: actions/setup-node@v1
               with:
                   node-version: '13.x'
@@ -19,10 +24,6 @@ jobs:
               run: |
                   yarn run link
                   yarn run build
-            - uses: actions/checkout@v2
-              with:
-                  token: ${{ secrets.PRIVATE_TOKEN }}
-                  fetch-depth: 0
             - name: Publish
               run: |
                   git config --global user.name 'robotiger'
