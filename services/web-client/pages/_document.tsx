@@ -12,9 +12,10 @@ export default class Document extends NextDocument {
         try {
             ctx.renderPage = () =>
                 originalRenderPage({
-                    enhanceApp: App => props =>
+                    enhanceApp: (App: JSX.IntrinsicAttributes) => (
+                        props: JSX.IntrinsicAttributes
+                    ) =>
                         styledComponentSheet.collectStyles(
-                            // eslint-disable-next-line
                             materialUiSheets.collect(<App {...props} />)
                         )
                 });

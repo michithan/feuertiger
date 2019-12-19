@@ -1,15 +1,10 @@
-const { getFirebaseAppSecrets } = require('@feuertiger/tools');
-
 module.exports = {
-    webpack: config => ({
+    webpack: config => {
         // Fixes npm packages that depend on `fs` module
         // eslint-disable-next-line no-param-reassign
-        node: {
+        config.node = {
             fs: 'empty'
-        },
-        ...config
-    }),
-    publicRuntimeConfig: {
-        tokens: getFirebaseAppSecrets()
+        };
+        return config;
     }
 };
