@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/tools",
     "version": "1.0.9-dev.43dbc0c.0",
-    "description": "",
+    "description": "tools",
     "main": "./dist/index",
     "scripts": {
         "build": "tsc"
