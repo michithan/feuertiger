@@ -1,3 +1,3 @@
-export * from './db';
-export * from './mappings/ResolverMap';
-export * from './mappings/ServiceMap';
+export * from "./firestore";
+export * from "./mappings/ResolverMap";
+export * from "./mappings/ServiceMap";

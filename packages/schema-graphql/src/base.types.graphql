@@ -1,8 +1,8 @@
 type PageInfo {
-    hasNextPage: Boolean
+  hasNextPage: Boolean
 }
 
 type Timeslot {
-    start: String
-    end: String
+  start: String
+  end: String
 }

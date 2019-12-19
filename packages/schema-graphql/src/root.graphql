@@ -13,11 +13,7 @@
 ##############
 
 type Query {
-    node(id: ID!): Node
-    allPersons(filter: Filter): PersonConnection
-    allExercises(filter: Filter): ExerciseConnection
-}
-
-type Mutation {
-    delete(id: ID!): Boolean
+  node(id: ID!): Node
+  allPersons(filter: Filter): PersonConnection
+  allExercises(filter: Filter): ExerciseConnection
 }

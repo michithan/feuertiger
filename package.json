@@ -2,9 +2,11 @@
   "name": "feuertiger",
   "private": true,
   "version": "1.0.0",
-  "scripts": {},
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "link": "node ./scripts/linkdist.js"
+  },
   "packages": [
     "packages/*",
     "services/*"
@@ -14,7 +16,11 @@
     "services/*"
   ],
   "devDependencies": {
-    "yarn": "^1.21.0",
-    "lerna": "^3.19.0"
+    "lerna": "^3.19.0",
+    "yarn": "^1.21.0"
+  },
+  "dependencies": {
+    "@lerna/package-graph": "^3.18.5",
+    "@lerna/project": "^3.18.0"
   }
 }
