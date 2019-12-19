@@ -2,6 +2,9 @@ name: Continuous Delivery
 
 on:
     repository_dispatch:
+        branch:
+            - master
+            - dev
         types: [deploy]
 
 jobs:
