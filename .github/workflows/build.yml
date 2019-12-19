@@ -5,12 +5,14 @@ on: [push]
 jobs:
     build_and_publish:
         runs-on: ubuntu-latest
+        if: "!contains(github.event.head_commit.message, '[published packaged]')"
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2-beta
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
             - run: |
-                  git config --local user.email "action@github.com"
-                  git config --local user.name "GitHub Action"
-                  git checkout "${GITHUB_REF:11}"
+                  git config --global user.name 'feuertiger'
+                  git config --global user.email 'feuertiger@users.noreply.github.com'
             - uses: actions/setup-node@v1
               with:
                   node-version: '13.x'
@@ -24,12 +26,28 @@ jobs:
             - name: Publish
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-                  yarn run version:canary
                   yarn run publish
-                  git commit -m "published packaged" -a
             - name: Push changes
-              uses: ad-m/github-push-action@master
+              run: |
+                  git add -A
+                  git commit -am "published packaged"
+                  git push
+    deploy_firebase:
+        needs: build_and_publish
+        branches:
+            - 'master'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2-beta
+            - uses: actions/setup-node@v1
               with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-                  force: true
-                  branch: '${GITHUB_REF:11}'
+                  node-version: '13.x'
+            - name: Install
+              working-directory: ./deployments/firebase
+              run: npm install
+            - name: Build
+              working-directory: ./deployments/firebase
+              run: npm run build
+            - name: Deploy
+              working-directory: ./deployments/firebase
+              run: npm run deploy

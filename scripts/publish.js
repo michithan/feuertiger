@@ -10,12 +10,6 @@ const branch = execSync('git rev-parse --abbrev-ref HEAD')
     .split('/')
     .shift();
 
-const changes = JSON.parse(
-    execSync('lerna list --since --json --no-private').toString()
+execSync(
+    `lerna publish prepatch --yes --exact --no-push --no-git-reset --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
 );
-
-if (changes.length > 0) {
-    execSync(
-        `lerna publish prerelease --yes --exact --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
-    );
-}
