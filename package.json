@@ -11,7 +11,7 @@
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "publish": "node ./scripts/publish.js",
         "link": "lerna link",
-        "build": "lerna run build --no-private"
+        "build": "lerna run build --no-private --since"
     },
     "packages": [
         "packages/*",
