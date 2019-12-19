@@ -12,6 +12,14 @@
         "generate": "graphql-codegen --config codegen.yml",
         "build": "npm run clean && npm run combine && npm run generate"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/feuertiger/feuertiger",
+        "directory": "packages/schema-graphql"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
