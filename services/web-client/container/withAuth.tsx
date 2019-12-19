@@ -1,48 +1,108 @@
 import React from 'react';
-import { default as NextApp, AppProps } from 'next/app';
 import getConfig from 'next/config';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import withFirebaseAuth, {
-    WrappedComponentProps
-} from 'react-with-firebase-auth';
 
-const { publicRuntimeConfig } = getConfig();
-const { tokens } = publicRuntimeConfig;
+export class AuthSingleton {
+    public firebaseAuth: firebase.auth.Auth;
 
-interface AuthProps extends WrappedComponentProps, AppProps {}
+    static instance: AuthSingleton;
 
-export default (WrappedComponent: React.ComponentType<AppProps>) => {
-    let firebaseApp: firebase.app.App;
-
-    try {
-        firebaseApp = firebase.initializeApp(tokens);
-    } catch (error) {
-        // we skip the "already exists" message which is
-        // not an actual error when we're hot-reloading
-        if (!/already exists/.test(error.message)) {
-            console.error('Firebase initialization error', error.stack);
+    constructor() {
+        if (AuthSingleton.instance) {
+            return AuthSingleton.instance;
         }
+
+        const { publicRuntimeConfig } = getConfig();
+        const { tokens } = publicRuntimeConfig;
+
+        const firebaseApp = firebase.initializeApp(tokens);
+        this.firebaseAuth = firebaseApp.auth();
+
+        AuthSingleton.instance = this;
     }
-    const firebaseAppAuth = firebaseApp && firebaseApp.auth();
-    const providers = {};
+}
 
-    const authWrapper = ({
-        user,
-        signOut,
-        signInWithEmailAndPassword,
-        ...pageProps
-    }: AuthProps) => {
-        if (user) {
-            return <WrappedComponent {...pageProps} />;
+export interface AuthProps {
+    auth?: firebase.auth.Auth;
+}
+
+export interface AuthStateProps {
+    isSignedIn: boolean;
+    isLoading: boolean;
+    error: any;
+}
+
+interface State extends AuthProps, AuthStateProps {}
+
+export default <TProps extends any>(
+    WrappedComponent: React.ComponentType<TProps & AuthProps & AuthStateProps>
+): React.ComponentType<TProps> =>
+    class AuthWrapper extends React.Component<TProps, State> {
+        constructor(props: TProps) {
+            super(props);
+            this.state = {
+                isSignedIn: true,
+                isLoading: true,
+                error: null,
+                auth: null
+            };
         }
-        return <WrappedComponent {...pageProps} />;
-        // return <div>Please sign in.</div>;
-    };
 
-    return (withFirebaseAuth({
-        providers,
-        firebaseAppAuth
-    })(authWrapper) as unknown) as typeof NextApp;
-};
+        componentDidMount() {
+            const authSignleton = new AuthSingleton();
+            const firebaseAuth: firebase.auth.Auth = authSignleton.firebaseAuth;
+
+            firebaseAuth.onAuthStateChanged(async user =>
+                this.setState({ isSignedIn: !!user, isLoading: false })
+            );
+            const auth: firebase.auth.Auth = {
+                ...firebaseAuth
+            };
+
+            auth.signInWithEmailAndPassword = async (email, password) => {
+                try {
+                    this.setState({ isLoading: true });
+                    const credential = await firebaseAuth.signInWithEmailAndPassword(
+                        email,
+                        password
+                    );
+                    this.setState({
+                        isLoading: false,
+                        isSignedIn: true
+                    });
+                    location.reload(true);
+                    return credential;
+                } catch (error) {
+                    this.setState({ error });
+                    throw error;
+                }
+            };
+
+            auth.signOut = async () => {
+                await firebaseAuth.signOut();
+                location.reload(true);
+            };
+
+            this.setState({
+                auth
+            });
+        }
+
+        render() {
+            const { ...props } = this.props;
+            const { auth, isSignedIn, isLoading, error } = this.state;
+
+            return (
+                <WrappedComponent
+                    // eslint-disable-next-line
+                    {...props}
+                    auth={auth}
+                    isSignedIn={isSignedIn}
+                    isLoading={isLoading}
+                    error={error}
+                />
+            );
+        }
+    };

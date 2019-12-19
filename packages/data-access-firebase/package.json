@@ -6,12 +6,19 @@
     "scripts": {
         "build": "tsc"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/feuertiger/feuertiger",
+        "directory": "packages/data-access-firebase"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
         "@feuertiger/schema-graphql": "1.0.0",
         "@feuertiger/utils-graphql": "1.0.0",
-        "@google-cloud/firestore": "^2.6.1",
         "apollo-server": "^2.9.13",
         "firebase": "^7.5.2",
         "firebase-admin": "^8.8.0",

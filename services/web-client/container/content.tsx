@@ -1,12 +1,13 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { CssBaseline, Container } from '@material-ui/core';
+import { AuthProps } from './withAuth';
 import AppBar from '../components/appBar';
 import SideBar from '../components/sideBar';
 
-type Props = {
+interface Props extends AuthProps {
     children?: ReactNode;
-};
+}
 
 type State = {
     open: boolean;
@@ -32,9 +33,12 @@ const RootDiv = styled.div`
 `;
 
 export default class Conntent extends React.Component<Props, State> {
-    state: State = {
-        open: false
-    };
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            open: false
+        };
+    }
 
     handleDrawerOpen = () => this.setState({ open: true });
 
@@ -42,11 +46,15 @@ export default class Conntent extends React.Component<Props, State> {
 
     render() {
         const { open } = this.state;
-        const { children } = this.props;
+        const { children, auth } = this.props;
         return (
             <RootDiv>
                 <CssBaseline />
-                <AppBar open={open} handleDrawerOpen={this.handleDrawerOpen} />
+                <AppBar
+                    open={open}
+                    handleDrawerOpen={this.handleDrawerOpen}
+                    auth={auth}
+                />
                 <SideBar
                     open={open}
                     handleDrawerClose={this.handleDrawerClose}
