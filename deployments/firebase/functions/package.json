@@ -12,11 +12,11 @@
     "dependencies": {
         "@feuertiger/proxy-graphql": "1.0.0",
         "@feuertiger/web-client": "1.0.0",
-        "firebase-admin": "~7.0.0",
-        "firebase-functions": "^2.2.0"
+        "firebase-admin": "8.8.0",
+        "firebase-functions": "3.3.0"
     },
     "devDependencies": {
-        "typescript": "^3.2.2"
+        "typescript": "3.7.3"
     },
     "private": true
 }

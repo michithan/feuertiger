@@ -1,12 +1,14 @@
 import React from 'react';
-import Link from 'next/link';
 import styled from 'styled-components';
 import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
+import { AuthProps } from '../container/withAuth';
+
 const drawerWidth = 240;
 
+// remove it here
 const StyledAppBar = styled(({ open, ...props }) => <AppBar {...props} />)`
     z-index: 1;
     transition: ${({ open, theme: { transitions } }) =>
@@ -31,6 +33,7 @@ const StyledToolbar = styled(Toolbar)`
     padding-right: 24;
 `;
 
+// remove it here
 const StyledIconButton = styled(({ open, ...props }) => (
     <IconButton {...props} />
 ))`
@@ -42,36 +45,44 @@ const StyledTypography = styled(Typography)`
     flex-grow: 1;
 `;
 
-interface Props {
+interface Props extends AuthProps {
     open: boolean;
     handleDrawerOpen: () => void;
 }
 
-export default ({ open, handleDrawerOpen }: Props) => (
-    <StyledAppBar position="absolute" open={open}>
-        <StyledToolbar>
-            <StyledIconButton
-                edge="start"
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                open={open}
-            >
-                <MenuIcon />
-            </StyledIconButton>
-            <StyledTypography
-                component="h1"
-                variant="h6"
-                color="inherit"
-                noWrap
-            >
-                Dashboard
-            </StyledTypography>
-            <Link href="/login">
-                <IconButton color="inherit">
-                    <ExitToAppIcon />
-                </IconButton>
-            </Link>
-        </StyledToolbar>
-    </StyledAppBar>
-);
+export default class Bar extends React.Component<Props> {
+    handleLogout = () => {
+        const { auth } = this.props;
+        auth.signOut();
+    };
+
+    render() {
+        const { open, handleDrawerOpen } = this.props;
+        return (
+            <StyledAppBar position="absolute" open={open}>
+                <StyledToolbar>
+                    <StyledIconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        open={open}
+                    >
+                        <MenuIcon />
+                    </StyledIconButton>
+                    <StyledTypography
+                        component="h1"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                    >
+                        Dashboard
+                    </StyledTypography>
+                    <IconButton color="inherit" onClick={this.handleLogout}>
+                        <ExitToAppIcon />
+                    </IconButton>
+                </StyledToolbar>
+            </StyledAppBar>
+        );
+    }
+}

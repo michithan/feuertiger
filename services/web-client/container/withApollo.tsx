@@ -1,14 +1,24 @@
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
 import withApollo from 'next-with-apollo';
 import fetch from 'isomorphic-unfetch';
-import { default as NextApp, AppProps } from 'next/app';
 
 // Update the GraphQL endpoint to any instance of GraphQL that you like
 const GRAPHQL_URL = 'http://localhost:4000/';
 
-const link = createHttpLink({
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('token');
+    return {
+        headers: {
+            ...headers,
+            authorization: token || ''
+        }
+    };
+});
+
+const httpLink = createHttpLink({
     fetch, // Switches between unfetch & node-fetch for client & server.
     uri: GRAPHQL_URL
 });
@@ -21,11 +31,10 @@ export interface ApolloProps {
 // e.g. ({ headers, ctx, initialState })
 const initClient = ({ initialState }) =>
     new ApolloClient({
-        link,
+        link: authLink.concat(httpLink),
         cache: new InMemoryCache()
             //  rehydrate the cache using the initial data passed from the server:
             .restore(initialState || {})
     });
 
-export default (App: typeof NextApp) =>
-    withApollo(initClient)(App) as React.ComponentType<AppProps>;
+export default withApollo(initClient);

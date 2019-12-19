@@ -1,8 +1,6 @@
-import { GraphQLResolveInfo, GraphQLAbstractType } from 'graphql';
 import { IResolvers } from 'apollo-server';
 import { ServiceAccount } from 'firebase-admin';
-import { __schema } from '@feuertiger/schema-graphql/dist/schema.json';
-import { Node, Edge, Connection } from '@feuertiger/schema-graphql';
+import { Node } from '@feuertiger/schema-graphql';
 import {
     initDb,
     seed,
@@ -21,32 +19,17 @@ const resolvers: IResolvers = createResolvers(serviceMap);
 
 const typeResolvers: IResolvers = {
     Node: {
-        __resolveType: (
-            source: Node,
-            context: any,
-            info: GraphQLResolveInfo,
-            abstractType: GraphQLAbstractType
-        ) => {
+        __resolveType: (source: Node) => {
             const { id } = source;
             const { type } = ParseId(id);
             return type;
         }
     },
     Edge: {
-        __resolveType: () => (
-            source: Edge,
-            context: any,
-            info: GraphQLResolveInfo,
-            abstractType: GraphQLAbstractType
-        ) => 'Edge'
+        __resolveType: () => () => 'Edge'
     },
     Connection: {
-        __resolveType: () => (
-            source: Connection,
-            context: any,
-            info: GraphQLResolveInfo,
-            abstractType: GraphQLAbstractType
-        ) => 'Connection'
+        __resolveType: () => () => 'Connection'
     }
 };
 

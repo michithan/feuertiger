@@ -4,8 +4,9 @@ import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/react-hooks';
 import red from '@material-ui/core/colors/red';
+import Skeleton from '@material-ui/lab/Skeleton';
 
-import withAuth from '../container/withAuth';
+import withAuth, { AuthProps, AuthStateProps } from '../container/withAuth';
 import withApollo, { ApolloProps } from '../container/withApollo';
 import Content from '../container/content';
 
@@ -29,7 +30,13 @@ const theme = createMuiTheme({
     }
 });
 
-class App extends NextApp<AppInitialProps & ApolloProps> {
+interface Props
+    extends AppInitialProps,
+        ApolloProps,
+        AuthProps,
+        AuthStateProps {}
+
+class App extends NextApp<Props> {
     // remove it here
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
@@ -39,15 +46,37 @@ class App extends NextApp<AppInitialProps & ApolloProps> {
     }
 
     render() {
-        const { Component, pageProps, apollo } = this.props;
+        const {
+            Component,
+            pageProps,
+            apollo,
+            auth,
+            isLoading,
+            isSignedIn
+        } = this.props;
+
+        const showLogin = !isLoading && !isSignedIn;
+        const showSkeleton = isLoading || !isSignedIn;
 
         return (
             <ApolloProvider client={apollo}>
                 <ThemeProvider theme={theme}>
                     <Head />
-                    <Login />
-                    <Content>
-                        <Component {...pageProps} />
+                    {showLogin && <Login auth={auth} />}
+                    <Content auth={auth}>
+                        {showSkeleton ? (
+                            <>
+                                <Skeleton height={40} />
+                                <Skeleton variant="rect" height={190} />
+                                <Skeleton height={40} />
+                                <Skeleton variant="rect" height={190} />
+                                <Skeleton height={40} />
+                                <Skeleton variant="rect" height={190} />
+                            </>
+                        ) : (
+                            // eslint-disable-next-line
+                            <Component {...pageProps} />
+                        )}
                     </Content>
                 </ThemeProvider>
             </ApolloProvider>
@@ -55,5 +84,8 @@ class App extends NextApp<AppInitialProps & ApolloProps> {
     }
 }
 
-export default withApollo(withAuth(App));
-// export default withApollo(App);
+// const appWithApollo = withApollo(App);
+// export default withAuth(appWithApollo);
+
+const appWithAuth = (withAuth(App) as unknown) as typeof NextApp;
+export default withApollo(appWithAuth);
