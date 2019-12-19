@@ -1,10 +1,10 @@
 {
     "npmClient": "yarn",
-    "version": "1.0.6-master.f4d8037.0",
+    "version": "1.0.9-dev.fc0583e.0",
     "useWorkspaces": true,
     "packages": [
         "packages/*",
         "services/*",
-        "deployments/*"
+        "deployments/firebase/*"
     ]
 }

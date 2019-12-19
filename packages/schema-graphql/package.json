@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/schema-graphql",
-    "version": "1.0.6-master.f4d8037.0",
-    "description": "",
+    "version": "1.0.9-dev.fc0583e.0",
+    "description": "schema",
     "main": "./dist/index.ts",
     "files": [
         "./dist"
@@ -36,5 +36,5 @@
         "prettier": "1.19.1",
         "rimraf": "3.0.0"
     },
-    "gitHead": "13432cdc0f404ea43ca549c2da4bc674f5235255"
+    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }

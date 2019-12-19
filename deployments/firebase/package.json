@@ -1,20 +1,19 @@
 {
     "name": "@feuertiger/firebase-functions",
     "scripts": {
-        "build": "npm i firebase-functions --no-package-lock tsc",
+        "preinstall": "npm i -g firebase-tools && npm i firebase-functions --no-save --no-package-lock",
+        "build": "tsc",
         "serve": "npm run build && firebase serve --only functions",
         "shell": "npm run build && firebase functions:shell",
         "start": "npm run shell",
-        "deploy": "firebase deploy --only functions",
-        "logs": "npm login --registry=https://npm.pkg.github.com:_authToken=TOKEN firebase functions:log"
+        "deploy:ci": "firebase deploy --only functions --token $FIREBASE_TOKEN"
     },
     "main": "./dist/index.js",
     "dependencies": {
-        "@feuertiger/proxy-graphql": "1.0.0",
-        "@feuertiger/web-client": "1.0.0",
+        "@feuertiger/proxy-graphql": "1.0.9-dev.3ce2583.0",
+        "@feuertiger/web-client": "1.0.9-dev.3ce2583.0",
         "firebase-admin": "8.8.0",
-        "firebase-functions": "^3.3.0",
-        "tsc": "^1.20150623.0"
+        "firebase-functions": "3.3.0"
     },
     "devDependencies": {
         "typescript": "3.7.3"

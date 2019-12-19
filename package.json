@@ -11,17 +11,17 @@
         "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "publish": "node ./scripts/publish.js",
         "link": "lerna link",
-        "build": "lerna run build"
+        "build": "lerna run build --no-private --since"
     },
     "packages": [
         "packages/*",
         "services/*",
-        "deployments/*"
+        "deployments/firebase/*"
     ],
     "workspaces": [
         "packages/*",
         "services/*",
-        "deployments/*"
+        "deployments/firebase/*"
     ],
     "dependencies": {
         "@lerna/package-graph": "3.18.5",

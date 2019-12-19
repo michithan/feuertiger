@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/tools",
-    "version": "1.0.6-master.f4d8037.0",
-    "description": "",
+    "version": "1.0.9-dev.fc0583e.0",
+    "description": "tools",
     "main": "./dist/index",
     "scripts": {
         "build": "tsc"
@@ -38,5 +38,5 @@
         "dotenv": "^8.2.0",
         "firebase-admin": "^8.8.0"
     },
-    "gitHead": "13432cdc0f404ea43ca549c2da4bc674f5235255"
+    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }

@@ -1,11 +1,12 @@
 name: Continuous Delivery
 
 on:
-    repository_dispatch:
-        branch:
-            - master
-            - dev
-        types: [deploy]
+    release:
+        branches:
+            - 'master'
+            - 'dev'
+        tags:
+            - '*.*'
 
 jobs:
     deploy_firebase:
