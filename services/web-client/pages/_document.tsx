@@ -12,9 +12,7 @@ export default class Document extends NextDocument {
         try {
             ctx.renderPage = () =>
                 originalRenderPage({
-                    enhanceApp: (App: JSX.IntrinsicAttributes) => (
-                        props: JSX.IntrinsicAttributes
-                    ) =>
+                    enhanceApp: App => props =>
                         styledComponentSheet.collectStyles(
                             materialUiSheets.collect(<App {...props} />)
                         )
