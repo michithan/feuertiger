@@ -17,7 +17,7 @@ execSync(
     `git pull`
 );
 execSync(
-    `git commit --amend -m "publish\n\n\nskip-checks: true"`
+    `git commit --amend -m "publish\n\n\nskip-checks: true`
 );
 execSync(
     `git push`
