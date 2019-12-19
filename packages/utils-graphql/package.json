@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/utils-graphql",
-    "version": "1.0.9-dev.43dbc0c.0",
+    "version": "1.0.9-dev.d930073.0",
     "description": "utils",
     "main": "./dist/index.js",
     "scripts": {
