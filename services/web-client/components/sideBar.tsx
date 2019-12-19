@@ -8,12 +8,14 @@ import {
     List,
     ListItem,
     ListItemIcon,
-    ListItemText
+    ListItemText,
+    ListSubheader
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const drawerWidth = 240;
 
@@ -25,7 +27,6 @@ const drawerClosed = ({ theme }) => css`
     }
 `;
 
-// eslint-disable-next-line
 const StyledDrawer = styled(({ open, ...props }) => <Drawer {...props} />)`
     > div {
         position: relative;

@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { Grid, Paper, Button, CircularProgress, Fab } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
 import AddMember from './addMember';
 
 interface State {
@@ -55,12 +56,9 @@ const MemberTable = ({ member }) => {
 };
 
 class Member extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            addDialogOpen: false
-        };
-    }
+    state: State = {
+        addDialogOpen: false
+    };
 
     handleOpenAddDialog = () => this.setState({ addDialogOpen: true });
 
@@ -69,17 +67,7 @@ class Member extends React.Component<Props, State> {
     render() {
         const { addDialogOpen } = this.state;
         const { data } = this.props;
-        const { loading, error, node } = data || {};
-
-        let content = null;
-
-        if (loading) {
-            content = <CircularProgress />;
-        } else if (error) {
-            content = <p>Error :(</p>;
-        } else if (data) {
-            content = <MemberTable member={node.participants} />;
-        }
+        const { loading, error, node } = data;
 
         return (
             <>
@@ -100,7 +88,15 @@ class Member extends React.Component<Props, State> {
                     </Grid>
                     {/* Recent Deposits */}
                     <Grid item xs={12} md={12} lg={12}>
-                        <Paper>{content}</Paper>
+                        <Paper>
+                            {loading ? (
+                                <CircularProgress />
+                            ) : error ? (
+                                <p>Error :(</p>
+                            ) : (
+                                <MemberTable member={node.participants} />
+                            )}
+                        </Paper>
                     </Grid>
                 </Grid>
             </>

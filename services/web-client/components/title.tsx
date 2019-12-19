@@ -5,8 +5,8 @@ interface Props {
     children: ReactNode;
 }
 
-export default ({ children }: Props) => (
+export default (props: Props) => (
     <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        {children}
+        {props.children}
     </Typography>
 );

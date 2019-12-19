@@ -1,18 +1,34 @@
 import React from 'react';
-import NextApp from 'next/app';
+import NextApp, { AppInitialProps } from 'next/app';
+import { createMuiTheme } from '@material-ui/core';
 import { ThemeProvider } from 'styled-components';
 import { ApolloProvider } from '@apollo/react-hooks';
+import red from '@material-ui/core/colors/red';
 
-import withData from '../utils/apollo-client';
+import withAuth from '../container/withAuth';
+import withApollo, { ApolloProps } from '../container/withApollo';
+import Content from '../container/content';
 
-const theme = {
-    primary: 'green'
-};
+import Head from '../components/head';
 
-interface IProps {
-    apollo: any;
-}
-class App extends NextApp<IProps> {
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#c90024'
+        },
+        secondary: {
+            main: '#19857b'
+        },
+        error: {
+            main: red.A400
+        },
+        background: {
+            default: '#fff'
+        }
+    }
+});
+
+class App extends NextApp<AppInitialProps & ApolloProps> {
     // remove it here
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
@@ -26,11 +42,15 @@ class App extends NextApp<IProps> {
         return (
             <ApolloProvider client={apollo}>
                 <ThemeProvider theme={theme}>
-                    <Component {...pageProps} />
+                    <Head />
+                    <Content>
+                        <Component {...pageProps} />
+                    </Content>
                 </ThemeProvider>
             </ApolloProvider>
         );
     }
 }
 
-export default withData(App);
+// export default withApollo(withAuth(App));
+export default withApollo(App);
