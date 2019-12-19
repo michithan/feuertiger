@@ -30,8 +30,9 @@ jobs:
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
     dispatch_deploy:
-        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false && (github.ref == 'refs/heads/master' | github.ref == 'refs/heads/dev')
         needs: build_and_publish
+        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false && (github.ref == 'refs/heads/master' | github.ref == 'refs/heads/dev')
+        steps:
             - name: Repository Dispatch
               uses: peter-evans/repository-dispatch@v1
               with:
