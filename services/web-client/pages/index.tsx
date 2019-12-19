@@ -1,26 +1,13 @@
-import React from 'react';
-import Head from 'next/head';
-import Nav from '../components/nav';
+import React, { ReactNode } from 'react';
 
-const Home = () => (
-    <div>
-        <Head>
-            <title>Feuertiger</title>
-            <link rel="icon" href="/favicon.ico" />
-            <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-            />
-            <link
-                rel="stylesheet"
-                href="https://fonts.googleapis.com/icon?family=Material+Icons"
-            />
-        </Head>
+type Props = {
+    children?: ReactNode;
+    index: number;
+    value: number;
+};
 
-        <Nav />
-
-        <div className="hero"></div>
-    </div>
-);
-
-export default Home;
+export default class HomePage extends React.Component<Props> {
+    render() {
+        return null;
+    }
+}
