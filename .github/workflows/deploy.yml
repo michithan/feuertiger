@@ -1,12 +1,8 @@
 name: Continuous Delivery
 
 on:
-    push:
-        branches:
-            - 'dev'
-            - 'master'
-        paths:
-            - 'deployments/firebase/package.json'
+    repository_dispatch:
+        types: [deploy]
 
 jobs:
     deploy_firebase:

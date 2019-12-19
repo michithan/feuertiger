@@ -21,6 +21,7 @@ jobs:
             - name: Build
               env:
                   FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
+                  GRAB_TOKEN_TO_BREAK_LOOP: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   yarn run link
                   yarn run build
@@ -28,3 +29,13 @@ jobs:
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
+    dispatch_deploy:
+        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false && (github.ref == 'refs/heads/master' | github.ref == 'refs/heads/dev')
+        needs: build_and_publish
+            - name: Repository Dispatch
+              uses: peter-evans/repository-dispatch@v1
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
+                  repository: feuertiger/feuertiger
+                  event-type: deploy
+                  client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
