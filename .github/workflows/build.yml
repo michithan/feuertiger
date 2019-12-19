@@ -28,5 +28,6 @@ jobs:
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
+                  git status
                   git commit -am 'publish\n\n\nskip-checks: true'
                   git push
