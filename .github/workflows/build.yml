@@ -31,7 +31,7 @@ jobs:
                   yarn run publish
     dispatch_deploy:
         needs: build_and_publish
-        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false && (github.ref == 'refs/heads/master' | github.ref == 'refs/heads/dev')
+        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev')
         runs-on: ubuntu-latest
         steps:
             - name: Repository Dispatch
