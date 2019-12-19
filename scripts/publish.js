@@ -16,8 +16,6 @@ const changes = JSON.parse(
 
 if (changes.length > 0) {
     execSync(
-        `lerna publish prerelease --yes --exact --amend --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
+        `lerna publish prerelease --yes --exact --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
     );
-    execSync('git commit --amend -m "publish\n\n\nskip-checks: true"');
-    execSync('git push --force-with-lease');
 }
