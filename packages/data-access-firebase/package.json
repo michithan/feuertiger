@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/data-access-firebase",
     "version": "1.0.9-dev.d930073.0",
-    "description": "",
+    "description": "data-access",
     "main": "./dist/index.js",
     "scripts": {
         "build": "tsc"
