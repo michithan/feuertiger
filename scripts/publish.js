@@ -13,12 +13,5 @@ const branch = execSync('git rev-parse --abbrev-ref HEAD')
 execSync(
     `lerna publish prerelease --yes --exact --amend --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
 );
-execSync(
-    `git pull`
-);
-execSync(
-    `git commit --amend -m "publish\n\n\nskip-checks: true`
-);
-execSync(
-    `git push`
-);
+execSync(`git commit --amend -m "publish\n\n\nskip-checks: true`);
+execSync(`git push --force-with-lease`);
