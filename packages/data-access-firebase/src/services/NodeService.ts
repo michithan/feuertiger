@@ -5,7 +5,7 @@ import {
     DocumentReference,
     Firestore
 } from '@google-cloud/firestore';
-import { Node, Scalars } from '@feuertiger/schema-graphql';
+import { Node, Scalars, Connection, Edge } from '@feuertiger/schema-graphql';
 import { GenerateId, ParseId } from '@feuertiger/utils-graphql';
 
 export interface INodeServiceClass {
@@ -16,10 +16,28 @@ export interface INodeService<T extends Node = Node> {
     GetById(id: Scalars['ID']): Promise<T>;
     Add(entity: Node): Promise<T>;
     Update(entity: T): Promise<T>;
+    Remove(entity: T): Promise<T>;
+    GetAll(filter?: any): Promise<Connection>;
+    GetEdgesById(
+        edgeId: Scalars['ID'],
+        fieldname: string,
+        filter?: any
+    ): Promise<Connection>;
+    AddEdge(nodeId: Scalars['ID'], edgeId: Scalars['ID']): Promise<boolean>;
+    RemoveEdge(nodeId: Scalars['ID'], edgeId: Scalars['ID']): Promise<boolean>;
 }
 
 export default class NodeService<T extends Node = Node>
     implements INodeService<T> {
+    GetAll = async (filter?: any): Promise<Connection> => ({} as Connection);
+
+    Remove = async (entity: T): Promise<T> => ({} as T);
+
+    AddEdge = async (nodeId: string, edgeId: string): Promise<boolean> => false;
+
+    RemoveEdge = async (nodeId: string, edgeId: string): Promise<boolean> =>
+        false;
+
     private collection: CollectionReference;
 
     constructor(private db: Firestore, private collectionName: string) {
@@ -45,6 +63,35 @@ export default class NodeService<T extends Node = Node>
         nodeType?: string
     ): Promise<WriteResult> => await this.GetDocument(id, nodeType).set(entity);
 
+    private async ResolveConnection(
+        nodeIds: Scalars['ID'][]
+    ): Promise<Connection> {
+        const { type } = ParseId(nodeIds[0]);
+        const nodeCollection = this.db.collection(type);
+        const edges: Edge[] = await Promise.all(
+            nodeIds.map<Promise<Edge>>(
+                async (id: Scalars['ID']): Promise<Edge> => {
+                    const documentSnapshot = await this.GetDocumentSnapshot(
+                        id,
+                        type
+                    );
+                    const node = documentSnapshot.data() as Node;
+                    return {
+                        cursor: '',
+                        node
+                    };
+                }
+            )
+        );
+
+        return {
+            pageInfo: {
+                hasNextPage: false
+            },
+            edges
+        } as Connection;
+    }
+
     public async GetById(id: Scalars['ID']): Promise<T> {
         try {
             const { type: nodeType } = ParseId(id);
@@ -55,6 +102,31 @@ export default class NodeService<T extends Node = Node>
             );
             const entity: T = documentSnapshot.data() as T;
             return entity;
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    public async GetEdgesById(
+        id: Scalars['ID'],
+        fieldname: string,
+        filter?: any
+    ): Promise<Connection> {
+        try {
+            console.log('collectionName: ', this.collectionName);
+            const documentSnapshot: DocumentSnapshot = await this.collection
+                .doc(id)
+                .get();
+            const edges = documentSnapshot.get(fieldname);
+            console.log('edges: ', edges);
+            const nodeIds = edges && Object.keys(edges).filter(id => edges[id]);
+
+            console.log('nodeIds: ', nodeIds);
+
+            if (nodeIds && nodeIds.length > 0) {
+                return await this.ResolveConnection(nodeIds);
+            }
+            return {} as Connection;
         } catch (error) {
             throw error;
         }

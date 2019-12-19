@@ -5,14 +5,29 @@
     },
     {
         "firstname": "Max",
-        "lastname": "Huber"
+        "lastname": "Huber",
+        "exercises": {
+            "Exercise:0": true,
+            "Exercise:1": true,
+            "Exercise:2": true
+        }
     },
     {
         "firstname": "Max",
-        "lastname": "Müller "
+        "lastname": "Müller",
+        "exercises": {
+            "Exercise:0": true,
+            "Exercise:1": true,
+            "Exercise:2": true
+        }
     },
     {
         "firstname": "Max",
-        "lastname": "Graf"
+        "lastname": "Graf",
+        "exercises": {
+            "Exercise:0": true,
+            "Exercise:1": true,
+            "Exercise:2": true
+        }
     }
 ]
