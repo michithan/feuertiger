@@ -1,14 +1,13 @@
 name: Continuous Integration
 
-on: [push]
+on:
+    repository_dispatch:
+        types: [build]
 
 jobs:
     build_and_publish:
-        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false
         runs-on: ubuntu-latest
         steps:
-            # Checkout one with GITHUB_TOKEN to prevent loop
-            - uses: actions/checkout@v2
             - uses: actions/checkout@v2
               with:
                   token: ${{ secrets.PRIVATE_TOKEN }}
@@ -32,7 +31,6 @@ jobs:
                   yarn run publish
     dispatch_deploy:
         needs: build_and_publish
-        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev')
         runs-on: ubuntu-latest
         steps:
             - name: Repository Dispatch
