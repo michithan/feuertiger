@@ -11,10 +11,9 @@ import {
     createResolvers
 } from '@feuertiger/data-access-firebase';
 import { ParseId } from '@feuertiger/utils-graphql';
+import { getFirebaseAdminSecrets } from '@feuertiger/tools';
 
-import { firebase as secrets } from '../../../secrets.json';
-
-const db = initDb(secrets as ServiceAccount);
+const db = initDb(getFirebaseAdminSecrets() as ServiceAccount);
 seed(db);
 
 const serviceMap: IServiceMap = injectServices(db);
