@@ -2,7 +2,7 @@
     "name": "@feuertiger/tools",
     "version": "1.0.9-dev.939a512.0",
     "description": "tools",
-    "main": "./dist/index",
+    "main": "./dist/index.js",
     "scripts": {
         "build": "tsc"
     },
