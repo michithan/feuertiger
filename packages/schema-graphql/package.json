@@ -8,7 +8,7 @@
         "./dist/schema.json"
     ],
     "scripts": {
-        "clean": "rimraf dist/*",
+        "clean": "rimraf ./dist/*",
         "combine": "node ./combine.js",
         "generate": "graphql-codegen --config codegen.yml",
         "build": "npm run clean && npm run combine && npm run generate"
@@ -24,7 +24,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "graphql": "^14.5.8"
+        "graphql": "14.5.8",
+        "graphql-import": "0.7.1"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "1.9.1",
@@ -33,7 +34,6 @@
         "@graphql-codegen/typescript-operations": "1.9.1",
         "@graphql-codegen/typescript-react-apollo": "1.9.1",
         "@graphql-codegen/typescript-resolvers": "1.9.1",
-        "graphql-import": "0.7.1",
         "prettier": "1.19.1",
         "rimraf": "3.0.0"
     },
