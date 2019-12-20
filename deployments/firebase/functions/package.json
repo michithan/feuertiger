@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/firebase-functions",
-    "version": "1.0.9-dev.fdb85a3.0",
+    "version": "1.0.9-dev.4413bf2.0",
     "description": "firebase deployment",
     "main": "lib/index.js",
     "author": "",
