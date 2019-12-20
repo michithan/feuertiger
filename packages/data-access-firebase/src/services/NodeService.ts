@@ -1,15 +1,16 @@
+import admin from 'firebase-admin';
 import {
-    CollectionReference,
-    DocumentSnapshot,
-    WriteResult,
-    DocumentReference,
-    Firestore
-} from '@google-cloud/firestore';
-import { Node, Scalars, Connection, Edge } from '@feuertiger/schema-graphql';
+    Node,
+    Scalars,
+    Connection,
+    Edge
+} from '@feuertiger/schema-graphql/dist/index';
 import { GenerateId, ParseId } from '@feuertiger/utils-graphql';
 
 export interface INodeServiceClass {
-    new (db: Firestore, collectionName: string): INodeService<Node>;
+    new (db: admin.firestore.Firestore, collectionName: string): INodeService<
+        Node
+    >;
 }
 
 export interface INodeService<T extends Node = Node> {
@@ -38,16 +39,19 @@ export default class NodeService<T extends Node = Node>
     RemoveEdge = async (nodeId: string, edgeId: string): Promise<boolean> =>
         false;
 
-    private collection: CollectionReference;
+    private collection: admin.firestore.CollectionReference;
 
-    constructor(private db: Firestore, private collectionName: string) {
+    constructor(
+        private db: admin.firestore.Firestore,
+        private collectionName: string
+    ) {
         this.collection = this.db.collection(collectionName);
     }
 
     private GetDocument = (
         id: Scalars['ID'],
         nodeType?: string
-    ): DocumentReference =>
+    ): admin.firestore.DocumentReference =>
         nodeType
             ? this.db.collection(nodeType).doc(id)
             : this.collection.doc(id);
@@ -55,13 +59,15 @@ export default class NodeService<T extends Node = Node>
     private GetDocumentSnapshot = async (
         id: Scalars['ID'],
         nodeType?: string
-    ): Promise<DocumentSnapshot> => await this.GetDocument(id, nodeType).get();
+    ): Promise<admin.firestore.DocumentSnapshot> =>
+        this.GetDocument(id, nodeType).get();
 
     private SetDocumentSnapshot = async (
         id: Scalars['ID'],
         entity: Node,
         nodeType?: string
-    ): Promise<WriteResult> => await this.GetDocument(id, nodeType).set(entity);
+    ): Promise<admin.firestore.WriteResult> =>
+        this.GetDocument(id, nodeType).set(entity);
 
     private async ResolveConnection(
         nodeIds: Scalars['ID'][]
@@ -96,7 +102,7 @@ export default class NodeService<T extends Node = Node>
         try {
             const { type: nodeType } = ParseId(id);
 
-            const documentSnapshot: DocumentSnapshot = await this.GetDocumentSnapshot(
+            const documentSnapshot: admin.firestore.DocumentSnapshot = await this.GetDocumentSnapshot(
                 id,
                 nodeType
             );
@@ -109,19 +115,14 @@ export default class NodeService<T extends Node = Node>
 
     public async GetEdgesById(
         id: Scalars['ID'],
-        fieldname: string,
-        filter?: any
+        fieldname: string
     ): Promise<Connection> {
         try {
-            console.log('collectionName: ', this.collectionName);
-            const documentSnapshot: DocumentSnapshot = await this.collection
+            const documentSnapshot: admin.firestore.DocumentSnapshot = await this.collection
                 .doc(id)
                 .get();
             const edges = documentSnapshot.get(fieldname);
-            console.log('edges: ', edges);
             const nodeIds = edges && Object.keys(edges).filter(id => edges[id]);
-
-            console.log('nodeIds: ', nodeIds);
 
             if (nodeIds && nodeIds.length > 0) {
                 return await this.ResolveConnection(nodeIds);
@@ -136,7 +137,7 @@ export default class NodeService<T extends Node = Node>
         try {
             const id = GenerateId(this.collection.id);
 
-            const writeResult: WriteResult = await this.SetDocumentSnapshot(
+            const writeResult: admin.firestore.WriteResult = await this.SetDocumentSnapshot(
                 id,
                 entity
             );
@@ -149,7 +150,7 @@ export default class NodeService<T extends Node = Node>
 
     public async Update(entity: T): Promise<T> {
         try {
-            const writeResult: WriteResult = await this.GetDocument(
+            const writeResult: admin.firestore.WriteResult = await this.GetDocument(
                 entity.id
             ).update(entity);
 

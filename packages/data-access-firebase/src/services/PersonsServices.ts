@@ -1,4 +1,4 @@
-import { Person } from '@feuertiger/schema-graphql';
+import { Person } from '@feuertiger/schema-graphql/dist/index';
 
 import NodeService from './NodeService';
 

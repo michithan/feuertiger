@@ -1,4 +1,4 @@
-import { Exercise } from '@feuertiger/schema-graphql';
+import { Exercise } from '@feuertiger/schema-graphql/dist/index';
 
 import NodeService from './NodeService';
 

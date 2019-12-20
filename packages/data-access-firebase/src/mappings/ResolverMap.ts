@@ -4,7 +4,7 @@ import {
     IntrospectionInterfaceType,
     IntrospectionField
 } from 'graphql';
-import { IResolvers, IResolverObject, IFieldResolver } from 'apollo-server';
+import { IResolvers, IResolverObject } from 'apollo-server';
 
 import {
     filterIntrospectionObjectTypes,

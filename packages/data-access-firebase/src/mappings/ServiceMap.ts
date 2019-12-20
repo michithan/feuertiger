@@ -1,6 +1,6 @@
 import { IntrospectionOutputType, IntrospectionSchema } from 'graphql';
-import { Firestore } from '@google-cloud/firestore';
 import { __schema } from '@feuertiger/schema-graphql/dist/schema.json';
+import admin from 'firebase-admin';
 
 import { filterIntrospectionObjectTypes } from '@feuertiger/utils-graphql';
 import ExercisesService from '../services/ExercisesService';
@@ -29,7 +29,7 @@ const allTypes: IntrospectionOutputType[] = filterIntrospectionObjectTypes(
     graphQLSchema
 );
 
-export const injectServices = (db: Firestore): IServiceMap =>
+export const injectServices = (db: admin.firestore.Firestore): IServiceMap =>
     allTypes.reduce(
         (serviceMap: IServiceMap, type: IntrospectionOutputType) => {
             const Service = ServiceClassMap[type.name] || ServiceClassMap.Node;
