@@ -1,10 +1,8 @@
 {
     "name": "@feuertiger/schema-graphql",
-    "version": "1.0.9-dev.7150959.0",
+    "version": "1.0.9-dev.fdb85a3.0",
     "description": "graphql schema",
-    "files": [
-        "./dist"
-    ],
+    "main": "./dist/index.ts",
     "scripts": {
         "clean": "rimraf ./dist/*",
         "combine": "node ./combine.js",
