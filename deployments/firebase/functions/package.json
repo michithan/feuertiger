@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/firebase-functions",
-    "version": "1.0.9-dev.b12d8b2.0",
+    "version": "1.0.9-dev.3f17f43.0",
     "description": "firebase deployment",
     "main": "lib/index.js",
     "author": "",
@@ -21,8 +21,8 @@
         "firebase-functions": "^3.3.0"
     },
     "devDependencies": {
-        "typescript": "^3.2.2",
-        "firebase-functions-test": "^0.1.6"
+        "firebase-functions-test": "^0.1.6",
+        "typescript": "^3.2.2"
     },
     "private": true
 }
