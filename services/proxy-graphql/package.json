@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/proxy-graphql",
-    "version": "1.0.9-dev.b12d8b2.0",
+    "version": "1.0.9-dev.294326a.0",
     "description": "graphql backend and proxy to database",
     "main": "./dist/index.js",
     "scripts": {
