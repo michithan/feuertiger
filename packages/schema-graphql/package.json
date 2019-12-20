@@ -3,9 +3,7 @@
     "version": "1.0.9-dev.8b05fad.0",
     "description": "graphql schema",
     "files": [
-        "./dist/index.ts",
-        "./dist/schema.graphql",
-        "./dist/schema.json"
+        "./dist"
     ],
     "scripts": {
         "clean": "rimraf ./dist/*",
