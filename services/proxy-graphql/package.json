@@ -1,0 +1,37 @@
+{
+    "name": "@feuertiger/proxy-graphql",
+    "version": "1.0.9-dev.13063f6.0",
+    "description": "graphql backend, proxy to database",
+    "main": "./dist/index.js",
+    "scripts": {
+        "dev": "ts-node-dev ./src/startup.ts",
+        "build": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/feuertiger/feuertiger",
+        "directory": "services/proxy-graphql"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@feuertiger/data-access-firebase": "1.0.9-dev.13063f6.0",
+        "@feuertiger/schema-graphql": "1.0.9-dev.13063f6.0",
+        "@feuertiger/tools": "1.0.9-dev.13063f6.0",
+        "@feuertiger/utils-graphql": "1.0.9-dev.13063f6.0",
+        "apollo-server": "2.9.13",
+        "apollo-server-express": "2.9.13",
+        "express": "4.17.1",
+        "firebase-admin": "8.8.0",
+        "graphql": "14.5.8",
+        "graphql-import": "0.7.1"
+    },
+    "devDependencies": {
+        "ts-node": "8.5.4",
+        "ts-node-dev": "1.0.0-pre.44",
+        "typescript": "3.7.3"
+    }
+}

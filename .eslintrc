@@ -1,0 +1,19 @@
+{
+    "extends": [
+        "airbnb-typescript",
+        "prettier",
+        "prettier/react",
+        "prettier/@typescript-eslint"
+    ],
+    "rules": {
+        "comma-dangle": 0,
+        "prettier/prettier": "error"
+    },
+    "plugins": [
+        "prettier",
+        "eslint-plugin-import",
+        "eslint-plugin-jsx-a11y",
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks"
+    ]
+}

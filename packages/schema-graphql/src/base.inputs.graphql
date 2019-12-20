@@ -1,0 +1,4 @@
+input Filter {
+    skip: Int
+    search: String
+}
