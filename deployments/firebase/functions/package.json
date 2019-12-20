@@ -14,6 +14,9 @@
         "deploy:ci": "firebase deploy --only functions --token $FIREBASE_TOKEN",
         "logs": "firebase functions:log"
     },
+    "engines": {
+        "node": "8"
+    },
     "dependencies": {
         "@feuertiger/proxy-graphql": "1.0.9-dev.b12d8b2.0",
         "@feuertiger/web-client": "1.0.9-dev.939a512.0",
