@@ -16,12 +16,12 @@
     "packages": [
         "packages/*",
         "services/*",
-        "deployments/firebase/*"
+        "deployments/firebase/functions/package.json"
     ],
     "workspaces": [
         "packages/*",
         "services/*",
-        "deployments/firebase/*"
+        "deployments/firebase/functions/package.json"
     ],
     "dependencies": {
         "@lerna/package-graph": "3.18.5",

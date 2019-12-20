@@ -5,6 +5,6 @@
     "packages": [
         "packages/*",
         "services/*",
-        "deployments/firebase/*"
+        "deployments/firebase/functions/package.json"
     ]
 }

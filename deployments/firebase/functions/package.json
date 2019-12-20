@@ -1,6 +1,10 @@
 {
     "name": "@feuertiger/firebase-functions",
     "version": "1.0.9-dev.b12d8b2.0",
+    "description": "firebase deployment",
+    "main": "lib/index.js",
+    "author": "",
+    "license": "ISC",
     "scripts": {
         "preinstall": "npm i -g firebase-tools && npm i firebase-functions --no-save --no-package-lock",
         "build": "tsc",
@@ -13,7 +17,6 @@
     "engines": {
         "node": "8"
     },
-    "main": "lib/index.js",
     "dependencies": {
         "@feuertiger/proxy-graphql": "1.0.9-dev.b12d8b2.0",
         "@feuertiger/web-client": "1.0.9-dev.b12d8b2.0",
