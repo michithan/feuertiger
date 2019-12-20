@@ -1,10 +1,5 @@
 import admin from 'firebase-admin';
-import {
-    Node,
-    Scalars,
-    Connection,
-    Edge
-} from '@feuertiger/schema-graphql/dist/index';
+import { Node, Scalars, Connection, Edge } from '@feuertiger/schema-graphql';
 import { GenerateId, ParseId } from '@feuertiger/utils-graphql';
 
 export interface INodeServiceClass {

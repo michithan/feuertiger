@@ -1,6 +1,6 @@
 import { IntrospectionOutputType, IntrospectionField } from 'graphql';
 
-import { Node, Connection } from '@feuertiger/schema-graphql/dist/index';
+import { Node, Connection } from '@feuertiger/schema-graphql';
 
 import { INodeService } from '../services/NodeService';
 

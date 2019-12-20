@@ -1,6 +1,6 @@
 import { IResolvers } from 'apollo-server';
 import { ServiceAccount } from 'firebase-admin';
-import { Node } from '@feuertiger/schema-graphql/dist/index';
+import { Node } from '@feuertiger/schema-graphql';
 import {
     initDb,
     seed,

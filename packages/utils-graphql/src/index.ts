@@ -5,7 +5,7 @@ import {
     IntrospectionInterfaceType
 } from 'graphql';
 import uuidv4 from 'uuid/v4';
-import { Scalars } from '@feuertiger/schema-graphql/dist/index';
+import { Scalars } from '@feuertiger/schema-graphql';
 
 export const isNodeObjectType = (
     type: any
