@@ -29,21 +29,9 @@ jobs:
               env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
               run: |
-                  firebase functions:config:set env.FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_TYPE=${{ secrets.FIREBASE_SECRETS_TYPE }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_PROJECT_ID=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_PRIVATE_KEY_ID=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY_ID }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_PRIVATE_KEY=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_CLIENT_EMAIL=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_CLIENT_ID=${{ secrets.FIREBASE_SECRETS_CLIENT_ID }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_AUTH_URI=${{ secrets.FIREBASE_SECRETS_AUTH_URI }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_TOKEN_URI=${{ secrets.FIREBASE_SECRETS_TOKEN_URI }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL=${{ secrets.FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_CLIENT_X509_CERT_URL=${{ secrets.FIREBASE_SECRETS_CLIENT_X509_CERT_URL }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_APP_APIKEY=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_APP_AUTHDOMAIN=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_APP_DATABASEURL=${{ secrets.FIREBASE_SECRETS_APP_DATABASEURL }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_APP_STORAGEBUCKET=${{ secrets.FIREBASE_SECRETS_APP_STORAGEBUCKET }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_APP_MESSAGINGSENDERID=${{ secrets.FIREBASE_SECRETS_APP_MESSAGINGSENDERID }}
-                  firebase functions:config:set env.FIREBASE_SECRETS_APP_APPID=${{ secrets.FIREBASE_SECRETS_APP_APPID }}
+                  firebase functions:config:set secrets.projectId=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
+                  firebase functions:config:set secrets.privateKey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
+                  firebase functions:config:set secrets.clientEmail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
+                  firebase functions:config:set secrets.apiKey=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
+                  firebase functions:config:set secrets.authDomain=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }}
                   npm run deploy:ci
