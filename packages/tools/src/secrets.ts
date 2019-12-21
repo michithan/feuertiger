@@ -3,7 +3,8 @@ import functions from 'firebase-functions';
 
 import { getSecretsEnvironment, SecretsEnvironment } from './environment';
 
-const config = (functions && functions.config()) || {};
+const config =
+    (functions && functions.config() && functions.config().env) || {};
 
 export const getFirebaseAdminSecrets = () => {
     const {
