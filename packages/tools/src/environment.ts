@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 
 config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
-interface SecretsEnvironment {
+export interface SecretsEnvironment {
     FIREBASE_SECRETS_TYPE?: string;
     FIREBASE_SECRETS_PROJECT_ID?: string;
     FIREBASE_SECRETS_PRIVATE_KEY_ID?: string;

@@ -1,12 +1,17 @@
 import { ServiceAccount } from 'firebase-admin';
-import { getSecretsEnvironment } from './environment';
+import functions from 'firebase-functions';
+
+import { getSecretsEnvironment, SecretsEnvironment } from './environment';
 
 export const getFirebaseAdminSecrets = () => {
     const {
         FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_PRIVATE_KEY,
         FIREBASE_SECRETS_CLIENT_EMAIL
-    } = getSecretsEnvironment();
+    } = {
+        ...getSecretsEnvironment(),
+        ...functions.config()
+    } as SecretsEnvironment;
 
     const secrets: ServiceAccount = {
         projectId: FIREBASE_SECRETS_PROJECT_ID,
@@ -17,10 +22,10 @@ export const getFirebaseAdminSecrets = () => {
 };
 
 export const getFirebaseAppSecrets = () => {
-    const {
-        FIREBASE_SECRETS_APP_AUTHDOMAIN,
-        FIREBASE_SECRETS_APP_APIKEY
-    } = getSecretsEnvironment();
+    const { FIREBASE_SECRETS_APP_AUTHDOMAIN, FIREBASE_SECRETS_APP_APIKEY } = {
+        ...getSecretsEnvironment(),
+        ...functions.config()
+    } as SecretsEnvironment;
 
     const tokens = {
         apiKey: FIREBASE_SECRETS_APP_APIKEY,
