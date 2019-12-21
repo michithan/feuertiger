@@ -3,6 +3,8 @@ import functions from 'firebase-functions';
 
 import { getSecretsEnvironment, SecretsEnvironment } from './environment';
 
+const config = (functions && functions.config()) || {};
+
 export const getFirebaseAdminSecrets = () => {
     const {
         FIREBASE_SECRETS_PROJECT_ID,
@@ -10,7 +12,7 @@ export const getFirebaseAdminSecrets = () => {
         FIREBASE_SECRETS_CLIENT_EMAIL
     } = {
         ...getSecretsEnvironment(),
-        ...functions.config()
+        ...config
     } as SecretsEnvironment;
 
     const secrets: ServiceAccount = {
@@ -24,7 +26,7 @@ export const getFirebaseAdminSecrets = () => {
 export const getFirebaseAppSecrets = () => {
     const { FIREBASE_SECRETS_APP_AUTHDOMAIN, FIREBASE_SECRETS_APP_APIKEY } = {
         ...getSecretsEnvironment(),
-        ...functions.config()
+        ...config
     } as SecretsEnvironment;
 
     const tokens = {
