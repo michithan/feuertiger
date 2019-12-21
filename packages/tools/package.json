@@ -30,7 +30,7 @@
         "prettier": "1.19.1",
         "ts-node": "8.5.4",
         "ts-node-dev": "1.0.0-pre.44",
-        "typescript": "3.7.3",
+        "typescript": "3.7.4",
         "yarn": "1.21.1"
     },
     "dependencies": {
