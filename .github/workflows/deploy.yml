@@ -24,6 +24,7 @@ jobs:
             - name: Build
               working-directory: ./deployments/firebase/functions
               run: npm run build
+            - run: firebase use --add ${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
             - run: firebase functions:config:set secrets.projectid=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
             - run: firebase functions:config:set secrets.privatekey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
             - run: firebase functions:config:set secrets.clientemail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
