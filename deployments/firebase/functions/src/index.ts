@@ -1,13 +1,11 @@
-import admin from 'firebase-admin';
+import admin, { ServiceAccount } from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 import { gqlServer } from '@feuertiger/proxy-graphql';
-import './secrets.json';
-
-const serviceAccountPath = require.resolve('./secrets.json');
+import serviceAccount from './secrets.json';
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccountPath)
+    credential: admin.credential.cert(serviceAccount as ServiceAccount)
 });
 
 const server = gqlServer();
