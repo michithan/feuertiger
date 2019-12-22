@@ -1,4 +1,5 @@
 import functions from 'firebase-functions';
+import { ServiceAccount } from 'firebase-admin';
 
 import { getSecretsEnvironment } from './environment';
 
@@ -18,13 +19,13 @@ const AddFirebaseConfig = (config: Config): Config => {
     const nextConfig: Config = { ...config };
     Object.keys(nextConfig).forEach((key: string) => {
         if (firebaseConfig[key]) {
-            nextConfig[key.toString()] = firebaseConfig[key];
+            nextConfig[key] = firebaseConfig[key];
         }
     });
     return nextConfig;
 };
 
-export const getFirebaseAdminSecrets = () => {
+export const getFirebaseAdminSecrets = (): ServiceAccount => {
     const {
         FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_PRIVATE_KEY,

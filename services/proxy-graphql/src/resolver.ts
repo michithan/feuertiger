@@ -11,7 +11,6 @@ import {
 import { ParseId } from '@feuertiger/utils-graphql';
 import { getFirebaseAdminSecrets } from '@feuertiger/tools';
 
-console.log('getFirebaseAdminSecrets()', getFirebaseAdminSecrets());
 const db = initDb(getFirebaseAdminSecrets() as ServiceAccount);
 seed(db);
 
