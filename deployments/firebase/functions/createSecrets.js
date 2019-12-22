@@ -20,10 +20,6 @@ const secrets = {
     )
 };
 
-Object.keys(secrets).forEach(key => {
-    console.log(`${key}:`, secrets[key].length);
-});
-
 const secretsPath = path.resolve(__dirname, 'src', 'secrets.json');
 const secretsJson = JSON.stringify(secrets, null, 4);
 

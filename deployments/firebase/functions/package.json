@@ -7,7 +7,7 @@
     "license": "ISC",
     "scripts": {
         "createSecrets": "node ./createSecrets.js",
-        "build": "npm run createSecrets && tsc",
+        "build": "tsc",
         "serve": "npm run build && firebase serve --only functions",
         "shell": "npm run build && firebase functions:shell",
         "start": "npm run shell",
