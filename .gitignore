@@ -11,3 +11,5 @@ package-lock.json
 *.code-workspace
 *.npmrc
 *.env
+
+secrets.json

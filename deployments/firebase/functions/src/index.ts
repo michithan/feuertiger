@@ -1,6 +1,10 @@
+import admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
 
 import { gqlServer } from '@feuertiger/proxy-graphql';
+import secrets from './secrets.json';
+
+admin.initializeApp(secrets);
 
 const server = gqlServer();
 

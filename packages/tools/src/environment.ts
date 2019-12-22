@@ -3,6 +3,9 @@ import { config } from 'dotenv';
 
 config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
+const trim = (str: string | undefined): string | undefined =>
+    str?.replace(/^"|"$/g, '');
+
 export interface SecretsEnvironment {
     FIREBASE_SECRETS_TYPE?: string;
     FIREBASE_SECRETS_PROJECT_ID?: string;
@@ -41,7 +44,7 @@ export const getSecretsEnvironment = (): SecretsEnvironment => {
         FIREBASE_SECRETS_APP_MESSAGINGSENDERID,
         FIREBASE_SECRETS_APP_APPID
     } = process.env;
-    return {
+    const secrets = {
         FIREBASE_SECRETS_TYPE,
         FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_PRIVATE_KEY_ID,
@@ -59,4 +62,12 @@ export const getSecretsEnvironment = (): SecretsEnvironment => {
         FIREBASE_SECRETS_APP_MESSAGINGSENDERID,
         FIREBASE_SECRETS_APP_APPID
     };
+
+    return Object.keys(secrets).reduce(
+        (acc: any, key: string): SecretsEnvironment => {
+            acc[key] = trim(acc[key]);
+            return acc;
+        },
+        { ...secrets }
+    );
 };

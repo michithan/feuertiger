@@ -1,14 +1,9 @@
-import admin, { ServiceAccount } from 'firebase-admin';
+import admin from 'firebase-admin';
 
 import personsSeed from './seeds/seed-persons.json';
 import exerciseSeed from './seeds/seed-exercise.json';
 
-export const initDb = (secrets: ServiceAccount): admin.firestore.Firestore =>
-    admin
-        .initializeApp({
-            credential: admin.credential.cert(secrets)
-        })
-        .firestore();
+export const initDb = (): admin.firestore.Firestore => admin.firestore();
 
 export const seed = (db: admin.firestore.Firestore): void => {
     const personsCollection = db.collection('Person');

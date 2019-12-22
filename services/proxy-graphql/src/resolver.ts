@@ -1,5 +1,4 @@
 import { IResolvers } from 'apollo-server';
-import { ServiceAccount } from 'firebase-admin';
 import { Node } from '@feuertiger/schema-graphql';
 import {
     initDb,
@@ -9,9 +8,8 @@ import {
     createResolvers
 } from '@feuertiger/data-access-firebase';
 import { ParseId } from '@feuertiger/utils-graphql';
-import { getFirebaseAdminSecrets } from '@feuertiger/tools';
 
-const db = initDb(getFirebaseAdminSecrets() as ServiceAccount);
+const db = initDb();
 seed(db);
 
 const serviceMap: IServiceMap = injectServices(db);
