@@ -2,7 +2,7 @@
     "name": "@feuertiger/firebase-functions",
     "version": "1.0.9-dev.183b344.0",
     "description": "firebase deployment",
-    "main": "lib/index.js",
+    "main": "./lib/index.js",
     "author": "",
     "license": "ISC",
     "scripts": {
