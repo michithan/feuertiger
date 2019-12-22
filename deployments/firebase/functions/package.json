@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@feuertiger/proxy-graphql": "1.0.9-dev.57f7988.0",
-        "@feuertiger/tools": "1.0.9-dev.e8fbb46.0",
+        "@feuertiger/tools": "1.0.9-dev.57f7988.0",
         "@feuertiger/web-client": "1.0.9-dev.57f7988.0",
         "firebase-admin": "8.9.0",
         "firebase-functions": "3.3.0"
