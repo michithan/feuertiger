@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/data-access-firebase",
-    "version": "1.0.9-dev.f1368b7.0",
+    "version": "1.0.9-dev.c83387a.0",
     "description": "data-access",
     "main": "./dist/index.js",
     "scripts": {
