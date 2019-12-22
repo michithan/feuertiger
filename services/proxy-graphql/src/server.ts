@@ -7,6 +7,7 @@ import { AuthenticationError } from 'apollo-server';
 import resolvers from './resolver';
 import schemaDirectives from './schemaDirectives';
 
+// eslint-disable-next-line import/prefer-default-export
 export const gqlServer = () => {
     const schemaPath = require.resolve(
         '@feuertiger/schema-graphql/dist/schema.graphql'
@@ -30,7 +31,8 @@ export const gqlServer = () => {
             } catch (error) {
                 throw new AuthenticationError('you must be logged in');
             }
-        }
+        },
+        playground: true
     });
 
     const app = express();
