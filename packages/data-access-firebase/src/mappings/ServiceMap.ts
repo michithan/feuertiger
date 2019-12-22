@@ -33,8 +33,10 @@ export const injectServices = (db: admin.firestore.Firestore): IServiceMap =>
     allTypes.reduce(
         (serviceMap: IServiceMap, type: IntrospectionOutputType) => {
             const Service = ServiceClassMap[type.name] || ServiceClassMap.Node;
-            serviceMap[type.name as string] = new Service(db, type.name);
-            return serviceMap;
+            return {
+                [type.name as string]: new Service(db, type.name),
+                ...serviceMap
+            };
         },
         {}
     );

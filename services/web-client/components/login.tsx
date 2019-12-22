@@ -42,11 +42,7 @@ export default class Login extends React.Component<Props> {
         const email = event.target.email.value;
         const password = event.target.password.value;
         const { auth } = this.props;
-        try {
-            auth.signInWithEmailAndPassword(email, password);
-        } catch (error) {
-            console.log('error:', error);
-        }
+        auth.signInWithEmailAndPassword(email, password);
     };
 
     render() {

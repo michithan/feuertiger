@@ -9,6 +9,7 @@ import { AuthProps } from '../container/withAuth';
 const drawerWidth = 240;
 
 // remove it here
+// eslint-disable-next-line react/jsx-props-no-spreading
 const StyledAppBar = styled(({ open, ...props }) => <AppBar {...props} />)`
     z-index: 1;
     transition: ${({ open, theme: { transitions } }) =>
@@ -35,6 +36,7 @@ const StyledToolbar = styled(Toolbar)`
 
 // remove it here
 const StyledIconButton = styled(({ open, ...props }) => (
+    // eslint-disable-next-line react/jsx-props-no-spreading
     <IconButton {...props} />
 ))`
     margin-right: 36;

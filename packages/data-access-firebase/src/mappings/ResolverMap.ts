@@ -76,6 +76,7 @@ const fieldObjectMap: Array<FieldObjectMapping> = [
         const fieldTuples: Array<FieldObjectTuple> = mapFieldsToObjectType(
             object.fields
         );
+        // eslint-disable-next-line no-restricted-syntax
         for (const fieldTuple of fieldTuples) {
             const { field, fieldObject } = fieldTuple;
             const type = isConnectionObjectType(fieldObject)
@@ -133,9 +134,10 @@ export const createResolvers = (serviceMap: IServiceMap): IResolvers =>
                 );
             }
 
-            resolvers[objectName] = resolverObject;
-
-            return resolvers;
+            return {
+                [objectName]: resolverObject,
+                ...resolvers
+            };
         },
         {}
     );
