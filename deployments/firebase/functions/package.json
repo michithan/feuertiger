@@ -6,7 +6,6 @@
     "author": "",
     "license": "ISC",
     "scripts": {
-        "preinstall": "npm i -g firebase-tools && npm i firebase-functions --no-save --no-package-lock",
         "build": "tsc",
         "serve": "npm run build && firebase serve --only functions",
         "shell": "npm run build && firebase functions:shell",

@@ -20,7 +20,9 @@ jobs:
               working-directory: ./deployments/firebase/functions
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: npm install
+              run: |
+                  npm i -g firebase-tools && npm i firebase-functions --no-save --no-package-lock
+                  npm install
             - name: Build
               working-directory: ./deployments/firebase/functions
               run: npm run build
