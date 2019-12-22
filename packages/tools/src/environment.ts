@@ -4,7 +4,7 @@ import { config } from 'dotenv';
 config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
 const trim = (str: string | undefined): string | undefined =>
-    str?.replace(/^"|"$/g, '');
+    str?.replace(/^"|"$/g, '').replace(/\\n/g, '\n');
 
 export interface SecretsEnvironment {
     FIREBASE_SECRETS_TYPE?: string;

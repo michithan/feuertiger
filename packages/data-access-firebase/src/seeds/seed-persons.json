@@ -29,5 +29,14 @@
             "Exercise:1": true,
             "Exercise:2": true
         }
+    },
+    {
+        "firstname": "Kathi",
+        "lastname": "Graf",
+        "exercises": {
+            "Exercise:0": true,
+            "Exercise:1": true,
+            "Exercise:2": true
+        }
     }
 ]

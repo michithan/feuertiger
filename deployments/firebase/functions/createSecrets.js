@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const trim = str => str && str.replace(/^"|"$/g, '');
+const trim = str => str && str.replace(/^"|"$/g, '').replace(/\\n/g, '\n');
 
 const secrets = JSON.stringify(
     {
