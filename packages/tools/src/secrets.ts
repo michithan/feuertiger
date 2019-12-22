@@ -3,7 +3,7 @@ import { ServiceAccount } from 'firebase-admin';
 
 import { getSecretsEnvironment } from './environment';
 
-interface Config {
+interface Config extends ServiceAccount {
     [key: string]: string | undefined;
 }
 
@@ -25,17 +25,25 @@ const AddFirebaseConfig = (config: Config): Config => {
     return nextConfig;
 };
 
-export const getFirebaseAdminSecrets = (): ServiceAccount => {
+export const getFirebaseAdminSecrets = (): Config => {
     const {
         FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_PRIVATE_KEY,
         FIREBASE_SECRETS_CLIENT_EMAIL
     } = getSecretsEnvironment();
-    return AddFirebaseConfig({
+    const config = AddFirebaseConfig({
         projectId: FIREBASE_SECRETS_PROJECT_ID,
         privateKey: FIREBASE_SECRETS_PRIVATE_KEY,
         clientEmail: FIREBASE_SECRETS_CLIENT_EMAIL
     });
+    return {
+        projectId: config.projectId,
+        privateKey: config.privateKey,
+        clientEmail: config.clientEmail,
+        project_id: config.projectId,
+        private_key: config.privateKey,
+        client_email: config.clientEmail
+    };
 };
 
 export const getFirebaseAppSecrets = () => {

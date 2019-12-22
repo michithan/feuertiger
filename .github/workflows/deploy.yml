@@ -26,17 +26,17 @@ jobs:
             - name: Build
               working-directory: ./deployments/firebase/functions
               run: npm run build
-            # - name: Set_Firebase_Config
-            #   working-directory: ./deployments/firebase/functions
-            #   env:
-            #       FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-            #   run: |
-            #       firebase use --add ${{ secrets.FIREBASE_SECRETS_PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
-            #       firebase functions:config:set secrets.projectid=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
-            #       firebase functions:config:set secrets.privatekey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }} --token ${{ secrets.FIREBASE_TOKEN }}
-            #       firebase functions:config:set secrets.clientemail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }} --token ${{ secrets.FIREBASE_TOKEN }}
-            #       firebase functions:config:set secrets.apikey=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }} --token ${{ secrets.FIREBASE_TOKEN }}
-            #       firebase functions:config:set secrets.authdomain=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }} --token ${{ secrets.FIREBASE_TOKEN }}
+            - name: Set_Firebase_Config
+              working-directory: ./deployments/firebase/functions
+              env:
+                  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+              run: |
+                  firebase use --add ${{ secrets.FIREBASE_SECRETS_PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+                  firebase functions:config:set secrets.projectid=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+                  firebase functions:config:set secrets.privatekey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }} --token ${{ secrets.FIREBASE_TOKEN }}
+                  firebase functions:config:set secrets.clientemail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }} --token ${{ secrets.FIREBASE_TOKEN }}
+                  firebase functions:config:set secrets.apikey=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }} --token ${{ secrets.FIREBASE_TOKEN }}
+                  firebase functions:config:set secrets.authdomain=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }} --token ${{ secrets.FIREBASE_TOKEN }}
             - name: Deploy_Firebase
               working-directory: ./deployments/firebase/functions
               env:
