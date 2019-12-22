@@ -32,13 +32,7 @@ jobs:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
               run: |
                   firebase use --add ${{ secrets.FIREBASE_SECRETS_PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
-                  firebase functions:config:set
-                  | secrets.projectid=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
-                  | secrets.privatekey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
-                  | secrets.clientemail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
-                  | secrets.apikey=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
-                  | secrets.authdomain=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }}
-                  | --token ${{ secrets.FIREBASE_TOKEN }}
+                  firebase functions:config:set secrets.projectid=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }} secrets.privatekey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }} secrets.clientemail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }} secrets.apikey=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }} secrets.authdomain=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }} --token ${{ secrets.FIREBASE_TOKEN }}
             - name: Deploy_Firebase
               working-directory: ./deployments/firebase/functions
               env:
