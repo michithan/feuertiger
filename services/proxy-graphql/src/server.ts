@@ -2,9 +2,8 @@ import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { importSchema } from 'graphql-import';
 
-import admin from 'firebase-admin';
-import { AuthenticationError } from 'apollo-server';
-import resolvers from './resolver';
+import createResolver from './createResolver';
+import resolveContext from './resolveContext';
 import schemaDirectives from './schemaDirectives';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -18,20 +17,8 @@ export const gqlServer = () => {
     const apolloServer = new ApolloServer({
         typeDefs,
         schemaDirectives,
-        resolvers: resolvers(),
-        context: async ({ req }) => {
-            const token = req.headers.authorization || '';
-            try {
-                const decodedToken = await admin.auth().verifyIdToken(token);
-                return {
-                    user: {
-                        uid: decodedToken.uid
-                    }
-                };
-            } catch (error) {
-                throw new AuthenticationError('you must be logged in');
-            }
-        },
+        resolvers: createResolver(),
+        context: resolveContext,
         playground: true
     });
 
