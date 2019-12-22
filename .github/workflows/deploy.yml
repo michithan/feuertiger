@@ -24,14 +24,13 @@ jobs:
             - name: Build
               working-directory: ./deployments/firebase/functions
               run: npm run build
+            - run: firebase functions:config:set secrets.projectid=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
+            - run: firebase functions:config:set secrets.privatekey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
+            - run: firebase functions:config:set secrets.clientemail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
+            - run: firebase functions:config:set secrets.apikey=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
+            - run: firebase functions:config:set secrets.authdomain=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }}
             - name: Deploy
               working-directory: ./deployments/firebase/functions
               env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-              run: |
-                  firebase functions:config:set secrets.projectid=${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
-                  firebase functions:config:set secrets.privatekey=${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
-                  firebase functions:config:set secrets.clientemail=${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
-                  firebase functions:config:set secrets.apikey=${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
-                  firebase functions:config:set secrets.authdomain=${{ secrets.FIREBASE_SECRETS_APP_AUTHDOMAIN }}
-                  npm run deploy:ci
+              run: npm run deploy:ci
