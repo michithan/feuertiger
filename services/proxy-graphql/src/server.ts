@@ -18,7 +18,7 @@ export const gqlServer = () => {
     const apolloServer = new ApolloServer({
         typeDefs,
         schemaDirectives,
-        resolvers,
+        resolvers: resolvers(),
         context: async ({ req }) => {
             const token = req.headers.authorization || '';
             try {

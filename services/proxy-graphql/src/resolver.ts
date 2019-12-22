@@ -9,29 +9,31 @@ import {
 } from '@feuertiger/data-access-firebase';
 import { ParseId } from '@feuertiger/utils-graphql';
 
-const db = initDb();
-seed(db);
+export default () => {
+    const db = initDb();
+    seed(db);
 
-const serviceMap: IServiceMap = injectServices(db);
-const resolvers: IResolvers = createResolvers(serviceMap);
+    const serviceMap: IServiceMap = injectServices(db);
+    const resolvers: IResolvers = createResolvers(serviceMap);
 
-const typeResolvers: IResolvers = {
-    Node: {
-        __resolveType: (source: Node) => {
-            const { id } = source;
-            const { type } = ParseId(id);
-            return type;
+    const typeResolvers: IResolvers = {
+        Node: {
+            __resolveType: (source: Node) => {
+                const { id } = source;
+                const { type } = ParseId(id);
+                return type;
+            }
+        },
+        Edge: {
+            __resolveType: () => () => 'Edge'
+        },
+        Connection: {
+            __resolveType: () => () => 'Connection'
         }
-    },
-    Edge: {
-        __resolveType: () => () => 'Edge'
-    },
-    Connection: {
-        __resolveType: () => () => 'Connection'
-    }
-};
+    };
 
-export default {
-    ...typeResolvers,
-    ...resolvers
+    return {
+        ...typeResolvers,
+        ...resolvers
+    };
 };
