@@ -18,8 +18,8 @@
     "license": "ISC",
     "dependencies": {
         "@feuertiger/schema-graphql": "1.0.9-dev.fdb85a3.0",
-        "graphql": "^14.5.8",
-        "uuid": "^3.3.3"
+        "graphql": "14.5.8",
+        "uuid": "3.3.3"
     },
     "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }
