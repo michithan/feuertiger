@@ -24,6 +24,8 @@ const secrets = JSON.stringify(
     4
 );
 
+console.log('secrets:', secrets);
+
 const secretsPath = path.resolve(__dirname, 'src', 'secrets.json');
 
 fs.writeFileSync(secretsPath, secrets, 'utf8');
