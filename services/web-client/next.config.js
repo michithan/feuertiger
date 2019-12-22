@@ -11,5 +11,6 @@ module.exports = {
     }),
     publicRuntimeConfig: {
         tokens: getFirebaseAppSecrets()
-    }
+    },
+    distDir: './dist'
 };
