@@ -16,13 +16,14 @@ jobs:
               with:
                   node-version: '8'
                   registry-url: 'https://npm.pkg.github.com'
-            - name: Install_Firebase_Tools
+            - name: Install
               working-directory: ./deployments/firebase/functions
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   echo -e "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}\n@feuertiger:registry=https://npm.pkg.github.com/feuertiger\npackage-lock=false" > .npmrc
                   npm i -g firebase-tools
+                  npm i --no-package-lock
             - name: Extract_Secrets
               working-directory: ./deployments/firebase/functions
               env:
