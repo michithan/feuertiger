@@ -8,13 +8,34 @@ import {
     createResolvers
 } from '@feuertiger/data-access-firebase';
 import { ParseId } from '@feuertiger/utils-graphql';
+import { createWorker } from 'tesseract.js';
 
 export default () => {
     const db = initDb();
     seed(db);
 
+    const customResolvers: IResolvers = {
+        Query: {
+            ocr: async (parent, args) => {
+                const { image } = args;
+
+                const worker = createWorker();
+                await worker.load();
+                await worker.loadLanguage('eng');
+                await worker.initialize('eng');
+                const { data } = await worker.recognize(image);
+                await worker.terminate();
+                const { text } = data;
+                return text;
+            }
+        }
+    };
+
     const serviceMap: IServiceMap = injectServices(db);
-    const resolvers: IResolvers = createResolvers(serviceMap);
+    const resolvers: IResolvers = {
+        ...createResolvers(serviceMap),
+        ...customResolvers
+    };
 
     const typeResolvers: IResolvers = {
         Node: {

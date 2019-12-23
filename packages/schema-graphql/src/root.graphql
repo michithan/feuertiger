@@ -16,6 +16,7 @@ type Query {
     node(id: ID!): Node
     allPersons(filter: Filter): PersonConnection
     allExercises(filter: Filter): ExerciseConnection
+    ocr(image: String): String
 }
 
 type Mutation {

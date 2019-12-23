@@ -27,7 +27,8 @@
         "express": "4.17.1",
         "firebase-admin": "8.8.0",
         "graphql": "14.5.8",
-        "graphql-import": "0.7.1"
+        "graphql-import": "0.7.1",
+        "tesseract.js": "2.0.1"
     },
     "devDependencies": {
         "ts-node": "8.5.4",
