@@ -35,6 +35,13 @@ const MemberTable = ({ member }: { member: Participants }) => {
     const participants = member.edges.map(({ node }) => node);
     return (
         <MaterialTable
+            options={{
+                exportButton: true,
+                filtering: true,
+                grouping: true,
+                search: true,
+                sorting: true
+            }}
             columns={[
                 { title: 'Vorname', field: 'firstname' },
                 { title: 'Nachname', field: 'lastname' },
@@ -43,6 +50,7 @@ const MemberTable = ({ member }: { member: Participants }) => {
                 {
                     field: 'edit',
                     title: '',
+                    filtering: false,
                     render: () => (
                         <Fab color="primary" aria-label="edit">
                             <EditIcon />
