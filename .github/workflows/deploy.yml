@@ -16,15 +16,14 @@ jobs:
               with:
                   node-version: '8'
                   registry-url: 'https://npm.pkg.github.com'
-            - name: Install
+            - name: Install_Firebase_Tools
               working-directory: ./deployments/firebase/functions
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   echo -e "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}\n@feuertiger:registry=https://npm.pkg.github.com/feuertiger\npackage-lock=false" > .npmrc
-                  npm i -g firebase-tools && npm i firebase-functions --no-save --no-package-lock
-                  npm i --no-package-lock
-            - name: Build
+                  npm i -g firebase-tools
+            - name: Extract_Secrets
               working-directory: ./deployments/firebase/functions
               env:
                   FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
@@ -38,9 +37,7 @@ jobs:
                   FIREBASE_SECRETS_TOKEN_URI: ${{ secrets.FIREBASE_SECRETS_TOKEN_URI }}
                   FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL }}
                   FIREBASE_SECRETS_CLIENT_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_CLIENT_X509_CERT_URL }}
-              run: |
-                  npm run createSecrets
-                  npm run build
+              run: npm run createSecrets
             - name: Deploy_Firebase
               working-directory: ./deployments/firebase/functions
               env:
