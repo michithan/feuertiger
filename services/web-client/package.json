@@ -29,7 +29,7 @@
         "apollo-client": "2.6.8",
         "apollo-link-context": "1.0.19",
         "apollo-link-http": "1.5.16",
-        "body-parser": "^1.19.0",
+        "body-parser": "1.19.0",
         "date-fns": "^2.0.0-beta.5",
         "express": "^4.17.1",
         "firebase": "7.6.0",
@@ -42,6 +42,7 @@
         "node-fetch": "2.6.0",
         "react": "16.12.0",
         "react-dom": "16.12.0",
+        "react-webcam": "4.0.0",
         "styled-components": "4.4.1"
     },
     "devDependencies": {
