@@ -5,8 +5,10 @@ import {
     DialogTitle,
     DialogContent,
     DialogActions,
-    DialogContentText
+    Grid,
+    TextField
 } from '@material-ui/core';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 interface Props {
     handleClose: () => void;
@@ -21,10 +23,75 @@ const AddMember = ({ handleClose, open }: Props) => (
     >
         <DialogTitle id="simple-dialog-title">Mitglied hinzufügen</DialogTitle>
         <DialogContent>
-            <DialogContentText>
-                To subscribe to this website, please enter your email address
-                here. We will send updates occasionally.
-            </DialogContentText>
+            <Grid container spacing={3}>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="firstName"
+                        name="Vorname"
+                        label="Vorname"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="lastName"
+                        name="Nachname"
+                        label="Nachname"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <KeyboardDatePicker
+                        disableToolbar
+                        variant="inline"
+                        format="MM/dd/yyyy"
+                        margin="normal"
+                        id="dateOfBirth"
+                        label="Geburtsdatum"
+                        value={new Date()}
+                        onChange={() => {}}
+                        KeyboardButtonProps={{
+                            'aria-label': 'change date'
+                        }}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="city"
+                        name="Stadt"
+                        label="Stadt"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        id="zipCode"
+                        name="PLZ"
+                        label="PLZ"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="street"
+                        name="Straße"
+                        label="Straße"
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <TextField
+                        id="number"
+                        name="Nummer"
+                        label="Nummer"
+                        fullWidth
+                    />
+                </Grid>
+            </Grid>
         </DialogContent>
         <DialogActions>
             <Button autoFocus onClick={handleClose} color="primary">
