@@ -15,12 +15,15 @@
         "resolveJsonModule": true
     },
     "include": [
+        "src/**/*",
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
         "utils/apollo-client.js",
         "pages/_document.js",
-        "pages/_app.js"
+        "pages/_app.js",
+        "next.config.js"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "extends": "../../tsconfig.json"
 }

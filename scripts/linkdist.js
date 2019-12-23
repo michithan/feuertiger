@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { getPackages } = require('@lerna/project');
 
-const linkscript = `export * from "../src/index.ts";`;
+const linkscript = `module.exports = require("../src/index");`;
 
 const getPackagePath = name => {
     const packageJsonPath = require.resolve(`${name}/package.json`);

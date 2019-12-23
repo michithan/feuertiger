@@ -1,12 +1,6 @@
-import { ServiceAccount } from 'firebase-admin';
+const { getSecretsEnvironment } = require('./environment');
 
-import { getSecretsEnvironment } from './environment';
-
-interface Config extends ServiceAccount {
-    [key: string]: string | undefined;
-}
-
-export const getFirebaseAdminSecrets = (): Config => {
+module.exports.getFirebaseAdminSecrets = () => {
     const {
         FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_PRIVATE_KEY,
@@ -19,7 +13,7 @@ export const getFirebaseAdminSecrets = (): Config => {
     };
 };
 
-export const getFirebaseAppSecrets = () => {
+module.exports.getFirebaseAppSecrets = () => {
     const {
         FIREBASE_SECRETS_APP_AUTHDOMAIN,
         FIREBASE_SECRETS_APP_APIKEY
