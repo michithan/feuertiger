@@ -19,6 +19,7 @@
         "@apollo/react-hoc": "3.1.3",
         "@apollo/react-hooks": "3.1.3",
         "@date-io/date-fns": "1.3.13",
+        "@feuertiger/ocr": "1.0.9-dev.b744f1e.0",
         "@feuertiger/tools": "1.0.9-dev.b744f1e.0",
         "@material-ui/core": "4.8.0",
         "@material-ui/icons": "4.5.1",
@@ -43,7 +44,9 @@
         "react": "16.12.0",
         "react-dom": "16.12.0",
         "react-webcam": "4.0.0",
-        "styled-components": "4.4.1"
+        "styled-components": "4.4.1",
+        "next-transpile-modules": "2.3.1",
+        "lodash.merge": "4.6.2"
     },
     "devDependencies": {
         "@types/react": "16.9.17",

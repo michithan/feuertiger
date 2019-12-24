@@ -8,11 +8,13 @@ import {
     Grid,
     TextField,
     Fab,
-    Typography
+    Typography,
+    DialogContentText
 } from '@material-ui/core';
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import CenterFocusStrongIcon from '@material-ui/icons/CenterFocusStrong';
 import Webcam from 'react-webcam';
+import { startOcr } from '@feuertiger/ocr';
 
 interface Props {
     handleClose: () => void;
@@ -21,6 +23,7 @@ interface Props {
 
 interface State {
     showCam: boolean;
+    ocrData?: string;
 }
 
 const videoConstraints = {
@@ -32,6 +35,8 @@ const videoConstraints = {
 export default class AddMember extends React.Component<Props, State> {
     webcamRef: React.RefObject<Webcam>;
 
+    stopOcr: () => void | undefined;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -40,20 +45,35 @@ export default class AddMember extends React.Component<Props, State> {
         this.webcamRef = React.createRef();
     }
 
+    componentWillUnmount() {
+        this?.stopOcr();
+    }
+
     handleOCR = async () => {
         this.setState({ showCam: true });
     };
 
-    handleCapture = capture => {
-        console.log('capture:', capture);
-        const imageSrc = this.webcamRef.current.getScreenshot();
-        console.log('imageSrc:', imageSrc);
+    handleCapture = () => {
+        this?.stopOcr();
         this.setState({ showCam: false });
+    };
+
+    handleOCRData = (data: string) => {
+        console.log('data: ', data);
+        this.setState({
+            ocrData: data
+        });
+    };
+
+    handleUserMedia = async () => {
+        const { video } = this.webcamRef.current;
+        const stopOCR = await startOcr(video, this.handleOCRData);
+        this.stopOcr = stopOCR;
     };
 
     render() {
         const { handleClose, open } = this.props;
-        const { showCam } = this.state;
+        const { showCam, ocrData } = this.state;
         return (
             <Dialog
                 onClose={handleClose}
@@ -63,14 +83,23 @@ export default class AddMember extends React.Component<Props, State> {
                 <DialogTitle id="simple-dialog-title">
                     Mitglied hinzufügen
                 </DialogTitle>
-                <DialogContent>
+                <DialogContent style={{ overflowY: 'initial' }}>
                     {showCam ? (
-                        <Webcam
-                            audio={false}
-                            ref={this.webcamRef}
-                            screenshotFormat="image/jpeg"
-                            videoConstraints={videoConstraints}
-                        />
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <Webcam
+                                    style={{ width: '100%' }}
+                                    onUserMedia={this.handleUserMedia}
+                                    audio={false}
+                                    ref={this.webcamRef}
+                                    screenshotFormat="image/jpeg"
+                                    videoConstraints={videoConstraints}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <DialogContentText>{ocrData}</DialogContentText>
+                            </Grid>
+                        </Grid>
                     ) : (
                         <Grid container spacing={3}>
                             <Grid item xs={12}>
@@ -161,7 +190,7 @@ export default class AddMember extends React.Component<Props, State> {
                             onClick={this.handleCapture}
                             color="primary"
                         >
-                            Capture
+                            Übernehmen
                         </Button>
                     ) : (
                         <>
