@@ -22,13 +22,13 @@
         "@feuertiger/schema-graphql": "1.0.9-dev.fbf03e8.0",
         "@feuertiger/tools": "1.0.9-dev.2bb73de.0",
         "@feuertiger/utils-graphql": "1.0.9-dev.fbf03e8.0",
+        "@feuertiger/ocr": "1.0.9-dev.fbf03e8.0",
         "apollo-server": "2.9.13",
         "apollo-server-express": "2.9.13",
         "express": "4.17.1",
         "firebase-admin": "8.8.0",
         "graphql": "14.5.8",
-        "graphql-import": "0.7.1",
-        "tesseract.js": "2.0.1"
+        "graphql-import": "0.7.1"
     },
     "devDependencies": {
         "ts-node": "8.5.4",

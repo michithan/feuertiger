@@ -12818,7 +12818,7 @@ tesseract.js-core@^2.0.0:
   resolved "https://registry.yarnpkg.com/tesseract.js-core/-/tesseract.js-core-2.0.0.tgz#1d4073ab4d0234d4c231de06ddd8c55043ac2b1a"
   integrity sha512-Oi+V/0iuDQarM9OaLRso6y8U0lPZy9dDaLBoSWNd9c5FSsvgL6OoIDRS+Pum/noAQw7Q3V8vetlf+SgQNRdorA==
 
-tesseract.js@^2.0.1:
+tesseract.js@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/tesseract.js/-/tesseract.js-2.0.1.tgz#d23f05c60d671f8e01b57e06a916295a0c2c5359"
   integrity sha512-5YXoYableNW6e/HE9D6G3XCn5tjBiV2lERbRL+HfuZdskfBkpvvG9GBtVdQ7OoOw/sqLh2J9o83NLHQrZJWyFg==

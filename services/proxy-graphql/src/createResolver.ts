@@ -8,7 +8,7 @@ import {
     createResolvers
 } from '@feuertiger/data-access-firebase';
 import { ParseId } from '@feuertiger/utils-graphql';
-import { createWorker } from 'tesseract.js';
+import { ocr } from '@feuertiger/ocr';
 
 export default () => {
     const db = initDb();
@@ -18,14 +18,7 @@ export default () => {
         Query: {
             ocr: async (parent, args) => {
                 const { image } = args;
-
-                const worker = createWorker();
-                await worker.load();
-                await worker.loadLanguage('eng');
-                await worker.initialize('eng');
-                const { data } = await worker.recognize(image);
-                await worker.terminate();
-                const { text } = data;
+                const text = await ocr(image);
                 return text;
             }
         }
