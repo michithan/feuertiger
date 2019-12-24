@@ -27,11 +27,14 @@ export const startOcr = async (
     const canvas = document.createElement('canvas');
 
     const doOCR = async (): Promise<string> => {
-        canvas.width = video.width;
-        canvas.height = video.height;
+        console.log('video:', { ...video });
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        console.log('video.videoWidth:', video.videoWidth);
+        console.log('video.videoHeight:', video.videoHeight);
         canvas
             ?.getContext('2d')
-            ?.drawImage(video, 0, 0, video.width, video.height);
+            ?.drawImage(video, 0, 0, video.videoWidth, video.videoWidth);
 
         const {
             data: { text }
