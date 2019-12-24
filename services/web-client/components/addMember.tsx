@@ -29,7 +29,7 @@ interface State {
 const videoConstraints = {
     // width: 1280,
     // height: 720,
-    facingMode: 'user'
+    facingMode: 'environment'
 };
 
 export default class AddMember extends React.Component<Props, State> {
@@ -59,7 +59,6 @@ export default class AddMember extends React.Component<Props, State> {
     };
 
     handleOCRData = (data: string) => {
-        console.log('data: ', data);
         this.setState({
             ocrData: data
         });
