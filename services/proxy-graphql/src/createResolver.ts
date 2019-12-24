@@ -1,4 +1,5 @@
 import { IResolvers } from 'apollo-server';
+import merge from 'lodash.merge';
 import { Node } from '@feuertiger/schema-graphql';
 import {
     initDb,
@@ -25,10 +26,10 @@ export default () => {
     };
 
     const serviceMap: IServiceMap = injectServices(db);
-    const resolvers: IResolvers = {
-        ...createResolvers(serviceMap),
-        ...customResolvers
-    };
+    const resolvers: IResolvers = merge(
+        createResolvers(serviceMap),
+        customResolvers
+    );
 
     const typeResolvers: IResolvers = {
         Node: {
