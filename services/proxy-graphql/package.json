@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/proxy-graphql",
-    "version": "1.0.9-dev.707c5b6.0",
+    "version": "1.0.9-dev.8dc84a6.0",
     "description": "graphql backend and proxy to database",
     "main": "./dist/index.js",
     "scripts": {
@@ -18,7 +18,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/data-access-firebase": "1.0.9-dev.b744f1e.0",
+        "@feuertiger/data-access-firebase": "1.0.9-dev.8dc84a6.0",
         "@feuertiger/ocr": "1.0.9-dev.707c5b6.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.b744f1e.0",
         "@feuertiger/tools": "1.0.9-dev.b744f1e.0",
