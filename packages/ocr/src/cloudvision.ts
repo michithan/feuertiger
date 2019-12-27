@@ -1,4 +1,4 @@
-import admin from 'firebase-admin';
+import firebase from 'firebase/app';
 // @ts-ignore
 import vision from '@google-cloud/vision';
 
@@ -9,7 +9,7 @@ export const visionOCR = async (image: string): Promise<any> => {
     //TODO upload image to firebase storage
 
     // Create a root reference
-    var storageRef = admin.storage();
+    var storageRef = firebase.storage();
 
     // eslint-disable-next-line global-require
 

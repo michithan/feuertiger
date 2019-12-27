@@ -1,6 +1,4 @@
-import { ServiceAccount } from 'firebase-admin';
-
-export interface Config extends ServiceAccount {
+export interface Config {
     [key: string]: string | undefined;
 }
 
