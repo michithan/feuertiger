@@ -72,12 +72,7 @@ export default class Bar extends React.Component<Props> {
                     >
                         <MenuIcon />
                     </StyledIconButton>
-                    <StyledTypography
-                        component="h1"
-                        variant="h6"
-                        color="inherit"
-                        noWrap
-                    >
+                    <StyledTypography variant="h6" color="inherit" noWrap>
                         Dashboard
                     </StyledTypography>
                     <IconButton color="inherit" onClick={this.handleLogout}>
