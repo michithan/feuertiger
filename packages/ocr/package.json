@@ -17,6 +17,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@google-cloud/vision": "1.7.2",
+        "firebase-admin": "8.9.0",
         "tesseract.js": "2.0.1"
     },
     "devDependencies": {

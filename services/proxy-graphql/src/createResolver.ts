@@ -9,7 +9,7 @@ import {
     createResolvers
 } from '@feuertiger/data-access-firebase';
 import { ParseId } from '@feuertiger/utils-graphql';
-import { ocr } from '@feuertiger/ocr';
+import { visionOCR } from '@feuertiger/ocr';
 
 export default () => {
     const db = initDb();
@@ -19,7 +19,7 @@ export default () => {
         Query: {
             ocr: async (parent, args) => {
                 const { image } = args;
-                const text = await ocr(image);
+                const text = await visionOCR(image);
                 return text;
             }
         }
