@@ -8389,10 +8389,10 @@ is-upper-case@^1.1.0:
   dependencies:
     upper-case "^1.1.0"
 
-is-url@1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.2.tgz#498905a593bf47cc2d9e7f738372bbf7696c7f26"
-  integrity sha1-SYkFpZO/R8wtnn9zg3K792lsfyY=
+is-url@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/is-url/-/is-url-1.2.4.tgz#04a4df46d28c4cff3d73d01ff06abeb318a1aa52"
+  integrity sha512-ITvGim8FhRiYe4IQ5uHSkj7pVaPDrCTkNd3yq3cV7iZAcJdHTUMPMEHcqSOy9xZ9qFenQCvi+2wjH9a1nXqHww==
 
 is-utf8@^0.2.0:
   version "0.2.1"
@@ -12869,16 +12869,16 @@ tesseract.js-core@^2.0.0:
   resolved "https://registry.yarnpkg.com/tesseract.js-core/-/tesseract.js-core-2.0.0.tgz#1d4073ab4d0234d4c231de06ddd8c55043ac2b1a"
   integrity sha512-Oi+V/0iuDQarM9OaLRso6y8U0lPZy9dDaLBoSWNd9c5FSsvgL6OoIDRS+Pum/noAQw7Q3V8vetlf+SgQNRdorA==
 
-tesseract.js@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/tesseract.js/-/tesseract.js-2.0.1.tgz#d23f05c60d671f8e01b57e06a916295a0c2c5359"
-  integrity sha512-5YXoYableNW6e/HE9D6G3XCn5tjBiV2lERbRL+HfuZdskfBkpvvG9GBtVdQ7OoOw/sqLh2J9o83NLHQrZJWyFg==
+tesseract.js@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/tesseract.js/-/tesseract.js-2.0.2.tgz#c415472198e0ba2910a6871a137e99bbd32ff34f"
+  integrity sha512-LeZmvmYDDErqBbVSzvGHAujZUQSmjYB0iZkmwvbc+QbA840rf+0CYkCMURIuE54zDrv0Qms+QINZokQr78FkBA==
   dependencies:
     bmp-js "^0.1.0"
     file-type "^12.4.1"
     idb-keyval "^3.2.0"
     is-electron "^2.2.0"
-    is-url "1.2.2"
+    is-url "^1.2.4"
     node-fetch "^2.6.0"
     opencollective-postinstall "^2.0.2"
     regenerator-runtime "^0.13.3"
