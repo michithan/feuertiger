@@ -20,7 +20,7 @@
     "dependencies": {
         "@google-cloud/vision": "1.7.2",
         "firebase": "7.6.0",
-        "tesseract.js": "2.0.1"
+        "tesseract.js": "2.0.2"
     },
     "devDependencies": {
         "@types/node-fetch": "2.5.4",
