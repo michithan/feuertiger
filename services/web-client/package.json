@@ -45,7 +45,7 @@
         "node-fetch": "2.6.0",
         "react": "16.12.0",
         "react-dom": "16.12.0",
-        "react-webcam": "4.1.1",
+        "react-webcam": "4.2.0",
         "styled-components": "4.4.1"
     },
     "devDependencies": {
