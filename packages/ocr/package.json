@@ -19,7 +19,7 @@
     "license": "ISC",
     "dependencies": {
         "@google-cloud/vision": "1.8.0",
-        "firebase": "7.6.2",
+        "firebase": "7.8.2",
         "tesseract.js": "2.0.2"
     },
     "devDependencies": {
