@@ -1,5 +1,5 @@
-FROM gitpod/workspace-full
-                    
+FROM node:10.19.0-alpine
+
 USER gitpod
 
 # Install custom tools, runtime, etc. using apt-get
