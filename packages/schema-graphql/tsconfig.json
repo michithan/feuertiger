@@ -4,6 +4,6 @@
         "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     },
     "extends": "../../tsconfig.json",
-    "include": ["src/**/*", "seeds/**/*"],
+    "include": ["./src/**/*", "./lib/**/*"],
     "exclude": ["node_modules", "**/*.spec.ts"]
 }

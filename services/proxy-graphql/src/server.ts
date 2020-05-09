@@ -1,23 +1,19 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { importSchema } from 'graphql-import';
+import { createSchema, schemaDirectives } from '@feuertiger/schema-graphql';
 
 import createResolver from './createResolver';
 import resolveContext from './resolveContext';
-import schemaDirectives from './schemaDirectives';
 
 // eslint-disable-next-line import/prefer-default-export
 export const gqlServer = () => {
-    const schemaPath = require.resolve(
-        '@feuertiger/schema-graphql/dist/schema.graphql'
-    );
-
-    const typeDefs = importSchema(schemaPath);
+    const schema = createSchema({
+        resolvers: createResolver(),
+        schemaDirectives
+    });
 
     const apolloServer = new ApolloServer({
-        typeDefs,
-        schemaDirectives,
-        resolvers: createResolver(),
+        schema,
         context: resolveContext,
         playground: true
     });
