@@ -1538,7 +1538,7 @@
   resolved "https://registry.yarnpkg.com/@google-cloud/projectify/-/projectify-1.0.4.tgz#28daabebba6579ed998edcadf1a8f3be17f3b5f0"
   integrity sha512-ZdzQUN02eRsmTKfBj9FDL0KNDIFNjBn/d6tHQmA/+FImH5DO6ZV8E7FzxMgAUiVAUq41RFAkb25p1oHOZ8psfg==
 
-"@google-cloud/promisify@^1.0.0":
+"@google-cloud/promisify@^1.0.0", "@google-cloud/promisify@^1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@google-cloud/promisify/-/promisify-1.0.4.tgz#ce86ffa94f9cfafa2e68f7b3e4a7fad194189723"
   integrity sha512-VccZDcOql77obTnFh0TbNED/6ZbbmHDf8UMNnzO1d5g9V0Htfm4k5cllY8P1tJsRKC3zWYGRLaViiupcgVjBoQ==
@@ -1571,14 +1571,14 @@
     through2 "^3.0.0"
     xdg-basedir "^4.0.0"
 
-"@google-cloud/vision@1.8.0":
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/vision/-/vision-1.8.0.tgz#a92924cfd149631d9d6a249961cb18089eace926"
-  integrity sha512-MNWogL5xI8VJEJIdIFbQKjLarNkeezi5RcnHRZPXOh+D0Dp3EBavWtDGm6FtdXWG5iqZ3vjIIRyM24QAV7G3wA==
+"@google-cloud/vision@1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/vision/-/vision-1.11.0.tgz#361d9133b7825efbb67fd5686f9e7432f20334b4"
+  integrity sha512-8QlfYwBQHzfLwpPGu1E6UqV/SW37fJccv2ocfcgNMpCZ+SAtYAjx0AZHAfbYy8WS+DTPCxzHDgXD0gN0MAaLzw==
   dependencies:
-    "@google-cloud/promisify" "^1.0.0"
-    google-gax "^1.7.5"
-    is "^3.2.1"
+    "@google-cloud/promisify" "^1.0.4"
+    google-gax "^1.14.1"
+    is "^3.3.0"
 
 "@graphql-codegen/cli@1.11.2":
   version "1.11.2"
@@ -1840,6 +1840,13 @@
   version "0.6.15"
   resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-0.6.15.tgz#534d1051ddced4e5e5849212789dd64014214dd4"
   integrity sha512-BFK5YMu8JILedibo0nr3NYM0ZC5hCZuXtzk10wEUp3d3pH11PjdvTfN1yEJ0VsfBY5Gtp3WOQ+t7Byq0NzH/iQ==
+  dependencies:
+    semver "^6.2.0"
+
+"@grpc/grpc-js@~1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.0.3.tgz#7fa2ba293ccc1e91b24074c2628c8c68336e18c4"
+  integrity sha512-JKV3f5Bv2TZxK6eJSB9EarsZrnLxrvcFNwI9goq0YRXa3S6NNoCSnI3cG3lkXVIJ03Wng1WXe76kc2JQtRe7AQ==
   dependencies:
     semver "^6.2.0"
 
@@ -2904,6 +2911,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/fs-extra@^8.0.1":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@types/fs-extra/-/fs-extra-8.1.0.tgz#1114834b53c3914806cd03b3304b37b3bd221a4d"
+  integrity sha512-UoOfVEzAUpeSPmjm7h1uk5MH6KZma2z2O7a75onTGjnNvAvMVrPzPL/vBbT65iIGHWj6rokwfmYcmxmlSf2uwg==
+  dependencies:
+    "@types/node" "*"
+
 "@types/glob@^7.1.1":
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-7.1.1.tgz#aa59a1c6e3fbc421e07ccd31a944c30eba521575"
@@ -2987,6 +3001,11 @@
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.0.tgz#719551d2352d301ac8b81db732acb6bdc28dbdef"
   integrity sha512-1w52Nyx4Gq47uuu0EVcsHBxZFJgurQ+rTKS3qMHxR1GY2T8c2AJYd6vZoZ9q1rupaDjU0yT+Jc2XTyXkjeMA+Q==
 
+"@types/long@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.1.tgz#459c65fa1867dafe6a8f322c4c51695663cc55e9"
+  integrity sha512-5tXH6Bx/kNGd3MgffdmP4dy2Z+G4eaXw0SE81Tq3BNadtnMR5/ySMzX4SLEzHJzSmPNn4HIdpQsBvXMUykr58w==
+
 "@types/mime@*":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.1.tgz#dc488842312a7f075149312905b5e3c0b054c79d"
@@ -3025,6 +3044,11 @@
   version "10.17.13"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.13.tgz#ccebcdb990bd6139cd16e84c39dc2fb1023ca90c"
   integrity sha512-pMCcqU2zT4TjqYFrWtYHKal7Sl30Ims6ulZ4UFXxI4xbtQqK/qqKwkDoBFCfooRqqmRu9vY3xaJRwxSh673aYg==
+
+"@types/node@^13.7.0":
+  version "13.13.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-13.13.5.tgz#96ec3b0afafd64a4ccea9107b75bf8489f0e5765"
+  integrity sha512-3ySmiBYJPqgjiHA7oEaIo2Rzz0HrOZ7yrNO5HWyaE5q0lQ3BppDZ3N53Miz8bw2I7gh1/zir2MGVZBvpb1zq9g==
 
 "@types/node@^8.0.53", "@types/node@^8.10.59":
   version "8.10.59"
@@ -7522,6 +7546,27 @@ google-gax@^1.12.0, google-gax@^1.7.5:
     semver "^6.0.0"
     walkdir "^0.4.0"
 
+google-gax@^1.14.1:
+  version "1.15.3"
+  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-1.15.3.tgz#e88cdcbbd19c7d88cc5fd7d7b932c4d1979a5aca"
+  integrity sha512-3JKJCRumNm3x2EksUTw4P1Rad43FTpqrtW9jzpf3xSMYXx+ogaqTM1vGo7VixHB4xkAyATXVIa3OcNSh8H9zsQ==
+  dependencies:
+    "@grpc/grpc-js" "~1.0.3"
+    "@grpc/proto-loader" "^0.5.1"
+    "@types/fs-extra" "^8.0.1"
+    "@types/long" "^4.0.0"
+    abort-controller "^3.0.0"
+    duplexify "^3.6.0"
+    google-auth-library "^5.0.0"
+    is-stream-ended "^0.1.4"
+    lodash.at "^4.6.0"
+    lodash.has "^4.5.2"
+    node-fetch "^2.6.0"
+    protobufjs "^6.8.9"
+    retry-request "^4.0.0"
+    semver "^6.0.0"
+    walkdir "^0.4.0"
+
 google-p12-pem@^2.0.0:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/google-p12-pem/-/google-p12-pem-2.0.3.tgz#14ecd78a94bd03bf86d74d9d0724787e85c7731f"
@@ -8560,7 +8605,7 @@ is-wsl@^1.1.0:
   resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
   integrity sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
 
-is@^3.2.1:
+is@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/is/-/is-3.3.0.tgz#61cff6dd3c4193db94a3d62582072b44e5645d79"
   integrity sha512-nW24QBoPcFGGHJGUwnfpI7Yc5CdqWNdsyHQszVE/z2pKHXzh7FZ5GWhJqSyaQ9wMkQnsTx+kAI8bHlCX4tKdbg==
@@ -11474,6 +11519,25 @@ protobufjs@^6.8.6, protobufjs@^6.8.8:
     "@protobufjs/utf8" "^1.1.0"
     "@types/long" "^4.0.0"
     "@types/node" "^10.1.0"
+    long "^4.0.0"
+
+protobufjs@^6.8.9:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-6.9.0.tgz#c08b2bf636682598e6fabbf0edb0b1256ff090bd"
+  integrity sha512-LlGVfEWDXoI/STstRDdZZKb/qusoAWUnmLg9R8OLSO473mBLWHowx8clbX5/+mKDEI+v7GzjoK9tRPZMMcoTrg==
+  dependencies:
+    "@protobufjs/aspromise" "^1.1.2"
+    "@protobufjs/base64" "^1.1.2"
+    "@protobufjs/codegen" "^2.0.4"
+    "@protobufjs/eventemitter" "^1.1.0"
+    "@protobufjs/fetch" "^1.1.0"
+    "@protobufjs/float" "^1.0.2"
+    "@protobufjs/inquire" "^1.1.0"
+    "@protobufjs/path" "^1.1.2"
+    "@protobufjs/pool" "^1.1.0"
+    "@protobufjs/utf8" "^1.1.0"
+    "@types/long" "^4.0.1"
+    "@types/node" "^13.7.0"
     long "^4.0.0"
 
 protocols@^1.1.0, protocols@^1.4.0:
