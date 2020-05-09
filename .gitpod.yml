@@ -1,4 +1,4 @@
 tasks:
-    - init: yarn install && yarn run build
+    - init: yarn && yarn bootstrap && yarn linkdist && yarn dev
 image:
     file: .gitpod.Dockerfile
