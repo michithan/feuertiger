@@ -6,8 +6,8 @@ Feuertiger is an open source project to create a state-of-the-art platform for m
 
 The main benefits of using Feuertiger should be:
 
-- Easy adaption of real world paper forms into the digital world and vice versa using OCR and PDF export
-- Easy hosting through straight forward infrastructure as code
+-   Easy adaption of real world paper forms into the digital world and vice versa using OCR and PDF export
+-   Easy hosting through straight forward infrastructure as code
 
 ## How to start
 
@@ -44,14 +44,14 @@ The git repo is set up as a mono-repository using Lena and GitHub npm package re
 ### Services
 
 | Name          | Port | Description      | URL                             |
-|---------------|------|------------------|---------------------------------|
+| ------------- | ---- | ---------------- | ------------------------------- |
 | proxy-graphql | 4000 | graphql backend  | https://localhost:4000/graphiql |
 | web-client    | 3000 | webclient server | https://localhost:3000/         |
 
 ### Packages
 
 | Name                 | Description                             |
-|----------------------|-----------------------------------------|
+| -------------------- | --------------------------------------- |
 | orc                  | ocr tooling                             |
 | schema-graphql       | backend api definiton source of truth   |
 | tools                | monorepo dev tooling                    |
@@ -79,4 +79,3 @@ The git repo is set up as a mono-repository using Lena and GitHub npm package re
 #### Styled-Components
 
 #### Apollo client
-
