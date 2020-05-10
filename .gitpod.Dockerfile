@@ -12,7 +12,8 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.0/install.sh
     && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm \
     && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion \
     && nvm install v10.19.0 \
-    && nvm use v10.19.0
+    && nvm use v10.19.0 \
+    && sudo apt install npm
 
 # Install lerna
 RUN npm i -g lerna
