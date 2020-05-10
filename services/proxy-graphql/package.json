@@ -33,7 +33,7 @@
     },
     "devDependencies": {
         "@types/lodash.merge": "4.6.6",
-        "ts-node": "8.6.0",
+        "ts-node": "8.10.1",
         "ts-node-dev": "1.0.0-pre.44",
         "typescript": "3.7.4"
     }
