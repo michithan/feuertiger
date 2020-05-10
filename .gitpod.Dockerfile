@@ -8,7 +8,7 @@ RUN apt update \
     && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion \
     && nvm install v10.19.0 \
     && nvm use v10.19.0 \
-    && npm i --no-optional --unsafe-perm -g \
+    && npm i --no-optional --unsafe-perm -g
 
 # Install lerna
 RUN npm i -g lerna
