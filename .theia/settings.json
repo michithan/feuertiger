@@ -3,6 +3,7 @@
     "workbench.iconTheme": "vscode-icons",
     "workbench.colorTheme": "Cyberpunk",
     "eslint.autoFixOnSave": true,
+    "editor.renderWhitespace": "all",
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.fontLigatures": true,
