@@ -2,3 +2,7 @@ tasks:
     - init: yarn && yarn linkdist && yarn dev
 image:
     file: .gitpod.Dockerfile
+
+vscode:
+  extensions:
+    - max-SS.Cyberpunk@1.2.5:5r0Bce1tseSEV2qESwg4Mw==
