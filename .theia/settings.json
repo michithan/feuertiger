@@ -1,0 +1,8 @@
+{
+    "editor.autoSave": "on",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "Cyberpunk",
+    "eslint.autoFixOnSave": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true
+}
