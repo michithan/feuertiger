@@ -1114,17 +1114,17 @@
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-1.3.13.tgz#90c71da493f20204b7a972929cc5c482d078b3fa"
   integrity sha512-AlEKV7TxjeK+jxWVKcCFrfYAk8spX9aCyiToFIiLPtfQbsjmRGLIhb5VZgptQcJdHtLXo7+m0DuurwFgUToQuA==
 
-"@date-io/core@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.0.0.tgz#3a8685b8f5ea25513327e1273a673b5477573ce9"
-  integrity sha512-Zam4FfQrRhGobLyjwM4qL9yoAZ66+jGHjXWf7ZrqRqeP/mrrVEAG2td/xHuUzCKz4xN3NzGcrd3r42p4n6UgXA==
+"@date-io/core@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.6.0.tgz#01efa47b225d1a94d3138583588b919442149ee8"
+  integrity sha512-GkM3jTlh9r3MfZEuFKV4g1JSbxz1G0Or1CBKkhPcw7UCJRjjsk5mLVYZYtUQEsOY8rCSFUTdCOm63ulWzAC/pw==
 
-"@date-io/date-fns@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@date-io/date-fns/-/date-fns-2.0.1.tgz#191614dc6241c88e4a782acbd259420f3798a979"
-  integrity sha512-wy3CWuV0dvrjm45ncO6duu4ZSOMxZpajFbEoj0X3DyNEYxjAdbv27waZYtJ2PwL85XZd9i/VaJQnh3GU7ZvP6g==
+"@date-io/date-fns@2.6.1":
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/@date-io/date-fns/-/date-fns-2.6.1.tgz#f0879f161203804ae5314401fcf0bc7133596eca"
+  integrity sha512-N8NwnUB9cs794aCmEW+TZv8uFFAPii/AzyEKJ6K2v+eZ4QbLuOuDcyX0BIQ98XH0YsBbZcTHggnFKHSX2bNaEw==
   dependencies:
-    "@date-io/core" "^2.0.0"
+    "@date-io/core" "^2.6.0"
 
 "@date-io/date-fns@^1.1.0":
   version "1.3.13"
