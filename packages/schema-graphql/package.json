@@ -20,7 +20,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "graphql": "14.5.8",
+        "graphql": "15.0.0",
         "graphql-import": "1.0.2"
     },
     "devDependencies": {
