@@ -1,5 +1,9 @@
 FROM ubuntu:18.04
 
+RUN sudo apt update \
+    && sudo apt upgrade \
+    && sudo apt install curl
+
 # Install node and npm
 RUN apt update \
     && curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.35.0/install.sh | bash \
