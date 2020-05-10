@@ -12,6 +12,6 @@ RUN sudo apt upgrade -y \
 RUN npm i -g lerna
 
 # Install firebase cli
-RUN curl -sL https://firebase.tools | bash
+RUN npm i -g firebase-tools
 
 USER gitpod

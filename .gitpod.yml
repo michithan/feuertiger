@@ -1,5 +1,7 @@
 tasks:
-    - init: yarn && yarn linkdist && yarn dev
+    - before: yarn && yarn linkdist
+    - init: yarn dev
+
 image:
     file: .gitpod.Dockerfile
 
