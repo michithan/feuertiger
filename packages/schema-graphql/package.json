@@ -20,8 +20,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "graphql": "14.5.8",
-        "graphql-import": "0.7.1"
+        "graphql": "15.0.0",
+        "graphql-import": "1.0.2"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "1.11.2",
@@ -30,7 +30,7 @@
         "@graphql-codegen/typescript-operations": "1.11.2",
         "@graphql-codegen/typescript-react-apollo": "1.11.2",
         "@graphql-codegen/typescript-resolvers": "1.11.2",
-        "prettier": "1.19.1",
+        "prettier": "2.0.5",
         "rimraf": "3.0.2"
     },
     "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
