@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM node:10.19.0-buster
 
 # Install sudo
 RUN apt-get update \
@@ -7,10 +7,6 @@ RUN apt-get update \
 # Install curl
 RUN sudo apt upgrade -y \
     && sudo apt install -y curl
-
-# Install node and npm
-RUN sudo apt install nodejs=10.19.0 \
-    && sudo apt install npm
 
 # Install lerna
 RUN npm i -g lerna
