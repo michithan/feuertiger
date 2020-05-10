@@ -12,7 +12,7 @@
         "publish": "node ./scripts/publish.js",
         "link": "lerna link",
         "build": "lerna run build --no-private --since",
-        "dev": "lerna run dev"
+        "dev": "lerna run dev --stream"
     },
     "packages": [
         "packages/*",
