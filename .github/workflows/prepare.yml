@@ -15,4 +15,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           image-name: feuertiger-dev-environment
           image-tag: latest
-          dockerfile: ./dev-environment/Dockerfile
+          entrypoint: ./dev-environment
