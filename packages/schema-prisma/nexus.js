@@ -1,18 +1,19 @@
-import { use, schema } from 'nexus';
-import { prisma } from 'nexus-plugin-prisma';
+const { nexusPrismaPlugin } = require('nexus-prisma');
+const { makeSchema, queryType, objectType } = require('@nexus/schema');
+const path = require('path');
 
-use(prisma());
+const dist = path.resolve(__dirname, 'dist');
+const source = require.resolve('./dist');
 
-schema;
-
-const schema = makeSchema({
+makeSchema({
+    plugins: [nexusPrismaPlugin()],
     typegenAutoConfig: {
         contextType: 'Context.Context',
-        sources: [{ source: require.resolve('./dist'), alias: 'prisma' }]
+        sources: [{ source, alias: 'prisma' }]
     },
     outputs: {
-        schema: './dist/schema.graphql',
-        typegen: '/dist/types.d.ts'
+        schema: `${dist}/schema.graphql`,
+        typegen: `${dist}/types.d.ts`
     },
     types: [
         queryType({
@@ -30,5 +31,3 @@ const schema = makeSchema({
         })
     ]
 });
-
-console.log('schema: ', schema);

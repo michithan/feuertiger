@@ -33,7 +33,7 @@ const videoConstraints = {
 };
 
 export default class AddMember extends React.Component<Props, State> {
-    webcamRef: React.RefObject<Webcam>;
+    webcamRef: React.RefObject<Webcam> & React.RefObject<HTMLVideoElement>;
 
     stopOcr: () => void | undefined;
 
@@ -46,7 +46,7 @@ export default class AddMember extends React.Component<Props, State> {
     }
 
     componentWillUnmount() {
-        this?.stopOcr();
+        this.stopOcr();
     }
 
     handleOCR = async () => {

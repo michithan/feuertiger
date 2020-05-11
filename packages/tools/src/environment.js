@@ -3,8 +3,8 @@ const { config } = require('dotenv');
 
 config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
-module.exports.trim = str =>
-    str && str.replace(/^"|"$/g, '').replace(/\\n/g, '\n');
+module.exports.trim = (text) =>
+    text && text.replace(/^"|"$/g, '').replace(/\\n/g, '\n');
 
 module.exports.getSecretsEnvironment = () => {
     const {
