@@ -9,7 +9,8 @@ The main benefits of using Feuertiger should be:
 -   Easy adaption of real world paper forms into the digital world and vice versa using OCR and PDF export
 -   Easy hosting through straight forward infrastructure as code
 
-------
+---
+
 ## How to start
 
 You can start coding simply using the Gitpod integration.
@@ -44,7 +45,8 @@ You can start coding simply using the Gitpod integration.
     ```
 5. Start coding
 
-------
+---
+
 ## Architecture
 
 Feuertiger is build with a nodejs backend and a react webapp.
@@ -70,49 +72,56 @@ The git repo is set up as a mono-repository using Lena and GitHub npm package re
 | utils-graphql        | tooling for graphql backend integration |
 | data-access-friebase | tooling for firebase access             |
 
+---
 
-------
 ## Tech-stack
 
 ### Languages
 
-#### Typescript
-
-[Typescript](https://www.typescriptlang.org/docs/home)
+-   [Typescript](https://www.typescriptlang.org/docs/home)
 
 ### Infrastructure
 
-#### Firebase
+#### Database
 
-[Firebase](https://firebase.google.com/)
+-   [Firebase Firestore](https://firebase.google.com/)
+
+#### Services
+
+-   [Firebase Auth](https://firebase.google.com/)
+-   [Firebase Functions](https://firebase.google.com/)
+-   Google Vision AI
 
 ### Backend
 
-#### Prisma ORM
+#### Data Access
 
-[Prisma](https://www.prisma.io/docs/)
+-   [Prisma](https://www.prisma.io/docs/)
 
-#### Graphql Apollo server
+#### API
 
-[Nodejs](https://nodejs.org/en/docs/)
-[Graphql](https://graphql.org/learn/)
-[Apollo Server](https://www.apollographql.com/docs/apollo-server/)
+-   [Nodejs](https://nodejs.org/en/docs/)
+-   [Graphql](https://graphql.org/learn/)
+-   [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
 
-### Frontend
+### Web-Frontend
 
-#### React nextjs
+#### Webclient Framework
 
-[React](https://reactjs.org/docs/getting-started.html)
 [Nextjs](https://nextjs.org/)
 
-#### Material-UI
+#### Webclient Rendering
 
-[Material-UI](https://material-ui.com/)
+[React](https://reactjs.org/docs/getting-started.html)
 
-#### Styled-Components
+#### CSS Rendering
 
 [Styled-Components](https://styled-components.com/docs)
 
-#### Apollo client
+#### UI-Library
+
+[Material-UI](https://material-ui.com/)
+
+#### API-Client
 
 [Apollo client](https://www.apollographql.com/docs/react/)
