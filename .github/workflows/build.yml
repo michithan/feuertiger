@@ -3,25 +3,36 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-  build_and_publish:
+  build_dev_environment:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and Publish latest Docker image
+        uses: VaultVulp/gp-docker-action@1.0.1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image-name: feuertiger-dev-environment
+          image-tag: latest
+          dockerfile: .dev-env.Dockerfile
+  build_and_publish:
+    needs: build_dev_environment
+    runs-on: ubuntu-latest
+    container:
+      image: docker.pkg.github.com/feuertiger/feuertiger/feuertiger-dev-environment:latest
     steps:
       - uses: actions/checkout@v2
         if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false
         with:
           token: ${{ secrets.PRIVATE_TOKEN }}
           fetch-depth: 0
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "10.13"
-      - uses: bahmutov/npm-install@v1
       - name: Build
         env:
           FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
           GRAB_TOKEN_TO_BREAK_LOOP: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          yarn run link
-          yarn run build
+          yarn
+          yarn link
+          yarn build
       - name: Publish
         run: |
           git config --global user.name 'robotiger'
@@ -30,7 +41,6 @@ jobs:
           yarn run publish
   dispatch_deploy:
     needs: build_and_publish
-    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     steps:
       - name: Repository Dispatch
