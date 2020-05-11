@@ -9,7 +9,7 @@ export const visionOCR = async (image: string): Promise<any> => {
     //TODO upload image to firebase storage
 
     // Create a root reference
-    var storageRef = firebase.storage();
+    let storageRef = firebase.storage();
 
     // eslint-disable-next-line global-require
 
@@ -22,8 +22,10 @@ export const visionOCR = async (image: string): Promise<any> => {
     // TODO implementd usecase specific detection and return objects
     const [result] = await client.labelDetection(image);
     const labels = result.labelAnnotations;
-    console.log('Labels:');
-    labels.forEach((label: any) => console.log(label.description));
+    if (labels) {
+        console.log('Labels:', labels);
+        labels.forEach((label: any) => console.log(label.description));
+    }
 
     //TODO remove image from firebase storage
 

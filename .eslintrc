@@ -5,6 +5,9 @@
         "prettier/react",
         "prettier/@typescript-eslint"
     ],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
     "rules": {
         "comma-dangle": 0,
         "prettier/prettier": "error"
