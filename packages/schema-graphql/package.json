@@ -24,12 +24,12 @@
         "graphql-import": "1.0.2"
     },
     "devDependencies": {
-        "@graphql-codegen/cli": "1.11.2",
-        "@graphql-codegen/introspection": "1.11.2",
-        "@graphql-codegen/typescript": "1.11.2",
-        "@graphql-codegen/typescript-operations": "1.11.2",
-        "@graphql-codegen/typescript-react-apollo": "1.11.2",
-        "@graphql-codegen/typescript-resolvers": "1.11.2",
+        "@graphql-codegen/cli": "1.13.5",
+        "@graphql-codegen/introspection": "1.13.5",
+        "@graphql-codegen/typescript": "1.13.5",
+        "@graphql-codegen/typescript-operations": "1.13.5",
+        "@graphql-codegen/typescript-react-apollo": "1.13.5",
+        "@graphql-codegen/typescript-resolvers": "1.13.5",
         "prettier": "2.0.5",
         "rimraf": "3.0.2"
     },
