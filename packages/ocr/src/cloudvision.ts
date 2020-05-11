@@ -1,15 +1,15 @@
-import firebase from 'firebase/app';
+// import firebase from 'firebase/app';
 // @ts-ignore
 import vision from '@google-cloud/vision';
 
-//TODO fix web import problem
+// TODO fix web import problem
 
 // eslint-disable-next-line import/prefer-default-export
 export const visionOCR = async (image: string): Promise<any> => {
-    //TODO upload image to firebase storage
+    // TODO upload image to firebase storage
 
     // Create a root reference
-    let storageRef = firebase.storage();
+    // const storageRef = firebase.storage();
 
     // eslint-disable-next-line global-require
 
@@ -22,12 +22,11 @@ export const visionOCR = async (image: string): Promise<any> => {
     // TODO implementd usecase specific detection and return objects
     const [result] = await client.labelDetection(image);
     const labels = result.labelAnnotations;
-    if (labels) {
-        console.log('Labels:', labels);
-        labels.forEach((label: any) => console.log(label.description));
-    }
+    // console.log('Labels:');
+    // eslint-disable-next-line no-console
+    labels.forEach((label: any) => console.log(label.description));
 
-    //TODO remove image from firebase storage
+    // TODO remove image from firebase storage
 
     return '';
 };

@@ -1,7 +1,3 @@
-type PageInfo {
-    hasNextPage: Boolean
-}
-
 type Timeslot {
     start: String
     end: String

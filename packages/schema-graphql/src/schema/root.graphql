@@ -5,17 +5,11 @@
 # import * from "base.types.graphql"
 # import * from "base.scalars.graphql"
 #
-# import * from "person.type.graphql"
-# import * from "exercise.type.graphql"
-
-##############
-# Root Query #
-##############
+# import * from "person.graphql"
+# import * from "exercise.graphql"
 
 type Query {
     node(id: ID!): Node
-    allPersons(filter: Filter): PersonConnection
-    allExercises(filter: Filter): ExerciseConnection
     ocr(image: String): String
 }
 

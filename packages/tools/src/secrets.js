@@ -15,10 +15,12 @@ module.exports.getFirebaseAdminSecrets = () => {
 
 module.exports.getFirebaseAppSecrets = () => {
     const {
+        FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_APP_AUTHDOMAIN,
         FIREBASE_SECRETS_APP_APIKEY
     } = getSecretsEnvironment();
     return {
+        projectId: FIREBASE_SECRETS_PROJECT_ID,
         apiKey: FIREBASE_SECRETS_APP_APIKEY,
         authDomain: FIREBASE_SECRETS_APP_AUTHDOMAIN
     };
