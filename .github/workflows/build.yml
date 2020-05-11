@@ -6,14 +6,17 @@ jobs:
   build_dev_environment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Build and Publish latest Docker image
-        uses: VaultVulp/gp-docker-action@1.0.1
+      - uses: actions/checkout@master
+      - name: Publish dev-environment to github package registry
+        uses: machine-learning-apps/gpr-docker-publish@master
+        id: docker
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: feuertiger-dev-environment
-          image-tag: latest
-          dockerfile: .dev-env.Dockerfile
+          IMAGE_NAME: "feuertiger-dev-environment"
+          TAG: "latest"
+          DOCKERFILE_PATH: "./.dev-env.Dockerfile"
+          BUILD_CONTEXT: "./"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build_and_publish:
     needs: build_dev_environment
     runs-on: ubuntu-latest
