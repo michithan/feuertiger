@@ -19,7 +19,7 @@
     "dependencies": {
         "@feuertiger/schema-graphql": "1.0.9-dev.faeb36d.0",
         "@feuertiger/utils-graphql": "1.0.9-dev.faeb36d.0",
-        "apollo-server": "2.9.15",
+        "apollo-server": "2.13.1",
         "firebase": "7.6.2",
         "firebase-admin": "8.12.1",
         "graphql": "15.0.0"
