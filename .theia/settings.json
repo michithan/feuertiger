@@ -9,6 +9,7 @@
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
     "editor.fontFamily": "Fira Code",
+    "github-actions.workflows.pinned.refresh.enabled": true,
     "github-actions.workflows.pinned.workflows": [
         ".github/workflows/dispatch.yml",
         ".github/workflows/build.yml",
