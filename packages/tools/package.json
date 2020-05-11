@@ -19,7 +19,7 @@
     "devDependencies": {
         "@lerna/package-graph": "3.18.5",
         "@lerna/project": "3.18.0",
-        "@typescript-eslint/eslint-plugin": "2.31.0",
+        "@typescript-eslint/eslint-plugin": "2.32.0",
         "eslint": "7.0.0",
         "eslint-config-airbnb": "18.0.1",
         "eslint-plugin-import": "2.19.1",
