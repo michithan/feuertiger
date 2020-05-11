@@ -108,20 +108,20 @@ The git repo is set up as a mono-repository using Lena and GitHub npm package re
 
 #### Webclient Framework
 
-[Nextjs](https://nextjs.org/)
+-  [Nextjs](https://nextjs.org/)
 
 #### Webclient Rendering
 
-[React](https://reactjs.org/docs/getting-started.html)
+-  [React](https://reactjs.org/docs/getting-started.html)
 
 #### CSS Rendering
 
-[Styled-Components](https://styled-components.com/docs)
+- [Styled-Components](https://styled-components.com/docs)
 
 #### UI-Library
 
-[Material-UI](https://material-ui.com/)
+- [Material-UI](https://material-ui.com/)
 
 #### API-Client
 
-[Apollo client](https://www.apollographql.com/docs/react/)
+- [Apollo client](https://www.apollographql.com/docs/react/)
