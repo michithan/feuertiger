@@ -1,6 +1,10 @@
-const { nexusPrismaPlugin } = require('nexus-prisma');
-const { makeSchema, queryType, objectType } = require('nexus');
-const path = require('path');
+import { use, schema } from 'nexus';
+import { prisma } from 'nexus-plugin-prisma';
+
+use(prisma());
+
+
+schema 
 
 const schema = makeSchema({
     typegenAutoConfig: {
@@ -11,7 +15,6 @@ const schema = makeSchema({
         schema: './dist/schema.graphql',
         typegen: '/dist/types.d.ts'
     },
-    plugins: [nexusPrismaPlugin()],
     types: [
         queryType({
             definition(t) {

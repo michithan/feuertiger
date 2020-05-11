@@ -22,9 +22,11 @@ export const visionOCR = async (image: string): Promise<any> => {
     // TODO implementd usecase specific detection and return objects
     const [result] = await client.labelDetection(image);
     const labels = result.labelAnnotations;
-    // console.log('Labels:');
-    // eslint-disable-next-line no-console
-    labels.forEach((label: any) => console.log(label.description));
+    if (labels) {
+        // console.log('Labels:');
+        // eslint-disable-next-line no-console
+        labels.forEach((label: any) => console.log(label.description));
+    }
 
     // TODO remove image from firebase storage
 
