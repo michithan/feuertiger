@@ -12,7 +12,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          registry: hub.docker.com
           repository: feuertiger/feuertiger-dev-environment
           tags: latest
   build_and_publish:
