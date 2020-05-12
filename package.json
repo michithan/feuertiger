@@ -7,7 +7,7 @@
     "scripts": {
         "linkdist": "node ./scripts/linkdist.js --no-private",
         "lint": "eslint ./**/*.{js,ts,tsx} --fix",
-        "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
+        "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "publish": "node ./scripts/publish.js",
         "link": "lerna link",
         "test": "lerna run test  --since --stream",

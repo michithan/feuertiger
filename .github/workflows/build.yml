@@ -33,6 +33,9 @@ jobs:
                   GRAB_TOKEN_TO_BREAK_LOOP: ${{ secrets.GITHUB_TOKEN }}
               run: |
                   yarn
+                  yarn format
+                  yarn lint
+                  yarn test
                   yarn build
             - name: Publish
               run: |
@@ -40,6 +43,7 @@ jobs:
                   git config --global user.email 'robotiger@users.noreply.github.com'
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   yarn run publish
+                  git push
     dispatch_deploy:
         needs: build_and_publish
         runs-on: ubuntu-latest
