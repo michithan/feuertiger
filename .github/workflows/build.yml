@@ -12,13 +12,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: hub.docker.com
           repository: feuertiger/feuertiger-dev-environment
           tags: latest
   build_and_publish:
     needs: publish_dev_environment
     runs-on: ubuntu-latest
     container:
-      image: "docker://docker.pkg.github.com/feuertiger/feuertiger/feuertiger-dev-environment:latest"
+      image: "docker://hub.docker.com/feuertiger/feuertiger-dev-environment:latest"
     steps:
       - uses: actions/checkout@v2
         if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false
