@@ -62,7 +62,7 @@ export const startOcr = async (
             // eslint-disable-next-line no-await-in-loop
             await startOCR();
             // eslint-disable-next-line no-await-in-loop
-            await new Promise(resolve => setTimeout(resolve, 250));
+            await new Promise((resolve) => setTimeout(resolve, 250));
         }
     })();
 

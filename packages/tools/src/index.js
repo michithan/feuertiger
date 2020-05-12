@@ -1,1 +1,1 @@
-module.exports = require('./secrets');
+exports = require('./secrets');

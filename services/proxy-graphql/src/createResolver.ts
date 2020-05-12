@@ -6,7 +6,7 @@ import { visionOCR } from '@feuertiger/ocr';
 export default () => {
     const customResolvers: IResolvers = {
         Query: {
-            ocr: async (parent, args) => {
+            ocr: async (_parent: any, args: { image: string }) => {
                 const { image } = args;
                 const text = await visionOCR(image);
                 return text;

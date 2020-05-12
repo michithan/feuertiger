@@ -5,7 +5,7 @@
     "main": "./dist/index.js",
     "scripts": {
         "dev": "ts-node-dev ./src/startup.ts",
-        "test": "jest",
+        "test": "jest --collect-coverage",
         "build": "tsc"
     },
     "repository": {
@@ -33,11 +33,12 @@
         "neo4j-driver": "4.0.1"
     },
     "devDependencies": {
-        "@babel/core": "^7.9.6",
-        "@babel/preset-env": "^7.9.6",
-        "@babel/preset-typescript": "^7.9.0",
+        "@babel/core": "7.9.6",
+        "@babel/preset-env": "7.9.6",
+        "@babel/preset-typescript": "7.9.0",
+        "@jest/globals": "26.0.1",
         "@types/lodash.merge": "4.6.6",
-        "babel-jest": "^26.0.1",
+        "babel-jest": "26.0.1",
         "jest": "26.0.1",
         "ts-node": "8.10.1",
         "ts-node-dev": "1.0.0-pre.44",

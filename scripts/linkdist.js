@@ -1,10 +1,10 @@
 const fs = require('fs');
 const { getPackages } = require('@lerna/project');
 
-const linkscript = `module.exports = require("../src/index");`;
+const linkscript = `exports = require("../src/index");`;
 const linktypesscript = `export * from "../src/index";`;
 
-const getPackagePath = name => {
+const getPackagePath = (name) => {
     const packageJsonPath = require.resolve(`${name}/package.json`);
     return packageJsonPath.split('package.json')[0];
 };
@@ -13,7 +13,7 @@ const getPackagePath = name => {
     const cwd = process.cwd();
     const pkgs = await getPackages(cwd);
 
-    [...pkgs].forEach(pkg => {
+    [...pkgs].forEach((pkg) => {
         const path = getPackagePath(pkg.name);
         const distpath = `${path}dist`;
         const distpathindex = `${distpath}/index.js`;

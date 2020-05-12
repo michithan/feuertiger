@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const trim = str => str && str.replace(/\\n/g, '\n').replace(/^"|"$/g, '');
+const trim = (str) => str && str.replace(/\\n/g, '\n').replace(/^"|"$/g, '');
 
 const secrets = {
     type: trim(process.env.FIREBASE_SECRETS_TYPE),

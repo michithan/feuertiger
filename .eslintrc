@@ -10,7 +10,12 @@
     },
     "rules": {
         "comma-dangle": 0,
-        "prettier/prettier": "error"
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ]
     },
     "plugins": [
         "prettier",

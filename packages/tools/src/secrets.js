@@ -1,6 +1,6 @@
 const { getSecretsEnvironment } = require('./environment');
 
-module.exports.getFirebaseAdminSecrets = () => {
+exports.getFirebaseAdminSecrets = () => {
     const {
         FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_PRIVATE_KEY,
@@ -13,7 +13,7 @@ module.exports.getFirebaseAdminSecrets = () => {
     };
 };
 
-module.exports.getFirebaseAppSecrets = () => {
+exports.getFirebaseAppSecrets = () => {
     const {
         FIREBASE_SECRETS_PROJECT_ID,
         FIREBASE_SECRETS_APP_AUTHDOMAIN,

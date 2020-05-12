@@ -3,52 +3,51 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-  publish_dev_environment:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Publish dev-environment to github package registry
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: feuertiger/feuertiger-dev-environment
-          cache_froms: feuertiger/feuertiger-dev-environment:latest
-          tags: latest
-          dockerfile: .dev-env.Dockerfile
-  build_and_publish:
-    needs: publish_dev_environment
-    runs-on: ubuntu-latest
-    container:
-      image: feuertiger/feuertiger-dev-environment:latest
-    steps:
-      - uses: actions/checkout@v2
-        if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false
-        with:
-          token: ${{ secrets.PRIVATE_TOKEN }}
-          fetch-depth: 0
-      - name: Build
-        env:
-          FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
-          GRAB_TOKEN_TO_BREAK_LOOP: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          yarn
-          yarn link
-          yarn build
-      - name: Publish
-        run: |
-          git config --global user.name 'robotiger'
-          git config --global user.email 'robotiger@users.noreply.github.com'
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-          yarn run publish
-  dispatch_deploy:
-    needs: build_and_publish
-    runs-on: ubuntu-latest
-    steps:
-      - name: Repository Dispatch
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.PRIVATE_TOKEN }}
-          repository: feuertiger/feuertiger
-          event-type: deploy
-          client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+    publish_dev_environment:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Publish dev-environment to github package registry
+              uses: docker/build-push-action@v1
+              with:
+                  username: ${{ secrets.DOCKERHUB_USER }}
+                  password: ${{ secrets.DOCKERHUB_TOKEN }}
+                  repository: feuertiger/feuertiger-dev-environment
+                  cache_froms: feuertiger/feuertiger-dev-environment:latest
+                  tags: latest
+                  dockerfile: .dev-env.Dockerfile
+    build_and_publish:
+        needs: publish_dev_environment
+        runs-on: ubuntu-latest
+        container:
+            image: feuertiger/feuertiger-dev-environment:latest
+        steps:
+            - uses: actions/checkout@v2
+              if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
+                  fetch-depth: 0
+            - name: Build
+              env:
+                  FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
+                  GRAB_TOKEN_TO_BREAK_LOOP: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  yarn
+                  yarn build
+            - name: Publish
+              run: |
+                  git config --global user.name 'robotiger'
+                  git config --global user.email 'robotiger@users.noreply.github.com'
+                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+                  yarn run publish
+    dispatch_deploy:
+        needs: build_and_publish
+        runs-on: ubuntu-latest
+        steps:
+            - name: Repository Dispatch
+              uses: peter-evans/repository-dispatch@v1
+              with:
+                  token: ${{ secrets.PRIVATE_TOKEN }}
+                  repository: feuertiger/feuertiger
+                  event-type: deploy
+                  client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'

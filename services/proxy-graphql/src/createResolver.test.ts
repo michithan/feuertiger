@@ -1,7 +1,10 @@
-//import { test } from 'jest';
+import { test, describe, expect } from '@jest/globals';
 
 import createResolver from './createResolver';
 
-test('Create Resolver', () => {
-    createResolver();
+describe('Create Resolver', () => {
+    test('should invoke', () => {
+        const resolver = createResolver();
+        expect(resolver).toBeTruthy();
+    });
 });

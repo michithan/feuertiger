@@ -4,7 +4,7 @@ const withTM = require('next-transpile-modules');
 
 module.exports = withTM({
     transpileModules: ['@feuertiger/ocr'],
-    webpack: config =>
+    webpack: (config) =>
         merge(
             {
                 // Fixes npm packages that depend on `fs` module

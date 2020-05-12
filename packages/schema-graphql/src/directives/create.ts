@@ -28,7 +28,7 @@ export default class CreateDirective extends SchemaDirectiveVisitor {
         };
 
         field.resolve = resolve
-            ? (obj, args, context, info) => {
+            ? (obj: any, args: any, context: any, info: any) => {
                   const result = resolve(obj, args, context, info);
                   obj[fieldName] = {
                       ...obj[fieldName],
