@@ -20,7 +20,7 @@ jobs:
     needs: publish_dev_environment
     runs-on: ubuntu-latest
     container:
-      image: "docker://hub.docker.com/feuertiger/feuertiger-dev-environment:latest"
+      image: feuertiger/feuertiger-dev-environment:latest
     steps:
       - uses: actions/checkout@v2
         if: contains(github.event.head_commit.committer.email, 'robotiger@users.noreply.github.com') == false
