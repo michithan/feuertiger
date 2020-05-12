@@ -11,9 +11,8 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }} 
-          registry: "feuertiger-dev-environment"
-          repository: feuertiger/feuertiger
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: feuertiger/feuertiger-dev-environment
           tags: latest
   build_and_publish:
     needs: publish_dev_environment
