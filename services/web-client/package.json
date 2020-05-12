@@ -46,12 +46,12 @@
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-webcam": "5.0.1",
-        "styled-components": "4.4.1"
+        "styled-components": "5.1.0"
     },
     "devDependencies": {
         "@types/react": "16.9.17",
         "@types/react-native": "0.62.7",
-        "@types/styled-components": "4.4.2",
+        "@types/styled-components": "5.1.0",
         "babel-plugin-styled-components": "1.10.7"
     }
 }
