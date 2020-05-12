@@ -12,8 +12,8 @@ jobs:
         id: docker
         with:
           cache: true
+          tag: "latest"
           IMAGE_NAME: "feuertiger-dev-environment"
-          TAG: "latest"
           DOCKERFILE_PATH: "./.dev-env.Dockerfile"
           BUILD_CONTEXT: "./"
         env:
