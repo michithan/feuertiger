@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { getPackages } = require('@lerna/project');
 
-const linkscript = `exports = require("../src/index");`;
+const linkscript = `module.exports = require("../src/index");`;
 const linktypesscript = `export * from "../src/index";`;
 
 const getPackagePath = (name) => {
