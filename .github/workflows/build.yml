@@ -8,14 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Publish dev-environment to github package registry
-        uses: elgohr/Publish-Docker-Github-Action@2.14
+        uses: docker/build-push-action@v1
         with:
-          name: "feuertiger-dev-environment"
-          username: "feuertiger"
+          username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }} 
-          registry: "hub.docker.com/feuertiger/feuertiger"
-          dockerfile: "./.dev-env.Dockerfile"
-          cache: true
+          registry: "feuertiger-dev-environment"
+          repository: feuertiger/feuertiger
+          tags: latest
   build_and_publish:
     needs: publish_dev_environment
     runs-on: ubuntu-latest
