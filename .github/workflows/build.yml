@@ -8,16 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Publish dev-environment to github package registry
-        uses: machine-learning-apps/gpr-docker-publish@master
-        id: docker
+        uses: elgohr/Publish-Docker-Github-Action@2.14
         with:
+          name: "feuertiger-dev-environment"
+          username: "feuertiger"
+          password: ${{ secrets.DOCKERHUB_TOKEN }} 
+          registry: "hub.docker.com/feuertiger/feuertiger"
+          dockerfile: "./.dev-env.Dockerfile"
           cache: true
-          tag: "latest"
-          IMAGE_NAME: "feuertiger-dev-environment"
-          DOCKERFILE_PATH: "./.dev-env.Dockerfile"
-          BUILD_CONTEXT: "./"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build_and_publish:
     needs: publish_dev_environment
     runs-on: ubuntu-latest
