@@ -1,17 +1,14 @@
-*.env
-
 node_modules
 dist
 lib
 
 package-lock.json
+secrets.json
 
+*.en
 *.vscode
 *.log
 *.code-workspace
 *.npmrc
 *.env
-
-secrets.json
-
 *.traineddata
