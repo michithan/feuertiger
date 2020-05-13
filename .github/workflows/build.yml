@@ -23,6 +23,11 @@ jobs:
       image: feuertiger/feuertiger-dev-environment:latest
     steps:
       - uses: actions/checkout@master
+      - name: Prepare
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+          git config --global user.name 'robotiger'
+          git config --global user.email 'robotiger@users.noreply.github.com'
       - name: Install
         run: yarn
       - name: Build
@@ -37,7 +42,6 @@ jobs:
         run: yarn test
       - name: Publish
         run: |
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           yarn run publish
       - name: Push changes
         if: ${{ failure() || !failure() }}
