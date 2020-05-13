@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-  dev_environment:
+  prepare_dev_environment:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -17,7 +17,7 @@ jobs:
           tags: latest
           dockerfile: .dev-env.Dockerfile
   build_and_publish:
-    needs: publish_dev_environment
+    needs: prepare_dev_environment
     runs-on: ubuntu-latest
     container:
       image: feuertiger/feuertiger-dev-environment:latest
@@ -45,7 +45,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
   deploy_firebase:
-    needs: publish_dev_environment
+    needs: build_and_publish
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
     container:
