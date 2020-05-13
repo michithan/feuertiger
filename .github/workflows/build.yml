@@ -33,14 +33,16 @@ jobs:
               if: ${{ failure() || !failure() }}
               env:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
-              run: git push
+              run: |
+                  export GIT_SHA=`git rev-parse HEAD`
+                  git push
             - name: Set state
               uses: Sibz/github-status-action@v1
               with:
-                  authToken: ${{secrets.GITHUB_TOKEN}}
+                  authToken: ${{ secrets.GITHUB_TOKEN }}
                   context: 'build_test_and_publish'
-                  state: '${{ job.status }}'
-                  sha: ${{ github.event.pull_request.head.sha || github.sha }}
+                  state: '${{ (failure() && "failure") || "success" }}'
+                  sha: ${{ GIT_SHA }}
     deploy_firebase:
         needs: build_test_and_publish
         runs-on: ubuntu-latest
