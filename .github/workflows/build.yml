@@ -41,8 +41,8 @@ jobs:
               with:
                   authToken: ${{ secrets.GITHUB_TOKEN }}
                   context: 'build_test_and_publish'
-                  state: '${{ (failure() && "failure") || "success" }}'
-                  sha: ${{ GIT_SHA }}
+                  state: 'success'
+                  sha: ${{ env.GIT_SHA }}
     deploy_firebase:
         needs: build_test_and_publish
         runs-on: ubuntu-latest
