@@ -27,22 +27,26 @@ jobs:
               with:
                   token: ${{ secrets.PRIVATE_TOKEN }}
                   fetch-depth: 0
-            - name: Build
-              env:
-                  FIREBASE_SECRETS_APP_APIKEY: ${{ secrets.FIREBASE_SECRETS_APP_APIKEY }}
-                  GRAB_TOKEN_TO_BREAK_LOOP: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  yarn
-                  yarn format
-                  yarn build
-                  yarn lint
-                  yarn test
-            - name: Publish
+            - name: Prepare
               run: |
                   git config --global user.name 'robotiger'
                   git config --global user.email 'robotiger@users.noreply.github.com'
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-                  yarn run publish
+            - name: Install
+              run: yarn
+            - name: Build
+              run: |
+                  yarn build
+            - name: Format & Lint & Fix
+              run: |
+                  yarn format
+                  yarn lint
+                  git commit -am "format & fix"
+            - name: Test
+              run: yarn test
+            - name: Publish
+              run: |
+                  yarn publish
                   git push
     dispatch_deploy:
         needs: build_and_publish
