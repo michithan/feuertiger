@@ -23,7 +23,7 @@ jobs:
               run: |
                   yarn format
                   yarn lint
-                  git commit -am "format & fix"
+                  git diff-index --quiet HEAD || git commit -am "format & fix"
             - name: Test
               run: yarn test
             - name: Publish
@@ -31,9 +31,9 @@ jobs:
                   yarn run publish
             - name: Push changes
               if: ${{ failure() || !failure() }}
-              uses: ad-m/github-push-action@master
-              with:
+              env:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
+              run: git push
     deploy_firebase:
         needs: build_test_and_publish
         runs-on: ubuntu-latest
