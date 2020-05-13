@@ -3,62 +3,62 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-    build_test_and_publish:
-        runs-on: ubuntu-latest
-        container:
-            image: feuertiger/feuertiger-dev-environment:latest
-        steps:
-            - uses: actions/checkout@master
-            - name: Prepare
-              run: |
-                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-                  git config --global user.name 'robotiger'
-                  git config --global user.email 'robotiger@users.noreply.github.com'
-            - name: Install
-              run: yarn
-            - name: Build
-              run: |
-                  yarn build
-            - name: Format & Lint & Fix
-              run: |
-                  yarn format
-                  yarn lint
-                  git diff-index --quiet HEAD || git commit -am "format & fix" --amend
-            - name: Test
-              run: yarn test
-            - name: Publish
-              run: |
-                  yarn run publish
-            - name: Push changes
-              if: ${{ failure() || !failure() }}
-              env:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-              run: git push
-    deploy_firebase:
-        needs: build_test_and_publish
-        runs-on: ubuntu-latest
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
-        container:
-            image: feuertiger/feuertiger-dev-environment:latest
-        steps:
-            - uses: actions/checkout@v2
-            - name: Deploy Firebase
-              working-directory: ./deployments/firebase/functions
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-                  FIREBASE_SECRETS_TYPE: ${{ secrets.FIREBASE_SECRETS_TYPE }}
-                  FIREBASE_SECRETS_PROJECT_ID: ${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
-                  FIREBASE_SECRETS_PRIVATE_KEY_ID: ${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY_ID }}
-                  FIREBASE_SECRETS_PRIVATE_KEY: ${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
-                  FIREBASE_SECRETS_CLIENT_EMAIL: ${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
-                  FIREBASE_SECRETS_CLIENT_ID: ${{ secrets.FIREBASE_SECRETS_CLIENT_ID }}
-                  FIREBASE_SECRETS_AUTH_URI: ${{ secrets.FIREBASE_SECRETS_AUTH_URI }}
-                  FIREBASE_SECRETS_TOKEN_URI: ${{ secrets.FIREBASE_SECRETS_TOKEN_URI }}
-                  FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL }}
-                  FIREBASE_SECRETS_CLIENT_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_CLIENT_X509_CERT_URL }}
-              run: |
-                  echo -e "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}\n@feuertiger:registry=https://npm.pkg.github.com/feuertiger\npackage-lock=false" > .npmrc
-                  npm i --no-package-lock
-                  npm run createSecrets
-                  npm run deploy:ci
+  build_test_and_publish:
+    runs-on: ubuntu-latest
+    container:
+      image: feuertiger/feuertiger-dev-environment:latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Prepare
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+          git config --global user.name 'robotiger'
+          git config --global user.email 'robotiger@users.noreply.github.com'
+      - name: Install
+        run: yarn
+      - name: Build
+        run: |
+          yarn build
+      - name: Format & Lint & Fix
+        run: |
+          yarn format
+          yarn lint
+          git diff-index --quiet HEAD || git commit -am "format & fix"
+      - name: Test
+        run: yarn test
+      - name: Publish
+        run: |
+          yarn run publish
+      - name: Push changes
+        if: ${{ failure() || !failure() }}
+        env:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        run: git push
+  deploy_firebase:
+    needs: build_test_and_publish
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
+    container:
+      image: feuertiger/feuertiger-dev-environment:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy Firebase
+        working-directory: ./deployments/firebase/functions
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_SECRETS_TYPE: ${{ secrets.FIREBASE_SECRETS_TYPE }}
+          FIREBASE_SECRETS_PROJECT_ID: ${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
+          FIREBASE_SECRETS_PRIVATE_KEY_ID: ${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY_ID }}
+          FIREBASE_SECRETS_PRIVATE_KEY: ${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
+          FIREBASE_SECRETS_CLIENT_EMAIL: ${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
+          FIREBASE_SECRETS_CLIENT_ID: ${{ secrets.FIREBASE_SECRETS_CLIENT_ID }}
+          FIREBASE_SECRETS_AUTH_URI: ${{ secrets.FIREBASE_SECRETS_AUTH_URI }}
+          FIREBASE_SECRETS_TOKEN_URI: ${{ secrets.FIREBASE_SECRETS_TOKEN_URI }}
+          FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL }}
+          FIREBASE_SECRETS_CLIENT_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_CLIENT_X509_CERT_URL }}
+        run: |
+          echo -e "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}\n@feuertiger:registry=https://npm.pkg.github.com/feuertiger\npackage-lock=false" > .npmrc
+          npm i --no-package-lock
+          npm run createSecrets
+          npm run deploy:ci
