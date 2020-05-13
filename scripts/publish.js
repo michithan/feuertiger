@@ -13,6 +13,6 @@ const changes = JSON.parse(
 
 if (changes.length > 0) {
     execSync(
-        `lerna publish prerelease --yes --exact --preid=${branch}.${commit} --registry=https://npm.pkg.github.com`
+        `lerna publish prerelease --yes --exact --preid=${branch}.${commit} --amend --registry=https://npm.pkg.github.com`
     );
 }
