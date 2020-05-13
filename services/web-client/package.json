@@ -7,6 +7,9 @@
         "build": "next build",
         "start": "next start"
     },
+    "browser": {
+        "child_process": false
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/feuertiger/feuertiger",

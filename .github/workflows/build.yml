@@ -34,9 +34,9 @@ jobs:
               run: |
                   yarn
                   yarn format
+                  yarn build
                   yarn lint
                   yarn test
-                  yarn build
             - name: Publish
               run: |
                   git config --global user.name 'robotiger'

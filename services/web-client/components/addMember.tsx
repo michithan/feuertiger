@@ -14,7 +14,7 @@ import {
 import { KeyboardDatePicker } from '@material-ui/pickers';
 import CenterFocusStrongIcon from '@material-ui/icons/CenterFocusStrong';
 import Webcam from 'react-webcam';
-import { startOcr } from '@feuertiger/ocr/dist/tesseract';
+import { startOcr } from '@feuertiger/ocr';
 
 interface Props {
     handleClose: () => void;
