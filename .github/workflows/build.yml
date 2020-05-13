@@ -35,7 +35,7 @@ jobs:
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
     deploy_firebase:
-        needs: build_and_publish
+        needs: build_test_and_publish
         runs-on: ubuntu-latest
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
         container:
