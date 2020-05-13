@@ -46,7 +46,7 @@ jobs:
               run: yarn test
             - name: Publish
               run: |
-                  yarn publish
+                  yarn run publish
                   git push
     dispatch_deploy:
         needs: build_and_publish
