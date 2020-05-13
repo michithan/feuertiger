@@ -23,8 +23,8 @@
         "@feuertiger/schema-graphql": "1.0.9-actions-refactor.21dc890.0",
         "@feuertiger/tools": "1.0.9-actions-refactor.21dc890.0",
         "@feuertiger/utils-graphql": "1.0.9-actions-refactor.21dc890.0",
-        "apollo-server": "2.9.15",
-        "apollo-server-express": "2.9.15",
+        "apollo-server": "2.13.1",
+        "apollo-server-express": "2.13.1",
         "express": "4.17.1",
         "firebase": "7.6.2",
         "firebase-admin": "8.12.1",
@@ -43,6 +43,6 @@
         "jest": "26.0.1",
         "ts-node": "8.10.1",
         "ts-node-dev": "1.0.0-pre.44",
-        "typescript": "3.7.4"
+        "typescript": "3.9.2"
     }
 }
