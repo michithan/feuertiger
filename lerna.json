@@ -1,0 +1,15 @@
+{
+    "npmClient": "yarn",
+    "version": "1.0.9-actions-refactor.9838e86.0",
+    "useWorkspaces": true,
+    "packages": [
+        "packages/*",
+        "services/*",
+        "deployments/firebase/functions"
+    ],
+    "command": {
+        "version": {
+            "push": false
+        }
+    }
+}
