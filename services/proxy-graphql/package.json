@@ -24,7 +24,7 @@
         "@feuertiger/tools": "1.0.9-dev.faeb36d.0",
         "@feuertiger/utils-graphql": "1.0.9-dev.faeb36d.0",
         "apollo-server": "2.13.1",
-        "apollo-server-express": "2.13.0",
+        "apollo-server-express": "2.13.1",
         "express": "4.17.1",
         "firebase-admin": "8.12.1",
         "graphql": "15.0.0",
