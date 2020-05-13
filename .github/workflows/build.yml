@@ -29,16 +29,16 @@ jobs:
       - name: Publish
         run: |
           yarn run publish
-      - uses: ouzi-dev/commit-status-updater@v1.0.4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: "build_test_and_publish"
-          status: "success"
       - name: Push changes
         if: ${{ failure() || !failure() }}
         env:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         run: git push
+      - uses: ouzi-dev/commit-status-updater@v1.0.4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: "build_test_and_publish"
+          status: "success"
   deploy_firebase:
     needs: build_test_and_publish
     runs-on: ubuntu-latest
