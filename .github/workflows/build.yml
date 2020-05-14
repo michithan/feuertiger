@@ -37,13 +37,14 @@ jobs:
               run: |
                   yarn run publish
                   echo ::set-env name=GIT_SHA::$(git rev-parse HEAD)
+                  echo ::set-env name=WORKFLOW_URL::"https://github.com/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
             - name: Set state
               uses: Sibz/github-status-action@v1
               with:
                   authToken: ${{ secrets.GITHUB_TOKEN }}
                   context: 'build_test_and_publish'
                   state: 'success'
-                  target_url: 'https://github.com/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}'
+                  target_url: ${{ env.WORKFLOW_URL }}
                   sha: ${{ env.GIT_SHA }}
     deploy_firebase:
         needs: build_test_and_publish
