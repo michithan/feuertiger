@@ -30,7 +30,6 @@ jobs:
                   git diff-index --quiet HEAD || git commit -am "format & fix" && git push --force
 
     test:
-        needs: format
         runs-on: ubuntu-latest
         container: feuertiger/feuertiger-dev-environment:latest
         steps:
