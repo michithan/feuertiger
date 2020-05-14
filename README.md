@@ -1,4 +1,4 @@
-![](https://github.com/feuertiger/feuertiger/workflows/Continuous%20Integration/badge.svg) [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/feuertiger/feuertiger) 
+[![](https://github.com/feuertiger/feuertiger/workflows/Continuous%20Integration/badge.svg)](https://github.com/feuertiger/feuertiger/actions?query=workflow%3A%22Continuous+Integration%22) [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/feuertiger/feuertiger) 
 
 # Feuertiger
 
