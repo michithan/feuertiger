@@ -3,10 +3,65 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-    build_test_and_publish:
+
+    format:
+        if: github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/master' && github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
         runs-on: ubuntu-latest
-        container:
-            image: feuertiger/feuertiger-dev-environment:latest
+        container: feuertiger/feuertiger-dev-environment:latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Prepare
+              run: |
+                  git config --global user.name 'feuertiger'
+                  git config --global user.email 'feuertiger@users.noreply.github.com'
+            - name: Restore node_modules
+              uses: actions/cache@master
+              with:
+                path: |
+                  node_modules
+                  */*/node_modules
+                key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+            - name: Install
+              run: yarn
+            - name: Format & Fix
+              run: |
+                  yarn format
+                  yarn lint || true
+                  git diff-index --quiet HEAD || git commit -am "format & fix" && git push --force
+
+    test:
+        needs: format
+        runs-on: ubuntu-latest
+        container: feuertiger/feuertiger-dev-environment:latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Restore node_modules
+              uses: actions/cache@master
+              with:
+                path: |
+                  node_modules
+                  */*/node_modules
+                key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+            - name: Install
+              run: |
+                  yarn
+                  yarn build
+                  yarn linkdist                    
+            - name: Test
+              run:  |
+                  yarn lint     
+                  yarn test          
+            - name: Approve dependabot
+              if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+              uses: hmarr/auto-approve-action@v2.0.0
+              with:
+                github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+    publish:
+        needs: test
+        if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
+        runs-on: ubuntu-latest
+        container: feuertiger/feuertiger-dev-environment:latest
         steps:
             - uses: actions/checkout@master
             - name: Prepare
@@ -23,35 +78,16 @@ jobs:
                 key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
             - name: Install
               run: yarn
-            - name: Build
-              run: |
-                  yarn build
-            - name: Format & Lint & Fix
-              run: |
-                  yarn format
-                  yarn lint
-                  git diff-index --quiet HEAD || git commit -am "format & fix" && git push --force
-            - name: Test
-              run: yarn test
             - name: Publish
               run: |
+                  yarn build
                   yarn run publish
-                  echo ::set-env name=GIT_SHA::$(git rev-parse HEAD)
-                  echo ::set-env name=WORKFLOW_URL::"https://github.com/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}"
-            - name: Set state
-              uses: Sibz/github-status-action@v1
-              with:
-                  authToken: ${{ secrets.GITHUB_TOKEN }}
-                  context: 'build_test_and_publish'
-                  state: 'success'
-                  target_url: ${{ env.WORKFLOW_URL }}
-                  sha: ${{ env.GIT_SHA }}
+
     deploy_firebase:
-        needs: build_test_and_publish
+        needs: publish
         runs-on: ubuntu-latest
         if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
-        container:
-            image: feuertiger/feuertiger-dev-environment:latest
+        container: feuertiger/feuertiger-dev-environment:latest
         steps:
             - uses: actions/checkout@v2
             - name: Deploy Firebase
