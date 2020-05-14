@@ -10,7 +10,7 @@
         "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "publish": "node ./scripts/publish.js && yarn format",
         "link": "lerna link",
-        "test": "lerna run test  --since --stream && codecov",
+        "test": "lerna run test --since --stream && codecov -t $CODECOV_TOKEN",
         "build": "lerna run build --no-private --since --stream",
         "dev": "lerna run dev --stream"
     },
