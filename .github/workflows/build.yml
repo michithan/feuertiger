@@ -49,12 +49,7 @@ jobs:
             - name: Test
               run:  |
                   yarn lint     
-                  yarn test          
-            - name: Approve dependabot
-              if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-              uses: hmarr/auto-approve-action@v2.0.0
-              with:
-                github-token: "${{ secrets.GITHUB_TOKEN }}"
+                  yarn test
 
     publish:
         needs: test
