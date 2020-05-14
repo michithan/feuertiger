@@ -28,7 +28,7 @@
         "nexus-prisma": "0.13.0"
     },
     "devDependencies": {
-        "@prisma/cli": "2.0.0-beta.4"
+        "@prisma/cli": "2.0.0-preview025"
     },
     "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }
