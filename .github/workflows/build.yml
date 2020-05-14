@@ -3,7 +3,7 @@ name: Continuous Integration
 on: [push]
 
 jobs:
-  format:
+  Format:
     if: github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/master' && github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
     container: feuertiger/feuertiger-dev-environment:latest
@@ -26,9 +26,9 @@ jobs:
         run: |
           yarn format
           yarn lint || true
-          git diff-index --quiet HEAD || git commit -am "format & fix" && git push --force
+          git diff-index --quiet HEAD || git commit -am "format & fix" && git push
 
-  test:
+  Test:
     runs-on: ubuntu-latest
     container: feuertiger/feuertiger-dev-environment:latest
     steps:
@@ -50,13 +50,15 @@ jobs:
           yarn lint
           yarn test
 
-  publish:
-    needs: test
+  Publish:
+    needs: Test
     if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
     container: feuertiger/feuertiger-dev-environment:latest
     steps:
       - uses: actions/checkout@master
+        with:
+          token: ${{ secrets.PRIVATE_TOKEN }}
       - name: Prepare
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
@@ -76,8 +78,8 @@ jobs:
           yarn build
           yarn run publish
 
-  deploy_firebase:
-    needs: publish
+  Deploy:
+    needs: Publish
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
     container: feuertiger/feuertiger-dev-environment:latest
