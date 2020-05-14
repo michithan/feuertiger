@@ -26,7 +26,7 @@
         "apollo-server-express": "2.9.15",
         "graphql": "14.5.8",
         "graphql-import": "0.7.1",
-        "nexus-prisma": "^0.9.1"
+        "nexus-prisma": "^0.13.0"
     },
     "devDependencies": {
         "@graphql-codegen/cli": "1.11.2",
