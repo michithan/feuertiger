@@ -29,7 +29,7 @@ jobs:
             - name: Publish
               run: |
                   yarn run publish
-                  ::set-env name=GIT_SHA::$(git rev-parse HEAD)
+                  echo ::set-env name=GIT_SHA::$(git rev-parse HEAD)
             - name: Set state
               uses: Sibz/github-status-action@v1
               with:
