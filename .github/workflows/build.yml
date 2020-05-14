@@ -7,6 +7,8 @@ jobs:
         runs-on: ubuntu-latest
         container:
             image: feuertiger/feuertiger-dev-environment:latest
+        env:
+            GITHUB_WORKFLOW_URL: https://github.com/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}
         steps:
             - uses: actions/checkout@master
             - name: Prepare
@@ -14,6 +16,13 @@ jobs:
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
                   git config --global user.name 'robotiger'
                   git config --global user.email 'robotiger@users.noreply.github.com'
+            - name: Restore node_modules
+              uses: actions/cache@master
+              with:
+                path: |
+                  node_modules
+                  */*/node_modules
+                key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
             - name: Install
               run: yarn
             - name: Build
@@ -36,6 +45,7 @@ jobs:
                   authToken: ${{ secrets.GITHUB_TOKEN }}
                   context: 'build_test_and_publish'
                   state: 'success'
+                  target_url: ${{ env.GITHUB_WORKFLOW_URL }}
                   sha: ${{ env.GIT_SHA }}
     deploy_firebase:
         needs: build_test_and_publish
