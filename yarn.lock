@@ -1641,13 +1641,13 @@
     "@graphql-toolkit/schema-merging" "0.9.0"
     tslib "1.10.0"
 
-"@graphql-codegen/introspection@1.11.2":
-  version "1.11.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/introspection/-/introspection-1.11.2.tgz#1959f71d89c17945ce80be1f0aa5d539f8a8908c"
-  integrity sha512-fH5nybU/2Y/SvzPp3nwLMyDDqZFhRkMoBXjJfHaPxrAp+uArxNn5b6uYH2pozDIopZ4WYr1qIwoG4nHsSK9jLA==
+"@graphql-codegen/introspection@1.13.5":
+  version "1.13.5"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/introspection/-/introspection-1.13.5.tgz#903e6d346e3ff5eaaa22e69ed291977b41e895ab"
+  integrity sha512-u/Y7fPpSfIUv+sxfiP8jZBXwXSASkEo6GZUwo+eWapptSCSWtel4BZoSid+OlWnVWaBgVwBGZdVSLYM3SHxXQA==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.11.2"
-    tslib "1.10.0"
+    "@graphql-codegen/plugin-helpers" "1.13.5"
+    tslib "~1.11.1"
 
 "@graphql-codegen/plugin-helpers@1.11.2":
   version "1.11.2"
@@ -5582,7 +5582,7 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codecov@^3.6.5:
+codecov@3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.6.5.tgz#d73ce62e8a021f5249f54b073e6f2d6a513f172a"
   integrity sha512-v48WuDMUug6JXwmmfsMzhCHRnhUf8O3duqXvltaYJKrO1OekZWpB/eH6iIoaxMl8Qli0+u3OxptdsBOYiD7VAQ==
