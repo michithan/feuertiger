@@ -7,8 +7,6 @@ jobs:
         runs-on: ubuntu-latest
         container:
             image: feuertiger/feuertiger-dev-environment:latest
-        env:
-            GITHUB_WORKFLOW_URL: https://github.com/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}
         steps:
             - uses: actions/checkout@master
             - name: Prepare
@@ -45,7 +43,7 @@ jobs:
                   authToken: ${{ secrets.GITHUB_TOKEN }}
                   context: 'build_test_and_publish'
                   state: 'success'
-                  target_url: ${{ env.GITHUB_WORKFLOW_URL }}
+                  target_url: 'https://github.com/${{ env.GITHUB_REPOSITORY }}/actions/runs/${{ env.GITHUB_RUN_ID }}'
                   sha: ${{ env.GIT_SHA }}
     deploy_firebase:
         needs: build_test_and_publish
