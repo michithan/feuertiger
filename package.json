@@ -8,7 +8,7 @@
         "linkdist": "node ./scripts/linkdist.js --no-private",
         "lint": "eslint ./**/*.{js,ts,tsx} --fix",
         "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
-        "publish": "node ./scripts/publish.js",
+        "publish": "node ./scripts/publish.js && yarn format",
         "link": "lerna link",
         "test": "lerna run test  --since --stream",
         "build": "lerna run build --no-private --since --stream",
