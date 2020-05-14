@@ -22,7 +22,7 @@
         "@feuertiger/tools": "1.0.9-ci-fix.d42d695.0",
         "@feuertiger/web-client": "1.0.9-ci-fix.d42d695.0",
         "firebase-admin": "8.12.1",
-        "firebase-functions": "3.3.0"
+        "firebase-functions": "3.6.1"
     },
     "devDependencies": {
         "firebase-functions-test": "0.2.1",
