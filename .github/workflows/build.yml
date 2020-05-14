@@ -30,7 +30,7 @@ jobs:
               run: |
                   yarn format
                   yarn lint
-                  git diff-index --quiet HEAD || git commit -am "format & fix" && git push
+                  git diff-index --quiet HEAD || git commit -am "format & fix" && git --force push
             - name: Test
               run: yarn test
             - name: Publish
