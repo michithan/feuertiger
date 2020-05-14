@@ -20,15 +20,13 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@feuertiger/utils-graphql": "1.0.9-renovate.fc52883.0",
         "@nexus/schema": "0.13.1",
-        "@prisma/client": "2.0.0-beta.4",
+        "@prisma/client": "2.0.0-beta.5",
         "nexus": "0.21.0",
-        "nexus-plugin-prisma": "^0.7.0",
         "nexus-prisma": "0.13.0"
     },
     "devDependencies": {
-        "@prisma/cli": "2.0.0-beta.4"
+        "@prisma/cli": "2.0.0-beta.5"
     },
     "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
 }

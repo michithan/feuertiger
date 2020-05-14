@@ -5,11 +5,17 @@ const path = require('path');
 const dist = path.resolve(__dirname, 'dist');
 const source = require.resolve('./dist');
 
+const prismaPlugin = nexusPrismaPlugin({
+    inputs: {
+        prismaClient: source
+    }
+});
+
 makeSchema({
-    plugins: [nexusPrismaPlugin()],
+    plugins: [prismaPlugin],
     typegenAutoConfig: {
-        contextType: 'Context.Context',
-        sources: [{ source, alias: 'prisma' }]
+        contextType: '{ prisma: PrismaClient.PrismaClient }',
+        sources: [{ source: `${dist}/index.d.ts`, alias: 'PrismaClient' }]
     },
     outputs: {
         schema: `${dist}/schema.graphql`,
@@ -18,6 +24,7 @@ makeSchema({
     types: [
         queryType({
             definition(t) {
+                t.crud.person();
                 t.crud.persons();
             }
         }),
