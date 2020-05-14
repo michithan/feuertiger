@@ -11683,7 +11683,7 @@ nexus-plugin-prisma@^0.7.0:
     prismjs "^1.19.0"
     stacktrace-parser "^0.1.9"
 
-nexus-prisma@0.13.0:
+nexus-prisma@0.13.0, nexus-prisma@^0.13.0:
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/nexus-prisma/-/nexus-prisma-0.13.0.tgz#6454a2740d95631d8e6bf81e2c8f2245efe58c7e"
   integrity sha512-P4WCd2V0B+lcbV5svQYbBN+lLDozMbvXKda+Sb8PYUYRWXYL293rpHsF8/Rz/P3EN0mvqQTJMA8VBpyd6DChXQ==
@@ -11696,15 +11696,6 @@ nexus-prisma@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/nexus-prisma/-/nexus-prisma-0.12.0.tgz#3161c436571159e8392bf8936f5d72b5f3efa742"
   integrity sha512-xqZjTS8HXIeNg2LLbcG+bP3bC54QXWteg1TzxeMuPMD5fkAnxfPnEOLsXoz22e1wLps7IeQRqNviVioueDUWVw==
-  dependencies:
-    camelcase "^5.3.1"
-    fs-extra "^8.1.0"
-    pluralize "^8.0.0"
-
-nexus-prisma@^0.9.1:
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/nexus-prisma/-/nexus-prisma-0.9.1.tgz#025b14d451ae833c1e573c24163592eb6588775c"
-  integrity sha512-BkBBh2rejDE4QYX1+xeBwjvAVm1Dh3qSyVhFXWR6NxdqahnNz9zWsOTrkIngZnwLP29k8XUPIxgQjlDYXp/URg==
   dependencies:
     camelcase "^5.3.1"
     fs-extra "^8.1.0"
