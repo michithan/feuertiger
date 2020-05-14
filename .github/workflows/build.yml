@@ -12,8 +12,8 @@ jobs:
             - name: Prepare
               run: |
                   echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
-                  git config --global user.name 'robotiger'
-                  git config --global user.email 'robotiger@users.noreply.github.com'
+                  git config --global user.name 'feuertiger'
+                  git config --global user.email 'feuertiger@users.noreply.github.com'
             - name: Restore node_modules
               uses: actions/cache@master
               with:
