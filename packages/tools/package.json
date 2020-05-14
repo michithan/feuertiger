@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/tools",
-    "version": "1.0.9-dev.d71515a.0",
+    "version": "1.0.9-dev.c4662ac.0",
     "description": "tools",
     "main": "./dist/index.js",
     "scripts": {
