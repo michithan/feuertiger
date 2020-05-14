@@ -1,4 +1,14 @@
-[![](https://github.com/feuertiger/feuertiger/workflows/Continuous%20Integration/badge.svg)](https://github.com/feuertiger/feuertiger/actions?query=workflow%3A%22Continuous+Integration%22) [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/feuertiger/feuertiger) 
+<p>
+   <a href="https://github.com/feuertiger/feuertiger/actions?query=workflow%3A%22Continuous+Integration%22">
+      <img src="https://github.com/feuertiger/feuertiger/workflows/Continuous%20Integration/badge.svg" alt="CI">
+   </a>
+   <a href="https://gitpod.io/#https://github.com/feuertiger/feuertiger">
+      <img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" alt="Gitpod">
+   </a>
+   <a href="https://github.com/feuertiger/feuertiger/blob/dev/.dependabot/config.yml">
+      <img src="https://flat.badgen.net/dependabot/feuertiger/feuertiger?icon=dependabot" alt="Dependabot" />
+   </a>
+</p>
 
 # Feuertiger
 
