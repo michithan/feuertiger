@@ -6,12 +6,12 @@
     "license": "ISC",
     "scripts": {
         "linkdist": "node ./scripts/linkdist.js --no-private",
-        "lint": "eslint ./**/*.ts ./**/*.tsx --fix",
-        "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{ts}\"",
-        "pretty": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
+        "lint": "eslint ./**/*.{js,ts,tsx} --fix",
+        "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "publish": "node ./scripts/publish.js",
         "link": "lerna link",
-        "build": "lerna run build --no-private --since",
+        "test": "lerna run test  --since --stream",
+        "build": "lerna run build --no-private --since --stream",
         "dev": "lerna run dev --stream"
     },
     "packages": [
@@ -42,7 +42,6 @@
         "eslint-plugin-react-hooks": "4.0.0",
         "lerna": "3.20.2",
         "prettier": "2.0.5",
-        "prettier-eslint-cli": "5.0.0",
         "yarn": "1.22.4"
     }
 }

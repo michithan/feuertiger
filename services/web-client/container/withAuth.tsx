@@ -34,7 +34,7 @@ export default <TProps extends any>(
             const authSignleton = new AuthSingleton();
             const { firebaseAuth } = authSignleton;
 
-            firebaseAuth.onAuthStateChanged(async user =>
+            firebaseAuth.onAuthStateChanged(async (user) =>
                 this.setState({ isSignedIn: !!user, isLoading: false })
             );
             const auth: firebase.auth.Auth = {

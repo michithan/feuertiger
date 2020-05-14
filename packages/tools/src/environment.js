@@ -3,10 +3,10 @@ const { config } = require('dotenv');
 
 config({ path: path.join(__dirname, '..', '..', '..', '.env') });
 
-module.exports.trim = str =>
-    str && str.replace(/^"|"$/g, '').replace(/\\n/g, '\n');
+exports.trim = (text) =>
+    text && text.replace(/^"|"$/g, '').replace(/\\n/g, '\n');
 
-module.exports.getSecretsEnvironment = () => {
+exports.getSecretsEnvironment = () => {
     const {
         FIREBASE_SECRETS_TYPE,
         FIREBASE_SECRETS_PROJECT_ID,
