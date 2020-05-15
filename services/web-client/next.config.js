@@ -14,6 +14,11 @@ module.exports = withTM({
                     child_process: 'empty',
                     net: 'empty',
                     tls: 'empty'
+                },
+                resolve: {
+                    alias: {
+                        '@feuertiger/ocr': require.resolve('@feuertiger/ocr')
+                    }
                 }
             },
             config
