@@ -1,4 +1,6 @@
 Deploy:
+  needs:
+    - Publish
   extends:
     - .docker-linux-runner
   stage: Deploy

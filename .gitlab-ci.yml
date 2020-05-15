@@ -11,8 +11,7 @@ variables:
 .docker-linux-runner:
   tags:
     - docker
-    - Linux
-    - x86_64
+    - linux
 
 .docker-in-docker:
   extends:

@@ -1,4 +1,6 @@
 Publish:
+  needs:
+    - Test
   extends:
     - .docker-linux-runner
   stage: Publish
