@@ -22,8 +22,8 @@ variables:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 include:
-  - local: '/ci/0-prepare.yml'
-  - local: '/ci/1-format.yml'
-  - local: '/ci/1-test.yml'
-  - local: '/ci/2-publish.yml'
-  - local: '/ci/3-deploy.yml'
+  - local: '/.ci/0-prepare.yml'
+  - local: '/.ci/1-format.yml'
+  - local: '/.ci/1-test.yml'
+  - local: '/.ci/2-publish.yml'
+  - local: '/.ci/3-deploy.yml'
