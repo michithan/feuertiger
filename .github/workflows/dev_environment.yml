@@ -4,6 +4,8 @@ on:
     push:
         paths:
             - .dev-env.Dockerfile
+    schedule:
+        - cron: "* 2 * * *"
 
 jobs:
     prepare_dev_environment:
