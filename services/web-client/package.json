@@ -36,7 +36,7 @@
         "body-parser": "1.19.0",
         "date-fns": "2.13.0",
         "express": "4.17.1",
-        "firebase": "7.14.3",
+        "firebase": "7.14.4",
         "graphql": "15.0.0",
         "graphql-tag": "2.10.3",
         "isomorphic-unfetch": "3.0.0",
