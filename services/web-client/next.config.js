@@ -7,18 +7,11 @@ module.exports = withTM({
     webpack: (config) =>
         merge(
             {
-                // Fixes npm packages that depend on `fs` module
-                // eslint-disable-next-line no-param-reassign
                 node: {
                     fs: 'empty',
                     child_process: 'empty',
                     net: 'empty',
                     tls: 'empty'
-                },
-                resolve: {
-                    alias: {
-                        '@feuertiger/ocr': require.resolve('@feuertiger/ocr')
-                    }
                 }
             },
             config
