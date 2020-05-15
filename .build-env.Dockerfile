@@ -1,3 +1,7 @@
 FROM feuertiger/feuertiger-dev-environment:latest
 
-USER gitpod
+ADD . /workspace
+
+WORKDIR /workspace
+
+RUN yarn
