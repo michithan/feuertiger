@@ -1,9 +1,9 @@
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
-      - "#approved-reviews-by>=1"
-      - "#author=dependabot-preview[bot]"
+      - approved-reviews-by>=1
+      - author=dependabot-preview[bot]
     actions:
       merge:
-        method: "squash"
-        strict: "smart"
+        method: squash
+        strict: smart
