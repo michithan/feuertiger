@@ -9,10 +9,3 @@ RUN apt-get update \
 # Install lerna && firebase cli
 RUN npm i -g lerna \
     && npm i -g firebase-tools
-
-# Use current workspace as cache
-ADD . /workspace
-
-WORKDIR /workspace
-
-RUN yarn

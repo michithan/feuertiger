@@ -1,0 +1,7 @@
+Publish:
+  extends:
+    - .docker-linux-runner
+  stage: Publish
+  script:
+    - yarn build
+    - yarn publish
