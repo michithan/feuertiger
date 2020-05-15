@@ -13,15 +13,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           repository: feuertiger/feuertiger-build-environment
-          cache_froms: feuertiger/feuertiger-build-environment:latest-${{ GITHUB_REF##*/ }}
-          tags: latest-${{ GITHUB_REF##*/ }}
+          cache_froms: feuertiger/feuertiger-build-environment:latest-${{ github.head_ref }}
+          tags: latest-${{ github.head_ref }}
           dockerfile: .build-env.Dockerfile
 
   Format:
     needs: Prepare
     if: github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/master' && github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
-    container: feuertiger/feuertiger-build-environment:latest-${{ GITHUB_REF##*/ }}
+    container: feuertiger/feuertiger-build-environment:latest-${{ github.head_ref }}
     steps:
       - uses: actions/checkout@master
       - name: Prepare
@@ -39,7 +39,7 @@ jobs:
   Test:
     needs: Prepare
     runs-on: ubuntu-latest
-    container: feuertiger/feuertiger-build-environment:latest-${{ GITHUB_REF##*/ }}
+    container: feuertiger/feuertiger-build-environment:latest-${{ github.head_ref }}
     steps:
       - uses: actions/checkout@master
       - name: Build
@@ -55,7 +55,7 @@ jobs:
     needs: Test
     if: github.actor != 'dependabot[bot]' && github.actor != 'dependabot-preview[bot]'
     runs-on: ubuntu-latest
-    container: feuertiger/feuertiger-build-environment:latest-${{ GITHUB_REF##*/ }}
+    container: feuertiger/feuertiger-build-environment:latest-${{ github.head_ref }}
     steps:
       - uses: actions/checkout@master
         with:
@@ -74,7 +74,7 @@ jobs:
     needs: Publish
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev'
-    container: feuertiger/feuertiger-dev-environment:latest-${{ GITHUB_REF##*/ }}
+    container: feuertiger/feuertiger-dev-environment:latest-${{ github.head_ref }}
     steps:
       - uses: actions/checkout@v2
       - name: Deploy Firebase
