@@ -5,3 +5,5 @@ ADD . /workspace
 WORKDIR /workspace
 
 RUN yarn
+
+WORKDIR /workspace
