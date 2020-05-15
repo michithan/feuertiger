@@ -7,7 +7,6 @@ package-lock.json
 secrets.json
 
 *.en
-*.vscode
 *.log
 *.code-workspace
 *.npmrc
