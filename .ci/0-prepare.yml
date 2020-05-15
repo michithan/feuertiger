@@ -7,7 +7,6 @@ Prepare:
       - .dev-env.Dockerfile
   stage: Prepare
   script:
-    - docker pull $DEV_ENVIRONMENT_IMAGE_TAG || true
-    - docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG .
+    - (docker pull $DEV_ENVIRONMENT_IMAGE_TAG && docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG .) || docker build -t $DEV_ENVIRONMENT_IMAGE_TAG .
     - docker push $DEV_ENVIRONMENT_IMAGE_TAG
 
