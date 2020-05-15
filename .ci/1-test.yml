@@ -1,5 +1,6 @@
 Test:
   extends:
+    - .job-base
     - .docker-linux-runner
   stage: Test
   script:

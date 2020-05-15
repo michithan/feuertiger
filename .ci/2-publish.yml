@@ -2,6 +2,7 @@ Publish:
   needs:
     - Test
   extends:
+    - .job-base
     - .docker-linux-runner
   stage: Publish
   script:

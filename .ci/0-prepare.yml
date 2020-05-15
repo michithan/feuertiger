@@ -1,5 +1,6 @@
 Prepare:
   extends:
+    - .job-base
     - .docker-in-docker
   only:
     changes:

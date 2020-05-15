@@ -2,6 +2,7 @@ Deploy:
   needs:
     - Publish
   extends:
+    - .job-base
     - .docker-linux-runner
   stage: Deploy
   variables:

@@ -1,5 +1,6 @@
 Format:
   extends:
+    - .job-base
     - .docker-linux-runner
   stage: Format
   script:

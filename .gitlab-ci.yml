@@ -8,6 +8,10 @@ stages:
 variables:
   DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/feuertiger/feuertiger/dev-environment:latest
 
+.job-base:
+  interruptible: true
+
+
 .docker-linux-runner:
   tags:
     - docker
