@@ -40,10 +40,10 @@ Build:
         - git diff-index --quiet HEAD || git commit -am "format"
         - yarn lint
         - git diff-index --quiet HEAD || git commit -am "fix"
-        - yarn test --since
-        - yarn build --since
+        - yarn test --since --parallel
+        - yarn build --since --parallel
         - echo '//gitlab.com/api/v4/projects/<your_project_id>/packages/npm/:_authToken=${CI_JOB_TOKEN}'>.npmrc
-        - lerna publish prerelease --since --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
+        - lerna publish prerelease --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
 
 Deploy:
    stage: Deploy
