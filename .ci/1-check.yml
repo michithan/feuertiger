@@ -1,0 +1,24 @@
+Check:
+  stage: Check
+  image: $DEV_ENVIRONMENT_IMAGE_TAG
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+  extends:
+    - .job-base
+    - .docker-linux-runner
+  script:
+    - node .ci/check.js
+  artifacts:
+    paths:
+    - .ci/build.yml
+
+Trigger:
+  needs: Check
+  stage: Check
+  rules:
+    - exists:
+      - .ci/build.yml
+  triggers:
+    include:
+      - artifact: .ci/build.yml
+        job: Check

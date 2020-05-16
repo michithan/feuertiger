@@ -1,8 +1,11 @@
-Test:
-  extends:
-    - .job-base
-    - .docker-linux-runner
-  stage: Test
-  script:
-    - yarn linkdist
-    - yarn test
+# Test:
+#   stage: Test
+#   cache:
+#     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+#   extends:
+#     - .job-base
+#     - .docker-linux-runner
+#   script:
+#     - yarn
+#     - yarn linkdist
+#     - yarn test
