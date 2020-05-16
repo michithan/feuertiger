@@ -4,7 +4,7 @@ execSync('yarn linkdist');
 
 execSync('yarn format');
 
-const hasChanges = () => JSON.parse(execSync('git diff-index --quiet HEAD || echo true').toString());
+const hasChanges = () => JSON.parse(execSync('git diff-index --quiet HEAD || echo true').toString().trim());
 
 if (hasChanges()) {
 
