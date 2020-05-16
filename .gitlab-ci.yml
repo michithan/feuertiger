@@ -46,10 +46,10 @@ Build:
 
 Deploy:
    stage: Deploy
-   extends:
-     - .job-base
-     - .docker-linux-runner
-   needs: Publish
+   interruptible: true
+   tags:
+       - docker
+   image: $DEV_ENVIRONMENT_IMAGE_TAG
    variables:
 #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
