@@ -26,9 +26,9 @@ stages:
 #     - docker info
 #     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
-# include:
-   - local: '/.ci/0-prepare.yml'
-   - local: '/.ci/1-check.yml'
+include:
+  - local: '/.ci/0-prepare.yml'
+  - local: '/.ci/1-check.yml'
 #   - local: '/.ci/1-format.yml'
 #   - local: '/.ci/1-test.yml'
 #   - local: '/.ci/2-publish.yml'
