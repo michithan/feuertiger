@@ -18,7 +18,7 @@ Trigger:
   rules:
     - exists:
       - .ci/build.yml
-  triggers:
+  trigger:
     include:
       - artifact: .ci/build.yml
         job: Check
