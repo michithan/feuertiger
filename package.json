@@ -9,7 +9,7 @@
         "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "lint": "eslint ./**/*.{js,ts,tsx} --fix",
         "test": "lerna run test --stream",
-        "build": "lerna run build --no-private --stream",
+        "build": "lerna run build --stream",
         "dev": "lerna run dev --stream"
     },
     "packages": [

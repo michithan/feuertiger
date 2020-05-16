@@ -44,8 +44,8 @@ Build:
         - yarn lint
         - git diff-index --quiet HEAD || git status
         - git diff-index --quiet HEAD || git commit -am "fix"
-        - yarn test --since
-        - yarn build --since
+        - yarn test --since --no-private
+        - yarn build --since --no-private
         - echo '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}'>.npmrc
         - lerna publish prerelease --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
 
