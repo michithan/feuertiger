@@ -6,12 +6,11 @@
     "license": "ISC",
     "scripts": {
         "linkdist": "node ./scripts/linkdist.js --no-private",
-        "lint": "eslint ./**/*.{js,ts,tsx} --fix",
         "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
-        "publish": "node ./scripts/publish.js && yarn format",
-        "link": "lerna link",
-        "test": "lerna run test --since --stream && codecov -t $CODECOV_TOKEN",
-        "build": "lerna run build --no-private --since --stream",
+        "lint": "eslint ./**/*.{js,ts,tsx} --fix",
+        "test": "lerna run test --stream",
+        "build": "lerna run build --no-private --stream",
+        "publish": "node ./scripts/publish.js",
         "dev": "lerna run dev --stream"
     },
     "packages": [
