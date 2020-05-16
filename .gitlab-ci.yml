@@ -1,35 +1,50 @@
 stages:
     - Prepare
     - Check
-#     - Test
-#     - Publish
-#     - Deploy
+    - Trigger
 
 variables:
-  DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/feuertiger/feuertiger/dev-environment:latest
+    DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/feuertiger/feuertiger/dev-environment:latest
 
-.job-base:
-  interruptible: true
+Prepare:
+    stage: Prepare
+    interruptible: true
+    tags:
+        - docker
+    image: docker:latest
+    services:
+        - docker:dind
+    before_script:
+        - docker info
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    only:
+        changes:
+            - .dev-env.Dockerfile
+    script:
+        - docker pull $DEV_ENVIRONMENT_IMAGE_TAG || true
+        - docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG --file .dev-env.Dockerfile .
+        - docker push $DEV_ENVIRONMENT_IMAGE_TAG
 
+Check:
+    stage: Check
+    interruptible: true
+    tags:
+        - docker
+    image: $DEV_ENVIRONMENT_IMAGE_TAG
+    cache:
+        key: '$CI_JOB_NAME-$CI_COMMIT_REF_SLUG'
+    script:
+        - node .ci/check.js
+    artifacts:
+        paths:
+            - .ci/build.yml
 
-.docker-linux-runner:
-  tags:
-    - docker
-
-.docker-in-docker:
-  extends:
-    - .docker-linux-runner
-  image: docker:latest
-  services:
-    - docker:dind
-  before_script:
-    - docker info
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-
-include:
-  - local: '/.ci/0-prepare.yml'
-  - local: '/.ci/1-check.yml'
-#   - local: '/.ci/1-format.yml'
-#   - local: '/.ci/1-test.yml'
-#   - local: '/.ci/2-publish.yml'
-#   - local: '/.ci/3-deploy.yml'
+Trigger:
+    stage: Trigger
+    rules:
+        - exists:
+              - .ci/build.yml
+    trigger:
+        include:
+            - artifact: .ci/build.yml
+              job: Check
