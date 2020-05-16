@@ -10,7 +10,6 @@
         "lint": "eslint ./**/*.{js,ts,tsx} --fix",
         "test": "lerna run test --stream",
         "build": "lerna run build --no-private --stream",
-        "publish": "node ./scripts/publish.js",
         "dev": "lerna run dev --stream"
     },
     "packages": [
