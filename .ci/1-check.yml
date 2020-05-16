@@ -13,7 +13,7 @@ Check:
     - .ci/build.yml
 
 Trigger:
-  needs: Check
+  needs: [ Check ]
   stage: Check
   rules:
     - exists:
