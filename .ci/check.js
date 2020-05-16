@@ -1,7 +1,5 @@
 const { execSync } = require('child_process');
 
-execSync('yarn');
-
 execSync('yarn linkdist');
 
 execSync('yarn format');
