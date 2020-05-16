@@ -8,7 +8,7 @@ execSync('yarn format', { stdio: 'inherit' });
 
 const hasChanges = () =>
     JSON.parse(
-        execSync('git diff-index --quiet HEAD || echo true').toString().trim()
+        execSync('git diff-index --quiet HEAD && echo false || echo true').toString().trim()
     );
 
 if (hasChanges()) {
