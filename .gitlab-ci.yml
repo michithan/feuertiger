@@ -35,6 +35,7 @@ Build:
         key: '$CI_JOB_NAME-$CI_COMMIT_REF_SLUG'
     script:
         - git pull origin HEAD:${CI_COMMIT_BRANCH}
+        - git checkout ${CI_COMMIT_BRANCH}
         - yarn
         - yarn linkdist
         - yarn format
@@ -45,7 +46,7 @@ Build:
         - git diff-index --quiet HEAD || git commit -am "fix"
         - yarn test --since
         - yarn build --since
-        - echo '//gitlab.com/api/v4/projects/<your_project_id>/packages/npm/:_authToken=${CI_JOB_TOKEN}'>.npmrc
+        - echo '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}'>.npmrc
         - lerna publish prerelease --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
 
 Deploy:
