@@ -7,7 +7,7 @@ RUN apt-get update \
     && sudo apt install -y curl
 
 # Install postgres
-RUN sudo apt-get install postgresql postgresql-contrib \
+RUN sudo apt-get install -y postgresql postgresql-contrib \
     && update-rc.d postgresql enable
 
 # Install lerna && firebase cli
