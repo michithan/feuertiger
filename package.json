@@ -8,9 +8,9 @@
         "linkdist": "node ./scripts/linkdist.js --no-private",
         "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
         "lint": "eslint ./**/*.{js,ts,tsx} --fix",
-        "test": "lerna run test --stream",
-        "build": "lerna run build --stream",
-        "dev": "lerna run dev --stream"
+        "test": "lerna run test --no-private --stream",
+        "build": "lerna run build --no-private --stream",
+        "dev": "lerna run dev --no-private --stream"
     },
     "packages": [
         "packages/*",
