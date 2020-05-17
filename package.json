@@ -6,7 +6,7 @@
     "license": "ISC",
     "scripts": {
         "linkdist": "node ./scripts/linkdist.js --no-private",
-        "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql --write",
+        "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql ./**/*.yml --write",
         "lint": "eslint ./**/*.{js,ts,tsx} --fix",
         "test": "lerna run test --no-private --stream",
         "build": "lerna run build --no-private --stream",

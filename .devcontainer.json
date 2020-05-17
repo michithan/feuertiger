@@ -1,5 +1,5 @@
 {
-    "image": "feuertiger/feuertiger-dev-environment:latest",
+    "image": "registry.gitlab.com/feuertiger/feuertiger/feuertiger-dev-environment:latest",
     "forwardPorts": [3000, 4000],
     "extensions": [
         "max-SS.Cyberpunk",

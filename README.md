@@ -1,12 +1,12 @@
 <p>
-   <a href="https://github.com/feuertiger/feuertiger/actions?query=workflow%3A%22Continuous+Integration%22">
-      <img src="https://github.com/feuertiger/feuertiger/workflows/Continuous%20Integration/badge.svg" alt="CI">
-   </a>
+   <a href="https://gitlab.com/feuertiger/feuertiger/-/commits/dev">
+        <img alt="pipeline status" src="https://gitlab.com/feuertiger/feuertiger/badges/dev/pipeline.svg" />
+    </a>
+    <a href="https://gitlab.com/feuertiger/feuertiger/-/commits/dev">
+        <img alt="coverage report" src="https://gitlab.com/feuertiger/feuertiger/badges/dev/coverage.svg" />
+    </a>
    <a href="https://gitpod.io/#https://gitlab.com/feuertiger/feuertiger">
-      <img src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod" alt="Gitpod">
-   </a>
-   <a href="https://github.com/feuertiger/feuertiger/blob/dev/.dependabot/config.yml">
-      <img src="https://flat.badgen.net/dependabot/feuertiger/feuertiger?icon=dependabot" alt="Dependabot" />
+        <img alt="Gitpod" src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod">
    </a>
 </p>
 
