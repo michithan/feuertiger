@@ -10,7 +10,7 @@
         "lint": "eslint ./**/*.{js,ts,tsx} --fix",
         "test": "lerna run test --no-private --stream",
         "build": "lerna run build --no-private --stream",
-        "dev": "lerna run dev --no-private --stream"
+        "dev": "lerna run dev --no-private --stream --parallel"
     },
     "packages": [
         "packages/*",
