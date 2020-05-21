@@ -51,7 +51,7 @@ const StyledDiv = styled.div`
     ${({ theme: { mixins } }) => mixins.toolbar}
 `;
 
-interface Props {
+export interface SideBarProps {
     open: boolean;
     handleDrawerClose: () => void;
 }
@@ -87,7 +87,7 @@ export const mainListItems = (
 
 export const secondaryListItems = <div />;
 
-export default ({ open, handleDrawerClose }: Props) => (
+export const SideBar = ({ open, handleDrawerClose }: SideBarProps) => (
     <StyledDrawer variant="permanent" open={open}>
         <StyledDiv>
             <IconButton onClick={handleDrawerClose}>

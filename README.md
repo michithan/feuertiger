@@ -74,18 +74,20 @@ The git repo is set up as a mono-repository using Lerna and Gitlab npm package r
 
 ### Services
 
-| Name       | Description      | URL                             |
-| ---------- | ---------------- | ------------------------------- |
-| graphql    | graphql backend  | https://localhost:4000/graphiql |
-| web-client | webclient server | https://localhost:3000/         |
+| Name       | Description         | URL                             |
+| ---------- | ------------------- | ------------------------------- |
+| graphql    | graphql backend     | https://localhost:4000/graphiql |
+| web-client | webclient server    | https://localhost:3000/         |
+| storybook  | view web-components | https://localhost:6006/         |
 
 ### Packages
 
-| Name           | Description                             |
-| -------------- | --------------------------------------- |
-| orc            | ocr tooling                             |
-| schema-graphql | backend api definiton source of truth   |
-| schema-prisma  | persited data definiton source of truth |
+| Name           | Description                                   |
+| -------------- | --------------------------------------------- |
+| orc            | ocr tooling                                   |
+| schema-graphql | backend api definiton source of truth         |
+| schema-prisma  | persited data definiton source of truth       |
+| web-components | component and page library used by web-client |
 
 ---
 

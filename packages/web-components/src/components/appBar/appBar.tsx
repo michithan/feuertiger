@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import {
+    AppBar as MuiAppBar,
+    Toolbar,
+    IconButton,
+    Typography
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
-import { AuthProps } from '../container/withAuth';
+import AuthProps from '../../types/authProps';
 
 const drawerWidth = 240;
 
 // remove it here
 // eslint-disable-next-line react/jsx-props-no-spreading
-const StyledAppBar = styled(({ open, ...props }) => <AppBar {...props} />)`
+const StyledAppBar = styled(({ open, ...props }) => <MuiAppBar {...props} />)`
     z-index: 1;
     transition: ${({ open, theme: { transitions } }) =>
         transitions.create(['width', 'margin'], {
@@ -47,12 +51,12 @@ const StyledTypography = styled(Typography)`
     flex-grow: 1;
 `;
 
-interface Props extends AuthProps {
+export interface AppBarProps extends AuthProps {
     open: boolean;
     handleDrawerOpen: () => void;
 }
 
-export default class Bar extends React.Component<Props> {
+export class AppBar extends React.Component<AppBarProps> {
     handleLogout = () => {
         const { auth } = this.props;
         auth.signOut();
