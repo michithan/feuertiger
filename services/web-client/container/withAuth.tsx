@@ -16,7 +16,7 @@ export interface AuthStateProps {
 
 interface State extends AuthProps, AuthStateProps {}
 
-export default <TProps extends any>(
+export default <TProps extends {}>(
     WrappedComponent: React.ComponentType<TProps & AuthProps & AuthStateProps>
 ): React.ComponentType<TProps> =>
     class AuthWrapper extends React.Component<TProps, State> {

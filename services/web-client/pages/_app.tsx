@@ -1,7 +1,7 @@
 import React from 'react';
 import NextApp, { AppInitialProps } from 'next/app';
 import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-hoc';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { Container, ThemeProvider, Login } from '@feuertiger/web-components';
@@ -15,7 +15,6 @@ interface Props
         AuthStateProps {}
 
 class App extends NextApp<Props> {
-    // remove it here
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles && jssStyles.parentNode) {
@@ -73,5 +72,5 @@ class App extends NextApp<Props> {
     }
 }
 
-const appWithAuth = (withAuth(App) as unknown) as typeof NextApp;
+const appWithAuth = withAuth(App);
 export default withApollo(appWithAuth);

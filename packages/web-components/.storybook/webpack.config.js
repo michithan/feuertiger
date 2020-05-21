@@ -1,5 +1,4 @@
 const merge = require('lodash.merge');
-const defaultWebpackConfig = require('../../../webpack.config');
 
 const mergeconfig = (a, b) =>
     merge(a, b, (objValue, srcValue) => {
@@ -10,8 +9,7 @@ const mergeconfig = (a, b) =>
     });
 
 module.exports = ({ config }) => {
-    const withDefault = mergeconfig(config, defaultWebpackConfig);
-    const withCustom = mergeconfig(withDefault, {
+    const withCustom = mergeconfig(config, {
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
             alias: {
@@ -20,6 +18,12 @@ module.exports = ({ config }) => {
                     '@feuertiger/schema-graphql'
                 )
             }
+        },
+        node: {
+            fs: 'empty',
+            child_process: 'empty',
+            net: 'empty',
+            tls: 'empty'
         }
     });
     withCustom.module.rules.push({
