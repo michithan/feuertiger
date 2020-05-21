@@ -15,7 +15,10 @@ module.exports = ({ config }) => {
         resolve: {
             extensions: ['.js', '.ts', '.tsx'],
             alias: {
-                '@feuertiger/ocr': require.resolve('@feuertiger/ocr')
+                '@feuertiger/ocr': require.resolve('@feuertiger/ocr'),
+                '@feuertiger/schema-graphql': require.resolve(
+                    '@feuertiger/schema-graphql'
+                )
             }
         }
     });

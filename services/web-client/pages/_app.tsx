@@ -1,10 +1,10 @@
 import React from 'react';
 import NextApp, { AppInitialProps } from 'next/app';
+import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { Container, ThemeProvider, Login } from '@feuertiger/web-components';
-import Head from 'next/head';
 import withAuth, { AuthProps, AuthStateProps } from '../container/withAuth';
 import withApollo, { ApolloProps } from '../container/withApollo';
 
@@ -72,9 +72,6 @@ class App extends NextApp<Props> {
         );
     }
 }
-
-// const appWithApollo = withApollo(App);
-// export default withAuth(appWithApollo);
 
 const appWithAuth = (withAuth(App) as unknown) as typeof NextApp;
 export default withApollo(appWithAuth);

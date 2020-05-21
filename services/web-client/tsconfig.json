@@ -1,12 +1,13 @@
 {
+    "extends": "../../tsconfig.web.json",
     "include": [
         "next-env.d.ts",
-        "pages/_document.js",
-        "pages/_app.js",
+        "pages/_document.tsx",
+        "pages/_app.tsx",
         "next.config.js",
         "**/*.js",
         "**/*.ts",
         "**/*.tsx"
     ],
-    "extends": "../../tsconfig.web.json"
+    "exclude": ["node_modules", "**/*.test.ts", "dist"]
 }
