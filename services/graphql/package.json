@@ -1,17 +1,17 @@
 {
-    "name": "@feuertiger/proxy-graphql",
+    "name": "@feuertiger/graphql",
     "version": "1.0.9-dependabot.791ff97.0",
-    "description": "graphql backend and proxy to database",
+    "description": "graphql backend",
     "main": "./dist/index.js",
     "scripts": {
-        "dev": "ts-node-dev ./src/startup.ts",
+        "dev": "ts-node-dev --debounce -- ./src/startup.ts",
         "test": "jest --collect-coverage",
         "build": "tsc"
     },
     "repository": {
         "type": "git",
         "url": "https://gitlab.com/feuertiger/feuertiger",
-        "directory": "services/proxy-graphql"
+        "directory": "services/graphql"
     },
     "publishConfig": {
         "registry": "https://gitlab.com/api/v4/projects/feuertiger/feuertiger/packages/npm/"
@@ -21,8 +21,8 @@
     "dependencies": {
         "@feuertiger/ocr": "1.0.9-dependabot.791ff97.0",
         "@feuertiger/schema-graphql": "1.0.9-dependabot.791ff97.0",
+        "@feuertiger/schema-prisma": "1.0.9-dependabot.791ff97.0",
         "@feuertiger/tools": "1.0.9-dependabot.791ff97.0",
-        "@feuertiger/utils-graphql": "1.0.9-dependabot.791ff97.0",
         "apollo-server": "2.13.1",
         "apollo-server-express": "2.13.1",
         "express": "4.17.1",
@@ -30,8 +30,7 @@
         "firebase-admin": "8.12.1",
         "graphql": "14.5.8",
         "graphql-import": "1.0.2",
-        "lodash.merge": "4.6.2",
-        "neo4j-driver": "4.0.1"
+        "lodash.merge": "4.6.2"
     },
     "devDependencies": {
         "@babel/core": "7.9.6",

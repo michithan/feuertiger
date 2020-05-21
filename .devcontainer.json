@@ -1,5 +1,6 @@
 {
     "dockerFile": ".dev-env.Dockerfile",
+    "postCreateCommand": "/etc/init.d/postgresql start && yarn && yarn linkdist",
     "forwardPorts": [3000, 4000],
     "extensions": [
         "max-SS.Cyberpunk",
@@ -15,7 +16,7 @@
         "eg2.vscode-npm-script",
         "esbenp.prettier-vscode",
         "Prisma.prisma",
-        "mtxr.sqltools",
+        "ckolkman.vscode-postgres",
         "jsayol.firebase-explorer",
         "anseki.vscode-color",
         "msjsdiag.debugger-for-chrome"
