@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 
-import { AuthProps } from '../container/withAuth';
+import AuthProps from '../../types/authProps';
 
 const PaperDiv = styled.div`
     margin: ${({ theme }) => theme.spacing(8, 4)};
@@ -34,9 +34,9 @@ const SubmitButton = styled(Button)`
     margin: ${({ theme }) => theme.spacing(3, 0, 2)};
 `;
 
-interface Props extends AuthProps {}
+export interface LoginProps extends AuthProps {}
 
-export default class Login extends React.Component<Props> {
+export class Login extends React.Component<LoginProps> {
     handleLogin = (event) => {
         event.preventDefault();
         const email = event.target.email.value;

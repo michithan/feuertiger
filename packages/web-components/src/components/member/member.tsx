@@ -1,10 +1,10 @@
 import React from 'react';
-import { graphql, DataProps } from '@apollo/react-hoc';
-import gql from 'graphql-tag';
 import { Grid, Paper, Button, CircularProgress, Fab } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
-import AddMember from './addMember';
+import { DataProps } from '@apollo/react-hoc';
+import { startOcr } from '@feuertiger/ocr';
+import { AddMember } from '../addMember/addMember';
 
 interface State {
     addDialogOpen: boolean;
@@ -22,7 +22,7 @@ interface Data {
     allPersons: Person[];
 }
 
-interface Props extends DataProps<Data> {}
+export interface MemberProps extends DataProps<Data> {}
 
 const MemberTable = ({ member }: { member: Person[] }) => {
     return (
@@ -54,8 +54,8 @@ const MemberTable = ({ member }: { member: Person[] }) => {
     );
 };
 
-class Member extends React.Component<Props, State> {
-    constructor(props: Props) {
+export class Member extends React.Component<MemberProps, State> {
+    constructor(props: MemberProps) {
         super(props);
         this.state = {
             addDialogOpen: false
@@ -84,6 +84,7 @@ class Member extends React.Component<Props, State> {
         return (
             <>
                 <AddMember
+                    startOcr={startOcr}
                     open={addDialogOpen}
                     handleClose={this.handleCloseAddDialog}
                 />
@@ -107,13 +108,3 @@ class Member extends React.Component<Props, State> {
         );
     }
 }
-
-export default graphql(gql`
-    {
-        allPersons {
-            id
-            firstname
-            lastname
-        }
-    }
-`)(Member);

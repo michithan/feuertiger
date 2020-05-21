@@ -2,6 +2,7 @@ import AuthProps from './authProps';
 
 export default {
     auth: {
-        signOut: () => {}
+        signOut: () => {},
+        signInWithEmailAndPassword: () => {}
     }
 } as AuthProps;

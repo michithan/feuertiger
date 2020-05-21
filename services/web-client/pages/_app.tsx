@@ -3,12 +3,10 @@ import NextApp, { AppInitialProps } from 'next/app';
 import { ApolloProvider } from '@apollo/react-hooks';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import { Container, ThemeProvider } from '@feuertiger/web-components';
+import { Container, ThemeProvider, Login } from '@feuertiger/web-components';
+import Head from 'next/head';
 import withAuth, { AuthProps, AuthStateProps } from '../container/withAuth';
 import withApollo, { ApolloProps } from '../container/withApollo';
-
-import Login from '../components/login';
-import Head from '../components/head';
 
 interface Props
     extends AppInitialProps,
@@ -41,7 +39,18 @@ class App extends NextApp<Props> {
         return (
             <ApolloProvider client={apollo}>
                 <ThemeProvider>
-                    <Head />
+                    <Head>
+                        <title>Feuertiger</title>
+                        <link rel="icon" href="/favicon.ico" />
+                        <link
+                            rel="stylesheet"
+                            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                        />
+                        <link
+                            rel="stylesheet"
+                            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                        />
+                    </Head>
                     {showLogin && <Login auth={auth} />}
                     <Container auth={auth}>
                         {showSkeleton ? (
