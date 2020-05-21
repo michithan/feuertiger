@@ -4,27 +4,18 @@ import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
 import { DataProps } from '@apollo/react-hoc';
 import { startOcr } from '@feuertiger/ocr';
+import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
 import { AddMember } from '../addMember/addMember';
 
 interface State {
     addDialogOpen: boolean;
 }
 
-interface Person {
-    id: string;
-    firstname: string;
-    lastname: string;
-}
-
-interface Data {
-    loading: boolean;
-    error: any;
-    allPersons: Person[];
-}
-
-export interface MemberProps extends DataProps<Data> {}
-
-const MemberTable = ({ member }: { member: Person[] }) => {
+const MemberTable = ({
+    member
+}: {
+    member: AllPersonsQueryResult['data']['allPersons'];
+}) => {
     return (
         <MaterialTable
             options={{
@@ -54,6 +45,8 @@ const MemberTable = ({ member }: { member: Person[] }) => {
     );
 };
 
+export interface MemberProps extends DataProps<AllPersonsQueryResult> {}
+
 export class Member extends React.Component<MemberProps, State> {
     constructor(props: MemberProps) {
         super(props);
@@ -68,8 +61,13 @@ export class Member extends React.Component<MemberProps, State> {
 
     render() {
         const { addDialogOpen } = this.state;
-        const { data } = this.props;
-        const { loading, error, allPersons } = data || {};
+        const {
+            data: {
+                error,
+                loading,
+                data: { allPersons }
+            }
+        } = this.props;
 
         let content = null;
 
@@ -77,7 +75,7 @@ export class Member extends React.Component<MemberProps, State> {
             content = <CircularProgress />;
         } else if (error) {
             content = <p>Error :(</p>;
-        } else if (data) {
+        } else if (allPersons) {
             content = <MemberTable member={allPersons} />;
         }
 

@@ -3,7 +3,10 @@
         "next-env.d.ts",
         "pages/_document.js",
         "pages/_app.js",
-        "next.config.js"
+        "next.config.js",
+        "**/*.js",
+        "**/*.ts",
+        "**/*.tsx"
     ],
     "extends": "../../tsconfig.web.json"
 }

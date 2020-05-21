@@ -5,7 +5,11 @@ const withTM = require('next-transpile-modules');
 const defaultWebpackConfig = require('../../webpack.config');
 
 module.exports = withTM({
-    transpileModules: ['@feuertiger/ocr', '@feuertiger/web-components'],
+    transpileModules: [
+        '@feuertiger/schema-graphql',
+        '@feuertiger/ocr',
+        '@feuertiger/web-components'
+    ],
     webpack: (config) => merge(defaultWebpackConfig, config),
     publicRuntimeConfig: {
         tokens: getFirebaseAppSecrets()

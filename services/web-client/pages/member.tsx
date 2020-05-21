@@ -1,17 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { graphql } from '@apollo/react-hoc';
-import gql from 'graphql-tag';
-import { Member, MemberProps } from '@feuertiger/web-components';
+import { graphql, DataProps } from '@apollo/react-hoc';
+import { Member } from '@feuertiger/web-components';
+import {
+    AllPersonsDocument,
+    AllPersonsQueryResult
+} from '@feuertiger/schema-graphql';
 
-const MemberPage = (props: MemberProps) => <Member {...props} />;
+const MemberPage = (props: DataProps<AllPersonsQueryResult>) => (
+    <Member {...props} />
+);
 
-export default graphql(gql`
-    {
-        allPersons {
-            id
-            firstname
-            lastname
-        }
-    }
-`)(MemberPage);
+export default graphql(AllPersonsDocument)(MemberPage);
