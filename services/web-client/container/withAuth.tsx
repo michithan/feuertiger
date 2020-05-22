@@ -1,12 +1,8 @@
 import React from 'react';
-import firebase from 'firebase/app';
 import 'firebase/auth';
+import { AuthProps } from '@feuertiger/web-components';
 
 import AuthSingleton from './authSingleton';
-
-export interface AuthProps {
-    auth?: firebase.auth.Auth;
-}
 
 export interface AuthStateProps {
     isSignedIn: boolean;
@@ -35,38 +31,34 @@ export default <TProps extends {}>(
             const { firebaseAuth } = authSignleton;
 
             firebaseAuth.onAuthStateChanged(async (user) =>
-                this.setState({ isSignedIn: !!user, isLoading: false })
+                this?.setState({ isSignedIn: !!user, isLoading: false })
             );
-            const auth: firebase.auth.Auth = {
-                ...firebaseAuth
-            };
-
-            auth.signInWithEmailAndPassword = async (email, password) => {
-                try {
-                    this.setState({ isLoading: true });
-                    const credential = await firebaseAuth.signInWithEmailAndPassword(
-                        email,
-                        password
-                    );
-                    this.setState({
-                        isLoading: false,
-                        isSignedIn: true
-                    });
-                    window.location.reload(true);
-                    return credential;
-                } catch (error) {
-                    this.setState({ error });
-                    throw error;
-                }
-            };
-
-            auth.signOut = async () => {
-                await firebaseAuth.signOut();
-                window.location.reload(true);
-            };
 
             this.setState({
-                auth
+                auth: {
+                    signInWithEmailAndPassword: async (email, password) => {
+                        try {
+                            this.setState({ isLoading: true });
+                            const credential = await firebaseAuth.signInWithEmailAndPassword(
+                                email,
+                                password
+                            );
+                            this.setState({
+                                isLoading: false,
+                                isSignedIn: true
+                            });
+                            window.location.reload(true);
+                            return credential;
+                        } catch (error) {
+                            this.setState({ error });
+                            throw error;
+                        }
+                    },
+                    signOut: async () => {
+                        await firebaseAuth.signOut();
+                        window.location.reload(true);
+                    }
+                }
             });
         }
 

@@ -1,4 +1,4 @@
-export default interface AuthProps {
+export interface AuthProps {
     auth: {
         signOut: () => void;
         signInWithEmailAndPassword: (email: string, password: string) => void;

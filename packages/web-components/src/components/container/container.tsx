@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CssBaseline, Container as MuiContainer } from '@material-ui/core';
 import { AppBar } from '../appBar/appBar';
 import { SideBar } from '../sideBar/sideBar';
-import AuthProps from '../../types/authProps';
+import { AuthProps } from '../../types/authProps';
 
 export interface ContainerProps extends AuthProps {
     children?: ReactNode;
