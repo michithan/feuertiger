@@ -1,7 +1,7 @@
 import React from 'react';
 import NextApp, { AppInitialProps } from 'next/app';
 import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hoc';
+import { ApolloProvider } from '@apollo/client';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {
     Container,
@@ -39,8 +39,6 @@ class App extends NextApp<Props> {
 
         const showLogin = !isLoading && !isSignedIn;
         const showSkeleton = isLoading || !isSignedIn || error;
-
-        console.log('pageProps: ', pageProps);
 
         return (
             <ApolloProvider client={apollo}>

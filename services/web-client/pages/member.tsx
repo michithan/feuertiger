@@ -1,28 +1,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { graphql } from '@apollo/react-hoc';
-import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 
-// import { Member } from '@feuertiger/web-components';
-// import { AllPersonsDocument } from '@feuertiger/schema-graphql';
+import { Member } from '@feuertiger/web-components';
+import { AllPersonsDocument } from '@feuertiger/schema-graphql';
 
 // export default graphql(AllPersonsDocument)(Member);
 
-const MemberPage = graphql(gql`
-    {
-        allPersons {
-            id
-            firstname
-            lastname
-        }
-    }
-`)((props) => {
+export default () => {
+    const props = useQuery(AllPersonsDocument);
     console.log('props: ', props);
-    return null;
-});
-
-export default (props, ...rest) => {
-    console.log('props: ', props);
-    console.log('rest: ', rest);
-    return <MemberPage {...props} />;
+    // return null;
+    return <Member {...props} />;
 };
