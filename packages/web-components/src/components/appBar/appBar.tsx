@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AuthProps from '../../types/authProps';
+import { AuthProps } from '../../types/authProps';
 
 const drawerWidth = 240;
 

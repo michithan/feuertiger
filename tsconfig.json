@@ -72,5 +72,5 @@
         "resolveJsonModule": true
     },
     "compileOnSave": true,
-    "exclude": ["node_modules", "**/*.test.ts", "coverage", "dist"]
+    "exclude": ["node_modules", "**/*.test.ts", "coverage", "babel.config.js"]
 }

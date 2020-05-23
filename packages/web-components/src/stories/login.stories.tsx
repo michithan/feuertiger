@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Container, ContainerProps } from '../components/container/container';
+import { Login, LoginProps } from '../components/login/login';
 import { authPropsMock } from '../types/authProps.mock';
 
-const defaultProps: ContainerProps = {
+const defaultProps: LoginProps = {
     ...authPropsMock
 };
 
-storiesOf('Container', module).add('Default', () => {
-    const props: ContainerProps = {
+storiesOf('Login', module).add('Default', () => {
+    const props: LoginProps = {
         ...defaultProps
     };
-    return <Container {...props} />;
+    return <Login {...props} />;
 });
