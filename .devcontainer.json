@@ -19,6 +19,7 @@
         "ckolkman.vscode-postgres",
         "jsayol.firebase-explorer",
         "anseki.vscode-color",
-        "msjsdiag.debugger-for-chrome"
+        "msjsdiag.debugger-for-chrome",
+        "naumovs.color-highlight"
     ]
 }

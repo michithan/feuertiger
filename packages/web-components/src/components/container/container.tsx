@@ -6,7 +6,7 @@ import { SideBar } from '../sideBar/sideBar';
 import { AuthProps } from '../../types/authProps';
 
 export interface ContainerProps extends AuthProps {
-    children?: ReactNode;
+    children?: React.ReactNode | null | undefined;
 }
 
 interface State {
