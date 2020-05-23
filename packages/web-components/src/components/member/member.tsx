@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid, Paper, Button, CircularProgress, Fab } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
-import { QueryResult } from '@apollo/client';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
 import { AddMember } from '../addMember/addMember';
@@ -45,7 +44,7 @@ const MemberTable = ({
     );
 };
 
-export interface MemberProps extends QueryResult<AllPersonsQueryResult> {}
+export interface MemberProps extends AllPersonsQueryResult {}
 
 export class Member extends React.Component<MemberProps, State> {
     constructor(props: MemberProps) {
@@ -62,11 +61,9 @@ export class Member extends React.Component<MemberProps, State> {
     render() {
         const { addDialogOpen } = this.state;
         const {
-            data: {
-                error,
-                loading,
-                data: { allPersons }
-            }
+            error,
+            loading,
+            data: { allPersons }
         } = this.props;
 
         let content = null;

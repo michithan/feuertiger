@@ -18,6 +18,7 @@ generates:
             withHOC: false
             withResultType: true
             reactApolloVersion: 3
+            gqlImport: '@apollo/client#gql'
     ./dist/schema.json:
         config:
             minify: false
