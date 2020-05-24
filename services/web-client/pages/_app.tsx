@@ -12,13 +12,13 @@ import {
 import withAuth, { AuthStateProps } from '../container/withAuth';
 import withApollo, { ApolloProps } from '../container/withApollo';
 
-interface Props
+export interface AppProps
     extends AppInitialProps,
         ApolloProps,
         AuthProps,
         AuthStateProps {}
 
-class App extends NextApp<Props> {
+export class App extends NextApp<AppProps> {
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles?.parentNode) {
@@ -55,7 +55,7 @@ class App extends NextApp<Props> {
                 <ThemeProvider>
                     {showLogin && <Login auth={auth} />}
                     <Container auth={auth}>
-                        <Component {...pageProps} />
+                        {Component && <Component {...pageProps} />}
                     </Container>
                 </ThemeProvider>
             </ApolloProvider>
