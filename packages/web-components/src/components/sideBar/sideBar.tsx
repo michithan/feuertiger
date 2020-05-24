@@ -28,6 +28,7 @@ const drawerClosed = ({ theme }) => css`
 // eslint-disable-next-line
 const StyledDrawer = styled(({ open, ...props }) => <Drawer {...props} />)`
     > div {
+        height: 100vh;
         position: relative;
         transition: ${({ open, theme: { transitions } }) =>
             transitions.create('width', {
@@ -38,6 +39,7 @@ const StyledDrawer = styled(({ open, ...props }) => <Drawer {...props} />)`
             })};
         white-space: nowrap;
         width: ${drawerWidth}px;
+        overflow-x: hidden;
         z-index: 0;
         ${({ open, theme }) => (open ? '' : drawerClosed({ theme }))}
     }

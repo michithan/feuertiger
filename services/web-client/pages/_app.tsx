@@ -1,8 +1,8 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import NextApp, { AppInitialProps } from 'next/app';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/client';
-import Skeleton from '@material-ui/lab/Skeleton';
 import {
     Container,
     ThemeProvider,
@@ -32,13 +32,11 @@ class App extends NextApp<Props> {
             pageProps,
             apollo,
             auth,
-            error,
             isLoading,
             isSignedIn
         } = this.props;
 
         const showLogin = !isLoading && !isSignedIn;
-        const showSkeleton = isLoading || !isSignedIn || error;
 
         return (
             <ApolloProvider client={apollo}>
@@ -57,19 +55,7 @@ class App extends NextApp<Props> {
                 <ThemeProvider>
                     {showLogin && <Login auth={auth} />}
                     <Container auth={auth}>
-                        {showSkeleton ? (
-                            <>
-                                <Skeleton height={40} />
-                                <Skeleton variant="rect" height={190} />
-                                <Skeleton height={40} />
-                                <Skeleton variant="rect" height={190} />
-                                <Skeleton height={40} />
-                                <Skeleton variant="rect" height={190} />
-                            </>
-                        ) : (
-                            // eslint-disable-next-line
-                            <Component {...pageProps} />
-                        )}
+                        <Component {...pageProps} />
                     </Container>
                 </ThemeProvider>
             </ApolloProvider>

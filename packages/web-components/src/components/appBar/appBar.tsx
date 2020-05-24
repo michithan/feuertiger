@@ -65,7 +65,7 @@ export class AppBar extends React.Component<AppBarProps> {
     render() {
         const { open, handleDrawerOpen } = this.props;
         return (
-            <StyledAppBar position="absolute" open={open}>
+            <StyledAppBar open={open}>
                 <StyledToolbar>
                     <StyledIconButton
                         edge="start"
