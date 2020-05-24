@@ -92,7 +92,10 @@ export const secondaryListItems = <div />;
 export const SideBar = ({ open, handleDrawerClose }: SideBarProps) => (
     <StyledDrawer variant="permanent" open={open}>
         <StyledDiv>
-            <IconButton onClick={handleDrawerClose}>
+            <IconButton
+                data-testid="sidebar-close-button"
+                onClick={handleDrawerClose}
+            >
                 <ChevronLeftIcon />
             </IconButton>
         </StyledDiv>
