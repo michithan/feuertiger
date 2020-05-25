@@ -1,52 +1,52 @@
 import { test, describe, expect } from '@jest/globals';
-import { fireEvent, render } from '@testing-library/react';
 import { SideBar } from './sideBar';
 import { ThemeProvider } from '../../providers/themeProvider';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 
 describe('Test side bar', () => {
     test('should create side bar', () => {
-        const component = renderer.create(
-            <ThemeProvider>
-                <SideBar open={false} handleDrawerClose={() => {}} />
-            </ThemeProvider>
+        const component = shallow(
+            <SideBar open={false} handleDrawerClose={() => {}} />,
+            {
+                wrappingComponent: ThemeProvider
+            }
         );
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(component).toMatchSnapshot();
     });
     test('should be open', () => {
-        const component = renderer.create(
-            <ThemeProvider>
-                <SideBar open={true} handleDrawerClose={() => {}} />
-            </ThemeProvider>
+        const component = shallow(
+            <SideBar open={true} handleDrawerClose={() => {}} />,
+            {
+                wrappingComponent: ThemeProvider
+            }
         );
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(component).toMatchSnapshot();
     });
     test('should be closed', () => {
-        const component = renderer.create(
-            <ThemeProvider>
-                <SideBar open={false} handleDrawerClose={() => {}} />
-            </ThemeProvider>
+        const component = shallow(
+            <SideBar open={false} handleDrawerClose={() => {}} />,
+            {
+                wrappingComponent: ThemeProvider
+            }
         );
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(component).toMatchSnapshot();
     });
     test('should trigger handleDrawerClose', () => {
         let triggerdClose = false;
-        const { getByTestId } = render(
-            <ThemeProvider>
-                <SideBar
-                    open={true}
-                    handleDrawerClose={() => {
-                        triggerdClose = true;
-                    }}
-                />
-            </ThemeProvider>
+        const component = shallow(
+            <SideBar
+                open={true}
+                handleDrawerClose={() => {
+                    triggerdClose = true;
+                }}
+            />,
+            {
+                wrappingComponent: ThemeProvider
+            }
         );
-        const closeButton = getByTestId('sidebar-close-button');
+        const closeButton = component.find('#sidebar-close-button');
         expect(closeButton).toBeTruthy();
-        fireEvent.click(closeButton);
+        closeButton.simulate('click');
         expect(triggerdClose).toBeTruthy();
     });
 });

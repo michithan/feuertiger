@@ -1,8 +1,6 @@
-import { test, describe, expect, beforeAll } from '@jest/globals';
+import { test, describe, expect } from '@jest/globals';
+import { shallow } from 'enzyme';
 import App, { AppProps } from './_app';
-import renderer from 'react-test-renderer'; // jest.setup.js
-import { setConfig } from 'next/config';
-import config from '../next.config';
 
 const appPropsMock: AppProps = {
     auth: {
@@ -17,14 +15,12 @@ const appPropsMock: AppProps = {
 };
 
 describe('Test nextjs app', () => {
-    beforeAll(() => setConfig(config));
     test('should create _app', () => {
-        const component = renderer.create(
+        const component = shallow(
             <App {...appPropsMock}>
                 <div>test</div>
             </App>
         );
-        let tree = component.toJSON();
-        expect(tree).toMatchSnapshot();
+        expect(component).toMatchSnapshot();
     });
 });
