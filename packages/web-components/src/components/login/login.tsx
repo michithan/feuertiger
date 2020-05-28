@@ -94,6 +94,7 @@ export class Login extends React.Component<LoginProps> {
                                 fullWidth
                                 variant="contained"
                                 color="primary"
+                                id="login-submit-button"
                             >
                                 Login
                             </SubmitButton>
