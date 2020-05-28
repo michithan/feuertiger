@@ -47,7 +47,7 @@ export class Login extends React.Component<LoginProps> {
 
     render() {
         return (
-            <Dialog aria-labelledby="simple-dialog-title" open>
+            <Dialog aria-labelledby="login" id="login-dialog" open>
                 <DialogContent>
                     <PaperDiv>
                         <CssBaseline />

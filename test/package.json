@@ -10,7 +10,13 @@
     "license": "ISC",
     "dependencies": {
         "@feuertiger/graphql": "1.0.9-dependabot.791ff97.0",
-        "@feuertiger/web-client": "1.0.9-dependabot.791ff97.0",
-        "cypress": "^4.6.0"
+        "@feuertiger/web-client": "1.0.9-dependabot.791ff97.0"
+    },
+    "devDependencies": {
+        "@cypress/webpack-preprocessor": "5.4.1",
+        "cypress": "4.6.0",
+        "ts-loader": "7.0.5",
+        "typescript": "3.9.3",
+        "webpack": "4.43.0"
     }
 }

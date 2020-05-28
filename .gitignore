@@ -2,6 +2,8 @@ node_modules
 dist
 lib
 coverage
+videos
+screenshots
 
 package-lock.json
 secrets.json

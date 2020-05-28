@@ -87,6 +87,7 @@ export class Member extends React.Component<MemberProps, State> {
                     {/* Chart */}
                     <Grid item xs={12} md={6} lg={4}>
                         <Button
+                            id="add-member-button"
                             variant="contained"
                             color="primary"
                             onClick={this.handleOpenAddDialog}

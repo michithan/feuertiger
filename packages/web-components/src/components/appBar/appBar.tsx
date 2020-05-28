@@ -79,7 +79,11 @@ export class AppBar extends React.Component<AppBarProps> {
                     <StyledTypography variant="h6" color="inherit" noWrap>
                         Dashboard
                     </StyledTypography>
-                    <IconButton color="inherit" onClick={this.handleLogout}>
+                    <IconButton
+                        color="inherit"
+                        onClick={this.handleLogout}
+                        id="app-bar-exit-button"
+                    >
                         <ExitToAppIcon />
                     </IconButton>
                 </StyledToolbar>
