@@ -6,6 +6,6 @@
         "packages/*",
         "services/*",
         "deployments/firebase/functions",
-        "test"
+        "e2e"
     ]
 }

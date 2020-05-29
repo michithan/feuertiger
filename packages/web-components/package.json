@@ -2,7 +2,7 @@
     "name": "@feuertiger/web-components",
     "version": "1.0.9-dependabot.791ff97.0",
     "scripts": {
-        "dev": "start-storybook -p 6006 -c .storybook",
+        "dev": "start-storybook -p 5000 -c .storybook",
         "test": "jest --collect-coverage"
     },
     "main": "./src/index.ts",
