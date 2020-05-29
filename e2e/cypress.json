@@ -8,8 +8,5 @@
     "pluginsFile": "plugins/index.js",
     "screenshotsFolder": "screenshots",
     "videosFolder": "videos",
-    "supportFile": "support/index.js",
-    "reporterOptions": {
-        "toConsole": true
-    }
+    "supportFile": "support/index.js"
 }

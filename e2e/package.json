@@ -4,8 +4,9 @@
     "description": "e2e testing",
     "private": true,
     "scripts": {
-        "open": "cypress open -p 6000",
-        "e2e": "cypress run"
+        "cypress": "cypress",
+        "open": "cypress open --browser chromium -p 6000",
+        "e2e": "cypress run --browser chromium -p 6000"
     },
     "author": "",
     "license": "ISC",
