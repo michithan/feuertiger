@@ -7,20 +7,15 @@ import {
 } from '../components/addExercise/addExerciseComponent';
 
 const defaultProps: AddExerciseComponentProps = {
-    name: 'michi'
+    handleClose: () => {},
+    open: true
 };
 
 storiesOf('AddExercise', module)
-    .add('Michi', () => {
-        const props: AddExerciseComponentProps = {
-            ...defaultProps
-        };
-        return <AddExerciseComponent {...props} />;
-    })
-    .add('Mina', () => {
-        const props: AddExerciseComponentProps = {
-            ...defaultProps,
-            name: 'mina'
-        };
-        return <AddExerciseComponent {...props} />;
-    });
+.add('Default', () => {
+    const props: AddExerciseComponentProps = {
+        ...defaultProps,
+        open: true
+    };
+    return <AddExerciseComponent {...props} />;
+});

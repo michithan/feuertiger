@@ -1,12 +1,26 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { 
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Grid,
+    TextField,
+    Fab,
+    Typography,
+    DialogContentText
+} from '@material-ui/core';
+import { KeyboardDateTimePicker} from '@material-ui/pickers';
+import CenterFocusStrongIcon from '@material-ui/icons/CenterFocusStrong';
 
 interface State {
-    showName: boolean;
+    dateOfEvent: Date;
 }
 
 export interface AddExerciseComponentProps {
-    name: String;
+    handleClose: () => void;
+    open: boolean;
 }
 
 export class AddExerciseComponent extends React.Component<
@@ -16,35 +30,74 @@ AddExerciseComponentProps,
     constructor(props: AddExerciseComponentProps) {
         super(props);
         this.state = {
-            showName: true
+            dateOfEvent: new Date()
         };
     }
 
     render() {
-        const { showName } = this.state;
-        const { name } = this.props;
-        return showName ? (
-            <p>
-                hallo {name}!
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.setState({ showName: false })}
-                >
-                    hide name
-                </Button>
-            </p>
-        ) : (
-            <p>
-                hallo
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => this.setState({ showName: true })}
-                >
-                    Shwo name
-                </Button>
-            </p>
+        const { handleClose, open } = this.props;
+        const { dateOfEvent } = this.state;
+        return (
+            <Dialog
+                onClose={handleClose}
+                aria-labelledby="simple-dialog-title"
+                open={open}
+            >
+                <DialogTitle id="simple-dialog-title">
+                   Übung erstellen
+                </DialogTitle>
+                <DialogContent style={{ overflowY: 'initial' }}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="exercise-titel"
+                                    name="Titel"
+                                    label="Titel"
+                                    fullWidth
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <KeyboardDateTimePicker
+                                    disableToolbar
+                                    variant="inline"
+                                    format="MM/dd/yyyy HH:mm"
+                                    margin="normal"
+                                    id="dateOfEvent"
+                                    label="Übungsdatum"
+                                    value={dateOfEvent}
+                                    onChange={() => {}}
+                                    KeyboardButtonProps={{
+                                        'aria-label': 'change date'
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    required
+                                    id="location"
+                                    name="Ort"
+                                    label="Ort"
+                                    fullWidth
+                                />
+                            </Grid>
+                        </Grid>
+                </DialogContent>
+                <DialogActions>
+                        <>
+                            <Button
+                                autoFocus
+                                onClick={handleClose}
+                                color="primary"
+                            >
+                                Abbrechen
+                            </Button>
+                            <Button onClick={handleClose} color="primary">
+                                Speichern
+                            </Button>
+                        </>
+                </DialogActions>
+            </Dialog>
         );
     }
 }
