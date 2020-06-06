@@ -32,6 +32,7 @@
         "next": "9.4.2",
         "react": "16.13.1",
         "react-dom": "16.13.1",
+        "react-lazylog": "^4.5.2",
         "react-webcam": "5.0.1",
         "styled-components": "5.1.0"
     },

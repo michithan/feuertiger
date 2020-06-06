@@ -11,35 +11,51 @@ const createEmptyData = (rowCount: number, rowLength: number): string[][] =>
     );
 
 export class RawDataStructure {
-    options: ExtractorOptions;
+    private options: ExtractorOptions;
 
-    data: string[][] = [];
+    public file: File;
 
-    text: string = '';
+    public rawText: string = '';
+
+    public cleanText: string = '';
+
+    public flattData: string[][] = [];
 
     constructor(options: ExtractorOptions) {
         this.options = options;
     }
 
-    parse = async (file: File) => {
-        this.text = await file.text();
+    public setOptions(options: ExtractorOptions) {
+        this.options = options;
+    }
+
+    public async load(file: File) {
+        this.file = file;
+        this.rawText = await file.text();
+    }
+
+    public async clean() {
+        this.cleanText = this.rawText;
+    }
+
+    public async parse() {
         const { colSeperator, rowSeprator, rowLength } = this.options;
 
         if (rowSeprator) {
-            const rows = this.text.split(rowSeprator);
-            this.data = rows.map((row) => row.split(colSeperator));
+            const rows = this.cleanText.split(rowSeprator);
+            this.flattData = rows.map((row) => row.split(colSeperator));
         } else if (rowLength) {
-            const flattCells = this.text.split(colSeperator);
+            const flattCells = this.cleanText.split(colSeperator);
             const rowCount = Math.ceil(flattCells.length / rowLength);
 
             const data: string[][] = createEmptyData(rowCount, rowLength);
 
-            this.data = flattCells.reduce((acc, cell, index) => {
+            this.flattData = flattCells.reduce((acc, cell, index) => {
                 const rowIndex = index % rowLength;
                 const colIndex = (index - rowIndex) / rowLength;
                 acc[colIndex][rowIndex] = cell;
                 return acc;
             }, data);
         }
-    };
+    }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import { DropzoneArea } from 'material-ui-dropzone';
 import {
     Grid,
     Table,
@@ -8,237 +7,246 @@ import {
     Paper,
     TableRow,
     TableCell,
-    Box,
     Card,
     CardContent,
     Typography,
     TextField,
-    Switch
+    Switch,
+    Button,
+    Stepper,
+    Step,
+    StepLabel,
+    StepContent
 } from '@material-ui/core';
-import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import { tryGetPreviewData } from 'next/dist/next-server/server/api-utils';
 import { RawDataStructure, ExtractorOptions } from './rawDataStructure';
+import { FileInfo } from './fileInfo';
+import { RawText } from './rawText';
+import { ParsingOptions } from './parsingOptions';
+import { FlattData } from './flattData';
 
 export interface DataExtractorProps {}
 
 interface State {
     file: File | null | undefined;
-    data: RawDataStructure;
+    dataStructure: RawDataStructure;
     options: ExtractorOptions;
+    activeStep: number;
 }
 
-const StyledBox = styled(Box)`
-    padding-right: 24;
-    font-family: 'Courier';
-`;
+const DEFAULT_OPTIONS = {
+    colSeperator: ';',
+    rowSeprator: '\n',
+    rowLength: null,
+    splitBySeparator: true
+};
 
 export class DataExtractor extends React.Component<DataExtractorProps, State> {
     constructor(props: DataExtractorProps) {
         super(props);
         this.state = {
+            activeStep: 0,
             file: null,
-            data: null,
-            options: {
-                colSeperator: ';',
-                rowSeprator: '\n',
-                rowLength: null,
-                splitBySeparator: true
-            }
+            dataStructure: null,
+            options: DEFAULT_OPTIONS
         };
     }
 
     handleChangeDropzone = async ([file]: File[]): Promise<void> => {
         if (file) {
-            this.processRawData(file);
+            await this.loadFile(file);
+            this.setState({
+                file
+            });
+        } else {
+            this.handleReset();
         }
-
-        this.setState({
-            file
-        });
     };
 
-    processRawData = async (file: File) => {
+    handleReset = () =>
+        this.setState({
+            file: null,
+            dataStructure: null,
+            options: DEFAULT_OPTIONS
+        });
+
+    loadFile = async (file: File) => {
         const { options } = this.state;
         const dataStructure = new RawDataStructure(options);
-        await dataStructure.parse(file);
-        this.setState({ data: dataStructure });
+        await dataStructure.load(file);
+        this.setState({ dataStructure });
     };
 
+    clean = async () => {
+        const { dataStructure, options } = this.state;
+        dataStructure.setOptions(options);
+        await dataStructure.clean();
+        this.setState({ dataStructure });
+    };
+
+    parse = async () => {
+        const { dataStructure, options } = this.state;
+        dataStructure.setOptions(options);
+        await dataStructure.parse();
+        this.setState({ dataStructure });
+    };
+
+    handleNext = () =>
+        this.setState(({ activeStep }) => ({
+            activeStep: activeStep + 1
+        }));
+
+    handleBack = () =>
+        this.setState(({ activeStep }) => ({
+            activeStep: activeStep - 1
+        }));
+
     render() {
-        const {
-            file,
-            data,
-            options: { splitBySeparator }
-        } = this.state;
+        const { file, dataStructure, options, activeStep } = this.state;
         return (
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <Card>
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                component="h2"
-                            >
-                                File
-                            </Typography>
-                            {file ? (
-                                <div>fileName: {file.name}</div>
-                            ) : (
-                                <DropzoneArea
-                                    onChange={this.handleChangeDropzone}
-                                    dropzoneText="Select File"
-                                    acceptedFiles={['.csv', '.pdf']}
-                                    fileObjects={[]}
-                                    filesLimit={1}
+            <Stepper activeStep={activeStep} orientation="vertical">
+                <Step key="Select file">
+                    <StepLabel>Select file</StepLabel>
+                    <StepContent>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <FileInfo
+                                    file={file}
+                                    handleChangeDropzone={
+                                        this.handleChangeDropzone
+                                    }
                                 />
-                            )}
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12}>
-                    <Card>
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="h5"
-                                component="h2"
-                            >
-                                Raw Data
-                            </Typography>
-                            {data ? (
-                                <StyledBox component="div" display="block">
-                                    {data.text}
-                                </StyledBox>
-                            ) : (
-                                <>
-                                    <Skeleton variant="text" height={30} />
-                                    <Skeleton variant="text" height={30} />
-                                    <Skeleton variant="text" height={30} />
-                                    <Skeleton variant="text" height={30} />
-                                    <Skeleton variant="text" height={30} />
-                                    <Skeleton variant="text" height={30} />
-                                </>
-                            )}
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12}>
-                    <Card>
-                        <CardContent>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
-                                    <Typography
-                                        gutterBottom
-                                        variant="h5"
-                                        component="h2"
-                                    >
-                                        Parsing Options
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={3}>
-                                    <TextField
-                                        required
-                                        id="colSeperator"
-                                        name="Cell Seperator"
-                                        label="Cell Seperator"
-                                        InputLabelProps={{
-                                            shrink: true
-                                        }}
-                                        variant="filled"
-                                    />
-                                </Grid>
-                                <Grid
-                                    item
-                                    xs={3}
-                                    component="label"
-                                    container
-                                    alignItems="center"
-                                    spacing={1}
-                                >
-                                    <Grid item>Split rows by Seperator</Grid>
-                                    <Grid item>
-                                        <Switch
-                                            checked={splitBySeparator}
-                                            name="checkedC"
-                                        />
-                                    </Grid>
-                                    <Grid item>Split rows by length</Grid>
-                                </Grid>
-                                {splitBySeparator ? (
-                                    <Grid item xs={3}>
-                                        <TextField
-                                            required
-                                            id="rowSeprator"
-                                            name="Row Seperator"
-                                            label="Row Seperator"
-                                            InputLabelProps={{
-                                                shrink: true
-                                            }}
-                                            variant="filled"
-                                        />
-                                    </Grid>
-                                ) : (
-                                    <Grid item xs={3}>
-                                        <TextField
-                                            required
-                                            id="rowLength"
-                                            name="Row Length"
-                                            label="Row Length"
-                                            InputLabelProps={{
-                                                shrink: true
-                                            }}
-                                            variant="filled"
-                                        />
-                                    </Grid>
-                                )}
                             </Grid>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12}>
-                    <Card>
-                        <CardContent>
-                            <TableContainer component={Paper}>
-                                <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="h2"
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    disabled={!file}
+                                    onClick={this.handleReset}
                                 >
-                                    Flatt Table
-                                </Typography>
-                                {data ? (
-                                    <Table
-                                        size="small"
-                                        aria-label="a dense table"
-                                    >
-                                        <TableBody>
-                                            {data?.data.map((row, index) => (
-                                                <TableRow key={`row_${index}`}>
-                                                    {row.map((cell) => (
-                                                        <TableCell align="right">
-                                                            {cell}
-                                                        </TableCell>
-                                                    ))}
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-                                    </Table>
-                                ) : (
-                                    <>
-                                        <Skeleton variant="text" height={30} />
-                                        <Skeleton variant="text" height={30} />
-                                        <Skeleton variant="text" height={30} />
-                                        <Skeleton variant="text" height={30} />
-                                        <Skeleton variant="text" height={30} />
-                                        <Skeleton variant="text" height={30} />
-                                    </>
-                                )}
-                            </TableContainer>
-                        </CardContent>
-                    </Card>
-                </Grid>
-            </Grid>
+                                    Reset
+                                </Button>
+                            </Grid>
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    disabled={!file}
+                                    onClick={this.handleNext}
+                                >
+                                    Next
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </StepContent>
+                </Step>
+                <Step key="Clean data">
+                    <StepLabel>Clean data</StepLabel>
+                    <StepContent>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <RawText dataStructure={dataStructure} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <ParsingOptions options={options} />
+                            </Grid>
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={this.handleBack}
+                                >
+                                    Back
+                                </Button>
+                            </Grid>
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={this.handleNext}
+                                >
+                                    Next
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </StepContent>
+                </Step>
+                <Step key="Parse data">
+                    <StepLabel>Parse data</StepLabel>
+                    <StepContent>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <RawText dataStructure={dataStructure} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <ParsingOptions options={options} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FlattData dataStructure={dataStructure} />
+                            </Grid>
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={this.handleBack}
+                                >
+                                    Back
+                                </Button>
+                            </Grid>
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={this.handleNext}
+                                >
+                                    Next
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </StepContent>
+                </Step>
+                <Step key="Structure data">
+                    <StepLabel>Structure data</StepLabel>
+                    <StepContent>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <FlattData dataStructure={dataStructure} />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <ParsingOptions options={options} />
+                            </Grid>
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={this.handleBack}
+                                >
+                                    Back
+                                </Button>
+                            </Grid>
+                            <Grid item xs="auto">
+                                <Button
+                                    autoFocus
+                                    color="primary"
+                                    variant="contained"
+                                    onClick={this.handleNext}
+                                >
+                                    Finish
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </StepContent>
+                </Step>
+            </Stepper>
         );
     }
 }
