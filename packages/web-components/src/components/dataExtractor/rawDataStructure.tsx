@@ -2,7 +2,7 @@ export interface ExtractorOptions {
     rowSeprator: string;
     colSeperator: string | null | undefined;
     rowLength: number | null | undefined;
-    splitBySeparator: boolean;
+    cleaningRules: Array<any>;
 }
 
 const createEmptyData = (rowCount: number, rowLength: number): string[][] =>

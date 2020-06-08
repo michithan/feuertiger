@@ -8,8 +8,12 @@ module.exports = withTM({
         '@feuertiger/ocr',
         '@feuertiger/web-components'
     ],
-    webpack: (config) =>
-        merge(
+    webpack: (config) => {
+        config.module.rules.push({
+            test: /\.test.tsx$/,
+            loader: 'ignore-loader'
+        });
+        return merge(
             {
                 node: {
                     fs: 'empty',
@@ -19,7 +23,8 @@ module.exports = withTM({
                 }
             },
             config
-        ),
+        );
+    },
     publicRuntimeConfig: {
         tokens: getFirebaseAppSecrets()
     },
