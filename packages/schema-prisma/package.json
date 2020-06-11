@@ -22,7 +22,7 @@
     "license": "ISC",
     "dependencies": {
         "@prisma/client": "2.0.0",
-        "casual": "1.6.2"
+        "faker": "4.1.0"
     },
     "devDependencies": {
         "@prisma/cli": "2.0.0",
