@@ -7,5 +7,6 @@ module.exports = {
     testEnvironment: 'enzyme',
     testEnvironmentOptions: {
         enzymeAdapter: 'react16'
-    }
+    },
+    transformIgnorePatterns: ['/node_modules/', '/dist/']
 };
