@@ -4,6 +4,7 @@ import exercises from './exercise';
 
 const length = 100;
 
+faker.locale = 'de';
 faker.seed(length);
 
 const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({

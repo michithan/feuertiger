@@ -3,6 +3,7 @@ import { ExerciseCreateInput } from '../../dist';
 
 const length = 200;
 
+faker.locale = 'de';
 faker.seed(length);
 
 export default Array.from({ length }, () => ({
