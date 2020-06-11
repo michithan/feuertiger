@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, Card, CardContent, Typography } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { LazyLog } from 'react-lazylog';
 import { RawDataStructure } from './rawDataStructure';

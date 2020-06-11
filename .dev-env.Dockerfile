@@ -20,3 +20,6 @@ USER root
 # Install lerna && firebase cli
 RUN npm i -g lerna \
     && npm i -g firebase-tools
+
+# Increase nodejs memory
+RUN export NODE_OPTIONS="--max-old-space-size=4096"

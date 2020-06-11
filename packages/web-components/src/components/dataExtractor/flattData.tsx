@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-    Table,
-    TableContainer,
-    TableBody,
-    Paper,
-    TableRow,
-    TableCell,
-    Card,
-    CardContent,
-    Typography
-} from '@material-ui/core';
+import { Table, TableBody, TableRow, TableCell } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { RawDataStructure } from './rawDataStructure';
 
