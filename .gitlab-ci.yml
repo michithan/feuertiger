@@ -36,15 +36,17 @@ Build:
     script:
         - git checkout ${CI_COMMIT_BRANCH}
         - yarn
-        - yarn linkdist
+        # TODO: format all globals and packages based on lerna run --since
         - yarn format
         - git diff-index --quiet HEAD || git status
         - git diff-index --quiet HEAD || git commit -am "format"
+        - yarn build
+        - yarn linkdist
+        # TODO: lint based on lerna run --since
         - yarn lint
         - git diff-index --quiet HEAD || git status
         - git diff-index --quiet HEAD || git commit -am "fix"
         - yarn test --since
-        - yarn build --since
         - echo '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}'>.npmrc
         - lerna publish prerelease --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
 # Deploy:
