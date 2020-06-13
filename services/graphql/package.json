@@ -14,7 +14,7 @@
         "directory": "services/graphql"
     },
     "publishConfig": {
-        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/feuertiger/feuertiger/packages/npm/"
+        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "author": "",
     "license": "ISC",

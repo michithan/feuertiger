@@ -18,7 +18,7 @@
         "directory": "services/web-client"
     },
     "publishConfig": {
-        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/feuertiger/feuertiger/packages/npm/"
+        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
         "@apollo/client": "3.0.0-beta.50",
