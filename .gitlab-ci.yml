@@ -49,9 +49,9 @@ Build:
         - git diff-index --quiet HEAD || git status
         - git diff-index --quiet HEAD || git commit -am "fix"
         - yarn test --since
-        - echo '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}'>.npmrc
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
+        - git remote set-url --push origin git@gitlab:$CI_PROJECT_PATH
         - git remote show origin
         - git push -o ci.skip --follow-tags origin HEAD:$CI_COMMIT_REF_NAME
 # Deploy:
