@@ -37,7 +37,8 @@ Prepare:
 Build:
     stage: Build
     rules:
-        - if: $CI_COMMIT_MESSAGE !~ /^(format|fix)$/ && $CI_COMMIT_MESSAGE !~ /^(v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)$/
+        - if: '$CI_COMMIT_MESSAGE !~ /^(format|fix)$/'
+        - if: '$CI_COMMIT_MESSAGE !~ /^(v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)$/'
     interruptible: true
     tags:
         - docker
@@ -75,7 +76,8 @@ Build:
 Deploy:
     stage: Deploy
     rules:
-        - if: $CI_COMMIT_BRANCH =~ /^(dev|master)$/ && $CI_COMMIT_MESSAGE =~ /^(v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)$/
+        - if: '$CI_COMMIT_BRANCH =~ /^(dev|master)$/'
+        - if: '$CI_COMMIT_MESSAGE =~ /^(v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)$/'
     interruptible: true
     tags:
         - docker
