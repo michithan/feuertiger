@@ -58,9 +58,10 @@ Build:
         - git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME
 
 Deploy:
-    stage: Deployonly:
-    refs:
-      - dev
+    stage: Deploy
+    only:
+        refs:
+            - dev
     interruptible: true
     tags:
         - docker
