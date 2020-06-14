@@ -78,10 +78,6 @@ Deploy:
           when: always
         - if: $CI_COMMIT_MESSAGE =~ /v[0-9]*.[0-9]*.[0-9]*.*/
           when: always
-    except:
-        - dev
-    only:
-        - tags
     interruptible: true
     tags:
         - docker
