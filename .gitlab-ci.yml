@@ -83,7 +83,7 @@ Build:
 Deploy:
     stage: deploy
     needs: ['Build']
-    ony:
+    only:
         refs:
             - dev
     interruptible: true
