@@ -10,6 +10,7 @@ include:
 variables:
     # TODO handle images per branch
     DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/dev-environment:latest
+    DEPENDENCY_SCANNING_DISABLED: $CI_SKIP
 
 ###############################################################################################
 # Build and Push the docker image representing the dev and build environment for the project  #
@@ -40,8 +41,10 @@ Prepare:
 ######################################################################################
 Build:
     stage: build
-    rules:
-        - if: '$CI_COMMIT_MESSAGE !~ /^(format|fix|v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)$/'
+    needs: ['Prepare']
+    except:
+        variables:
+            - $CI_SKIP == "true"
     interruptible: true
     tags:
         - docker
@@ -57,22 +60,21 @@ Build:
         - git config --global user.email "${GITLAB_USER_EMAIL}"
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
     script:
-        - echo $CI_COMMIT_MESSAGE
-        - echo $CI_COMMIT_BRANCH
+        - echo $CI_SKIP
         - git checkout ${CI_COMMIT_REF_NAME}
         - yarn
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
-        - git diff-index --quiet HEAD || (git commit -am "format" && git push)
+        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.CI_SKIP="true")
         - yarn build
         - yarn linkdist
         # TODO: lint based on lerna run --since
         - yarn lint
-        - git diff-index --quiet HEAD || (git commit -am "fix" && git push)
+        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.CI_SKIP="true")
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git remote show origin
-        - git push origin HEAD:$CI_COMMIT_REF_NAME
+        - git push -o ci.CI_SKIP="true"" origin HEAD:$CI_COMMIT_REF_NAME
 
 #######################################################
 # Deploy firebase functions                           #
@@ -80,8 +82,10 @@ Build:
 #######################################################
 Deploy:
     stage: deploy
-    rules:
-        - if: '$CI_COMMIT_BRANCH =~ /^(dev|master)$/ && $CI_COMMIT_MESSAGE =~ /^(v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)$/'
+    needs: ['Build']
+    ony:
+        refs:
+            - dev
     interruptible: true
     tags:
         - docker
