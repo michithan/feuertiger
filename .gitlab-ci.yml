@@ -34,11 +34,14 @@ Build:
     cache:
         key: '$CI_JOB_NAME-$CI_COMMIT_REF_SLUG'
     before_script:
-        - ${CI_COMMIT_REF_PROTECTED} && git remote set-url origin "https://${CI_JOB_USER_PROTECTED}:${CI_JOB_TOKEN_PROTECTED}@${CI_REPOSITORY_URL#*@}" || git remote set-url origin "https://${GITLAB_USER_NAME}@${CI_REPOSITORY_URL#*@}"
+        - >
+            ${CI_COMMIT_REF_PROTECTED} 
+            && git remote set-url origin "https://${CI_JOB_USER_PROTECTED}:${CI_JOB_TOKEN_PROTECTED}@${CI_REPOSITORY_URL#*@}" 
+            || git remote set-url origin "https://${CI_REPOSITORY_URL#*@}"
         - git config --global user.name "${GITLAB_USER_NAME}"
         - git config --global user.email "${GITLAB_USER_EMAIL}"
     script:
-        - git checkout ${CI_COMMIT_BRANCH}
+        - git checkout ${CI_COMMIT_REF_NAME}
         - yarn
         # TODO: format all globals and packages based on lerna run --since
         # - yarn format
@@ -54,7 +57,7 @@ Build:
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git remote show origin
-        - git push -o ci.skip
+        - git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME
 # Deploy:
 #     stage: Deploy
 #     interruptible: true
