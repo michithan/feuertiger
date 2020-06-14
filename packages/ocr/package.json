@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/ocr",
-    "version": "1.0.9-michibranch.e995e5cc.0",
+    "version": "1.0.9-michibranch.d023cc6b.0",
     "description": "ocr for feuertiger",
     "main": "./dist/index.js",
     "sideEffects": false,
