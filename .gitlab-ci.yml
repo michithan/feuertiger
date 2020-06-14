@@ -8,6 +8,9 @@ variables:
 
 Prepare:
     stage: Prepare
+    except:
+        variables:
+            - $IGNORE_TOKEN == ${CI_IGNORE_TOKEN}
     interruptible: true
     tags:
         - docker
@@ -27,6 +30,9 @@ Prepare:
 
 Build:
     stage: Build
+    except:
+        variables:
+            - $IGNORE_TOKEN == ${CI_IGNORE_TOKEN}
     interruptible: true
     tags:
         - docker
@@ -46,22 +52,25 @@ Build:
         - yarn
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
-        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME)
+        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="IGNORE_TOKEN=${CI_IGNORE_TOKEN}"
         - yarn build
         - yarn linkdist
         # TODO: lint based on lerna run --since
         - yarn lint
-        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME)
+        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="IGNORE_TOKEN=${CI_IGNORE_TOKEN}"
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git remote show origin
-        - git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME
+        - git push -o ci.variable="IGNORE_TOKEN=${CI_IGNORE_TOKEN}" origin HEAD:$CI_COMMIT_REF_NAME
 
 Deploy:
     stage: Deploy
     only:
         refs:
             - dev
+    except:
+        variables:
+            - $IGNORE_TOKEN == ${CI_IGNORE_TOKEN}
     interruptible: true
     tags:
         - docker
@@ -82,6 +91,7 @@ Deploy:
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
     script:
         - cd ./deployments/firebase/functions
+        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
         - npm i --no-package-lock
         - npm run createSecrets
         - npm run deploy:ci
