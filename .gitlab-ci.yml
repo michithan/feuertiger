@@ -40,6 +40,7 @@ Build:
             || git remote set-url origin "https://${CI_JOB_USER_UNPROTECTED}:${CI_JOB_TOKEN_UNPROTECTED}@${CI_REPOSITORY_URL#*@}"
         - git config --global user.name "${GITLAB_USER_NAME}"
         - git config --global user.email "${GITLAB_USER_EMAIL}"
+        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
     script:
         - git checkout ${CI_COMMIT_REF_NAME}
         - yarn
@@ -52,32 +53,34 @@ Build:
         - yarn lint
         - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME)
         - yarn test --since
-        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git remote show origin
         - git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME
-# Deploy:
-#     stage: Deploy
-#     interruptible: true
-#     tags:
-#         - docker
-#     image: $DEV_ENVIRONMENT_IMAGE_TAG
-#     variables:
-#     #     NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#     #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-#     #     FIREBASE_SECRETS_TYPE: ${{ secrets.FIREBASE_SECRETS_TYPE }}
-#     #     FIREBASE_SECRETS_PROJECT_ID: ${{ secrets.FIREBASE_SECRETS_PROJECT_ID }}
-#     #     FIREBASE_SECRETS_PRIVATE_KEY_ID: ${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY_ID }}
-#     #     FIREBASE_SECRETS_PRIVATE_KEY: ${{ secrets.FIREBASE_SECRETS_PRIVATE_KEY }}
-#     #     FIREBASE_SECRETS_CLIENT_EMAIL: ${{ secrets.FIREBASE_SECRETS_CLIENT_EMAIL }}
-#     #     FIREBASE_SECRETS_CLIENT_ID: ${{ secrets.FIREBASE_SECRETS_CLIENT_ID }}
-#     #     FIREBASE_SECRETS_AUTH_URI: ${{ secrets.FIREBASE_SECRETS_AUTH_URI }}
-#     #     FIREBASE_SECRETS_TOKEN_URI: ${{ secrets.FIREBASE_SECRETS_TOKEN_URI }}
-#     #     FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL }}
-#     #     FIREBASE_SECRETS_CLIENT_X509_CERT_URL: ${{ secrets.FIREBASE_SECRETS_CLIENT_X509_CERT_URL }}
-#     script:
-#         - cd ./deployments/firebase/functions
-#         - echo -e "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}\n@feuertiger:registry=https://npm.pkg.github.com/feuertiger\npackage-lock=false" > .npmrc
-#         - npm i --no-package-lock
-#         - npm run createSecrets
-#         - npm run deploy:ci
+
+Deploy:
+    stage: Deployonly:
+    refs:
+      - dev
+    interruptible: true
+    tags:
+        - docker
+    image: $DEV_ENVIRONMENT_IMAGE_TAG
+    variables:
+        FIREBASE_TOKEN: ${FIREBASE_TOKEN}
+        FIREBASE_SECRETS_TYPE: ${FIREBASE_SECRETS_TYPE}
+        FIREBASE_SECRETS_PROJECT_ID: ${FIREBASE_SECRETS_PROJECT_ID}
+        FIREBASE_SECRETS_PRIVATE_KEY_ID: ${FIREBASE_SECRETS_PRIVATE_KEY_ID}
+        FIREBASE_SECRETS_PRIVATE_KEY: ${FIREBASE_SECRETS_PRIVATE_KEY}
+        FIREBASE_SECRETS_CLIENT_EMAIL: ${FIREBASE_SECRETS_CLIENT_EMAIL}
+        FIREBASE_SECRETS_CLIENT_ID: ${FIREBASE_SECRETS_CLIENT_ID}
+        FIREBASE_SECRETS_AUTH_URI: ${FIREBASE_SECRETS_AUTH_URI}
+        FIREBASE_SECRETS_TOKEN_URI: ${FIREBASE_SECRETS_TOKEN_URI}
+        FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL: ${FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL}
+        FIREBASE_SECRETS_CLIENT_X509_CERT_URL: ${FIREBASE_SECRETS_CLIENT_X509_CERT_URL}
+    before_script:
+        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
+    script:
+        - cd ./deployments/firebase/functions
+        - npm i --no-package-lock
+        - npm run createSecrets
+        - npm run deploy:ci
