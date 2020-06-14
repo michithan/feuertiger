@@ -35,9 +35,9 @@ Build:
     stage: Build
     except:
         variables:
-            - $CI_COMMIT_MESSAGE =~ /format/
-            - $CI_COMMIT_MESSAGE =~ /fix/
-            - $CI_COMMIT_MESSAGE =~ /v[0-9]*.[0-9]*.[0-9]*.*/
+            - $CI_COMMIT_MESSAGE == /format/
+            - $CI_COMMIT_MESSAGE == /fix/
+            - $CI_COMMIT_MESSAGE == /v[0-9]*.[0-9]*.[0-9]*.*/
     interruptible: true
     tags:
         - docker
