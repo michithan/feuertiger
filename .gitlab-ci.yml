@@ -8,9 +8,9 @@ variables:
 
 Prepare:
     stage: Prepare
-    except:
-        variables:
-            - $IGNORE_TOKEN == ${CI_IGNORE_TOKEN}
+    only:
+        changes:
+            - .dev-env.Dockerfile
     interruptible: true
     tags:
         - docker
@@ -20,9 +20,6 @@ Prepare:
     before_script:
         - docker info
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    only:
-        changes:
-            - .dev-env.Dockerfile
     script:
         - docker pull $DEV_ENVIRONMENT_IMAGE_TAG || true
         - docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG --file .dev-env.Dockerfile .
@@ -32,7 +29,9 @@ Build:
     stage: Build
     except:
         variables:
-            - $IGNORE_TOKEN == ${CI_IGNORE_TOKEN}
+            - $CI_COMMIT_MESSAGE =~ /format/
+            - $CI_COMMIT_MESSAGE =~ /fix/
+            - $CI_COMMIT_MESSAGE =~ /v[0-9]*.[0-9]*.[0-9]*.*/
     interruptible: true
     tags:
         - docker
@@ -52,25 +51,23 @@ Build:
         - yarn
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
-        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="IGNORE_TOKEN=${CI_IGNORE_TOKEN}"
+        - git diff-index --quiet HEAD || (git commit -am "format" && git push
         - yarn build
         - yarn linkdist
         # TODO: lint based on lerna run --since
         - yarn lint
-        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="IGNORE_TOKEN=${CI_IGNORE_TOKEN}"
+        - git diff-index --quiet HEAD || (git commit -am "fix" && git push
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git remote show origin
-        - git push -o ci.variable="IGNORE_TOKEN=${CI_IGNORE_TOKEN}" origin HEAD:$CI_COMMIT_REF_NAME
+        - git push origin HEAD:$CI_COMMIT_REF_NAME
 
 Deploy:
     stage: Deploy
     only:
         refs:
             - dev
-    except:
-        variables:
-            - $IGNORE_TOKEN == ${CI_IGNORE_TOKEN}
+            - tags
     interruptible: true
     tags:
         - docker
