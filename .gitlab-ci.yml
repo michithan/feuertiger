@@ -6,6 +6,9 @@ stages:
 variables:
     DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/dev-environment:latest
 
+##############################################################################################
+# Build and Push the docker image representing the dev and build environment for the project #
+##############################################################################################
 Prepare:
     stage: Prepare
     only:
@@ -25,6 +28,9 @@ Prepare:
         - docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG --file .dev-env.Dockerfile .
         - docker push $DEV_ENVIRONMENT_IMAGE_TAG
 
+######################################################################################
+# Format Code, Build, Lint, Test and Publish all changed NPM packages of the project #
+######################################################################################
 Build:
     stage: Build
     except:
@@ -51,23 +57,25 @@ Build:
         - yarn
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
-        - git diff-index --quiet HEAD || (git commit -am "format" && git push
+        - git diff-index --quiet HEAD || (git commit -am "format" && git push)
         - yarn build
         - yarn linkdist
         # TODO: lint based on lerna run --since
         - yarn lint
-        - git diff-index --quiet HEAD || (git commit -am "fix" && git push
+        - git diff-index --quiet HEAD || (git commit -am "fix" && git push)
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git remote show origin
         - git push origin HEAD:$CI_COMMIT_REF_NAME
 
+#############################
+# Deploy firebase functions #
+#############################
 Deploy:
     stage: Deploy
     only:
-        refs:
-            - dev
-            - tags
+        - tags
+        - dev
     interruptible: true
     tags:
         - docker
