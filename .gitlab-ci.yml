@@ -44,16 +44,14 @@ Build:
         - git checkout ${CI_COMMIT_REF_NAME}
         - yarn
         # TODO: format all globals and packages based on lerna run --since
-        # - yarn format
-        # - git diff-index --quiet HEAD || git status
-        # - git diff-index --quiet HEAD || git commit -am "format"
+        - yarn format
+        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME)
         - yarn build
         - yarn linkdist
         # TODO: lint based on lerna run --since
-        # - yarn lint
-        # - git diff-index --quiet HEAD || git status
-        # - git diff-index --quiet HEAD || git commit -am "fix"
-        # - yarn test --since
+        - yarn lint
+        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.skip origin HEAD:$CI_COMMIT_REF_NAME)
+        - yarn test --since
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git remote show origin
