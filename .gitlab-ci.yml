@@ -4,11 +4,13 @@ stages:
     - Deploy
 
 variables:
+    # TODO handle images per branch
     DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/dev-environment:latest
 
-##############################################################################################
-# Build and Push the docker image representing the dev and build environment for the project #
-##############################################################################################
+###############################################################################################
+# Build and Push the docker image representing the dev and build environment for the project  #
+# - triggered if dockerfile hast changed                                                      #
+###############################################################################################
 Prepare:
     stage: Prepare
     only:
@@ -30,14 +32,15 @@ Prepare:
 
 ######################################################################################
 # Format Code, Build, Lint, Test and Publish all changed NPM packages of the project #
+# - triggered by every push except pushes from ci                                    #
 ######################################################################################
 Build:
     stage: Build
-    except:
-        variables:
-            - $CI_COMMIT_MESSAGE == /format/
-            - $CI_COMMIT_MESSAGE == /fix/
-            - $CI_COMMIT_MESSAGE == /v[0-9]*.[0-9]*.[0-9]*.*/
+    rules:
+        - if: $CI_COMMIT_MESSAGE =~ /^(format|fix)$/
+          when: always
+        - if: $CI_COMMIT_MESSAGE =~ /^(v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)/
+          when: always
     interruptible: true
     tags:
         - docker
@@ -68,15 +71,16 @@ Build:
         - git remote show origin
         - git push origin HEAD:$CI_COMMIT_REF_NAME
 
-#############################
-# Deploy firebase functions #
-#############################
+#######################################################
+# Deploy firebase functions                           #
+# - triggered by pushes on deploy branches made by ci #
+#######################################################
 Deploy:
     stage: Deploy
     rules:
         - if: $CI_COMMIT_BRANCH == /^(dev|master)$/
           when: always
-        - if: $CI_COMMIT_MESSAGE == /v[0-9]*.[0-9]*.[0-9]*.*/
+        - if: $CI_COMMIT_MESSAGE == /^(v[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*.*)/
           when: always
     interruptible: true
     tags:
