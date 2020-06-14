@@ -11,8 +11,6 @@ include:
 variables:
     # TODO handle images per branch
     DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/dev-environment:latest
-    DEPENDENCY_SCANNING_DISABLED: $CI_SKIP
-    LICENSE_MANAGEMENT_DISABLED: $CI_SKIP
 
 ###############################################################################################
 # Build and Push the docker image representing the dev and build environment for the project  #
@@ -66,15 +64,15 @@ Build:
         - yarn
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
-        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="CI_SKIP=true")
+        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
         - yarn build
         - yarn linkdist
         # TODO: lint based on lerna run --since
         - yarn lint
-        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="CI_SKIP=true")
+        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --no-git-reset --preid=${CI_COMMIT_BRANCH}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
-        - git push -o ci.variable="CI_SKIP=true" origin HEAD:$CI_COMMIT_REF_NAME
+        - git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true" origin HEAD:$CI_COMMIT_REF_NAME
 
     #artifacts:
     #    reports:
