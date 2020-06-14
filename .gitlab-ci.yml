@@ -3,6 +3,9 @@ stages:
     - Build
     - Deploy
 
+include:
+    - template: Dependency-Scanning.gitlab-ci.yml
+
 variables:
     # TODO handle images per branch
     DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/dev-environment:latest
