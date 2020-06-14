@@ -41,7 +41,6 @@ Prepare:
 ######################################################################################
 Build:
     stage: build
-    needs: ['Prepare']
     except:
         variables:
             - $CI_SKIP == "true"
