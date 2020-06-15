@@ -65,10 +65,10 @@ Build:
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
         - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
-        - yarn build
+        - yarn build --since
         - yarn linkdist
         # TODO: lint based on lerna run --since
-        - yarn lint
+        - yarn lint --since
         - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --preid=${CI_COMMIT_REF_SLUG}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
