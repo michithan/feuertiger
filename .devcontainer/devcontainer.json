@@ -1,9 +1,14 @@
 {
     "name": "feuertiger",
-    "dockerFile": ".dev-env.Dockerfile",
+    "dockerFile": "../.dev-env.Dockerfile",
     "postCreateCommand": "yarn && yarn linkdist && yarn build",
-    "forwardPorts": [3000, 4000, 5000, 6000],
-    "workspaceMount": "source=/workspaces,target=/workspace,type=bind,consistency=cached",
+    "forwardPorts": [
+        3000,
+        4000,
+        5000,
+        6000
+    ],
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
     "workspaceFolder": "/workspace",
     "extensions": [
         "max-SS.Cyberpunk",
