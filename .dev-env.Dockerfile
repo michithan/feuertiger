@@ -19,8 +19,8 @@ RUN sudo apt-get update \
 # install node v10.19.0
 ENV NODE_VERSION=10.19.0
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN bash -c ". .nvm/nvm.sh && nvm install v10.19.0 && nvm alias default v10.19.0"
-RUN ~/.nvm/nvm.sh && nvm use default
+RUN bash -c ". .nvm/nvm.sh && nvm install v10.19.0 && nvm uninstall default && nvm alias default v10.19.0 && nvm use default"
+ENV PATH=$PATH:/home/gitpod/.nvm/versions/node/v${NODE_VERSION}/bin
 
 # Install lerna && firebase cli
 RUN npm i -g lerna firebase-tools
