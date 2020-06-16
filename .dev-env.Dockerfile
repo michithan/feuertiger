@@ -17,7 +17,8 @@ RUN sudo apt-get update \
     && sudo apt-get clean
 
 # install node v10.19.0
-RUN bash -c ". .nvm/nvm.sh && nvm install 10.19.0 && nvm use 10.19.0 && nvm uninstall default && nvm install 10.19.0 && nvm alias default 10.19.0 && nvm use default"
+ENV NODE_VERSION=10.19.0
+RUN bash -c ". .nvm/nvm.sh && nvm install 10.19.0 && nvm alias default 10.19.0 && nvm use default"
 
 # Install lerna && firebase cli
 RUN npm i -g lerna firebase-tools
