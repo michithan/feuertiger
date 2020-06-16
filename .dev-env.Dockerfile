@@ -1,8 +1,11 @@
 FROM gitpod/workspace-postgres
 
+# To avoid bricked workspaces (https://github.com/gitpod-io/gitpod/issues/1171)
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Install cypress dependencies
 RUN sudo apt-get update \
-    && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    && sudo apt-get install -y \
     libgtk2.0-0 \
     libgtk-3-0 \
     libnotify-dev \
@@ -13,7 +16,7 @@ RUN sudo apt-get update \
     libxtst6 \
     xauth \
     xvfb \
-    && sudo apt-get install -y chromium \
+    && sudo apt-get install -y chromium-browser \
     && sudo apt-get clean
 
 # Create feuertiger database
