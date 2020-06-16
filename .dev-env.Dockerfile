@@ -17,6 +17,12 @@ RUN sudo sh -c  'echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg 
     && sudo apt clean \
     && sudo rm -rf /var/cache/apt/* /var/lib/apt/lists/* /tmp/*
 
+USER postgres
+RUN /etc/init.d/postgresql start \
+    && psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" \
+    && createdb -O feuertiger feuertiger
+USER root
+
 # Setup PostgreSQL server for user gitpod
 ENV PATH="$PATH:/usr/lib/postgresql/12/bin"
 ENV PGDATA="/workspace/.pgsql/data"
