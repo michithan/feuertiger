@@ -16,8 +16,8 @@ RUN sudo apt-get update \
     && sudo rm -rf /var/lib/apt/lists/* \
     && sudo apt-get clean
 
-# Create feuertiger database
-# RUN psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" && createdb -O feuertiger feuertiger
+# install nove v10.19.0
+RUN nvm install 10.19.0
 
 # Install lerna && firebase cli
 RUN npm i -g lerna \
