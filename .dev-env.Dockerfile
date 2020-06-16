@@ -23,4 +23,4 @@ RUN bash -c ". .nvm/nvm.sh && nvm install v10.19.0 && nvm uninstall default && n
 ENV PATH=$PATH:/home/gitpod/.nvm/versions/node/v${NODE_VERSION}/bin
 
 # Install lerna && firebase cli
-RUN npm i -g lerna firebase-tools
+RUN npm i -g yarn lerna firebase-tools
