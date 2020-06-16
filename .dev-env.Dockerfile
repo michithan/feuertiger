@@ -16,7 +16,7 @@ RUN sudo apt-get update \
     libxtst6 \
     xauth \
     xvfb \
-    && sudo apt-get install -y chromium-browser \
+    && sudo apt-get install -yq chromium-browser \
     && sudo apt-get clean
 
 # Create feuertiger database
