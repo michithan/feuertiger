@@ -17,7 +17,7 @@ RUN sudo apt-get update \
     && sudo apt-get clean
 
 # install nove v10.19.0
-RUN . $NVM_DIR/nvm.sh \
+RUN . ~/.nvm/nvm.sh \
     && nvm install 10.19.0 \
     && nvm alias default 10.19.0  \
     && nvm use default
