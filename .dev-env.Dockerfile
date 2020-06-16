@@ -17,11 +17,10 @@ RUN sudo apt-get update \
     && sudo apt-get clean
 
 # install node v10.19.0
-RUN bash -c ". .nvm/nvm.sh && nvm install 10.19.0 && nvm use 10.19.0 && nvm uninstall default && nvm alias default 10.19.0 && nvm use default"
+RUN bash -c ". .nvm/nvm.sh && nvm install 10.19.0 && nvm use 10.19.0 && nvm uninstall default && nvm install 10.19.0 && nvm alias default 10.19.0 && nvm use default"
 
 # Install lerna && firebase cli
-RUN npm i -g lerna \
-    && npm i -g firebase-tools
+RUN npm i -g lerna firebase-tools
 
 # Increase nodejs memory
 RUN export NODE_OPTIONS="--max-old-space-size=4096"
