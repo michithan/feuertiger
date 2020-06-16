@@ -13,7 +13,7 @@ RUN sudo apt-get update \
     libxtst6 \
     xauth \
     xvfb \
-    && sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq chromium-browser \
+    && sudo rm -rf /var/lib/apt/lists/* \
     && sudo apt-get clean
 
 # Create feuertiger database
