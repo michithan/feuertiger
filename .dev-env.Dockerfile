@@ -6,12 +6,15 @@ RUN apt-get update \
     && sudo apt upgrade -y \
     && sudo apt install -y curl \
     && sudo apt install -y libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb \
-    && sudo apt install -y chromium
+    && sudo apt install -y chromium \
+    && sudo apt clean
 
 # Install PostgreSQL
-RUN sudo apt-get update \
-    && sudo apt-get install -y postgresql-12 postgresql-contrib-12 \
-    && sudo apt-get clean \
+RUN sudo sh -c  'echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
+    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - \
+    && apt-get update \
+    && sudo apt install -y postgresql-12 postgresql-contrib-12 \
+    && sudo apt clean \
     && sudo rm -rf /var/cache/apt/* /var/lib/apt/lists/* /tmp/*
 
 # Setup PostgreSQL server for user gitpod
