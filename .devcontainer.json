@@ -1,6 +1,6 @@
 {
     "dockerFile": ".dev-env.Dockerfile",
-    "postCreateCommand": "/etc/init.d/postgresql start && yarn && yarn linkdist",
+    "postCreateCommand": "yarn && yarn linkdist",
     "forwardPorts": [3000, 4000, 5000, 6000],
     "extensions": [
         "max-SS.Cyberpunk",

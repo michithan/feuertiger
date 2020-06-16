@@ -5,8 +5,8 @@
     "private": true,
     "scripts": {
         "cypress": "cypress",
-        "open": "cypress open --browser chromium -p 6000",
-        "e2e": "cypress run --browser chromium -p 6000"
+        "open": "cypress open -p 6000",
+        "e2e": "cypress run -p 6000"
     },
     "author": "",
     "license": "ISC",
