@@ -1,4 +1,4 @@
-FROM node:10.19.0-buster
+FROM gitpod/workspace-postgres
 
 # Install sudo && curl && cypress dependencies
 RUN apt-get update \
@@ -9,19 +9,8 @@ RUN apt-get update \
     && sudo apt install -y chromium \
     && sudo apt clean
 
-# Install PostgreSQL
-RUN sudo sh -c  'echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
-    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - \
-    && apt-get update \
-    && sudo apt install -y postgresql-12 postgresql-contrib-12 \
-    && sudo apt clean \
-    && sudo rm -rf /var/cache/apt/* /var/lib/apt/lists/* /tmp/*
-
-USER postgres
-RUN /etc/init.d/postgresql start \
-    && psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" \
-    && createdb -O feuertiger feuertiger
-USER root
+# Create feuertiger database
+RUN psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" && createdb -O feuertiger feuertiger
 
 # Setup PostgreSQL server for user gitpod
 ENV PATH="$PATH:/usr/lib/postgresql/12/bin"
