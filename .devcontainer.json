@@ -1,6 +1,6 @@
 {
     "dockerFile": ".dev-env.Dockerfile",
-    "postCreateCommand": "yarn && yarn linkdist",
+    "postCreateCommand": "yarn && yarn linkdist && yarn build",
     "forwardPorts": [3000, 4000, 5000, 6000],
     "extensions": [
         "max-SS.Cyberpunk",
