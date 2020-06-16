@@ -17,7 +17,7 @@ RUN sudo apt-get update \
     && sudo apt-get clean
 
 # Create feuertiger database
-RUN sudo pg_start && psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" && createdb -O feuertiger feuertiger
+RUN sudo sh pg_start && psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" && createdb -O feuertiger feuertiger
 
 # Install lerna && firebase cli
 RUN npm i -g lerna \
