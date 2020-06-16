@@ -16,11 +16,8 @@ RUN sudo apt-get update \
     && sudo rm -rf /var/lib/apt/lists/* \
     && sudo apt-get clean
 
-# install nove v10.19.0
-RUN . ~/.nvm/nvm.sh \
-    && sudo nvm install 10.19.0 \
-    && sudo nvm alias default 10.19.0  \
-    && sudo nvm use default
+# install node v10.19.0
+RUN bash -c ". .nvm/nvm.sh && nvm install 10.19.0 && nvm alias default 10.19.0"
 
 # Install lerna && firebase cli
 RUN npm i -g lerna \
