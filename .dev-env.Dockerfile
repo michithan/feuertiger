@@ -10,7 +10,7 @@ RUN apt-get update \
     && sudo apt clean
 
 # Install PostgreSQL
-RUN sudo sh -c  'echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
+RUN sudo sh -c  'echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list.d/pgdg.list' \
     && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add - \
     && apt-get update \
     && sudo apt install -y postgresql-12 postgresql-contrib-12 \
