@@ -1,9 +1,7 @@
 FROM gitpod/workspace-postgres
 
 # Install sudo && curl && cypress dependencies
-RUN apt-get update \
-    && apt-get -y install sudo \
-    && sudo apt upgrade -y \
+RUN sudo apt upgrade -y \
     && sudo apt install -y curl \
     && sudo apt install -y libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb \
     && sudo apt install -y chromium \
