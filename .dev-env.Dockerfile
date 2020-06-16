@@ -24,3 +24,5 @@ ENV PATH=$PATH:/home/gitpod/.nvm/versions/node/v${NODE_VERSION}/bin
 
 # Install lerna && firebase cli
 RUN npm i -g yarn lerna firebase-tools
+
+USER root
