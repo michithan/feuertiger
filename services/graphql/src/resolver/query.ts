@@ -23,6 +23,10 @@ const Query: QueryResolvers = {
     allPersons: async (parent: any, args, context: Context) => {
         const persons = await context.db.person.findMany();
         return persons;
+    },
+    allExercises: async (parent: any, args, context: Context) => {
+        const exercises = await context.db.exercise.findMany();
+        return exercises;
     }
 };
 

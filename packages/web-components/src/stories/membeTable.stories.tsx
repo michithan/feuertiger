@@ -2,12 +2,15 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import faker from 'faker';
-import { Member, MemberProps } from '../components/member/member';
+import {
+    MemberTable,
+    MemberTableProps
+} from '../components/memberTable/memberTable';
 
 faker.locale = 'de';
 faker.seed(4);
 
-const defaultProps: MemberProps = Object.freeze({
+const defaultProps: MemberTableProps = Object.freeze({
     networkStatus: null,
     loading: false,
     error: null,
@@ -35,30 +38,30 @@ const defaultProps: MemberProps = Object.freeze({
             }
         ]
     }
-} as unknown) as MemberProps;
+} as unknown) as MemberTableProps;
 
-storiesOf('Member', module)
+storiesOf('MemberTable', module)
     .add('Default', () => {
-        const props: MemberProps = {
+        const props: MemberTableProps = {
             ...defaultProps
         };
         props.loading = false;
         props.error = null;
-        return <Member {...props} />;
+        return <MemberTable {...props} />;
     })
     .add('Loading', () => {
-        const props: MemberProps = {
+        const props: MemberTableProps = {
             ...defaultProps
         };
         props.loading = true;
         props.error = null;
-        return <Member {...props} />;
+        return <MemberTable {...props} />;
     })
     .add('Error', () => {
-        const props: MemberProps = {
+        const props: MemberTableProps = {
             ...defaultProps
         };
         props.loading = false;
         props.error = { message: 'error' } as any;
-        return <Member {...props} />;
+        return <MemberTable {...props} />;
     });

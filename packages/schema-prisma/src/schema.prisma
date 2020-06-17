@@ -1,3 +1,5 @@
+import "./promotion.prisma"
+
 datasource postgresql {
   url      = "postgresql://feuertiger:feuertiger@localhost:5432/feuertiger"
   provider = "postgresql"
@@ -17,10 +19,45 @@ model Exercise {
   participants Person[] @relation("Exercise_Participant", references: [id])
 }
 
+model Exercise {
+  id           String   @id
+  topic        String
+  timeslot     Timeslot @relation(fields: [timeslotId], references: [id])
+  timeslotId   String
+  leaders      Person[] @relation("Exercise_Leader", references: [id])
+  participants Person[] @relation("Exercise_Participant", references: [id])
+}
+
+model Address  {
+  id           String   @id
+  street  String
+  streetNumber   String
+  postalCode   String
+  city  String
+  contry  String
+}
+
+model Membership {
+  id           String   @id
+  person  Person
+  active  boolean
+  entryDate   String
+  departureDate   String
+}
+
 model Person {
   id                    String     @id
   firstname             String
   lastname              String
+  birthName             String
+  placeOfBirth          String
+  dateOfBirth         String
+  membershipNumber       String
+  grade     Grade
+  addressId   String
+  address   Address  @relation(fields: [addressId], references: [id])
+  memberships  Membership[] @relation("Person_Membership", references: [id])
+  promotions   Promotion[] @relation("Person_Promotion", references: [id])
   exercisesParticipated Exercise[] @relation("Exercise_Participant", references: [id])
   exercisesLeaded       Exercise[] @relation("Exercise_Leader", references: [id])
 }

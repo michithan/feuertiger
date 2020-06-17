@@ -2,3 +2,21 @@ type Timeslot {
     start: String
     end: String
 }
+
+type Address implements Node {
+    id: ID!
+    street: String
+    streetNumber: String
+    postalCode: String
+    city: String
+    contry: String
+}
+
+input _Address {
+    id: ID!
+    street: String
+    streetNumber: String
+    postalCode: String
+    city: String
+    contry: String
+}

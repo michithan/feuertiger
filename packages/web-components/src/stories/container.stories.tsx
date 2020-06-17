@@ -3,7 +3,7 @@ import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { Container, ContainerProps } from '../components/container/container';
-import { authPropsMock } from '../types/authProps.mock';
+import { authPropsMock } from '../mocks/authProps.mock';
 
 const defaultProps: ContainerProps = {
     ...authPropsMock

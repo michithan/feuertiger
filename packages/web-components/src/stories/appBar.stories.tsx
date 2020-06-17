@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { AppBar, AppBarProps } from '../components/appBar/appBar';
-import { authPropsMock } from '../types/authProps.mock';
+import { authPropsMock } from '../mocks/authProps.mock';
 
 const defaultProps: AppBarProps = {
     ...authPropsMock,

@@ -2,12 +2,12 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import { Member, MemberProps } from '@feuertiger/web-components';
+import { MemberTable, MemberTableProps } from '@feuertiger/web-components';
 import { AllPersonsDocument } from '@feuertiger/schema-graphql';
 
 export default () => {
     const props = useQuery(AllPersonsDocument);
-    const memberProps: MemberProps = {
+    const memberProps: MemberTableProps = {
         ...props,
         data: {
             allPersons: props?.data?.allPersons?.map((person) => ({
@@ -15,5 +15,5 @@ export default () => {
             }))
         }
     };
-    return <Member {...memberProps} />;
+    return <MemberTable {...memberProps} />;
 };

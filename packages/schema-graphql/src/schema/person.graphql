@@ -1,7 +1,16 @@
 type Person implements Node {
     id: ID!
-    firstname: String
-    lastname: String
+    firstname: String!
+    lastname: String!
+    avatar: String
+    address: Address
+    birthName: String
+    placeOfBirth: String
+    dateOfBirth: String!
+    membershipNumber: String
+    memberships: [Membership]
+    promotions: [Promotion]
+    grade: Grade
     exercisesParticipated: [Exercise]
     exercisesLeaded: [Exercise]
 }
@@ -10,6 +19,7 @@ input _Person {
     id: ID!
     firstname: String!
     lastname: String!
+    avatar: String
     exercisesParticipated: [_Node!]
     exercisesLeaded: [_Node!]
 }

@@ -6,7 +6,7 @@ import {
     DataExtractorProps
 } from '../components/dataExtractor/dataExtractor';
 import { Container, ContainerProps } from '../components/container/container';
-import { authPropsMock } from '../types/authProps.mock';
+import { authPropsMock } from '../mocks/authProps.mock';
 
 const defaultProps: DataExtractorProps = {};
 const defaultContainerProps: ContainerProps = {

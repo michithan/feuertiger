@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Paper, Button, CircularProgress, Fab } from '@material-ui/core';
 import MaterialTable from 'material-table';
-import EditIcon from '@material-ui/icons/Edit';
+import ArrowRight from '@material-ui/icons/ArrowRight';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
 import { AddMember } from '../addMember/addMember';
@@ -10,44 +10,10 @@ interface State {
     addDialogOpen: boolean;
 }
 
-const MemberTable = ({
-    member
-}: {
-    member: AllPersonsQueryResult['data']['allPersons'];
-}) => {
-    return (
-        <MaterialTable
-            options={{
-                exportButton: true,
-                filtering: true,
-                grouping: true,
-                search: true,
-                sorting: true
-            }}
-            columns={[
-                { title: 'Vorname', field: 'firstname' },
-                { title: 'Nachname', field: 'lastname' },
-                {
-                    field: 'edit',
-                    title: '',
-                    filtering: false,
-                    render: () => (
-                        <Fab color="primary" aria-label="edit">
-                            <EditIcon />
-                        </Fab>
-                    )
-                }
-            ]}
-            data={member}
-            title="Mitglieder"
-        />
-    );
-};
+export interface MemberTableProps extends AllPersonsQueryResult {}
 
-export interface MemberProps extends AllPersonsQueryResult {}
-
-export class Member extends React.Component<MemberProps, State> {
-    constructor(props: MemberProps) {
+export class MemberTable extends React.Component<MemberTableProps, State> {
+    constructor(props: MemberTableProps) {
         super(props);
         this.state = {
             addDialogOpen: false
@@ -73,7 +39,33 @@ export class Member extends React.Component<MemberProps, State> {
         } else if (error) {
             content = <p>Error :(</p>;
         } else if (allPersons) {
-            content = <MemberTable member={allPersons} />;
+            content = (
+                <MaterialTable
+                    options={{
+                        exportButton: true,
+                        filtering: true,
+                        grouping: true,
+                        search: true,
+                        sorting: true
+                    }}
+                    columns={[
+                        { title: 'Vorname', field: 'firstname' },
+                        { title: 'Nachname', field: 'lastname' },
+                        {
+                            field: 'edit',
+                            title: '',
+                            filtering: false,
+                            render: () => (
+                                <Fab color="primary" aria-label="edit">
+                                    <ArrowRight />
+                                </Fab>
+                            )
+                        }
+                    ]}
+                    data={allPersons}
+                    title="Mitglieder"
+                />
+            );
         }
 
         return (
