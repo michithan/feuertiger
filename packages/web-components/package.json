@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/web-components",
-    "version": "1.0.9-dev.1cf47562.0",
+    "version": "1.0.9-dev.87816d5a.0",
     "sideEffects": false,
     "scripts": {
         "dev": "start-storybook --quiet -p 5000 -c .storybook",
