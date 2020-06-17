@@ -1,5 +1,5 @@
 datasource postgresql {
-  url      = "postgresql://gitpod@localhost:5432/feuertiger"
+  url      = "postgresql://feuertiger:feuertiger@localhost:5432/feuertiger"
   provider = "postgresql"
 }
 
