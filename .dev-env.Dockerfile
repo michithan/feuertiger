@@ -1,28 +1,37 @@
-FROM gitpod/workspace-postgres
+FROM node:10.19.0-buster
 
-# Install cypress dependencies
-RUN sudo apt-get update \
-    && sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq \
-    libgtk2.0-0 \
-    libgtk-3-0 \
-    libnotify-dev \
-    libgconf-2-4 \
-    libnss3 \
-    libxss1 \
-    libasound2 \
-    libxtst6 \
-    xauth \
-    xvfb \
-    && sudo rm -rf /var/lib/apt/lists/* \
-    && sudo apt-get clean
-
-# install node v10.19.0
-ENV NODE_VERSION=10.19.0
+# Increase nodejs memory
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-RUN bash -c ". .nvm/nvm.sh && nvm install v10.19.0 && nvm uninstall default && nvm alias default v10.19.0 && nvm use default"
-ENV PATH=$PATH:/home/gitpod/.nvm/versions/node/v${NODE_VERSION}/bin
+
+# Install sudo && curl && cypress dependencies
+RUN apt update \
+    && apt install -y sudo \
+    && sudo apt upgrade -y \
+    && sudo apt install -y \
+                curl \
+                chromium \
+                libgtk2.0-0 \
+                libgtk-3-0 \
+                libnotify-dev \
+                libgconf-2-4 \
+                libnss3 \
+                libxss1 \
+                libasound2 \
+                libxtst6 \
+                xauth \
+                xvfb
+
+# Install postgres
+RUN sudo apt install -y \
+            postgresql \
+            postgresql-contrib \
+    && update-rc.d postgresql enable
+
+USER postgres
+RUN /etc/init.d/postgresql start \
+    && psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" \
+    && createdb -O feuertiger feuertiger
+USER root
 
 # Install lerna && firebase cli
-RUN npm i -g yarn lerna firebase-tools
-
-USER root
+RUN npm i -g lerna firebase-tools
