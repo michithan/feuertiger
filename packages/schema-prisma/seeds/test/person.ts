@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { PersonCreateInput } from '../../dist';
+import { PersonCreateInput, Grade } from '../../dist';
 import exercises from './exercise';
 
 const length = 100;
@@ -11,6 +11,39 @@ const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
     id: `person:${faker.random.uuid()}`,
     firstname: faker.name.firstName(),
     lastname: faker.name.lastName(),
+    address: {
+        create: {
+            id: `address:${faker.random.uuid()}`,
+            city: faker.address.city(),
+            country: faker.address.country(),
+            postalCode: faker.address.zipCode(),
+            street: faker.address.streetName(),
+            streetNumber: faker.address.streetSuffix()
+        }
+    },
+    birthName: faker.name.lastName(),
+    dateOfBirth: faker.date.past().toDateString(),
+    grade: Grade.FM,
+    membershipNumber: faker.random.number().toString(),
+    placeOfBirth: faker.address.city(),
+    promotions: {
+        create: [
+            {
+                id: `promotion:${faker.random.uuid()}`,
+                grade: Grade.FM,
+                dateOfPromotion: faker.date.past().toDateString()
+            }
+        ]
+    },
+    memberships: {
+        create: [
+            {
+                id: `membership:${faker.random.uuid()}`,
+                active: true,
+                entryDate: faker.date.past().toDateString()
+            }
+        ]
+    },
     exercisesParticipated: {
         connect: [
             {

@@ -18,5 +18,5 @@ input _Address {
     streetNumber: String
     postalCode: String
     city: String
-    contry: String
+    country: String
 }
