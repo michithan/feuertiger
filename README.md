@@ -1,13 +1,10 @@
 <p>
-   <a href="https://gitlab.com/feuertiger/feuertiger/-/commits/dev">
+    <a href="https://gitlab.com/feuertiger/feuertiger/-/commits/dev">
         <img alt="pipeline status" src="https://gitlab.com/feuertiger/feuertiger/badges/dev/pipeline.svg" />
     </a>
     <a href="https://gitlab.com/feuertiger/feuertiger/-/commits/dev">
         <img alt="coverage report" src="https://gitlab.com/feuertiger/feuertiger/badges/dev/coverage.svg" />
     </a>
-   <a href="https://gitpod.io/#https://gitlab.com/feuertiger/feuertiger">
-        <img alt="Gitpod" src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod">
-   </a>
 </p>
 
 # Feuertiger
@@ -20,43 +17,40 @@ The main benefits of using Feuertiger should be:
 -   Easy import and export functionality to existing solutions
 -   Easy and cheap hosting through straight forward infrastructure as code
 
----
-
 ## How to start
 
-You can start coding simply using the Gitpod integration.
+You can start coding by simply using [Visual Studio Code Remote - Containers ](https://code.visualstudio.com/docs/remote/containers)
 
-1. Install Gitpod [chrome extension](https://chrome.google.com/webstore/detail/gitpod-online-ide/dodmmooeoklaejobgleioelladacbeki).
-2. Open Gitpod on Gitlab for your feature branch.
-3. To be able to run the Firebase service you need to set some secret environment variables.<br/>
+1. Install [docker desktop](https://docs.docker.com/desktop/) 
+2. Install VS Code extension [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+3. Open repository in container
+4. To be able to run the Firebase service you need to set some secret environment variables.<br/>
    You can also get these secrets by creating your own [Firebase](https://firebase.google.com/) project
 
     ```
-    gp env FIREBASE_SECRETS_TYPE=**********
-    gp env FIREBASE_SECRETS_PROJECT_ID=**********
-    gp env FIREBASE_SECRETS_PRIVATE_KEY_ID=**********
-    gp env FIREBASE_SECRETS_PRIVATE_KEY=**********
-    gp env FIREBASE_SECRETS_CLIENT_EMAIL=**********
-    gp env FIREBASE_SECRETS_CLIENT_ID=**********
-    gp env FIREBASE_SECRETS_AUTH_URI="https://accounts.google.com/o/oauth2/auth"
-    gp env FIREBASE_SECRETS_TOKEN_URI="https://oauth2.googleapis.com/token"
-    gp env FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL="https://www.googleapis.com/oauth2/v1/certs"
-    gp env FIREBASE_SECRETS_CLIENT_X509_CERT_URL=**********
-    gp env FIREBASE_SECRETS_APP_APIKEY=**********
-    gp env FIREBASE_SECRETS_APP_AUTHDOMAIN=**********
-    gp env FIREBASE_SECRETS_APP_DATABASEURL=**********
-    gp env FIREBASE_SECRETS_APP_STORAGEBUCKET=**********
-    gp env FIREBASE_SECRETS_APP_MESSAGINGSENDERID=**********
-    gp env FIREBASE_SECRETS_APP_APPID=**********
+    export FIREBASE_SECRETS_TYPE=**********
+    export FIREBASE_SECRETS_PROJECT_ID=**********
+    export FIREBASE_SECRETS_PRIVATE_KEY_ID=**********
+    export FIREBASE_SECRETS_PRIVATE_KEY=**********
+    export FIREBASE_SECRETS_CLIENT_EMAIL=**********
+    export FIREBASE_SECRETS_CLIENT_ID=**********
+    export FIREBASE_SECRETS_AUTH_URI="https://accounts.google.com/o/oauth2/auth"
+    export FIREBASE_SECRETS_TOKEN_URI="https://oauth2.googleapis.com/token"
+    export FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL="https://www.googleapis.com/oauth2/v1/certs"
+    export FIREBASE_SECRETS_CLIENT_X509_CERT_URL=**********
+    export FIREBASE_SECRETS_APP_APIKEY=**********
+    export FIREBASE_SECRETS_APP_AUTHDOMAIN=**********
+    export FIREBASE_SECRETS_APP_DATABASEURL=**********
+    export FIREBASE_SECRETS_APP_STORAGEBUCKET=**********
+    export FIREBASE_SECRETS_APP_MESSAGINGSENDERID=**********
+    export FIREBASE_SECRETS_APP_APPID=**********
     ```
-
-4. Run services in dev mode
+5. Run services in dev mode
     ```
     yarn dev
     ```
-5. Start coding
-
-6. Login as Testuser
+6. Start coding
+7. Login as Testuser
     ```
     User: feuertiger@feuertiger.com
     Password: feuertiger
