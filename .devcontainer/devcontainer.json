@@ -2,14 +2,7 @@
     "name": "feuertiger",
     "dockerFile": "../.dev-env.Dockerfile",
     "postCreateCommand": "yarn && yarn linkdist && yarn build",
-    "forwardPorts": [
-        3000,
-        4000,
-        5000,
-        6000
-    ],
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
-    "workspaceFolder": "/workspace",
+    "forwardPorts": [3000, 4000, 5000, 6000],
     "extensions": [
         "max-SS.Cyberpunk",
         "eamodio.gitlens",

@@ -3,7 +3,7 @@
     "version": "1.0.9-dev.1cf47562.0",
     "sideEffects": false,
     "scripts": {
-        "dev": "start-storybook -p 5000 -c .storybook",
+        "dev": "start-storybook --quiet -p 5000 -c .storybook",
         "test": "jest --collect-coverage"
     },
     "main": "./src/index.ts",
