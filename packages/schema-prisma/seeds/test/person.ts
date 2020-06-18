@@ -19,7 +19,7 @@ const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
             country: faker.address.country(),
             postalCode: faker.address.zipCode(),
             street: faker.address.streetName(),
-            streetNumber: faker.random.number(99)
+            streetNumber: faker.random.number(99).toString()
         }
     },
     birthName: faker.name.lastName(),
