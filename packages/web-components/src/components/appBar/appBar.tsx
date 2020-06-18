@@ -49,6 +49,9 @@ const StyledIconButton = styled(({ open, ...props }) => (
 
 const StyledTypography = styled(Typography)`
     flex-grow: 1;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
 `;
 
 export interface AppBarProps extends AuthProps {
@@ -77,7 +80,13 @@ export class AppBar extends React.Component<AppBarProps> {
                         <MenuIcon />
                     </StyledIconButton>
                     <StyledTypography variant="h6" color="inherit" noWrap>
-                        Dashboard
+                        <span role="img" aria-label="Feuer">
+                            🔥
+                        </span>
+                        <span>Feuertiger</span>
+                        <span role="img" aria-label="Tiger">
+                            🐯
+                        </span>
                     </StyledTypography>
                     <IconButton
                         color="inherit"

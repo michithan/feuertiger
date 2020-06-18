@@ -6,6 +6,7 @@ import {
     MemberTable,
     MemberTableProps
 } from '../components/memberTable/memberTable';
+import { mockDefaultPerson } from '../mocks/persons.mock';
 
 faker.locale = 'de';
 faker.seed(4);
@@ -16,26 +17,10 @@ const defaultProps: MemberTableProps = Object.freeze({
     error: null,
     data: {
         allPersons: [
-            {
-                id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
-            },
-            {
-                id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
-            },
-            {
-                id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
-            },
-            {
-                id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
-            }
+            mockDefaultPerson(),
+            mockDefaultPerson(),
+            mockDefaultPerson(),
+            mockDefaultPerson()
         ]
     }
 } as unknown) as MemberTableProps;

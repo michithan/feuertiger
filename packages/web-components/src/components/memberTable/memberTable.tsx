@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-    Grid,
-    Paper,
-    Button,
-    CircularProgress,
-    Fab,
-    Avatar
-} from '@material-ui/core';
+import { Grid, Button, CircularProgress, Fab, Avatar } from '@material-ui/core';
 import MaterialTable from 'material-table';
-import ArrowRight from '@material-ui/icons/ArrowRight';
+import FindInPage from '@material-ui/icons/FindInPage';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
 import Link from 'next/link';
@@ -78,7 +71,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                             render: ({ id }) => (
                                 <Link href={`/member/${id}`}>
                                     <Fab color="primary" aria-label="edit">
-                                        <ArrowRight />
+                                        <FindInPage />
                                     </Fab>
                                 </Link>
                             )
@@ -111,7 +104,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                     </Grid>
                     {/* Recent Deposits */}
                     <Grid item xs={12} md={12} lg={12}>
-                        <Paper>{content}</Paper>
+                        {content}
                     </Grid>
                 </Grid>
             </>

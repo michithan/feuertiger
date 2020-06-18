@@ -4,6 +4,11 @@ query allPersons {
         firstname
         lastname
         avatar
+        birthName
+        placeOfBirth
+        dateOfBirth
+        membershipNumber
+        grade
         address {
             id
             street
@@ -12,10 +17,5 @@ query allPersons {
             city
             contry
         }
-        birthName
-        placeOfBirth
-        dateOfBirth
-        membershipNumber
-        grade
     }
 }

@@ -9,7 +9,7 @@ import {
 import { Container, ContainerProps } from '../components/container/container';
 import { authPropsMock } from '../mocks/authProps.mock';
 
-import { defaultPersonMock } from '../mocks/persons.mock';
+import { mockDefaultPerson } from '../mocks/persons.mock';
 
 const defaultContainerProps: ContainerProps = {
     ...authPropsMock
@@ -19,7 +19,7 @@ faker.locale = 'de';
 faker.seed(4);
 
 const defaultProps: MemberDetailsProps = Object.freeze({
-    member: defaultPersonMock
+    member: mockDefaultPerson()
 } as unknown) as MemberDetailsProps;
 
 storiesOf('MemberDetails', module)

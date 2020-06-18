@@ -53,8 +53,8 @@ export class App extends NextApp<AppProps> {
                     />
                 </Head>
                 <ThemeProvider>
-                    {showLogin && <Login auth={auth} />}
                     <Container auth={auth}>
+                        {showLogin && <Login auth={auth} />}
                         {Component && <Component {...pageProps} />}
                     </Container>
                 </ThemeProvider>
