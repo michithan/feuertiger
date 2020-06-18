@@ -1,9 +1,9 @@
 import React from 'react';
 import { Grid, TextField, Paper, Avatar, Typography } from '@material-ui/core';
-import { Person } from '@feuertiger/schema-graphql';
+import { Person, PersonDetailsQueryResult } from '@feuertiger/schema-graphql';
 
-export interface MemberDetailsProps {
-    member: Person;
+export interface MemberDetailsProps extends PersonDetailsQueryResult {
+    member: Partial<Person> | undefined | null;
 }
 
 interface State {}
@@ -16,7 +16,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
 
     render() {
         const { member } = this.props;
-        const { firstname, lastname, avatar } = member;
+        const { firstname, lastname, avatar } = member || {};
         return (
             <Paper>
                 <Grid container spacing={3}>

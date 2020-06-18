@@ -11,6 +11,7 @@ import MaterialTable from 'material-table';
 import ArrowRight from '@material-ui/icons/ArrowRight';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
+import Link from 'next/link';
 import { AddMember } from '../addMember/addMember';
 
 interface State {
@@ -74,10 +75,12 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                             title: '',
                             field: 'edit',
                             filtering: false,
-                            render: () => (
-                                <Fab color="primary" aria-label="edit">
-                                    <ArrowRight />
-                                </Fab>
+                            render: ({ id }) => (
+                                <Link href={`/member/${id}`}>
+                                    <Fab color="primary" aria-label="edit">
+                                        <ArrowRight />
+                                    </Fab>
+                                </Link>
                             )
                         }
                     ]}

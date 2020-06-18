@@ -1,0 +1,82 @@
+datasource postgresql {
+  url = "***"
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../dist"
+}
+
+model Exercise {
+  id           String   @id
+  topic        String
+  timeslot     Timeslot @relation(fields: [timeslotId], references: [id])
+  timeslotId   String
+  leaders      Person[] @relation("Exercise_Leader", references: [id])
+  participants Person[] @relation("Exercise_Participant", references: [id])
+}
+
+model Address  {
+  id           String   @id
+  street       String
+  streetNumber String
+  postalCode   String
+  city         String
+  country       String
+}
+
+model Membership {
+  id              String    @id
+  active          Boolean
+  entryDate       String
+  personId        String
+  person          Person    @relation("Person_Membership", fields: [personId])
+  departureDate   String?
+}
+
+enum Grade {
+  FA
+  FM
+  OFM
+  HFM
+  LM
+  OLM
+  HLM
+  BM
+  OBM
+  HBM
+}
+
+model Promotion   {
+  id                String    @id
+  dateOfPromotion   String
+  personId          String
+  person            Person    @relation("Person_Promotion", fields: [personId])
+  grade             Grade
+}
+
+model Person {
+  id                      String      @id
+  firstname               String
+  lastname                String
+  birthName               String
+  placeOfBirth            String
+  avatar                  String
+  dateOfBirth             String
+  membershipNumber        String
+  grade                   Grade
+  addressId               String
+  address                 Address       @relation(fields: [addressId], references: [id])
+  memberships             Membership[]  @relation("Person_Membership")
+  promotions              Promotion[]   @relation("Person_Promotion")
+  exercisesParticipated   Exercise[]    @relation("Exercise_Participant", references: [id])
+  exercisesLeaded         Exercise[]    @relation("Exercise_Leader", references: [id])
+}
+
+model Timeslot {
+  id       String     @id
+  start    DateTime
+  end      DateTime
+  Exercise Exercise[]
+}

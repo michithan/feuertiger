@@ -12,7 +12,11 @@ export const getNode = async ({
     const { type } = parseGlobalId(id);
     // @ts-ignore
     const resolver = context.db[type];
-    const node = await resolver({ id });
+    const node = await resolver.findOne({
+        where: {
+            id
+        }
+    });
     return node as Node;
 };
 
