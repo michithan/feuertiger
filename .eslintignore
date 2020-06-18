@@ -1,6 +1,10 @@
 dist
 lib
 node_modules
+coverage
 
 .next
 *.test.*
+setupTests.ts
+babel.config.js
+jest.config.js

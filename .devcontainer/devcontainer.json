@@ -1,0 +1,26 @@
+{
+    "name": "feuertiger",
+    "dockerFile": "../.dev-env.Dockerfile",
+    "postCreateCommand": "yarn && yarn linkdist && yarn build",
+    "forwardPorts": [3000, 4000, 5000, 6000],
+    "extensions": [
+        "max-SS.Cyberpunk",
+        "eamodio.gitlens",
+        "vscode-icons-team.vscode-icons",
+        "tomoki1207.pdf",
+        "jpoissonnier.vscode-styled-components",
+        "dbaeumer.vscode-eslint",
+        "Prisma.vscode-graphql",
+        "mikestead.dotenv",
+        "CoenraadS.bracket-pair-colorizer",
+        "ecmel.vscode-html-css",
+        "eg2.vscode-npm-script",
+        "esbenp.prettier-vscode",
+        "Prisma.prisma",
+        "ckolkman.vscode-postgres",
+        "jsayol.firebase-explorer",
+        "anseki.vscode-color",
+        "msjsdiag.debugger-for-chrome",
+        "naumovs.color-highlight"
+    ]
+}

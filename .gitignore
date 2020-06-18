@@ -11,6 +11,7 @@ secrets.json
 *.en
 *.log
 *.code-workspace
-*.npmrc
 *.env
 *.traineddata
+
+report.*.json

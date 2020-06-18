@@ -4,6 +4,9 @@ import { storiesOf } from '@storybook/react';
 import faker from 'faker';
 import { Member, MemberProps } from '../components/member/member';
 
+faker.locale = 'de';
+faker.seed(4);
+
 const defaultProps: MemberProps = Object.freeze({
     networkStatus: null,
     loading: false,

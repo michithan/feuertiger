@@ -37,7 +37,7 @@ const SubmitButton = styled(Button)`
 export interface LoginProps extends AuthProps {}
 
 export class Login extends React.Component<LoginProps> {
-    handleLogin = (event) => {
+    handleLogin = (event: any) => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
