@@ -69,7 +69,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                             field: 'edit',
                             filtering: false,
                             render: ({ id }) => (
-                                <Link href={`/member/${id}`}>
+                                <Link href="/member/[id]" as={`member/${id}`}>
                                     <Fab color="primary" aria-label="edit">
                                         <FindInPage />
                                     </Fab>
