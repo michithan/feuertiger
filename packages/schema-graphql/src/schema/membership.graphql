@@ -1,7 +1,7 @@
 type Membership implements Node {
     id: ID!
-    person: Person!
-    active: Boolean!
-    entryDate: String!
+    person: Person
+    active: Boolean
+    entryDate: String
     departureDate: String
 }

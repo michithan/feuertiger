@@ -13,6 +13,6 @@ enum Grade {
 
 type Promotion implements Node {
     id: ID!
-    grade: Grade!
-    dateOfPromotion: String!
+    grade: Grade
+    dateOfPromotion: String
 }
