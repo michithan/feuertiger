@@ -1,4 +1,4 @@
-import { PersonResolvers, Node } from '@feuertiger/schema-graphql';
+import { PersonResolvers } from '@feuertiger/schema-graphql';
 import { Context } from '../context';
 
 const Person: PersonResolvers = {
@@ -13,11 +13,7 @@ const Person: PersonResolvers = {
         });
         return persons?.exercisesLeaded ?? [];
     },
-    exercisesParticipated: async (
-        { id },
-        args,
-        context: Context
-    ) => {
+    exercisesParticipated: async ({ id }, args, context: Context) => {
         const persons = await context.db.person.findOne({
             where: {
                 id
@@ -60,7 +56,7 @@ const Person: PersonResolvers = {
             }
         });
         return persons?.promotions ?? [];
-    },
+    }
 };
 
 export default Person;

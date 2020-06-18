@@ -1,5 +1,12 @@
 import React from 'react';
-import { Grid, Paper, Button, CircularProgress, Fab } from '@material-ui/core';
+import {
+    Grid,
+    Paper,
+    Button,
+    CircularProgress,
+    Fab,
+    Avatar
+} from '@material-ui/core';
 import MaterialTable from 'material-table';
 import ArrowRight from '@material-ui/icons/ArrowRight';
 import { startOcr } from '@feuertiger/ocr';
@@ -49,11 +56,23 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                         sorting: true
                     }}
                     columns={[
+                        {
+                            title: '',
+                            field: 'avatar',
+                            filtering: false,
+                            render: ({ avatar }) => (
+                                <Avatar alt="Remy Sharp" src={avatar} />
+                            )
+                        },
                         { title: 'Vorname', field: 'firstname' },
                         { title: 'Nachname', field: 'lastname' },
+                        { title: 'Geburtsdatum', field: 'dateOfBirth' },
+                        { title: 'Dienstgrad', field: 'grade' },
+                        { title: 'Straße', field: 'address.street' },
+                        { title: 'Hausnummer', field: 'address.streetNumber' },
                         {
-                            field: 'edit',
                             title: '',
+                            field: 'edit',
                             filtering: false,
                             render: () => (
                                 <Fab color="primary" aria-label="edit">

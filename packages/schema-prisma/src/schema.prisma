@@ -62,6 +62,7 @@ model Person {
   lastname                String
   birthName               String
   placeOfBirth            String
+  avatar                  String
   dateOfBirth             String
   membershipNumber        String
   grade                   Grade

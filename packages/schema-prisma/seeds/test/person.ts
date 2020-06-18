@@ -11,6 +11,7 @@ const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
     id: `person:${faker.random.uuid()}`,
     firstname: faker.name.firstName(),
     lastname: faker.name.lastName(),
+    avatar: faker.image.cats(),
     address: {
         create: {
             id: `address:${faker.random.uuid()}`,
