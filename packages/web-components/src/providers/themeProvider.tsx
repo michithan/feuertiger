@@ -4,6 +4,7 @@ import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { ThemeProvider as StyledComponentThemeProvider } from 'styled-components';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { de } from 'date-fns/locale';
 
 const theme = createMuiTheme({
     palette: {
@@ -32,7 +33,7 @@ export class ThemeProvider extends React.Component<ThemeProviderProps> {
         return (
             <StyledComponentThemeProvider theme={theme}>
                 <MuiThemeProvider theme={theme}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={de}>
                         <>{children}</>
                     </MuiPickersUtilsProvider>
                 </MuiThemeProvider>

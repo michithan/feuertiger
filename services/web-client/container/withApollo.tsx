@@ -38,4 +38,5 @@ const initClient = ({ initialState }) =>
         cache: new InMemoryCache().restore(initialState || {})
     });
 
-export default withApollo(initClient);
+export default (WrappedComponent: any): any =>
+    withApollo(initClient)(WrappedComponent);

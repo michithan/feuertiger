@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "experimentalDecorators": true,
         "lib": ["dom", "dom.iterable", "esnext"],
         "types": ["react", "node"],
         "skipLibCheck": true,
@@ -22,6 +23,8 @@
         "**/*.tsx",
         "pages/_document.js",
         "pages/_app.js",
+        "pages/_document.tsx",
+        "pages/_app.tsx",
         "next.config.js"
     ],
     "exclude": ["node_modules"]

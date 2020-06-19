@@ -8,6 +8,7 @@ import { PreSaveDialog, PreDiscardDialog } from '../index';
 
 export interface EditButtonGroupProps {
     editMode: boolean;
+    dirty: boolean;
     handleClickEdit: () => any;
     handleClickSave: () => any;
     handleClickDiscard: () => any;
@@ -47,7 +48,7 @@ export class EditButtonGroup extends React.Component<
             showPreBackDialog: false
         });
 
-    handleClickCancel = () =>
+    handleClickBack = () =>
         this.setState({
             showPreSaveDialog: false,
             showPreDiscardDialog: false,
@@ -74,7 +75,7 @@ export class EditButtonGroup extends React.Component<
     handleClickConfirmCancel = () => this.reset();
 
     render() {
-        const { editMode, handleClickEdit } = this.props;
+        const { editMode, handleClickEdit, dirty } = this.props;
         const {
             showPreSaveDialog,
             showPreDiscardDialog,
@@ -102,13 +103,28 @@ export class EditButtonGroup extends React.Component<
                     handleClickDiscard={this.handleClickConfirmBack}
                     handleClickCancel={this.handleClickConfirmCancel}
                 />
-                <Button aria-label="edit" onClick={this.handleClickSave}>
+                <Button
+                    aria-label="edit"
+                    onClick={this.handleClickSave}
+                    disabled={!dirty}
+                >
                     <SaveIcon />
                 </Button>
-                <Button aria-label="edit" onClick={this.handleClickDiscard}>
+                <Button
+                    aria-label="edit"
+                    onClick={this.handleClickDiscard}
+                    disabled={!dirty}
+                >
                     <DiscardIcon />
                 </Button>
-                <Button aria-label="edit" onClick={this.handleClickCancel}>
+                <Button
+                    aria-label="edit"
+                    onClick={
+                        dirty
+                            ? this.handleClickBack
+                            : this.handleClickConfirmBack
+                    }
+                >
                     <CancelIcon />
                 </Button>
             </ButtonGroup>

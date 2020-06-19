@@ -4,11 +4,17 @@ import {
     Avatar,
     Typography,
     Divider,
-    Breadcrumbs
+    Breadcrumbs,
+    TextField
 } from '@material-ui/core';
-import { Person, PersonDetailsQueryResult } from '@feuertiger/schema-graphql';
+import {
+    Person,
+    PersonDetailsQueryResult,
+    Grade
+} from '@feuertiger/schema-graphql';
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { withFormik, FormikProps } from 'formik';
 
 import { Link, Paper, Detail, EditButtonGroup, DetailType } from '../index';
 
@@ -31,22 +37,90 @@ const GridDivider = () => (
     </Grid>
 );
 
-export class MemberDetails extends React.Component<MemberDetailsProps, State> {
-    constructor(props: MemberDetailsProps) {
+interface FormValues {
+    id: string;
+    firstname: string;
+    lastname: string;
+    avatar: string;
+    dateOfBirth: string;
+    grade: Grade;
+    exercisesParticipated: number;
+    exercisesLeaded: number;
+    promotions: number;
+    memberships: number;
+    placeOfBirth: string;
+    birthName: string;
+    entryDate: string;
+    active: boolean;
+    postalCode: string;
+    city: string;
+    street: string;
+    streetNumber: string;
+}
+
+const formConfig = {
+    mapPropsToValues: ({ member }: MemberDetailsProps) => {
+        const {
+            address,
+            memberships,
+            exercisesParticipated,
+            exercisesLeaded,
+            promotions
+        } = member || {};
+        const { entryDate, active } = memberships?.[0] || {};
+        const { postalCode, city, street, streetNumber } = address || {};
+        return {
+            ...member,
+            entryDate,
+            active,
+            postalCode,
+            city,
+            street,
+            streetNumber,
+            exercisesParticipated: exercisesParticipated?.length,
+            exercisesLeaded: exercisesLeaded?.length,
+            promotions: promotions?.length,
+            memberships: memberships?.length
+        };
+    },
+    enableReinitialize: true,
+    validate: () => ({}),
+    handleSubmit: () => {}
+};
+
+class MemberDetailsWithForm extends React.Component<
+    MemberDetailsProps & FormikProps<FormValues>,
+    State
+> {
+    constructor(props: MemberDetailsProps & FormikProps<FormValues>) {
         super(props);
         this.state = { editMode: false };
     }
 
-    handleClickEdit = () => this.setState({ editMode: true });
+    private handleClickEdit = () => this.setState({ editMode: true });
 
-    handleClickDiscard = () => this.setState({ editMode: true });
+    private handleClickDiscard = () => {
+        this.props?.resetForm();
+        this.setState({ editMode: true });
+    };
 
-    handleClickBack = () => this.setState({ editMode: false });
+    private handleClickBack = () => {
+        this.props?.resetForm();
+        this.setState({ editMode: false });
+    };
 
-    handleClickSave = () => this.setState({ editMode: false });
+    private handleClickSave = () => this.setState({ editMode: false });
 
     render() {
-        const { member, loading } = this.props;
+        const {
+            values,
+            loading,
+            dirty,
+            handleChange,
+            handleBlur,
+            handleReset,
+            handleSubmit
+        } = this.props;
         const { editMode } = this.state;
         const {
             id,
@@ -55,16 +129,18 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
             avatar,
             dateOfBirth,
             grade,
-            address,
+            placeOfBirth,
+            birthName,
+            entryDate,
+            active,
+            postalCode,
+            city,
+            street,
+            streetNumber,
             exercisesParticipated,
             exercisesLeaded,
-            promotions,
-            memberships,
-            placeOfBirth,
-            birthName
-        } = member || {};
-        const { entryDate, active } = (memberships && memberships[0]) || {};
-        const { postalCode, city, street, streetNumber } = address || {};
+            promotions
+        } = values;
 
         return (
             <Grid container spacing={3}>
@@ -82,7 +158,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                 </Grid>
                 <Grid item xs={12}>
                     <Paper>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <Grid container spacing={3} justify="center">
                                 {loading ? (
                                     <>
@@ -133,6 +209,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                             >
                                                 <EditButtonGroup
                                                     editMode={editMode}
+                                                    dirty={dirty}
                                                     handleClickSave={
                                                         this.handleClickSave
                                                     }
@@ -150,26 +227,106 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                         </Grid>
                                         <GridDivider />
                                         <Detail
+                                            handleChange={handleChange}
+                                            handleBlur={handleBlur}
+                                            handleReset={handleReset}
                                             label="Geburtsdatum"
                                             edit={editMode}
                                             name="dateOfBirth"
-                                            type={DetailType.Text}
+                                            type={DetailType.Date}
                                         >
                                             {dateOfBirth}
                                         </Detail>
                                         <Detail
+                                            handleChange={handleChange}
+                                            handleBlur={handleBlur}
+                                            handleReset={handleReset}
                                             label="Adresse"
                                             edit={editMode}
                                             name="adresse"
-                                            type={DetailType.Text}
+                                            type={DetailType.Component}
                                         >
-                                            <>
-                                                {postalCode} {city}
-                                                <br />
-                                                {street} {streetNumber}
-                                            </>
+                                            {editMode ? (
+                                                <Grid container>
+                                                    <Grid item xs={6}>
+                                                        <TextField
+                                                            onChange={
+                                                                handleChange
+                                                            }
+                                                            onBlur={handleBlur}
+                                                            onReset={
+                                                                handleReset
+                                                            }
+                                                            label="PLZ"
+                                                            id="postalCodeInput"
+                                                            name="postalCodeInput"
+                                                            defaultValue={
+                                                                postalCode
+                                                            }
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <TextField
+                                                            onChange={
+                                                                handleChange
+                                                            }
+                                                            onBlur={handleBlur}
+                                                            onReset={
+                                                                handleReset
+                                                            }
+                                                            label="Ort"
+                                                            id="cityInput"
+                                                            name="cityInput"
+                                                            defaultValue={city}
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <TextField
+                                                            onChange={
+                                                                handleChange
+                                                            }
+                                                            onBlur={handleBlur}
+                                                            onReset={
+                                                                handleReset
+                                                            }
+                                                            label="Straße"
+                                                            id="streetInput"
+                                                            name="streetInput"
+                                                            defaultValue={
+                                                                street
+                                                            }
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={6}>
+                                                        <TextField
+                                                            onChange={
+                                                                handleChange
+                                                            }
+                                                            onBlur={handleBlur}
+                                                            onReset={
+                                                                handleReset
+                                                            }
+                                                            label="Nummer"
+                                                            id="streetNumberInput"
+                                                            name="streetNumberInput"
+                                                            defaultValue={
+                                                                streetNumber
+                                                            }
+                                                        />
+                                                    </Grid>
+                                                </Grid>
+                                            ) : (
+                                                <>
+                                                    {postalCode} {city}
+                                                    <br />
+                                                    {street} {streetNumber}
+                                                </>
+                                            )}
                                         </Detail>
                                         <Detail
+                                            handleChange={handleChange}
+                                            handleBlur={handleBlur}
+                                            handleReset={handleReset}
                                             label="Geburtsort"
                                             edit={editMode}
                                             name="placeOfBirth"
@@ -178,6 +335,9 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                             {placeOfBirth}
                                         </Detail>
                                         <Detail
+                                            handleChange={handleChange}
+                                            handleBlur={handleBlur}
+                                            handleReset={handleReset}
                                             label="Geburtsname"
                                             edit={editMode}
                                             name="birthName"
@@ -187,14 +347,20 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                         </Detail>
                                         <GridDivider />
                                         <Detail
+                                            handleChange={handleChange}
+                                            handleBlur={handleBlur}
+                                            handleReset={handleReset}
                                             label="Eintrittsdatum"
                                             edit={editMode}
                                             name="entryDate"
-                                            type={DetailType.Text}
+                                            type={DetailType.Date}
                                         >
                                             {entryDate}
                                         </Detail>
                                         <Detail
+                                            handleChange={handleChange}
+                                            handleBlur={handleBlur}
+                                            handleReset={handleReset}
                                             label="Status"
                                             edit={editMode}
                                             name="active"
@@ -203,8 +369,10 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                             {active ? 'Aktiv' : 'Inaktiv'}
                                         </Detail>
                                         <Detail
+                                            handleChange={handleChange}
+                                            handleBlur={handleBlur}
+                                            handleReset={handleReset}
                                             label="Dienstgrad"
-                                            edit={editMode}
                                             name="grade"
                                             type={DetailType.Text}
                                         >
@@ -214,25 +382,25 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                             label="Beförderungen"
                                             edit={editMode}
                                             name="promotions"
-                                            type={DetailType.Text}
+                                            type={DetailType.Button}
                                         >
-                                            {promotions?.length}
+                                            {promotions}
                                         </Detail>
                                         <Detail
                                             label="Übungen teilgenommen"
                                             edit={editMode}
                                             name="exercisesParticipated"
-                                            type={DetailType.Text}
+                                            type={DetailType.Button}
                                         >
-                                            {exercisesParticipated?.length}
+                                            {exercisesParticipated}
                                         </Detail>
                                         <Detail
                                             label="Übungen geleitet"
                                             edit={editMode}
                                             name="exercisesLeaded"
-                                            type={DetailType.Text}
+                                            type={DetailType.Button}
                                         >
-                                            {exercisesLeaded?.length}
+                                            {exercisesLeaded}
                                         </Detail>
                                     </>
                                 )}
@@ -244,3 +412,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
         );
     }
 }
+
+export const MemberDetails = withFormik<MemberDetailsProps, FormValues>(
+    formConfig
+)(MemberDetailsWithForm);
