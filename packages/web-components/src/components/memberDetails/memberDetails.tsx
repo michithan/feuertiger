@@ -1,8 +1,15 @@
 import React, { ReactElement } from 'react';
-import { Grid, Avatar, Typography, Divider } from '@material-ui/core';
+import {
+    Grid,
+    Avatar,
+    Typography,
+    Divider,
+    Breadcrumbs
+} from '@material-ui/core';
 import { Person, PersonDetailsQueryResult } from '@feuertiger/schema-graphql';
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { Link } from '../link/link';
 import { Paper } from '../paper/paper';
 
 export interface MemberDetailsProps extends PersonDetailsQueryResult {
@@ -59,6 +66,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
         }
 
         const {
+            id,
             firstname,
             lastname,
             avatar,
@@ -76,60 +84,98 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
         const { postalCode, city, street, streetNumber } = address || {};
 
         return (
-            <Paper>
-                <Grid container spacing={3} justify="center">
-                    <Grid item xs={12} container spacing={3} justify="center">
-                        <Grid
-                            item
-                            xs={6}
-                            justify="center"
-                            alignContent="center"
-                            container
-                        >
-                            <Typography variant="h3" component="h3">
-                                {firstname} {lastname}
-                            </Typography>
-                        </Grid>
-                        <Grid
-                            item
-                            xs={6}
-                            justify="center"
-                            alignContent="center"
-                            container
-                        >
-                            <StyledAvatar alt="Profilbild" src={avatar} />
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12} container spacing={3} justify="center">
-                        <Divider style={{ width: '100%' }} />
-                    </Grid>
-                    <Detail label="Geburtsdatum">{dateOfBirth}</Detail>
-                    <Detail label="Adresse">
-                        <>
-                            {postalCode} {city}
-                            <br />
-                            {street} {streetNumber}
-                        </>
-                    </Detail>
-                    <Detail label="Geburtsort">{placeOfBirth}</Detail>
-                    <Detail label="Geburtsname">{birthName}</Detail>
-                    <Grid item xs={12} container spacing={3} justify="center">
-                        <Divider style={{ width: '100%' }} />
-                    </Grid>
-                    <Detail label="Eintrittsdatum">{entryDate}</Detail>
-                    <Detail label="Status">
-                        {active ? 'Aktiv' : 'Inaktiv'}
-                    </Detail>
-                    <Detail label="Dienstgrad">{grade}</Detail>
-                    <Detail label="Beförderungen">{promotions?.length}</Detail>
-                    <Detail label="Übungen teilgenommen">
-                        {exercisesParticipated?.length}
-                    </Detail>
-                    <Detail label="Übungen geleitet">
-                        {exercisesLeaded?.length}
-                    </Detail>
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Link href="/member">Mitglieder</Link>
+                        {id && firstname && (
+                            <Link href="/member/[id]" as={`/member/${id}`}>
+                                {firstname}
+                            </Link>
+                        )}
+                        <Typography color="textPrimary">Details</Typography>
+                    </Breadcrumbs>
                 </Grid>
-            </Paper>
+                <Grid item xs={12}>
+                    <Paper>
+                        <Grid container spacing={3} justify="center">
+                            <Grid
+                                item
+                                xs={12}
+                                container
+                                spacing={3}
+                                justify="center"
+                            >
+                                <Grid
+                                    item
+                                    xs={6}
+                                    justify="center"
+                                    alignContent="center"
+                                    container
+                                >
+                                    <Typography variant="h3" component="h3">
+                                        {firstname} {lastname}
+                                    </Typography>
+                                </Grid>
+                                <Grid
+                                    item
+                                    xs={6}
+                                    justify="center"
+                                    alignContent="center"
+                                    container
+                                >
+                                    <StyledAvatar
+                                        alt="Profilbild"
+                                        src={avatar}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                container
+                                spacing={3}
+                                justify="center"
+                            >
+                                <Divider style={{ width: '100%' }} />
+                            </Grid>
+                            <Detail label="Geburtsdatum">{dateOfBirth}</Detail>
+                            <Detail label="Adresse">
+                                <>
+                                    {postalCode} {city}
+                                    <br />
+                                    {street} {streetNumber}
+                                </>
+                            </Detail>
+                            <Detail label="Geburtsort">{placeOfBirth}</Detail>
+                            <Detail label="Geburtsname">{birthName}</Detail>
+                            <Grid
+                                item
+                                xs={12}
+                                container
+                                spacing={3}
+                                justify="center"
+                            >
+                                <Divider style={{ width: '100%' }} />
+                            </Grid>
+                            <Detail label="Eintrittsdatum">{entryDate}</Detail>
+                            <Detail label="Status">
+                                {active ? 'Aktiv' : 'Inaktiv'}
+                            </Detail>
+                            <Detail label="Dienstgrad">{grade}</Detail>
+                            <Detail label="Beförderungen">
+                                {promotions?.length}
+                            </Detail>
+                            <Detail label="Übungen teilgenommen">
+                                {exercisesParticipated?.length}
+                            </Detail>
+                            <Detail label="Übungen geleitet">
+                                {exercisesLeaded?.length}
+                            </Detail>
+                        </Grid>
+                    </Paper>
+                </Grid>
+            </Grid>
         );
     }
 }

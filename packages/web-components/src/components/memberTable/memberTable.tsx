@@ -1,10 +1,18 @@
 import React from 'react';
-import { Grid, Button, CircularProgress, Fab, Avatar } from '@material-ui/core';
+import {
+    Grid,
+    Button,
+    CircularProgress,
+    Fab,
+    Avatar,
+    Breadcrumbs,
+    Typography
+} from '@material-ui/core';
 import MaterialTable from 'material-table';
 import FindInPage from '@material-ui/icons/FindInPage';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
-import Link from 'next/link';
+import { Link } from '../link/link';
 import { AddMember } from '../addMember/addMember';
 
 interface State {
@@ -69,7 +77,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                             field: 'edit',
                             filtering: false,
                             render: ({ id }) => (
-                                <Link href="/member/[id]" as={`member/${id}`}>
+                                <Link href="/member/[id]" as={`/member/${id}`}>
                                     <Fab color="primary" aria-label="edit">
                                         <FindInPage />
                                     </Fab>
@@ -84,30 +92,32 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
         }
 
         return (
-            <>
+            <Grid container spacing={3}>
                 <AddMember
                     startOcr={startOcr}
                     open={addDialogOpen}
                     handleClose={this.handleCloseAddDialog}
                 />
-                <Grid container spacing={3}>
-                    {/* Chart */}
-                    <Grid item xs={12} md={6} lg={4}>
-                        <Button
-                            id="add-member-button"
-                            variant="contained"
-                            color="primary"
-                            onClick={this.handleOpenAddDialog}
-                        >
-                            Mitglied hinzufügen
-                        </Button>
-                    </Grid>
-                    {/* Recent Deposits */}
-                    <Grid item xs={12} md={12} lg={12}>
-                        {content}
-                    </Grid>
+                <Grid item xs={12}>
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Link href="/member">Mitglieder</Link>
+                        <Typography color="textPrimary">Übersicht</Typography>
+                    </Breadcrumbs>
                 </Grid>
-            </>
+                <Grid item xs={12} md={6} lg={4}>
+                    <Button
+                        id="add-member-button"
+                        variant="contained"
+                        color="primary"
+                        onClick={this.handleOpenAddDialog}
+                    >
+                        Mitglied hinzufügen
+                    </Button>
+                </Grid>
+                <Grid item xs={12} md={12} lg={12}>
+                    {content}
+                </Grid>
+            </Grid>
         );
     }
 }
