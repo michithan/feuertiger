@@ -1,0 +1,29 @@
+mutation updatePerson($person: _Person!) {
+    updatePerson(person: $person) {
+        id
+        firstname
+        lastname
+        avatar
+        birthName
+        placeOfBirth
+        dateOfBirth
+        membershipNumber
+        grade
+        address {
+            id
+            street
+            streetNumber
+            postalCode
+            city
+            contry
+        }
+        memberships {
+            id
+            active
+            entryDate
+        }
+        ...personPromotions
+        ...personExercisesLeaded
+        ...personExercisesParticipated
+    }
+}

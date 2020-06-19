@@ -25,15 +25,9 @@ query personDetails($id: ID!) {
                 active
                 entryDate
             }
-            exercisesLeaded {
-                id
-            }
-            exercisesParticipated {
-                id
-            }
-            promotions {
-                id
-            }
+            ...personPromotions
+            ...personExercisesLeaded
+            ...personExercisesParticipated
         }
     }
 }

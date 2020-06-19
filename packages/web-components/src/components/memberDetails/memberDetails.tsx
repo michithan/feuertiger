@@ -17,6 +17,9 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { withFormik, FormikProps } from 'formik';
 
 import { Link, Paper, Detail, EditButtonGroup, DetailType } from '../index';
+import { MemberExercisesDetails } from './memberExercisesDetails';
+import { MemberExercisesLeadDetails } from './memberExercisesLeadDetails';
+import { MemberPromotionsDetail } from './memberPromotionsDetail';
 
 export interface MemberDetailsProps extends PersonDetailsQueryResult {
     member: Partial<Person> | undefined | null;
@@ -60,13 +63,7 @@ interface FormValues {
 
 const formConfig = {
     mapPropsToValues: ({ member }: MemberDetailsProps) => {
-        const {
-            address,
-            memberships,
-            exercisesParticipated,
-            exercisesLeaded,
-            promotions
-        } = member || {};
+        const { address, memberships } = member || {};
         const { entryDate, active } = memberships?.[0] || {};
         const { postalCode, city, street, streetNumber } = address || {};
         return {
@@ -77,9 +74,6 @@ const formConfig = {
             city,
             street,
             streetNumber,
-            exercisesParticipated: exercisesParticipated?.length,
-            exercisesLeaded: exercisesLeaded?.length,
-            promotions: promotions?.length,
             memberships: memberships?.length
         };
     },
@@ -119,7 +113,8 @@ class MemberDetailsWithForm extends React.Component<
             handleChange,
             handleBlur,
             handleReset,
-            handleSubmit
+            handleSubmit,
+            member
         } = this.props;
         const { editMode } = this.state;
         const {
@@ -136,10 +131,7 @@ class MemberDetailsWithForm extends React.Component<
             postalCode,
             city,
             street,
-            streetNumber,
-            exercisesParticipated,
-            exercisesLeaded,
-            promotions
+            streetNumber
         } = values;
 
         return (
@@ -226,187 +218,208 @@ class MemberDetailsWithForm extends React.Component<
                                             </Grid>
                                         </Grid>
                                         <GridDivider />
-                                        <Detail
-                                            handleChange={handleChange}
-                                            handleBlur={handleBlur}
-                                            handleReset={handleReset}
-                                            label="Geburtsdatum"
-                                            edit={editMode}
-                                            name="dateOfBirth"
-                                            type={DetailType.Date}
-                                        >
-                                            {dateOfBirth}
-                                        </Detail>
-                                        <Detail
-                                            handleChange={handleChange}
-                                            handleBlur={handleBlur}
-                                            handleReset={handleReset}
-                                            label="Adresse"
-                                            edit={editMode}
-                                            name="adresse"
-                                            type={DetailType.Component}
-                                        >
-                                            {editMode ? (
-                                                <Grid container>
-                                                    <Grid item xs={6}>
-                                                        <TextField
-                                                            onChange={
-                                                                handleChange
-                                                            }
-                                                            onBlur={handleBlur}
-                                                            onReset={
-                                                                handleReset
-                                                            }
-                                                            label="PLZ"
-                                                            id="postalCodeInput"
-                                                            name="postalCodeInput"
-                                                            defaultValue={
-                                                                postalCode
-                                                            }
-                                                        />
+                                        <Grid item xs={12} sm={6}>
+                                            <Detail
+                                                handleChange={handleChange}
+                                                handleBlur={handleBlur}
+                                                handleReset={handleReset}
+                                                label="Geburtsdatum"
+                                                edit={editMode}
+                                                name="dateOfBirth"
+                                                type={DetailType.Date}
+                                            >
+                                                {dateOfBirth}
+                                            </Detail>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <Detail
+                                                handleChange={handleChange}
+                                                handleBlur={handleBlur}
+                                                handleReset={handleReset}
+                                                label="Adresse"
+                                                edit={editMode}
+                                                name="adresse"
+                                                type={DetailType.Component}
+                                            >
+                                                {editMode ? (
+                                                    <Grid container>
+                                                        <Grid item xs={6}>
+                                                            <TextField
+                                                                onChange={
+                                                                    handleChange
+                                                                }
+                                                                onBlur={
+                                                                    handleBlur
+                                                                }
+                                                                onReset={
+                                                                    handleReset
+                                                                }
+                                                                label="PLZ"
+                                                                id="postalCodeInput"
+                                                                name="postalCodeInput"
+                                                                defaultValue={
+                                                                    postalCode
+                                                                }
+                                                            />
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <TextField
+                                                                onChange={
+                                                                    handleChange
+                                                                }
+                                                                onBlur={
+                                                                    handleBlur
+                                                                }
+                                                                onReset={
+                                                                    handleReset
+                                                                }
+                                                                label="Ort"
+                                                                id="cityInput"
+                                                                name="cityInput"
+                                                                defaultValue={
+                                                                    city
+                                                                }
+                                                            />
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <TextField
+                                                                onChange={
+                                                                    handleChange
+                                                                }
+                                                                onBlur={
+                                                                    handleBlur
+                                                                }
+                                                                onReset={
+                                                                    handleReset
+                                                                }
+                                                                label="Straße"
+                                                                id="streetInput"
+                                                                name="streetInput"
+                                                                defaultValue={
+                                                                    street
+                                                                }
+                                                            />
+                                                        </Grid>
+                                                        <Grid item xs={6}>
+                                                            <TextField
+                                                                onChange={
+                                                                    handleChange
+                                                                }
+                                                                onBlur={
+                                                                    handleBlur
+                                                                }
+                                                                onReset={
+                                                                    handleReset
+                                                                }
+                                                                label="Nummer"
+                                                                id="streetNumberInput"
+                                                                name="streetNumberInput"
+                                                                defaultValue={
+                                                                    streetNumber
+                                                                }
+                                                            />
+                                                        </Grid>
                                                     </Grid>
-                                                    <Grid item xs={6}>
-                                                        <TextField
-                                                            onChange={
-                                                                handleChange
-                                                            }
-                                                            onBlur={handleBlur}
-                                                            onReset={
-                                                                handleReset
-                                                            }
-                                                            label="Ort"
-                                                            id="cityInput"
-                                                            name="cityInput"
-                                                            defaultValue={city}
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <TextField
-                                                            onChange={
-                                                                handleChange
-                                                            }
-                                                            onBlur={handleBlur}
-                                                            onReset={
-                                                                handleReset
-                                                            }
-                                                            label="Straße"
-                                                            id="streetInput"
-                                                            name="streetInput"
-                                                            defaultValue={
-                                                                street
-                                                            }
-                                                        />
-                                                    </Grid>
-                                                    <Grid item xs={6}>
-                                                        <TextField
-                                                            onChange={
-                                                                handleChange
-                                                            }
-                                                            onBlur={handleBlur}
-                                                            onReset={
-                                                                handleReset
-                                                            }
-                                                            label="Nummer"
-                                                            id="streetNumberInput"
-                                                            name="streetNumberInput"
-                                                            defaultValue={
-                                                                streetNumber
-                                                            }
-                                                        />
-                                                    </Grid>
-                                                </Grid>
-                                            ) : (
-                                                <>
-                                                    {postalCode} {city}
-                                                    <br />
-                                                    {street} {streetNumber}
-                                                </>
-                                            )}
-                                        </Detail>
-                                        <Detail
-                                            handleChange={handleChange}
-                                            handleBlur={handleBlur}
-                                            handleReset={handleReset}
-                                            label="Geburtsort"
-                                            edit={editMode}
-                                            name="placeOfBirth"
-                                            type={DetailType.Text}
-                                        >
-                                            {placeOfBirth}
-                                        </Detail>
-                                        <Detail
-                                            handleChange={handleChange}
-                                            handleBlur={handleBlur}
-                                            handleReset={handleReset}
-                                            label="Geburtsname"
-                                            edit={editMode}
-                                            name="birthName"
-                                            type={DetailType.Text}
-                                        >
-                                            {birthName}
-                                        </Detail>
+                                                ) : (
+                                                    <>
+                                                        {postalCode} {city}
+                                                        <br />
+                                                        {street} {streetNumber}
+                                                    </>
+                                                )}
+                                            </Detail>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <Detail
+                                                handleChange={handleChange}
+                                                handleBlur={handleBlur}
+                                                handleReset={handleReset}
+                                                label="Geburtsort"
+                                                edit={editMode}
+                                                name="placeOfBirth"
+                                                type={DetailType.Text}
+                                            >
+                                                {placeOfBirth}
+                                            </Detail>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <Detail
+                                                handleChange={handleChange}
+                                                handleBlur={handleBlur}
+                                                handleReset={handleReset}
+                                                label="Geburtsname"
+                                                edit={editMode}
+                                                name="birthName"
+                                                type={DetailType.Text}
+                                            >
+                                                {birthName}
+                                            </Detail>
+                                        </Grid>
                                         <GridDivider />
-                                        <Detail
-                                            handleChange={handleChange}
-                                            handleBlur={handleBlur}
-                                            handleReset={handleReset}
-                                            label="Eintrittsdatum"
-                                            edit={editMode}
-                                            name="entryDate"
-                                            type={DetailType.Date}
-                                        >
-                                            {entryDate}
-                                        </Detail>
-                                        <Detail
-                                            handleChange={handleChange}
-                                            handleBlur={handleBlur}
-                                            handleReset={handleReset}
-                                            label="Status"
-                                            edit={editMode}
-                                            name="active"
-                                            type={DetailType.Text}
-                                        >
-                                            {active ? 'Aktiv' : 'Inaktiv'}
-                                        </Detail>
-                                        <Detail
-                                            handleChange={handleChange}
-                                            handleBlur={handleBlur}
-                                            handleReset={handleReset}
-                                            label="Dienstgrad"
-                                            name="grade"
-                                            type={DetailType.Text}
-                                        >
-                                            {grade}
-                                        </Detail>
-                                        <Detail
-                                            label="Beförderungen"
-                                            edit={editMode}
-                                            name="promotions"
-                                            type={DetailType.Button}
-                                        >
-                                            {promotions}
-                                        </Detail>
-                                        <Detail
-                                            label="Übungen teilgenommen"
-                                            edit={editMode}
-                                            name="exercisesParticipated"
-                                            type={DetailType.Button}
-                                        >
-                                            {exercisesParticipated}
-                                        </Detail>
-                                        <Detail
-                                            label="Übungen geleitet"
-                                            edit={editMode}
-                                            name="exercisesLeaded"
-                                            type={DetailType.Button}
-                                        >
-                                            {exercisesLeaded}
-                                        </Detail>
+                                        <Grid item xs={12} sm={6}>
+                                            <Detail
+                                                handleChange={handleChange}
+                                                handleBlur={handleBlur}
+                                                handleReset={handleReset}
+                                                label="Eintrittsdatum"
+                                                edit={editMode}
+                                                name="entryDate"
+                                                type={DetailType.Date}
+                                            >
+                                                {entryDate}
+                                            </Detail>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <Detail
+                                                handleChange={handleChange}
+                                                handleBlur={handleBlur}
+                                                handleReset={handleReset}
+                                                label="Status"
+                                                edit={editMode}
+                                                name="active"
+                                                type={DetailType.Text}
+                                            >
+                                                {active ? 'Aktiv' : 'Inaktiv'}
+                                            </Detail>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <Detail
+                                                handleChange={handleChange}
+                                                handleBlur={handleBlur}
+                                                handleReset={handleReset}
+                                                label="Dienstgrad"
+                                                name="grade"
+                                                type={DetailType.Text}
+                                            >
+                                                {grade}
+                                            </Detail>
+                                        </Grid>
+                                        <Grid item xs={12} sm={6} />
                                     </>
                                 )}
                             </Grid>
                         </form>
                     </Paper>
+                </Grid>
+                <Grid item xs={6}>
+                    <MemberExercisesDetails
+                        editMode={editMode}
+                        exercisesParticipated={member?.exercisesParticipated}
+                    />
+                </Grid>
+                <Grid item container spacing={3} xs={6}>
+                    <Grid item xs={12}>
+                        <MemberPromotionsDetail
+                            editMode={editMode}
+                            promotions={member?.promotions}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <MemberExercisesLeadDetails
+                            editMode={editMode}
+                            exercisesLeaded={member?.exercisesLeaded}
+                        />
+                    </Grid>
                 </Grid>
             </Grid>
         );

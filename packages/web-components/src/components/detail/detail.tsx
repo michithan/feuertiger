@@ -119,7 +119,7 @@ export const Detail = ({
         }
     }
     return (
-        <Grid item xs={12} sm={6} container spacing={3}>
+        <Grid container spacing={3}>
             <Grid item xs={6}>
                 <Typography variant="caption">{label}</Typography>
             </Grid>
