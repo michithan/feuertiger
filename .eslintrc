@@ -15,7 +15,8 @@
             {
                 "endOfLine": "auto"
             }
-        ]
+        ],
+        "import/no-cycle": 0
     },
     "plugins": [
         "prettier",

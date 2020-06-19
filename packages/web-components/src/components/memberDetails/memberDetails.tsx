@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import {
     Grid,
     Avatar,
@@ -9,62 +9,45 @@ import {
 import { Person, PersonDetailsQueryResult } from '@feuertiger/schema-graphql';
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Link } from '../link/link';
-import { Paper } from '../paper/paper';
+
+import { Link, Paper, Detail, EditButtonGroup } from '../index';
 
 export interface MemberDetailsProps extends PersonDetailsQueryResult {
     member: Partial<Person> | undefined | null;
 }
-
-interface State {}
 
 const StyledAvatar = styled(Avatar)`
     height: ${({ theme }) => theme.spacing(14)}px !important;
     width: ${({ theme }) => theme.spacing(14)}px !important;
 `;
 
-export interface DetailProps {
-    label: string | number | ReactElement;
-    children: string | number | ReactElement | ReactElement[];
+interface State {
+    editMode: boolean;
 }
 
-const Detail = ({ label, children }: DetailProps) => (
-    <Grid item xs={12} sm={6} container spacing={3}>
-        <Grid item xs={6}>
-            <Typography variant="caption">{label}</Typography>
-        </Grid>
-        <Grid item xs={6}>
-            <Typography variant="body1">{children}</Typography>
-        </Grid>
+const GridDivider = () => (
+    <Grid item xs={12} container spacing={3} justify="center">
+        <Divider style={{ width: '100%' }} />
     </Grid>
 );
 
 export class MemberDetails extends React.Component<MemberDetailsProps, State> {
     constructor(props: MemberDetailsProps) {
         super(props);
-        this.state = {};
+        this.state = { editMode: false };
     }
+
+    handleClickEdit = () => this.setState({ editMode: true });
+
+    handleClickDiscard = () => this.setState({ editMode: true });
+
+    handleClickBack = () => this.setState({ editMode: false });
+
+    handleClickSave = () => this.setState({ editMode: false });
 
     render() {
         const { member, loading } = this.props;
-
-        if (loading && !member) {
-            return (
-                <Paper>
-                    <>
-                        <Skeleton height={40} />
-                        <Skeleton variant="rect" height={190} />
-                        <Skeleton height={40} />
-                        <Skeleton variant="rect" height={190} />
-                        <Skeleton height={40} />
-                        <Skeleton variant="rect" height={190} />
-                        <Skeleton height={40} />
-                        <Skeleton variant="rect" height={190} />
-                    </>
-                </Paper>
-            );
-        }
-
+        const { editMode } = this.state;
         const {
             id,
             firstname,
@@ -88,91 +71,163 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                 <Grid item xs={12}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link href="/member">Mitglieder</Link>
-                        {id && firstname && (
-                            <Link href="/member/[id]" as={`/member/${id}`}>
-                                {firstname}
-                            </Link>
-                        )}
+                        <Link
+                            href={id ? '/member/[id]' : '/member'}
+                            as={id ? `/member/${id}` : '/member'}
+                        >
+                            {firstname || '...'}
+                        </Link>
                         <Typography color="textPrimary">Details</Typography>
                     </Breadcrumbs>
                 </Grid>
                 <Grid item xs={12}>
                     <Paper>
-                        <Grid container spacing={3} justify="center">
-                            <Grid
-                                item
-                                xs={12}
-                                container
-                                spacing={3}
-                                justify="center"
-                            >
-                                <Grid
-                                    item
-                                    xs={6}
-                                    justify="center"
-                                    alignContent="center"
-                                    container
-                                >
-                                    <Typography variant="h3" component="h3">
-                                        {firstname} {lastname}
-                                    </Typography>
-                                </Grid>
-                                <Grid
-                                    item
-                                    xs={6}
-                                    justify="center"
-                                    alignContent="center"
-                                    container
-                                >
-                                    <StyledAvatar
-                                        alt="Profilbild"
-                                        src={avatar}
-                                    />
-                                </Grid>
+                        <form>
+                            <Grid container spacing={3} justify="center">
+                                {loading ? (
+                                    <>
+                                        <Skeleton height={40} />
+                                        <Skeleton variant="rect" height={190} />
+                                    </>
+                                ) : (
+                                    <>
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            container
+                                            spacing={3}
+                                            justify="center"
+                                        >
+                                            <Grid
+                                                item
+                                                xs={5}
+                                                justify="center"
+                                                alignContent="center"
+                                                container
+                                            >
+                                                <Typography
+                                                    variant="h3"
+                                                    component="h3"
+                                                >
+                                                    {firstname} {lastname}
+                                                </Typography>
+                                            </Grid>
+                                            <Grid
+                                                item
+                                                xs={4}
+                                                justify="center"
+                                                alignContent="center"
+                                                container
+                                            >
+                                                <StyledAvatar
+                                                    alt="Profilbild"
+                                                    src={avatar}
+                                                />
+                                            </Grid>
+                                            <Grid
+                                                item
+                                                xs={3}
+                                                container
+                                                justify="flex-end"
+                                                alignContent="flex-start"
+                                            >
+                                                <EditButtonGroup
+                                                    editMode={editMode}
+                                                    handleClickSave={
+                                                        this.handleClickSave
+                                                    }
+                                                    handleClickDiscard={
+                                                        this.handleClickDiscard
+                                                    }
+                                                    handleClickBack={
+                                                        this.handleClickBack
+                                                    }
+                                                    handleClickEdit={
+                                                        this.handleClickEdit
+                                                    }
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                        <GridDivider />
+                                        <Detail
+                                            label="Geburtsdatum"
+                                            edit={editMode}
+                                            id="dateOfBirth"
+                                        >
+                                            {dateOfBirth}
+                                        </Detail>
+                                        <Detail
+                                            label="Adresse"
+                                            edit={editMode}
+                                            id="adresse"
+                                        >
+                                            <>
+                                                {postalCode} {city}
+                                                <br />
+                                                {street} {streetNumber}
+                                            </>
+                                        </Detail>
+                                        <Detail
+                                            label="Geburtsort"
+                                            edit={editMode}
+                                            id="placeOfBirth"
+                                        >
+                                            {placeOfBirth}
+                                        </Detail>
+                                        <Detail
+                                            label="Geburtsname"
+                                            edit={editMode}
+                                            id="birthName"
+                                        >
+                                            {birthName}
+                                        </Detail>
+                                        <GridDivider />
+                                        <Detail
+                                            label="Eintrittsdatum"
+                                            edit={editMode}
+                                            id="entryDate"
+                                        >
+                                            {entryDate}
+                                        </Detail>
+                                        <Detail
+                                            label="Status"
+                                            edit={editMode}
+                                            id="active"
+                                        >
+                                            {active ? 'Aktiv' : 'Inaktiv'}
+                                        </Detail>
+                                        <Detail
+                                            label="Dienstgrad"
+                                            edit={editMode}
+                                            id="grade"
+                                        >
+                                            {grade}
+                                        </Detail>
+                                        <Detail
+                                            label="Beförderungen"
+                                            edit={editMode}
+                                            id="promotions"
+                                        >
+                                            {promotions?.length}
+                                        </Detail>
+                                        <Detail
+                                            label="Übungen teilgenommen"
+                                            edit={editMode}
+                                            id="exercisesParticipated"
+                                        >
+                                            {exercisesParticipated?.length}
+                                        </Detail>
+                                        <Detail
+                                            label="Übungen geleitet"
+                                            edit={editMode}
+                                            id="exercisesLeaded"
+                                        >
+                                            {exercisesLeaded?.length}
+                                        </Detail>
+                                    </>
+                                )}
                             </Grid>
-                            <Grid
-                                item
-                                xs={12}
-                                container
-                                spacing={3}
-                                justify="center"
-                            >
-                                <Divider style={{ width: '100%' }} />
-                            </Grid>
-                            <Detail label="Geburtsdatum">{dateOfBirth}</Detail>
-                            <Detail label="Adresse">
-                                <>
-                                    {postalCode} {city}
-                                    <br />
-                                    {street} {streetNumber}
-                                </>
-                            </Detail>
-                            <Detail label="Geburtsort">{placeOfBirth}</Detail>
-                            <Detail label="Geburtsname">{birthName}</Detail>
-                            <Grid
-                                item
-                                xs={12}
-                                container
-                                spacing={3}
-                                justify="center"
-                            >
-                                <Divider style={{ width: '100%' }} />
-                            </Grid>
-                            <Detail label="Eintrittsdatum">{entryDate}</Detail>
-                            <Detail label="Status">
-                                {active ? 'Aktiv' : 'Inaktiv'}
-                            </Detail>
-                            <Detail label="Dienstgrad">{grade}</Detail>
-                            <Detail label="Beförderungen">
-                                {promotions?.length}
-                            </Detail>
-                            <Detail label="Übungen teilgenommen">
-                                {exercisesParticipated?.length}
-                            </Detail>
-                            <Detail label="Übungen geleitet">
-                                {exercisesLeaded?.length}
-                            </Detail>
-                        </Grid>
+                        </form>
                     </Paper>
                 </Grid>
             </Grid>

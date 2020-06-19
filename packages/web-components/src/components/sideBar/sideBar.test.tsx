@@ -1,6 +1,6 @@
 import { test, describe, expect } from '@jest/globals';
 import { SideBar } from './sideBar';
-import { ThemeProvider } from '../../providers/themeProvider';
+import { ThemeProvider } from '../../index';
 import { shallow } from 'enzyme';
 
 describe('Test side bar', () => {

@@ -13,7 +13,7 @@ import FindInPage from '@material-ui/icons/FindInPage';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
 import { Link } from '../link/link';
-import { AddMember } from '../addMember/addMember';
+import { AddMember } from '../index';
 
 interface State {
     addDialogOpen: boolean;
