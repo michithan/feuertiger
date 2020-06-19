@@ -10,7 +10,7 @@ import { Person, PersonDetailsQueryResult } from '@feuertiger/schema-graphql';
 import styled from 'styled-components';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import { Link, Paper, Detail, EditButtonGroup } from '../index';
+import { Link, Paper, Detail, EditButtonGroup, DetailType } from '../index';
 
 export interface MemberDetailsProps extends PersonDetailsQueryResult {
     member: Partial<Person> | undefined | null;
@@ -152,14 +152,16 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                         <Detail
                                             label="Geburtsdatum"
                                             edit={editMode}
-                                            id="dateOfBirth"
+                                            name="dateOfBirth"
+                                            type={DetailType.Text}
                                         >
                                             {dateOfBirth}
                                         </Detail>
                                         <Detail
                                             label="Adresse"
                                             edit={editMode}
-                                            id="adresse"
+                                            name="adresse"
+                                            type={DetailType.Text}
                                         >
                                             <>
                                                 {postalCode} {city}
@@ -170,14 +172,16 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                         <Detail
                                             label="Geburtsort"
                                             edit={editMode}
-                                            id="placeOfBirth"
+                                            name="placeOfBirth"
+                                            type={DetailType.Text}
                                         >
                                             {placeOfBirth}
                                         </Detail>
                                         <Detail
                                             label="Geburtsname"
                                             edit={editMode}
-                                            id="birthName"
+                                            name="birthName"
+                                            type={DetailType.Text}
                                         >
                                             {birthName}
                                         </Detail>
@@ -185,42 +189,48 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                                         <Detail
                                             label="Eintrittsdatum"
                                             edit={editMode}
-                                            id="entryDate"
+                                            name="entryDate"
+                                            type={DetailType.Text}
                                         >
                                             {entryDate}
                                         </Detail>
                                         <Detail
                                             label="Status"
                                             edit={editMode}
-                                            id="active"
+                                            name="active"
+                                            type={DetailType.Text}
                                         >
                                             {active ? 'Aktiv' : 'Inaktiv'}
                                         </Detail>
                                         <Detail
                                             label="Dienstgrad"
                                             edit={editMode}
-                                            id="grade"
+                                            name="grade"
+                                            type={DetailType.Text}
                                         >
                                             {grade}
                                         </Detail>
                                         <Detail
                                             label="Beförderungen"
                                             edit={editMode}
-                                            id="promotions"
+                                            name="promotions"
+                                            type={DetailType.Text}
                                         >
                                             {promotions?.length}
                                         </Detail>
                                         <Detail
                                             label="Übungen teilgenommen"
                                             edit={editMode}
-                                            id="exercisesParticipated"
+                                            name="exercisesParticipated"
+                                            type={DetailType.Text}
                                         >
                                             {exercisesParticipated?.length}
                                         </Detail>
                                         <Detail
                                             label="Übungen geleitet"
                                             edit={editMode}
-                                            id="exercisesLeaded"
+                                            name="exercisesLeaded"
+                                            type={DetailType.Text}
                                         >
                                             {exercisesLeaded?.length}
                                         </Detail>
