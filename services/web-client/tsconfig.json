@@ -6,10 +6,11 @@
         "skipLibCheck": true,
         "noEmit": true,
         "module": "esnext",
+        "sourceMap": true,
         "moduleResolution": "node",
         "jsx": "preserve",
         "target": "es5",
-        "allowJs": true,
+        "allowJs": false,
         "strict": false,
         "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
@@ -24,8 +25,7 @@
         "pages/_document.js",
         "pages/_app.js",
         "pages/_document.tsx",
-        "pages/_app.tsx",
-        "next.config.js"
+        "pages/_app.tsx"
     ],
     "exclude": ["node_modules"]
 }

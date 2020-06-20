@@ -1,14 +1,26 @@
 const merge = require('lodash.merge');
 const { getFirebaseAppSecrets } = require('@feuertiger/tools');
 const withTM = require('next-transpile-modules');
+const withSourceMaps = require('@zeit/next-source-maps');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true'
+});
 
-module.exports = withTM({
+const compose = (...plugins) => config =>
+    plugins.reduce((composedConfig, plugin) => plugin(composedConfig), config);
+
+module.exports = compose(
+    withSourceMaps,
+    withTM,
+    withBundleAnalyzer
+)({
+    devtool: 'hidden-source-map',
     transpileModules: [
-        '@feuertiger/schema-graphql',
         '@feuertiger/ocr',
+        '@feuertiger/schema-graphql',
         '@feuertiger/web-components'
     ],
-    webpack: (config) => {
+    webpack: config => {
         config.module.rules.push({
             test: /\.test.tsx$/,
             loader: 'ignore-loader'

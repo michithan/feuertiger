@@ -29,6 +29,8 @@
         "@material-ui/core": "4.9.14",
         "@material-ui/lab": "4.0.0-alpha.53",
         "@material-ui/styles": "4.9.14",
+        "@next/bundle-analyzer": "9.4.4",
+        "@zeit/next-source-maps": "0.0.3",
         "body-parser": "1.19.0",
         "express": "4.17.1",
         "firebase": "7.14.4",
@@ -45,6 +47,7 @@
         "styled-components": "5.1.0"
     },
     "devDependencies": {
+        "@babel/plugin-proposal-decorators": "7.10.1",
         "@jest/globals": "26.0.1",
         "@types/enzyme-adapter-react-16": "1.0.6",
         "@types/react": "16.9.17",
@@ -53,7 +56,6 @@
         "babel-jest": "26.0.1",
         "babel-loader": "8.1.0",
         "babel-plugin-styled-components": "1.10.7",
-        "@babel/plugin-proposal-decorators": "7.10.1",
         "babel-preset-react-app": "9.1.2",
         "enzyme": "3.11.0",
         "enzyme-adapter-react-16": "1.15.2",
