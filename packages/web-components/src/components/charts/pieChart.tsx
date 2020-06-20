@@ -40,14 +40,21 @@ export const PieChart = (props: PieChartProps) => {
                 fill={theme.palette.primary.light}
             >
                 {data?.map((entry, index) => (
-                    <Cell fill={COLORS[index % COLORS.length]} />
+                    <Cell
+                        key={`${entry.name}`}
+                        fill={COLORS[index % COLORS.length]}
+                    />
                 ))}
             </Pie>
             <Tooltip />
             <Legend
                 align="center"
                 verticalAlign="middle"
-                content={<Typography variant="h3">{sum}</Typography>}
+                content={() => (
+                    <Typography align="center" variant="h3">
+                        {sum}
+                    </Typography>
+                )}
             />
         </RechartsPieChart>
     );
