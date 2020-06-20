@@ -1,7 +1,18 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import faker from 'faker';
-import { MemberTable, MemberTableProps, mockDefaultPerson } from '../index';
+import {
+    MemberTable,
+    MemberTableProps,
+    mockDefaultPerson,
+    authPropsMock,
+    Container,
+    ContainerProps
+} from '../index';
+
+const defaultContainerProps: ContainerProps = {
+    ...authPropsMock
+};
 
 faker.locale = 'de';
 faker.seed(4);
@@ -29,19 +40,13 @@ storiesOf('MemberTable', module)
         props.error = null;
         return <MemberTable {...props} />;
     })
-    .add('Loading', () => {
+    .add('With Container', () => {
         const props: MemberTableProps = {
             ...defaultProps
         };
-        props.loading = true;
-        props.error = null;
-        return <MemberTable {...props} />;
-    })
-    .add('Error', () => {
-        const props: MemberTableProps = {
-            ...defaultProps
-        };
-        props.loading = false;
-        props.error = { message: 'error' } as any;
-        return <MemberTable {...props} />;
+        return (
+            <Container {...defaultContainerProps}>
+                <MemberTable {...props} />
+            </Container>
+        );
     });
