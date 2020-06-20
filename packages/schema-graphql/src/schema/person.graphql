@@ -14,10 +14,10 @@ type Person implements Node {
     birthName: String
     placeOfBirth: String
     dateOfBirth: DateTime!
+    grade: Grade
     actualMembership: Membership
     memberships: [Membership]
     promotions: [Promotion]
-    grade: Grade
     exercisesParticipated: [Exercise]
     exercisesLeaded: [Exercise]
 }
@@ -26,11 +26,10 @@ input PersonUpdate {
     id: ID!
     firstname: String
     lastname: String
+    sex: Sex
     avatar: String
     address: AddressUpdate
     birthName: String
     placeOfBirth: String
     dateOfBirth: DateTime
-    actualMembership: MembershipUpdate
-    grade: Grade
 }

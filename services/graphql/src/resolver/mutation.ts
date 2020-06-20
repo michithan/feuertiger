@@ -1,8 +1,5 @@
-import { MutationResolvers } from '@feuertiger/schema-graphql';
-import {
-    PersonCreateInput,
-    PersonUpdateInput
-} from '@feuertiger/schema-prisma';
+import { MutationResolvers, Person } from '@feuertiger/schema-graphql';
+import { PersonCreateInput } from '@feuertiger/schema-prisma';
 import { Context } from '../context';
 import { mapInput, parseGlobalId } from '../utils/id';
 
@@ -28,16 +25,36 @@ const Mutation: MutationResolvers = {
         const created = await context.db.person.create({ data });
         return created;
     },
-    updatePerson: async (_parent, args, context: Context) => {
-        const data = mapInput<PersonUpdateInput>(args.person, {
-            connections: ['exercisesParticipated', 'exercisesLeaded']
-        });
-        const update = await context.db.person.update({
+    updatePerson: async (_parent, { person }, context: Context) => {
+        const { id, address } = person;
+        const update: Person = await context.db.person.update({
             where: {
-                id: data.id
+                id
             },
-            data
+            data: {
+                firstname: person.firstname ?? undefined,
+                lastname: person.lastname ?? undefined,
+                sex: person.sex ?? undefined,
+                placeOfBirth: person.placeOfBirth ?? undefined,
+                birthName: person.birthName ?? undefined,
+                avatar: person.avatar ?? undefined,
+                dateOfBirth: person.dateOfBirth ?? undefined
+            }
         });
+        if (address) {
+            update.address = await context.db.address.update({
+                where: {
+                    id: address.id
+                },
+                data: {
+                    city: address.city ?? undefined,
+                    country: address.country ?? undefined,
+                    postalCode: address.postalCode ?? undefined,
+                    street: address.street ?? undefined,
+                    streetNumber: address.streetNumber ?? undefined
+                }
+            });
+        }
         return update || null;
     },
     addExerciseToPerson: async (_parent, args, context: Context) => {
