@@ -1,12 +1,12 @@
 query dashboard {
     dashboard {
-        membersByGrade {
-            grade
-            members
+        countMembersByGrade {
+            name
+            value
         }
-        exerciseByCategory {
-            category
-            exercises
+        countExerciseByCategory {
+            name
+            value
         }
     }
 }

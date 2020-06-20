@@ -31,7 +31,8 @@ const Query: QueryResolvers = {
     allExercises: async (parent: any, args, context: Context) => {
         const exercises = await context.db.exercise.findMany();
         return exercises;
-    }
+    },
+    dashboard: async () => ({})
 };
 
 export default Query;

@@ -1,15 +1,14 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import faker from 'faker';
 import {
     MemberDetails,
-    MemberDetailsProps
-} from '../components/memberDetails/memberDetails';
-import { Container, ContainerProps } from '../components/container/container';
-import { authPropsMock } from '../mocks/authProps.mock';
-
-import { mockDefaultPerson } from '../mocks/persons.mock';
+    MemberDetailsProps,
+    Container,
+    ContainerProps,
+    authPropsMock,
+    mockDefaultPerson
+} from '../index';
 
 const defaultContainerProps: ContainerProps = {
     ...authPropsMock

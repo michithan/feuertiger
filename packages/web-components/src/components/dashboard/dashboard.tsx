@@ -1,9 +1,8 @@
 import React from 'react';
 import { Grid, Breadcrumbs, Typography } from '@material-ui/core';
 import { DashboardQueryResult } from '@feuertiger/schema-graphql';
-import { PieChart, Pie } from 'recharts';
 
-import { Paper, Link } from '../index';
+import { Paper, Link, PieChart } from '../../index';
 
 interface State {}
 
@@ -17,8 +16,9 @@ export class Dashboard extends React.Component<DashboardProps, State> {
 
     render() {
         const { data } = this.props;
-        const { dashboard } = data || {};
-        const { membersByGrade, exerciseByCategory } = dashboard || {};
+        const countMembersByGrade = data?.dashboard?.countMembersByGrade;
+        const countExerciseByCategory =
+            data?.dashboard?.countExerciseByCategory;
         return (
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -31,24 +31,20 @@ export class Dashboard extends React.Component<DashboardProps, State> {
                     <Paper>
                         <Grid container spacing={3}>
                             <Grid container item xs={12} justify="center">
-                                <Link href="/member">
+                                <Link href="/member" inherit>
                                     <Typography variant="h4" component="h4">
                                         Mitglieder
                                     </Typography>
                                 </Link>
                             </Grid>
-                            <Grid container item xs={12} justify="center">
-                                <PieChart width={730} height={250}>
-                                    <Pie
-                                        data={membersByGrade}
-                                        dataKey="value"
-                                        nameKey="name"
-                                        cx="50%"
-                                        cy="50%"
-                                        outerRadius={50}
-                                        fill="#8884d8"
-                                    />
-                                </PieChart>
+                            <Grid
+                                container
+                                item
+                                xs={12}
+                                justify="center"
+                                alignContent="center"
+                            >
+                                <PieChart data={countMembersByGrade} />
                             </Grid>
                         </Grid>
                     </Paper>
@@ -57,24 +53,20 @@ export class Dashboard extends React.Component<DashboardProps, State> {
                     <Paper>
                         <Grid container spacing={3}>
                             <Grid container item xs={12} justify="center">
-                                <Link href="/exercices">
+                                <Link href="/exercices" inherit>
                                     <Typography variant="h4" component="h4">
                                         Übungen
                                     </Typography>
                                 </Link>
                             </Grid>
-                            <Grid container item xs={12} justify="center">
-                                <PieChart width={730} height={250}>
-                                    <Pie
-                                        data={exerciseByCategory}
-                                        dataKey="value"
-                                        nameKey="name"
-                                        cx="50%"
-                                        cy="50%"
-                                        outerRadius={50}
-                                        fill="#8884d8"
-                                    />
-                                </PieChart>
+                            <Grid
+                                container
+                                item
+                                xs={12}
+                                justify="center"
+                                alignContent="center"
+                            >
+                                <PieChart data={countExerciseByCategory} />
                             </Grid>
                         </Grid>
                     </Paper>

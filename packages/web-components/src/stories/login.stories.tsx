@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Login, LoginProps } from '../components/login/login';
-import { authPropsMock } from '../mocks/authProps.mock';
+import { Login, LoginProps, authPropsMock } from '../index';
 
 const defaultProps: LoginProps = {
     ...authPropsMock

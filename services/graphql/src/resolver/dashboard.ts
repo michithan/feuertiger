@@ -3,7 +3,7 @@ import { Grade } from '@feuertiger/schema-prisma';
 import { Context } from '../context';
 
 const Dashboard: DashboardResolvers = {
-    membersByGrade: async (parent, args, context: Context) => {
+    countMembersByGrade: async (parent, args, context: Context) => {
         const memberGrades = await context.db.person.findMany({
             select: {
                 grade: true
@@ -16,11 +16,11 @@ const Dashboard: DashboardResolvers = {
             }, new Map<Grade, number>())
             .entries();
         return Array.from(membersByGrade).map(([grade, number]) => ({
-            grade,
-            members: number
+            name: grade,
+            value: number
         }));
     },
-    exerciseByCategory: async (parent, args, context: Context) => {
+    countExerciseByCategory: async (parent, args, context: Context) => {
         const exerciseCategorys = await context.db.exercise.findMany({
             select: {
                 topic: true
@@ -28,8 +28,8 @@ const Dashboard: DashboardResolvers = {
         });
         return [
             {
-                category: 'Sonstige',
-                exercises: exerciseCategorys.length
+                name: 'Sonstige',
+                value: exerciseCategorys.length
             }
         ];
     }

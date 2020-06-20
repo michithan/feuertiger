@@ -1,16 +1,11 @@
-type MembersByGrade {
-    grade: Grade!
-    members: Int!
-}
-
-type ExerciseByCategory {
-    category: String!
-    exercises: Int!
+type CountPerGroup {
+    name: String!
+    value: Int!
 }
 
 type Dashboard {
-    membersByGrade: [MembersByGrade]!
-    exerciseByCategory: [ExerciseByCategory]!
+    countMembersByGrade: [CountPerGroup]
+    countExerciseByCategory: [CountPerGroup]
 }
 
 extend type Query {

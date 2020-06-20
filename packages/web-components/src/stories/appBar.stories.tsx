@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { AppBar, AppBarProps } from '../components/appBar/appBar';
-import { authPropsMock } from '../mocks/authProps.mock';
+import { AppBar, AppBarProps, authPropsMock } from '../index';
 
 const defaultProps: AppBarProps = {
     ...authPropsMock,

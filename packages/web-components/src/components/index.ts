@@ -12,3 +12,4 @@ export * from './preSaveDialog/preSaveDialog';
 export * from './preDiscardDialog/preDiscardDialog';
 export * from './editButtonGroup/editButtonGroup';
 export * from './dashboard/dashboard';
+export * from './charts/pieChart';

@@ -1,7 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { SideBar, SideBarProps } from '../components/sideBar/sideBar';
+import { SideBar, SideBarProps } from '../index';
 
 const defaultProps: SideBarProps = {
     handleDrawerClose: () => {},

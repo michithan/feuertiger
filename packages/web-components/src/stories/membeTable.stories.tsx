@@ -1,12 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import faker from 'faker';
-import {
-    MemberTable,
-    MemberTableProps
-} from '../components/memberTable/memberTable';
-import { mockDefaultPerson } from '../mocks/persons.mock';
+import { MemberTable, MemberTableProps, mockDefaultPerson } from '../index';
 
 faker.locale = 'de';
 faker.seed(4);

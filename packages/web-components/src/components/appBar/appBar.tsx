@@ -13,8 +13,6 @@ import { AuthProps } from '../../index';
 
 const drawerWidth = 240;
 
-// remove it here
-// eslint-disable-next-line react/jsx-props-no-spreading
 const StyledAppBar = styled(({ open, ...props }) => <MuiAppBar {...props} />)`
     z-index: 1;
     transition: ${({ open, theme: { transitions } }) =>
@@ -39,9 +37,7 @@ const StyledToolbar = styled(Toolbar)`
     padding-right: 24;
 `;
 
-// remove it here
 const StyledIconButton = styled(({ open, ...props }) => (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <IconButton {...props} />
 ))`
     margin-right: 36;

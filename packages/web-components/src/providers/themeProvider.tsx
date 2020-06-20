@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { ThemeProvider as StyledComponentThemeProvider } from 'styled-components';
@@ -6,7 +5,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { de } from 'date-fns/locale';
 
-const theme = createMuiTheme({
+export const theme = createMuiTheme({
     palette: {
         type: 'dark',
         primary: {
