@@ -35,8 +35,10 @@ export class Container extends React.Component<ContainerProps, any, any> {
             <ApolloProvider client={apollo}>
                 <ThemeProvider>
                     <UiContainer auth={auth}>
-                        {showLogin && <Login auth={auth} />}
-                        {Component && <Component {...pageProps} />}
+                        <>
+                            {showLogin && <Login auth={auth} />}
+                            {Component && <Component {...pageProps} />}
+                        </>
                     </UiContainer>
                 </ThemeProvider>
             </ApolloProvider>

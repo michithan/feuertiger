@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { Address } from '@feuertiger/schema-graphql';
 
 import { Detail, DetailType, FormikTextField } from '../index';
@@ -28,6 +28,7 @@ export const DetailAddress = ({
                         label="PLZ"
                         id={`${namespace}.postalCodeInput`}
                         name={`${namespace}.postalCode`}
+                        type="number"
                     />
                 </Grid>
                 <Grid item xs={6}>
@@ -53,11 +54,11 @@ export const DetailAddress = ({
                 </Grid>
             </Grid>
         ) : (
-            <>
+            <Typography id={namespace} variant="body1">
                 {postalCode} {city}
                 <br />
                 {street} {streetNumber}
-            </>
+            </Typography>
         )}
     </Detail>
 );

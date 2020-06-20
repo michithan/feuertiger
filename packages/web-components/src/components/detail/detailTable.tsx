@@ -8,7 +8,6 @@ export interface DetailTableProps {
     children: ReactElement | ReactElement[];
     editMode?: boolean;
     dirty?: boolean;
-    loading?: boolean;
     handleClickBack?: () => void;
     handleClickDiscard?: () => void;
     handleClickEdit?: () => void;
@@ -16,7 +15,6 @@ export interface DetailTableProps {
 }
 
 export const DetailTable = ({
-    loading,
     label,
     editMode,
     children,
@@ -46,11 +44,9 @@ export const DetailTable = ({
                     />
                 </Grid>
             </Grid>
-            {!loading && (
-                <Grid item xs={12}>
-                    <Table aria-label="simple table">{children}</Table>
-                </Grid>
-            )}
+            <Grid item xs={12}>
+                <Table aria-label="simple table">{children}</Table>
+            </Grid>
         </Grid>
     </Paper>
 );

@@ -41,7 +41,6 @@ export class MemberExercisesDetails extends React.Component<
         return (
             <DetailTable
                 label="Übungen"
-                loading={!exercisesParticipated}
                 editMode={editMode}
                 handleClickSave={this.handleClickSave}
                 handleClickDiscard={this.handleClickDiscard}

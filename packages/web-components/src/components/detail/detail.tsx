@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Grid, Typography, Button as MuiButton } from '@material-ui/core';
 
-import { FormikTextField, FormikKeyboardDatePicker } from '../index';
+import { FormikTextField, FormikDatePicker } from '../index';
 
 export enum DetailType {
     Text,
@@ -35,21 +35,16 @@ export const Detail = ({
                 content = <FormikTextField id={`${name}Input`} name={name} />;
                 break;
             case DetailType.Number:
-                content = <FormikTextField id={`${name}Input`} name={name} />;
-                break;
-            case DetailType.Date:
                 content = (
-                    <FormikKeyboardDatePicker
-                        variant="dialog"
-                        format="MM/dd/yyyy"
-                        margin="normal"
+                    <FormikTextField
                         id={`${name}Input`}
                         name={name}
-                        KeyboardButtonProps={{
-                            'aria-label': `Ändere ${label}`
-                        }}
+                        type="number"
                     />
                 );
+                break;
+            case DetailType.Date:
+                content = <FormikDatePicker id={`${name}Input`} name={name} />;
                 break;
             case DetailType.Component:
                 content = children as ReactElement;
@@ -92,7 +87,7 @@ export const Detail = ({
             <Grid item xs={6}>
                 <Typography variant="caption">{label}</Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} container justify="flex-start">
                 {content}
             </Grid>
         </Grid>

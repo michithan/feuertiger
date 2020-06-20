@@ -40,7 +40,6 @@ export class MemberPromotionsDetail extends React.Component<
         return (
             <DetailTable
                 label="Beförderungen"
-                loading={!promotions}
                 editMode={editMode}
                 handleClickSave={this.handleClickSave}
                 handleClickDiscard={this.handleClickDiscard}
