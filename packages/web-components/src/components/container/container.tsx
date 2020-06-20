@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { CssBaseline, Container as MuiContainer } from '@material-ui/core';
+import { SnackbarProvider } from 'notistack';
 
 import { AppBar, SideBar, AuthProps } from '../../index';
 
@@ -67,7 +68,11 @@ export class Container extends React.Component<ContainerProps, State> {
                     handleDrawerClose={this.handleDrawerClose}
                 />
                 <StyledMain>
-                    <StyledContainer maxWidth="lg">{children}</StyledContainer>
+                    <SnackbarProvider maxSnack={3}>
+                        <StyledContainer maxWidth="lg">
+                            {children}
+                        </StyledContainer>
+                    </SnackbarProvider>
                 </StyledMain>
             </RootDiv>
         );

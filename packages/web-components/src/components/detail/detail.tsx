@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Grid, Typography, Button as MuiButton } from '@material-ui/core';
-
+import format from 'date-fns/format';
 import { FormikTextField, FormikDatePicker } from '../index';
 
 export enum DetailType {
@@ -14,7 +14,8 @@ export enum DetailType {
 export interface DetailProps {
     name: string;
     label: string | number | ReactElement;
-    children: string | number | ReactElement | ReactElement[];
+    value?: string | number | Date;
+    children?: ReactElement | ReactElement[];
     type: DetailType;
     edit?: boolean;
     handleClick?: (_: any) => void;
@@ -23,6 +24,7 @@ export interface DetailProps {
 export const Detail = ({
     name,
     label,
+    value,
     children,
     edit,
     type,
@@ -68,10 +70,16 @@ export const Detail = ({
             case DetailType.Text:
             case DetailType.Number:
             case DetailType.Button:
+                content = (
+                    <Typography id={name} variant="body1">
+                        {value}
+                    </Typography>
+                );
+                break;
             case DetailType.Date:
                 content = (
                     <Typography id={name} variant="body1">
-                        {children}
+                        {format(value as Date, 'dd.MM.yyyy')}
                     </Typography>
                 );
                 break;

@@ -5,6 +5,7 @@ import {
 } from '@feuertiger/schema-graphql';
 import { Avatar, Divider, Grid, Typography } from '@material-ui/core';
 import { Form, FormikProps, withFormik, WithFormikConfig } from 'formik';
+import { withSnackbar, ProviderContext } from 'notistack';
 import React from 'react';
 import styled from 'styled-components';
 import {
@@ -67,7 +68,7 @@ const formConfig: WithFormikConfig<MemberBasicDetailsProps, PersonUpdate> = {
         firstname,
         lastname,
         avatar,
-        dateOfBirth,
+        dateOfBirth: new Date(dateOfBirth),
         placeOfBirth,
         birthName
     }),
@@ -76,10 +77,14 @@ const formConfig: WithFormikConfig<MemberBasicDetailsProps, PersonUpdate> = {
 };
 
 class MemberBasicDetailsWithForm extends React.Component<
-    MemberBasicDetailsProps & FormikProps<PersonUpdate>,
+    MemberBasicDetailsProps & FormikProps<PersonUpdate> & ProviderContext,
     State
 > {
-    constructor(props: MemberBasicDetailsProps & FormikProps<PersonUpdate>) {
+    constructor(
+        props: MemberBasicDetailsProps &
+            FormikProps<PersonUpdate> &
+            ProviderContext
+    ) {
         super(props);
         this.state = { editMode: false };
     }
@@ -97,12 +102,17 @@ class MemberBasicDetailsWithForm extends React.Component<
     };
 
     private handleClickSave = async () => {
-        const { values, updatePerson } = this.props;
-        await updatePerson({
-            variables: {
-                person: values
-            }
-        });
+        const { values, updatePerson, enqueueSnackbar } = this.props;
+        try {
+            await updatePerson({
+                variables: {
+                    person: values
+                }
+            });
+            enqueueSnackbar('Änderungen übernommen.', { variant: 'success' });
+        } catch (error) {
+            enqueueSnackbar('Fehler! ', { variant: 'error' });
+        }
         this.setState({ editMode: false });
     };
 
@@ -179,9 +189,8 @@ class MemberBasicDetailsWithForm extends React.Component<
                                 edit={editMode}
                                 name="dateOfBirth"
                                 type={DetailType.Date}
-                            >
-                                {dateOfBirth}
-                            </Detail>
+                                value={dateOfBirth}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <DetailAddress
@@ -196,9 +205,8 @@ class MemberBasicDetailsWithForm extends React.Component<
                                 edit={editMode}
                                 name="placeOfBirth"
                                 type={DetailType.Text}
-                            >
-                                {placeOfBirth}
-                            </Detail>
+                                value={placeOfBirth}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Detail
@@ -206,9 +214,8 @@ class MemberBasicDetailsWithForm extends React.Component<
                                 edit={editMode}
                                 name="birthName"
                                 type={DetailType.Text}
-                            >
-                                {birthName}
-                            </Detail>
+                                value={birthName}
+                            />
                         </Grid>
                         <GridDivider />
                         <Grid item xs={12} sm={6}>
@@ -216,27 +223,24 @@ class MemberBasicDetailsWithForm extends React.Component<
                                 label="Eintrittsdatum"
                                 name="actualMembership.entryDate"
                                 type={DetailType.Date}
-                            >
-                                {entryDate}
-                            </Detail>
+                                value={new Date(entryDate)}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Detail
                                 label="Status"
                                 name="actualMembership.active"
                                 type={DetailType.Text}
-                            >
-                                {active ? 'Aktiv' : 'Inaktiv'}
-                            </Detail>
+                                value={active ? 'Aktiv' : 'Inaktiv'}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <Detail
                                 label="Dienstgrad"
                                 name="grade"
                                 type={DetailType.Text}
-                            >
-                                {grade}
-                            </Detail>
+                                value={grade}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={6} />
                     </Grid>
@@ -249,4 +253,4 @@ class MemberBasicDetailsWithForm extends React.Component<
 export const MemberBasicDetails = withFormik<
     MemberBasicDetailsProps,
     PersonUpdate
->(formConfig)(MemberBasicDetailsWithForm);
+>(formConfig)(withSnackbar(MemberBasicDetailsWithForm));
