@@ -8,9 +8,9 @@ type Query {
 
 type Mutation {
     delete(id: ID!): Boolean
-    createPerson(person: _Person!): Person
+    createPerson(person: PersonUpdate!): Person
     createExercise(exercise: _Exercise!): Exercise
-    updatePerson(person: _Person!): Person
+    updatePerson(person: PersonUpdate!): Person
     updateExercise(exercise: _Exercise!): Exercise
     addExerciseToPerson(exerciseId: ID!, personId: ID!): Boolean
     addLeadersToExercise(exerciseId: ID!, personId: ID!): Boolean

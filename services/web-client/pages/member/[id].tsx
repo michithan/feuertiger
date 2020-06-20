@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import dynamic from 'next/dynamic';
 
 import {
@@ -11,22 +11,28 @@ import {
 import {
     PersonDetailsDocument,
     PersonDetailsQueryResult,
-    Person
+    Person,
+    UpdatePersonDocument
 } from '@feuertiger/schema-graphql';
 
 export default dynamic(
     async () => () => {
         const router = useRouter();
         const { id } = router.query;
-        const props = useQuery(PersonDetailsDocument, {
+
+        const queryResult = useQuery(PersonDetailsDocument, {
             variables: { id }
         }) as PersonDetailsQueryResult;
+
+        const [updatePerson] = useMutation(UpdatePersonDocument);
+
         const memberDetailsProps: MemberDetailsProps = {
-            ...props,
-            member: props?.data?.node as Person
+            ...queryResult,
+            member: queryResult?.data?.node as Person,
+            updatePerson
         };
         return (
-            <LoadingContainer loading={props.loading}>
+            <LoadingContainer loading={queryResult.loading}>
                 <MemberDetails {...memberDetailsProps} />
             </LoadingContainer>
         );

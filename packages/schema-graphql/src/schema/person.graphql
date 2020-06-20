@@ -1,13 +1,20 @@
+enum Sex {
+    MALE
+    FEMAL
+    DIVERSE
+}
+
 type Person implements Node {
     id: ID!
     firstname: String!
     lastname: String!
+    sex: Sex
     avatar: String
-    address: Address
+    address: Address!
     birthName: String
     placeOfBirth: String
     dateOfBirth: String!
-    membershipNumber: String
+    actualMembership: Membership
     memberships: [Membership]
     promotions: [Promotion]
     grade: Grade
@@ -15,11 +22,15 @@ type Person implements Node {
     exercisesLeaded: [Exercise]
 }
 
-input _Person {
+input PersonUpdate {
     id: ID!
-    firstname: String!
-    lastname: String!
+    firstname: String
+    lastname: String
     avatar: String
-    exercisesParticipated: [_Node!]
-    exercisesLeaded: [_Node!]
+    address: AddressUpdate
+    birthName: String
+    placeOfBirth: String
+    dateOfBirth: String
+    actualMembership: MembershipUpdate
+    grade: Grade
 }

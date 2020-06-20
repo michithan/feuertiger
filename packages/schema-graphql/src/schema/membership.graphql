@@ -5,3 +5,10 @@ type Membership implements Node {
     entryDate: String
     departureDate: String
 }
+
+input MembershipUpdate {
+    id: ID!
+    active: Boolean
+    entryDate: String
+    departureDate: String
+}

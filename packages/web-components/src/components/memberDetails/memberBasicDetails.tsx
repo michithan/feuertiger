@@ -1,6 +1,10 @@
 import React from 'react';
 import { Grid, Avatar, Typography, Divider } from '@material-ui/core';
-import { Person, Grade, Address } from '@feuertiger/schema-graphql';
+import {
+    Person,
+    UpdatePersonMutationFn,
+    PersonUpdate
+} from '@feuertiger/schema-graphql';
 import styled from 'styled-components';
 import { withFormik, FormikProps, Form, WithFormikConfig } from 'formik';
 
@@ -13,7 +17,8 @@ import {
 } from '../index';
 
 export interface MemberBasicDetailsProps {
-    member: Partial<Person> | undefined | null;
+    member: Person;
+    updatePerson: UpdatePersonMutationFn;
 }
 
 const StyledAvatar = styled(Avatar)`
@@ -31,21 +36,7 @@ const GridDivider = () => (
     </Grid>
 );
 
-interface FormValues {
-    id: string;
-    firstname: string;
-    lastname: string;
-    avatar: string;
-    dateOfBirth: string;
-    grade: Grade;
-    placeOfBirth: string;
-    birthName: string;
-    entryDate: string;
-    active: boolean;
-    address: Address;
-}
-
-const formConfig: WithFormikConfig<MemberBasicDetailsProps, FormValues> = {
+const formConfig: WithFormikConfig<MemberBasicDetailsProps, PersonUpdate> = {
     mapPropsToValues: ({
         member: {
             id,
@@ -57,7 +48,7 @@ const formConfig: WithFormikConfig<MemberBasicDetailsProps, FormValues> = {
             grade,
             placeOfBirth,
             birthName,
-            memberships: [{ entryDate, active }]
+            memberships: [{ id: membershipId, entryDate, active }]
         }
     }) => ({
         id,
@@ -69,18 +60,21 @@ const formConfig: WithFormikConfig<MemberBasicDetailsProps, FormValues> = {
         grade,
         placeOfBirth,
         birthName,
-        entryDate,
-        active
+        actualMembership: {
+            id: membershipId,
+            entryDate,
+            active
+        }
     }),
     validate: () => ({}),
     handleSubmit: () => {}
 };
 
 class MemberBasicDetailsWithForm extends React.Component<
-    MemberBasicDetailsProps & FormikProps<FormValues>,
+    MemberBasicDetailsProps & FormikProps<PersonUpdate>,
     State
 > {
-    constructor(props: MemberBasicDetailsProps & FormikProps<FormValues>) {
+    constructor(props: MemberBasicDetailsProps & FormikProps<PersonUpdate>) {
         super(props);
         this.state = { editMode: false };
     }
@@ -97,7 +91,19 @@ class MemberBasicDetailsWithForm extends React.Component<
         this.setState({ editMode: false });
     };
 
-    private handleClickSave = () => {
+    private handleClickSave = async () => {
+        const { values, updatePerson } = this.props;
+
+        console.log('values: ', values);
+
+        const updateResult = await updatePerson({
+            variables: {
+                person: values
+            }
+        });
+
+        console.log('updateResult: ', updateResult);
+
         this.setState({ editMode: false });
     };
 
@@ -113,8 +119,7 @@ class MemberBasicDetailsWithForm extends React.Component<
                 grade,
                 placeOfBirth,
                 birthName,
-                entryDate,
-                active,
+                actualMembership: { entryDate, active },
                 address
             }
         } = this.props;
@@ -209,7 +214,7 @@ class MemberBasicDetailsWithForm extends React.Component<
                             <Detail
                                 label="Eintrittsdatum"
                                 edit={editMode}
-                                name="entryDate"
+                                name="actualMembership.entryDate"
                                 type={DetailType.Date}
                             >
                                 {entryDate}
@@ -219,7 +224,7 @@ class MemberBasicDetailsWithForm extends React.Component<
                             <Detail
                                 label="Status"
                                 edit={editMode}
-                                name="active"
+                                name="actualMembership.active"
                                 type={DetailType.Text}
                             >
                                 {active ? 'Aktiv' : 'Inaktiv'}
@@ -244,5 +249,5 @@ class MemberBasicDetailsWithForm extends React.Component<
 
 export const MemberBasicDetails = withFormik<
     MemberBasicDetailsProps,
-    FormValues
+    PersonUpdate
 >(formConfig)(MemberBasicDetailsWithForm);

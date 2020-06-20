@@ -1,6 +1,10 @@
 import React from 'react';
 import { Grid, Typography, Breadcrumbs } from '@material-ui/core';
-import { Person, PersonDetailsQueryResult } from '@feuertiger/schema-graphql';
+import {
+    Person,
+    PersonDetailsQueryResult,
+    UpdatePersonMutationFn
+} from '@feuertiger/schema-graphql';
 
 import { Link, MemberBasicDetails } from '../index';
 import { MemberExercisesDetails } from './memberExercisesDetails';
@@ -8,6 +12,7 @@ import { MemberPromotionsDetail } from './memberPromotionsDetail';
 
 export interface MemberDetailsProps extends PersonDetailsQueryResult {
     member: Person;
+    updatePerson: UpdatePersonMutationFn;
 }
 
 interface State {}
@@ -19,7 +24,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
     }
 
     render() {
-        const { member } = this.props;
+        const { member, updatePerson } = this.props;
         const {
             id,
             firstname,
@@ -39,7 +44,10 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                     </Breadcrumbs>
                 </Grid>
                 <Grid item xs={12}>
-                    <MemberBasicDetails member={member} />
+                    <MemberBasicDetails
+                        member={member}
+                        updatePerson={updatePerson}
+                    />
                 </Grid>
                 <Grid item xs={6}>
                     <MemberExercisesDetails

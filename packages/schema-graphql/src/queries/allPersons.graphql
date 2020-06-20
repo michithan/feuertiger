@@ -3,11 +3,15 @@ query allPersons {
         id
         firstname
         lastname
+        sex
         avatar
         birthName
         placeOfBirth
         dateOfBirth
-        membershipNumber
+        actualMembership {
+            active
+            entryDate
+        }
         grade
         address {
             id
@@ -15,7 +19,7 @@ query allPersons {
             streetNumber
             postalCode
             city
-            contry
+            country
         }
     }
 }

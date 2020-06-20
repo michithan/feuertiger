@@ -7,10 +7,14 @@ query personDetails($id: ID!) {
             firstname
             lastname
             avatar
+            sex
             birthName
             placeOfBirth
             dateOfBirth
-            membershipNumber
+            actualMembership {
+                active
+                entryDate
+            }
             grade
             address {
                 id
@@ -18,7 +22,7 @@ query personDetails($id: ID!) {
                 streetNumber
                 postalCode
                 city
-                contry
+                country
             }
             memberships {
                 id

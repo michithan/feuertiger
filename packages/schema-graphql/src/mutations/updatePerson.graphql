@@ -1,4 +1,4 @@
-mutation updatePerson($person: _Person!) {
+mutation updatePerson($person: PersonUpdate!) {
     updatePerson(person: $person) {
         id
         firstname
@@ -7,7 +7,6 @@ mutation updatePerson($person: _Person!) {
         birthName
         placeOfBirth
         dateOfBirth
-        membershipNumber
         grade
         address {
             id
@@ -15,15 +14,7 @@ mutation updatePerson($person: _Person!) {
             streetNumber
             postalCode
             city
-            contry
+            country
         }
-        memberships {
-            id
-            active
-            entryDate
-        }
-        ...personPromotions
-        ...personExercisesLeaded
-        ...personExercisesParticipated
     }
 }

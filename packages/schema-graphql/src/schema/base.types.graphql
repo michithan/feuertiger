@@ -9,10 +9,10 @@ type Address implements Node {
     streetNumber: String
     postalCode: String
     city: String
-    contry: String
+    country: String
 }
 
-input _Address {
+input AddressUpdate {
     id: ID!
     street: String
     streetNumber: String
