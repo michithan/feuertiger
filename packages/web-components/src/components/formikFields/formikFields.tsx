@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, TextFieldProps } from '@material-ui/core';
 import { DatePicker, DatePickerProps } from '@material-ui/pickers';
-import { Field } from 'formik';
+import { Field, FieldProps } from 'formik';
 
 const FormikTextFieldWrapper = ({
     field,
@@ -13,40 +13,58 @@ export const FormikTextField = (props: TextFieldProps) => (
     <Field {...props} component={FormikTextFieldWrapper} />
 );
 
+const FormikDatePickerWrapper = ({
+    form: { setFieldValue, setFieldError, errors },
+    field,
+    ...other
+}: Partial<DatePickerProps> & FieldProps<any>) => {
+    const currentError = errors[field.name];
+    console.log('initfield: ', field);
+    return (
+        <DatePicker
+            cancelLabel="Abbrechen"
+            okLabel="Übernehmen"
+            todayLabel="Heute"
+            allowKeyboardControl
+            showTodayButton
+            // variant="dialog"
+            name={field.name}
+            value={field.value}
+            // format="dd.MM.yyyy"
+            helperText={currentError}
+            error={Boolean(currentError)}
+            onError={(error: string) => {
+                if (error !== currentError) {
+                    setFieldError(field.name, error);
+                }
+            }}
+            onChange={fieldValue => {
+                console.log('field: ', field);
+                setFieldValue(field.name, fieldValue, false);
+            }}
+            {...other}
+        />
+    );
+};
+
+export interface FormikDatePickerProps {
+    name: string;
+    label: string;
+    disableFuture?: boolean;
+    disablePast?: boolean;
+}
+
 export const FormikDatePicker = ({
-    label,
     name,
-    ...props
+    label,
+    disableFuture,
+    disablePast
 }: Partial<DatePickerProps>) => (
     <Field
-        {...props}
-        label={label}
         name={name}
-        component={({
-            form: { setFieldValue, setFieldError, errors },
-            field: { value }
-        }) => (
-            <DatePicker
-                cancelLabel="Abbrechen"
-                okLabel="Übernehmen"
-                todayLabel="Heute"
-                allowKeyboardControl
-                showTodayButton
-                format="dd.MM.yyyy"
-                variant="dialog"
-                {...props}
-                label={label}
-                name={name}
-                helperText={errors[name]}
-                error={Boolean(errors[name])}
-                onChange={(fieldValue) =>
-                    setFieldValue(name, fieldValue, false)
-                }
-                onError={(error) =>
-                    error !== errors[name] && setFieldError(name, error)
-                }
-                value={value}
-            />
-        )}
+        label={label}
+        disableFuture={disableFuture}
+        disablePast={disablePast}
+        component={FormikDatePickerWrapper}
     />
 );

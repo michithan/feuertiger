@@ -15,7 +15,7 @@ export default dynamic(
         const memberProps: MemberTableProps = {
             ...props,
             data: {
-                allPersons: props?.data?.allPersons?.map((person) => ({
+                allPersons: props?.data?.allPersons?.map(person => ({
                     ...person
                 }))
             }

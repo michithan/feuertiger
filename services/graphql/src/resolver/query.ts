@@ -23,7 +23,7 @@ export const getNode = async ({
 const Query: QueryResolvers = {
     node: (_parent, { id }, context) => getNode({ id, context }),
     nodes: (_parent, args, context) =>
-        Promise.all(args.ids.map((id) => getNode({ id, context }))),
+        Promise.all(args.ids.map(id => getNode({ id, context }))),
     allPersons: async (parent: any, args, context: Context) => {
         const persons = await context.db.person.findMany();
         return persons;

@@ -10,10 +10,10 @@ type Person implements Node {
     lastname: String!
     sex: Sex
     avatar: String
-    address: Address!
+    address: Address
     birthName: String
     placeOfBirth: String
-    dateOfBirth: String!
+    dateOfBirth: DateTime!
     actualMembership: Membership
     memberships: [Membership]
     promotions: [Promotion]
@@ -30,7 +30,7 @@ input PersonUpdate {
     address: AddressUpdate
     birthName: String
     placeOfBirth: String
-    dateOfBirth: String
+    dateOfBirth: DateTime
     actualMembership: MembershipUpdate
     grade: Grade
 }

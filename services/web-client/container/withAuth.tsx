@@ -28,7 +28,7 @@ export default <P extends object>(WrappedComponent: any): any =>
             const authSignleton = new AuthSingleton();
             const { firebaseAuth } = authSignleton;
 
-            firebaseAuth.onAuthStateChanged(async (user) =>
+            firebaseAuth.onAuthStateChanged(async user =>
                 this?.setState({ isSignedIn: !!user, isLoading: false })
             );
 

@@ -1,19 +1,18 @@
-import React from 'react';
-import { Grid, Avatar, Typography, Divider } from '@material-ui/core';
 import {
     Person,
-    UpdatePersonMutationFn,
-    PersonUpdate
+    PersonUpdate,
+    UpdatePersonMutationFn
 } from '@feuertiger/schema-graphql';
+import { Avatar, Divider, Grid, Typography } from '@material-ui/core';
+import { Form, FormikProps, withFormik, WithFormikConfig } from 'formik';
+import React from 'react';
 import styled from 'styled-components';
-import { withFormik, FormikProps, Form, WithFormikConfig } from 'formik';
-
 import {
-    Paper,
     Detail,
-    EditButtonGroup,
+    DetailAddress,
     DetailType,
-    DetailAddress
+    EditButtonGroup,
+    Paper
 } from '../index';
 
 export interface MemberBasicDetailsProps {

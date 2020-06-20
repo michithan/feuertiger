@@ -16,11 +16,11 @@ const save = async (create: (arg0: any) => Promise<any>, data: any) => {
 
 (async () => {
     await Promise.all(
-        exercises.map((exercise) => save(client.exercise.create, exercise))
+        exercises.map(exercise => save(client.exercise.create, exercise))
     );
 
     await Promise.all(
-        persons.map((person) => save(client.person.create, person))
+        persons.map(person => save(client.person.create, person))
     );
 
     client.disconnect();

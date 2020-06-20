@@ -54,7 +54,7 @@ export class MemberExercisesDetails extends React.Component<
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {exercisesParticipated?.map((exercise) => (
+                    {exercisesParticipated?.map(exercise => (
                         <TableRow key={exercise.id}>
                             <TableCell component="th" scope="row">
                                 {exercise.topic}

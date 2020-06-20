@@ -7,8 +7,8 @@ const linktypesscript = `export * from "../src/index";`;
 
 const cwd = process.cwd();
 
-getPackages(cwd).then((pkgs) =>
-    [...pkgs].forEach((pkg) => {
+getPackages(cwd).then(pkgs =>
+    [...pkgs].forEach(pkg => {
         const packageJsonPath = require.resolve(`${pkg.name}/package.json`);
         const path = packageJsonPath.split('package.json')[0];
         const distpath = `${path}dist`;

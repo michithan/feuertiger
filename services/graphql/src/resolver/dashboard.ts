@@ -4,13 +4,23 @@ import { Context } from '../context';
 
 const Dashboard: DashboardResolvers = {
     countMembersByGrade: async (parent, args, context: Context) => {
-        const memberGrades = await context.db.person.findMany({
+        const members = await context.db.person.findMany({
             select: {
-                grade: true
+                promotions: {
+                    take: 1,
+                    orderBy: {
+                        dateOfPromotion: 'desc'
+                    },
+                    select: {
+                        grade: true
+                    }
+                }
             }
         });
-        const membersByGrade = memberGrades
-            .reduce((grades, { grade }) => {
+        const membersByGrade = members
+            .map(({ promotions }) => promotions?.[0]?.grade)
+            .filter(grade => !!grade)
+            .reduce((grades, grade) => {
                 grades.set(grade, (grades.get(grade) || 0) + 1);
                 return grades;
             }, new Map<Grade, number>())

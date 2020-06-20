@@ -1,22 +1,16 @@
 {
-    "editor.autoSave": "on",
     "workbench.iconTheme": "vscode-icons",
     "workbench.colorTheme": "Cyberpunk",
-    "eslint.autoFixOnSave": true,
+    "files.autoSave": "off",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.renderWhitespace": "all",
-    "editor.formatOnSave": true,
+    "editor.formatOnSave": false,
     "editor.formatOnPaste": true,
     "editor.fontLigatures": true,
     "editor.fontSize": 14,
     "editor.fontFamily": "Fira Code",
-    "github-actions.workflows.pinned.refresh.enabled": true,
-    "github-actions.workflows.pinned.workflows": [
-        ".github/workflows/dispatch.yml",
-        ".github/workflows/build.yml",
-        ".github/workflows/deploy.yml"
-    ],
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll": true
     },
     "typescript.tsdk": "./node_modules/typescript/lib",
     "vscode-postgres.defaultDatabase": "feuertiger",

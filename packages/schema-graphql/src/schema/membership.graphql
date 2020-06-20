@@ -2,13 +2,13 @@ type Membership implements Node {
     id: ID!
     person: Person
     active: Boolean
-    entryDate: String
-    departureDate: String
+    entryDate: DateTime
+    departureDate: DateTime
 }
 
 input MembershipUpdate {
     id: ID!
     active: Boolean
-    entryDate: String
-    departureDate: String
+    entryDate: DateTime
+    departureDate: DateTime
 }

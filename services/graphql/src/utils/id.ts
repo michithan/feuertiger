@@ -16,14 +16,14 @@ export const buildGlobalId = (id: string, type: string): string =>
 export const connectInput = <T = _Node>(connections: _Node[]): Connection[] =>
     connections
         ?.map(
-            (connection) =>
+            connection =>
                 connection && {
                     upsert: {
                         id: connection.id
                     }
                 }
         )
-        .filter((connection) => connection);
+        .filter(connection => connection);
 
 type Options = {
     connections: string[] | null;
@@ -41,7 +41,7 @@ export const mapInput = <T>(
 ): T => {
     const data = rest as T;
 
-    options?.connections?.forEach((key) => {
+    options?.connections?.forEach(key => {
         // @ts-ignore
         const connections = data[key];
         if (connections) {

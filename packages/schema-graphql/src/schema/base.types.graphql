@@ -1,6 +1,6 @@
 type Timeslot {
-    start: String
-    end: String
+    start: DateTime
+    end: DateTime
 }
 
 type Address implements Node {

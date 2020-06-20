@@ -4,7 +4,7 @@ import {
     PersonUpdateInput
 } from '@feuertiger/schema-prisma';
 import { Context } from '../context';
-import { parseGlobalId, mapInput } from '../utils/id';
+import { mapInput, parseGlobalId } from '../utils/id';
 
 export const deleteNode = ({
     id,

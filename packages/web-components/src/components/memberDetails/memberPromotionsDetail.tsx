@@ -53,7 +53,7 @@ export class MemberPromotionsDetail extends React.Component<
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {promotions?.map((promotion) => (
+                    {promotions?.map(promotion => (
                         <TableRow key={promotion.id}>
                             <TableCell component="th" scope="row">
                                 {promotion.grade}

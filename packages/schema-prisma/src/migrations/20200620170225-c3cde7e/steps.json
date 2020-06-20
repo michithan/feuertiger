@@ -18,6 +18,15 @@
       ]
     },
     {
+      "tag": "CreateEnum",
+      "enum": "Sex",
+      "values": [
+        "MALE",
+        "FEMAL",
+        "DIVERSE"
+      ]
+    },
+    {
       "tag": "CreateSource",
       "source": "postgresql"
     },
@@ -271,6 +280,13 @@
       "arity": "Required"
     },
     {
+      "tag": "CreateField",
+      "model": "Address",
+      "field": "Person",
+      "type": "Person",
+      "arity": "List"
+    },
+    {
       "tag": "CreateModel",
       "model": "Membership"
     },
@@ -303,7 +319,7 @@
       "tag": "CreateField",
       "model": "Membership",
       "field": "entryDate",
-      "type": "String",
+      "type": "DateTime",
       "arity": "Required"
     },
     {
@@ -363,7 +379,7 @@
       "tag": "CreateField",
       "model": "Membership",
       "field": "departureDate",
-      "type": "String",
+      "type": "DateTime",
       "arity": "Optional"
     },
     {
@@ -392,7 +408,7 @@
       "tag": "CreateField",
       "model": "Promotion",
       "field": "dateOfPromotion",
-      "type": "String",
+      "type": "DateTime",
       "arity": "Required"
     },
     {
@@ -494,6 +510,20 @@
     {
       "tag": "CreateField",
       "model": "Person",
+      "field": "sex",
+      "type": "Sex",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Person",
+      "field": "phone",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "Person",
       "field": "birthName",
       "type": "String",
       "arity": "Required"
@@ -516,7 +546,7 @@
       "tag": "CreateField",
       "model": "Person",
       "field": "dateOfBirth",
-      "type": "String",
+      "type": "DateTime",
       "arity": "Required"
     },
     {
@@ -524,13 +554,6 @@
       "model": "Person",
       "field": "membershipNumber",
       "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Person",
-      "field": "grade",
-      "type": "Grade",
       "arity": "Required"
     },
     {

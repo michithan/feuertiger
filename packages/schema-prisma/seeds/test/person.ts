@@ -1,5 +1,5 @@
 import faker from 'faker';
-import { PersonCreateInput, Grade } from '../../dist';
+import { Grade, PersonCreateInput, Sex } from '../../dist';
 import exercises from './exercise';
 
 const length = 100;
@@ -7,11 +7,13 @@ const length = 100;
 faker.locale = 'de';
 faker.seed(length);
 
-const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
+const createPerson = (): PersonCreateInput => ({
     id: `person:${faker.random.uuid()}`,
     firstname: faker.name.firstName(),
     lastname: faker.name.lastName(),
     avatar: faker.image.cats(),
+    phone: faker.phone.phoneNumber(),
+    sex: Sex.FEMAL,
     address: {
         create: {
             id: `address:${faker.random.uuid()}`,
@@ -23,8 +25,7 @@ const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
         }
     },
     birthName: faker.name.lastName(),
-    dateOfBirth: faker.date.past().toDateString(),
-    grade: Grade.FM,
+    dateOfBirth: faker.date.past(),
     membershipNumber: faker.random.number().toString(),
     placeOfBirth: faker.address.city(),
     promotions: {
@@ -32,7 +33,7 @@ const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
             {
                 id: `promotion:${faker.random.uuid()}`,
                 grade: Grade.FM,
-                dateOfPromotion: faker.date.past().toDateString()
+                dateOfPromotion: faker.date.past()
             }
         ]
     },
@@ -41,7 +42,7 @@ const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
             {
                 id: `membership:${faker.random.uuid()}`,
                 active: true,
-                entryDate: faker.date.past().toDateString()
+                entryDate: faker.date.past()
             }
         ]
     },
@@ -61,7 +62,9 @@ const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
             }
         ]
     }
-}));
+});
+
+const persons: Array<PersonCreateInput> = Array.from({ length }, createPerson);
 
 persons[0].exercisesLeaded = {
     connect: [
