@@ -72,7 +72,6 @@ const formConfig: WithFormikConfig<MemberBasicDetailsProps, FormValues> = {
         entryDate,
         active
     }),
-    enableReinitialize: true,
     validate: () => ({}),
     handleSubmit: () => {}
 };
@@ -99,8 +98,6 @@ class MemberBasicDetailsWithForm extends React.Component<
     };
 
     private handleClickSave = () => {
-        const { values } = this.props;
-        console.log('values: ', values);
         this.setState({ editMode: false });
     };
 

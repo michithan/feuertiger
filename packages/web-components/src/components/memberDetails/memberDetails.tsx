@@ -2,13 +2,12 @@ import React from 'react';
 import { Grid, Typography, Breadcrumbs } from '@material-ui/core';
 import { Person, PersonDetailsQueryResult } from '@feuertiger/schema-graphql';
 
-import Skeleton from '@material-ui/lab/Skeleton';
-import { Link, MemberBasicDetails, Paper } from '../index';
+import { Link, MemberBasicDetails } from '../index';
 import { MemberExercisesDetails } from './memberExercisesDetails';
 import { MemberPromotionsDetail } from './memberPromotionsDetail';
 
 export interface MemberDetailsProps extends PersonDetailsQueryResult {
-    member: Partial<Person> | undefined | null;
+    member: Person;
 }
 
 interface State {}
@@ -20,16 +19,14 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
     }
 
     render() {
-        const { loading, member } = this.props;
-        if (loading || !member) {
-            return (
-                <Paper>
-                    <Skeleton height={40} />
-                    <Skeleton variant="rect" height={190} />
-                </Paper>
-            );
-        }
-        const { id, firstname, lastname } = member;
+        const { member } = this.props;
+        const {
+            id,
+            firstname,
+            lastname,
+            promotions,
+            exercisesParticipated
+        } = member;
         return (
             <Grid container spacing={3}>
                 <Grid item xs={12}>
@@ -46,19 +43,15 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                 </Grid>
                 <Grid item xs={6}>
                     <MemberExercisesDetails
-                        exercisesParticipated={member.exercisesParticipated}
+                        exercisesParticipated={exercisesParticipated}
                     />
                 </Grid>
                 <Grid item container spacing={3} xs={6}>
                     <Grid item xs={12}>
-                        <MemberPromotionsDetail
-                            promotions={member.promotions}
-                        />
+                        <MemberPromotionsDetail promotions={promotions} />
                     </Grid>
                     <Grid item xs={12}>
-                        <MemberPromotionsDetail
-                            promotions={member.promotions}
-                        />
+                        <MemberPromotionsDetail promotions={promotions} />
                     </Grid>
                 </Grid>
             </Grid>

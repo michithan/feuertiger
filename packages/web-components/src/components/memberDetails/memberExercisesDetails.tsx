@@ -23,18 +23,14 @@ export class MemberExercisesDetails extends React.Component<
     private handleClickEdit = () => this.setState({ editMode: true });
 
     private handleClickDiscard = () => {
-        this.props?.resetForm();
         this.setState({ editMode: true });
     };
 
     private handleClickBack = () => {
-        this.props?.resetForm();
         this.setState({ editMode: false });
     };
 
     private handleClickSave = () => {
-        const { values } = this.props;
-        console.log('values: ', values);
         this.setState({ editMode: false });
     };
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Grid,
     Button,
-    CircularProgress,
     Fab,
     Avatar,
     Breadcrumbs,
@@ -12,8 +11,8 @@ import MaterialTable from 'material-table';
 import FindInPage from '@material-ui/icons/FindInPage';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
-import { Link } from '../link/link';
-import { AddMember } from '../index';
+
+import { AddMember, Link } from '../index';
 
 interface State {
     addDialogOpen: boolean;
@@ -36,60 +35,8 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
     render() {
         const { addDialogOpen } = this.state;
         const {
-            error,
-            loading,
             data: { allPersons }
         } = this.props;
-
-        let content = null;
-
-        if (loading) {
-            content = <CircularProgress />;
-        } else if (error) {
-            content = <p>Error :(</p>;
-        } else if (allPersons) {
-            content = (
-                <MaterialTable
-                    options={{
-                        exportButton: true,
-                        filtering: true,
-                        grouping: true,
-                        search: true,
-                        sorting: true
-                    }}
-                    columns={[
-                        {
-                            title: '',
-                            field: 'avatar',
-                            filtering: false,
-                            render: ({ avatar }) => (
-                                <Avatar alt="Remy Sharp" src={avatar} />
-                            )
-                        },
-                        { title: 'Vorname', field: 'firstname' },
-                        { title: 'Nachname', field: 'lastname' },
-                        { title: 'Geburtsdatum', field: 'dateOfBirth' },
-                        { title: 'Dienstgrad', field: 'grade' },
-                        { title: 'Straße', field: 'address.street' },
-                        { title: 'Hausnummer', field: 'address.streetNumber' },
-                        {
-                            title: '',
-                            field: 'edit',
-                            filtering: false,
-                            render: ({ id }) => (
-                                <Link href="/member/[id]" as={`/member/${id}`}>
-                                    <Fab color="primary" aria-label="edit">
-                                        <FindInPage />
-                                    </Fab>
-                                </Link>
-                            )
-                        }
-                    ]}
-                    data={allPersons}
-                    title="Mitglieder"
-                />
-            );
-        }
 
         return (
             <Grid container spacing={3}>
@@ -115,7 +62,51 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                     </Button>
                 </Grid>
                 <Grid item xs={12} md={12} lg={12}>
-                    {content}
+                    <MaterialTable
+                        options={{
+                            exportButton: true,
+                            filtering: true,
+                            grouping: true,
+                            search: true,
+                            sorting: true
+                        }}
+                        columns={[
+                            {
+                                title: '',
+                                field: 'avatar',
+                                filtering: false,
+                                render: ({ avatar }) => (
+                                    <Avatar alt="Remy Sharp" src={avatar} />
+                                )
+                            },
+                            { title: 'Vorname', field: 'firstname' },
+                            { title: 'Nachname', field: 'lastname' },
+                            { title: 'Geburtsdatum', field: 'dateOfBirth' },
+                            { title: 'Dienstgrad', field: 'grade' },
+                            { title: 'Straße', field: 'address.street' },
+                            {
+                                title: 'Hausnummer',
+                                field: 'address.streetNumber'
+                            },
+                            {
+                                title: '',
+                                field: 'edit',
+                                filtering: false,
+                                render: ({ id }) => (
+                                    <Link
+                                        href="/member/[id]"
+                                        as={`/member/${id}`}
+                                    >
+                                        <Fab color="primary" aria-label="edit">
+                                            <FindInPage />
+                                        </Fab>
+                                    </Link>
+                                )
+                            }
+                        ]}
+                        data={allPersons}
+                        title="Mitglieder"
+                    />
                 </Grid>
             </Grid>
         );

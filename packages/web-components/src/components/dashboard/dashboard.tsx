@@ -15,10 +15,11 @@ export class Dashboard extends React.Component<DashboardProps, State> {
     }
 
     render() {
-        const { data } = this.props;
-        const countMembersByGrade = data?.dashboard?.countMembersByGrade;
-        const countExerciseByCategory =
-            data?.dashboard?.countExerciseByCategory;
+        const {
+            data: {
+                dashboard: { countMembersByGrade, countExerciseByCategory }
+            }
+        } = this.props;
         return (
             <Grid container spacing={3}>
                 <Grid item xs={12}>
