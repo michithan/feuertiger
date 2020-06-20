@@ -14,7 +14,6 @@ export default class Document extends NextDocument {
                 originalRenderPage({
                     enhanceApp: (App: any) => (props: any) =>
                         styledComponentSheet.collectStyles(
-                            // eslint-disable-next-line
                             materialUiSheets.collect(<App {...props} />)
                         )
                 });

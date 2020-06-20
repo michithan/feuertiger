@@ -4,7 +4,6 @@ import vision from '@google-cloud/vision';
 
 // TODO fix web import problem
 
-// eslint-disable-next-line import/prefer-default-export
 export const visionOCR = async (image: string): Promise<any> => {
     // TODO upload image to firebase storage
 

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { Paper as MaterialPaper } from '@material-ui/core';
 import styled from 'styled-components';
 
