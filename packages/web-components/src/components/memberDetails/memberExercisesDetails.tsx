@@ -1,22 +1,15 @@
 import React from 'react';
-import {
-    Grid,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody
-} from '@material-ui/core';
+import { TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import { PersonExercisesParticipatedFragment } from '@feuertiger/schema-graphql';
 
-import { Paper, Detail, DetailType } from '../index';
+import { DetailTable } from '../index';
 
 export interface MemberExercisesDetailsProps
-    extends PersonExercisesParticipatedFragment {
+    extends PersonExercisesParticipatedFragment {}
+
+interface State {
     editMode: boolean;
 }
-
-interface State {}
 
 export class MemberExercisesDetails extends React.Component<
     MemberExercisesDetailsProps,
@@ -24,55 +17,60 @@ export class MemberExercisesDetails extends React.Component<
 > {
     constructor(props: MemberExercisesDetailsProps) {
         super(props);
-        this.state = {};
+        this.state = { editMode: false };
     }
 
+    private handleClickEdit = () => this.setState({ editMode: true });
+
+    private handleClickDiscard = () => {
+        this.props?.resetForm();
+        this.setState({ editMode: true });
+    };
+
+    private handleClickBack = () => {
+        this.props?.resetForm();
+        this.setState({ editMode: false });
+    };
+
+    private handleClickSave = () => {
+        const { values } = this.props;
+        console.log('values: ', values);
+        this.setState({ editMode: false });
+    };
+
     render() {
-        const { exercisesParticipated, editMode } = this.props;
+        const { exercisesParticipated } = this.props;
+        const { editMode } = this.state;
+
         return (
-            <Paper>
-                <Grid container spacing={3} justify="center">
-                    <Grid item xs={12}>
-                        <Detail
-                            label="Übungen teilgenommen"
-                            edit={editMode}
-                            name="exercisesParticipated"
-                            type={DetailType.Button}
-                        >
-                            {exercisesParticipated?.length}
-                        </Detail>
-                    </Grid>
-                    {exercisesParticipated?.length > 0 && (
-                        <Grid item xs={12}>
-                            <Table aria-label="simple table">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>Thema</TableCell>
-                                        <TableCell align="right">
-                                            Datum
-                                        </TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {exercisesParticipated?.map((exercise) => (
-                                        <TableRow key={exercise.id}>
-                                            <TableCell
-                                                component="th"
-                                                scope="row"
-                                            >
-                                                {exercise.topic}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {exercise?.timeslot?.start}
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </Grid>
-                    )}
-                </Grid>
-            </Paper>
+            <DetailTable
+                label="Übungen"
+                loading={!exercisesParticipated}
+                editMode={editMode}
+                handleClickSave={this.handleClickSave}
+                handleClickDiscard={this.handleClickDiscard}
+                handleClickBack={this.handleClickBack}
+                handleClickEdit={this.handleClickEdit}
+            >
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Thema</TableCell>
+                        <TableCell align="right">Datum</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {exercisesParticipated?.map((exercise) => (
+                        <TableRow key={exercise.id}>
+                            <TableCell component="th" scope="row">
+                                {exercise.topic}
+                            </TableCell>
+                            <TableCell align="right">
+                                {exercise?.timeslot?.start}
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </DetailTable>
         );
     }
 }

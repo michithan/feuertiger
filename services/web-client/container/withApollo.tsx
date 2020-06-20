@@ -1,6 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/link-context';
-import withApollo from 'next-with-apollo';
+import withApollo, { WithApolloState } from 'next-with-apollo';
 import fetch from 'isomorphic-unfetch';
 
 import AuthSingleton from './authSingleton';
@@ -29,7 +29,8 @@ const httpLink = createHttpLink({
 });
 
 export interface ApolloProps {
-    apollo: any;
+    apollo: ApolloClient<any>;
+    apolloState: WithApolloState<any>;
 }
 
 const initClient = ({ initialState }) =>

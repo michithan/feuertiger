@@ -1,11 +1,7 @@
 import React, { ReactElement } from 'react';
-import {
-    Grid,
-    Typography,
-    TextField,
-    Button as MuiButton
-} from '@material-ui/core';
-import { KeyboardDatePicker } from '@material-ui/pickers';
+import { Grid, Typography, Button as MuiButton } from '@material-ui/core';
+
+import { FormikTextField, FormikKeyboardDatePicker } from '../index';
 
 export enum DetailType {
     Text,
@@ -22,9 +18,6 @@ export interface DetailProps {
     type: DetailType;
     edit?: boolean;
     handleClick?: (_: any) => void;
-    handleChange?: (_: any) => void;
-    handleBlur?: (_: any) => void;
-    handleReset?: (_: any) => void;
 }
 
 export const Detail = ({
@@ -33,49 +26,25 @@ export const Detail = ({
     children,
     edit,
     type,
-    handleClick,
-    handleChange,
-    handleBlur,
-    handleReset
+    handleClick
 }: DetailProps) => {
     let content: ReactElement;
     if (edit) {
         switch (type) {
             case DetailType.Text:
-                content = (
-                    <TextField
-                        id={name}
-                        name={name}
-                        value={children}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onReset={handleReset}
-                    />
-                );
+                content = <FormikTextField id={`${name}Input`} name={name} />;
                 break;
             case DetailType.Number:
-                content = (
-                    <TextField
-                        id={name}
-                        name={name}
-                        value={children}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onReset={handleReset}
-                    />
-                );
+                content = <FormikTextField id={`${name}Input`} name={name} />;
                 break;
             case DetailType.Date:
                 content = (
-                    <KeyboardDatePicker
+                    <FormikKeyboardDatePicker
                         variant="dialog"
                         format="MM/dd/yyyy"
                         margin="normal"
-                        id={name}
-                        value={children}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onReset={handleReset}
+                        id={`${name}Input`}
+                        name={name}
                         KeyboardButtonProps={{
                             'aria-label': `Ändere ${label}`
                         }}

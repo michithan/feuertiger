@@ -3,7 +3,11 @@ import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
 
-import { MemberDetailsProps, MemberDetails } from '@feuertiger/web-components';
+import {
+    MemberDetailsProps,
+    MemberDetails,
+    LoadingContainer
+} from '@feuertiger/web-components';
 import {
     PersonDetailsDocument,
     PersonDetailsQueryResult,
@@ -21,7 +25,11 @@ export default dynamic(
             ...props,
             member: props?.data?.node as Person
         };
-        return <MemberDetails {...memberDetailsProps} />;
+        return (
+            <LoadingContainer loading={props.loading}>
+                <MemberDetails {...memberDetailsProps} />
+            </LoadingContainer>
+        );
     },
     {
         ssr: false
