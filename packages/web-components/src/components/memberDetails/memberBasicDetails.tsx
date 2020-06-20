@@ -1,7 +1,7 @@
 import {
-    Person,
     PersonUpdate,
-    UpdatePersonMutationFn
+    UpdatePersonMutationFn,
+    PersonDetailsQueryResult
 } from '@feuertiger/schema-graphql';
 import { Avatar, Divider, Grid, Typography } from '@material-ui/core';
 import { Form, FormikProps, withFormik, WithFormikConfig } from 'formik';
@@ -17,7 +17,7 @@ import {
 } from '../index';
 
 export interface MemberBasicDetailsProps {
-    member: Person;
+    member: PersonDetailsQueryResult['data']['node'];
     updatePerson: UpdatePersonMutationFn;
 }
 

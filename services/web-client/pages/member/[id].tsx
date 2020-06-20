@@ -11,7 +11,6 @@ import {
 import {
     PersonDetailsDocument,
     PersonDetailsQueryResult,
-    Person,
     UpdatePersonDocument
 } from '@feuertiger/schema-graphql';
 
@@ -20,19 +19,19 @@ export default dynamic(
         const router = useRouter();
         const { id } = router.query;
 
-        const queryResult = useQuery(PersonDetailsDocument, {
+        const { data, loading } = useQuery(PersonDetailsDocument, {
             variables: { id }
         }) as PersonDetailsQueryResult;
 
         const [updatePerson] = useMutation(UpdatePersonDocument);
 
+        const { node: member } = data || {};
         const memberDetailsProps: MemberDetailsProps = {
-            ...queryResult,
-            member: queryResult?.data?.node as Person,
+            member,
             updatePerson
         };
         return (
-            <LoadingContainer loading={queryResult.loading}>
+            <LoadingContainer loading={loading || !member}>
                 <MemberDetails {...memberDetailsProps} />
             </LoadingContainer>
         );

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Grid, Table, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 import { Paper, EditButtonGroup } from '../index';
 
@@ -45,7 +45,7 @@ export const DetailTable = ({
                 </Grid>
             </Grid>
             <Grid item xs={12}>
-                <Table aria-label="simple table">{children}</Table>
+                {children}
             </Grid>
         </Grid>
     </Paper>

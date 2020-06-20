@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, Typography, Breadcrumbs } from '@material-ui/core';
 import {
-    Person,
     PersonDetailsQueryResult,
     UpdatePersonMutationFn
 } from '@feuertiger/schema-graphql';
@@ -10,8 +9,8 @@ import { Link, MemberBasicDetails } from '../index';
 import { MemberExercisesDetails } from './memberExercisesDetails';
 import { MemberPromotionsDetail } from './memberPromotionsDetail';
 
-export interface MemberDetailsProps extends PersonDetailsQueryResult {
-    member: Person;
+export interface MemberDetailsProps {
+    member: PersonDetailsQueryResult['data']['node'];
     updatePerson: UpdatePersonMutationFn;
 }
 

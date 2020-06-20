@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import MaterialTable from 'material-table';
 import { PersonPromotionsFragment } from '@feuertiger/schema-graphql';
 
 import { DetailTable } from '../index';
@@ -46,24 +46,19 @@ export class MemberPromotionsDetail extends React.Component<
                 handleClickBack={this.handleClickBack}
                 handleClickEdit={this.handleClickEdit}
             >
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Thema</TableCell>
-                        <TableCell align="right">Datum</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {promotions?.map(promotion => (
-                        <TableRow key={promotion.id}>
-                            <TableCell component="th" scope="row">
-                                {promotion.grade}
-                            </TableCell>
-                            <TableCell align="right">
-                                {promotion.dateOfPromotion}
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
+                <MaterialTable
+                    options={{
+                        search: true
+                    }}
+                    columns={[
+                        { title: 'Dienstgrad', field: 'grade' },
+                        { title: 'Datum', field: 'dateOfPromotion' }
+                    ]}
+                    data={promotions.map(promotion => ({
+                        ...promotion
+                    }))}
+                    title="Beförderungen"
+                />
             </DetailTable>
         );
     }

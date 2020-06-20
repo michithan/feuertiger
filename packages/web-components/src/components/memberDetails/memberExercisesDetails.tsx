@@ -1,5 +1,5 @@
 import React from 'react';
-import { TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import MaterialTable from 'material-table';
 import { PersonExercisesParticipatedFragment } from '@feuertiger/schema-graphql';
 
 import { DetailTable } from '../index';
@@ -38,6 +38,12 @@ export class MemberExercisesDetails extends React.Component<
         const { exercisesParticipated } = this.props;
         const { editMode } = this.state;
 
+        const editConfig = editMode
+            ? {
+                  isEditable: () => true
+              }
+            : {};
+
         return (
             <DetailTable
                 label="Übungen"
@@ -47,24 +53,20 @@ export class MemberExercisesDetails extends React.Component<
                 handleClickBack={this.handleClickBack}
                 handleClickEdit={this.handleClickEdit}
             >
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Thema</TableCell>
-                        <TableCell align="right">Datum</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {exercisesParticipated?.map(exercise => (
-                        <TableRow key={exercise.id}>
-                            <TableCell component="th" scope="row">
-                                {exercise.topic}
-                            </TableCell>
-                            <TableCell align="right">
-                                {exercise?.timeslot?.start}
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
+                <MaterialTable
+                    editable={editConfig}
+                    options={{
+                        search: true
+                    }}
+                    columns={[
+                        { title: 'Thema', field: 'topic' }
+                        // { title: 'Datum', field: 'lastname' }
+                    ]}
+                    data={exercisesParticipated.map(exercise => ({
+                        ...exercise
+                    }))}
+                    title="Mitglieder"
+                />
             </DetailTable>
         );
     }
