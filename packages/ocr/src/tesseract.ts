@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createWorker, createScheduler } from 'tesseract.js';
 
-// eslint-disable-next-line import/prefer-default-export
 export const ocr = async (image: string): Promise<string> => {
     const worker = createWorker();
     await worker.load();
