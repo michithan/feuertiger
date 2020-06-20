@@ -81,7 +81,11 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                             },
                             { title: 'Vorname', field: 'firstname' },
                             { title: 'Nachname', field: 'lastname' },
-                            { title: 'Geburtsdatum', field: 'dateOfBirth' },
+                            {
+                                title: 'Geburtsdatum',
+                                field: 'dateOfBirth',
+                                type: 'date'
+                            },
                             { title: 'Dienstgrad', field: 'grade' },
                             { title: 'Straße', field: 'address.street' },
                             {
