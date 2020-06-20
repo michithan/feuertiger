@@ -1,0 +1,18 @@
+type MembersByGrade {
+    grade: Grade!
+    members: Int!
+}
+
+type ExerciseByCategory {
+    category: String!
+    exercises: Int!
+}
+
+type Dashboard {
+    membersByGrade: [MembersByGrade]!
+    exerciseByCategory: [ExerciseByCategory]!
+}
+
+extend type Query {
+    dashboard: Dashboard
+}

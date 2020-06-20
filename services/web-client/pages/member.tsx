@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';

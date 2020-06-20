@@ -36,6 +36,7 @@
         "react-dom": "16.13.1",
         "react-lazylog": "4.5.2",
         "react-webcam": "5.0.1",
+        "recharts": "1.8.5",
         "styled-components": "5.1.0"
     },
     "devDependencies": {
@@ -50,6 +51,7 @@
         "@types/faker": "4.1.12",
         "@types/react": "16.9.17",
         "@types/react-native": "0.62.9",
+        "@types/recharts": "1.8.12",
         "@types/styled-components": "5.1.0",
         "babel-jest": "26.0.1",
         "babel-loader": "8.1.0",

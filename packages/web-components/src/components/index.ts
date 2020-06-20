@@ -11,3 +11,4 @@ export * from './detail/detail';
 export * from './preSaveDialog/preSaveDialog';
 export * from './preDiscardDialog/preDiscardDialog';
 export * from './editButtonGroup/editButtonGroup';
+export * from './dashboard/dashboard';
