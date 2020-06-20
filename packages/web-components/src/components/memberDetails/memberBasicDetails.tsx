@@ -39,31 +39,37 @@ const formConfig: WithFormikConfig<MemberBasicDetailsProps, PersonUpdate> = {
     mapPropsToValues: ({
         member: {
             id,
-            address,
+            address: {
+                id: addressId,
+                city,
+                country,
+                postalCode,
+                street,
+                streetNumber
+            },
             firstname,
             lastname,
             avatar,
             dateOfBirth,
-            grade,
             placeOfBirth,
-            birthName,
-            memberships: [{ id: membershipId, entryDate, active }]
+            birthName
         }
     }) => ({
         id,
-        address,
+        address: {
+            id: addressId,
+            city,
+            country,
+            postalCode,
+            street,
+            streetNumber
+        },
         firstname,
         lastname,
         avatar,
         dateOfBirth,
-        grade,
         placeOfBirth,
-        birthName,
-        actualMembership: {
-            id: membershipId,
-            entryDate,
-            active
-        }
+        birthName
     }),
     validate: () => ({}),
     handleSubmit: () => {}
@@ -92,17 +98,11 @@ class MemberBasicDetailsWithForm extends React.Component<
 
     private handleClickSave = async () => {
         const { values, updatePerson } = this.props;
-
-        console.log('values: ', values);
-
-        const updateResult = await updatePerson({
+        await updatePerson({
             variables: {
                 person: values
             }
         });
-
-        console.log('updateResult: ', updateResult);
-
         this.setState({ editMode: false });
     };
 
@@ -110,15 +110,17 @@ class MemberBasicDetailsWithForm extends React.Component<
         const { editMode } = this.state;
         const {
             dirty,
+            member: {
+                grade,
+                actualMembership: { entryDate, active }
+            },
             values: {
                 firstname,
                 lastname,
                 avatar,
                 dateOfBirth,
-                grade,
                 placeOfBirth,
                 birthName,
-                actualMembership: { entryDate, active },
                 address
             }
         } = this.props;
@@ -212,7 +214,6 @@ class MemberBasicDetailsWithForm extends React.Component<
                         <Grid item xs={12} sm={6}>
                             <Detail
                                 label="Eintrittsdatum"
-                                edit={editMode}
                                 name="actualMembership.entryDate"
                                 type={DetailType.Date}
                             >
@@ -222,7 +223,6 @@ class MemberBasicDetailsWithForm extends React.Component<
                         <Grid item xs={12} sm={6}>
                             <Detail
                                 label="Status"
-                                edit={editMode}
                                 name="actualMembership.active"
                                 type={DetailType.Text}
                             >

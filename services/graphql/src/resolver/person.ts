@@ -46,6 +46,22 @@ const Person: PersonResolvers = {
         });
         return persons?.memberships ?? [];
     },
+    actualMembership: async ({ id }, args, context: Context) => {
+        const persons = await context.db.person.findOne({
+            where: {
+                id
+            },
+            select: {
+                memberships: {
+                    take: 1,
+                    orderBy: {
+                        entryDate: 'desc'
+                    }
+                }
+            }
+        });
+        return persons?.memberships?.[0] ?? null;
+    },
     grade: async ({ id }, args, context: Context) => {
         const promotion = await context.db.promotion.findMany({
             where: {
