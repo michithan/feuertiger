@@ -15,11 +15,10 @@ export const FormikTextField = (props: TextFieldProps) => (
 
 const FormikDatePickerWrapper = ({
     form: { setFieldValue, setFieldError, errors },
-    field,
+    field: { name, value },
     ...other
 }: Partial<DatePickerProps> & FieldProps<any>) => {
-    const currentError = errors[field.name];
-    console.log('initfield: ', field);
+    const currentError = errors[name];
     return (
         <DatePicker
             cancelLabel="Abbrechen"
@@ -27,21 +26,18 @@ const FormikDatePickerWrapper = ({
             todayLabel="Heute"
             allowKeyboardControl
             showTodayButton
-            // variant="dialog"
-            name={field.name}
-            value={field.value}
-            // format="dd.MM.yyyy"
+            variant="dialog"
+            name={name}
+            value={value}
+            format="dd.MM.yyyy"
             helperText={currentError}
             error={Boolean(currentError)}
             onError={(error: string) => {
-                if (error !== currentError) {
-                    setFieldError(field.name, error);
+                if (error && error !== currentError) {
+                    setFieldError(name, error);
                 }
             }}
-            onChange={fieldValue => {
-                console.log('field: ', field);
-                setFieldValue(field.name, fieldValue, false);
-            }}
+            onChange={fieldValue => setFieldValue(name, fieldValue, false)}
             {...other}
         />
     );
