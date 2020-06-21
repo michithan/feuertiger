@@ -59,8 +59,9 @@ Build:
         - git config --global user.name "${GITLAB_USER_NAME}"
         - git config --global user.email "${GITLAB_USER_EMAIL}"
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
-    script:
         - git checkout ${CI_COMMIT_REF_NAME}
+    script:
+        - git tag -n
         - lerna bootstrap --since
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
