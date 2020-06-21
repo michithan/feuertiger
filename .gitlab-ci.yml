@@ -1,5 +1,5 @@
 stages:
-    - prepare
+    - .pre
     - test
     - build
     - deploy
@@ -17,7 +17,7 @@ variables:
 # - triggered if dockerfile hast changed                                                      #
 ###############################################################################################
 Prepare:
-    stage: prepare
+    stage: .pre
     only:
         changes:
             - .dev-env.Dockerfile
@@ -41,6 +41,7 @@ Prepare:
 ######################################################################################
 Build:
     stage: build
+    needs: []
     except:
         variables:
             - $CI_SKIP == "true"
@@ -85,6 +86,7 @@ Build:
 #######################################################
 Deploy:
     stage: deploy
+    needs: ['Build']
     only:
         refs:
             - dev
