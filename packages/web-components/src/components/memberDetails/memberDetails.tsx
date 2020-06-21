@@ -52,14 +52,10 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                         exercisesNotParticipated={exercisesNotParticipated}
                     />
                 </Grid>
-                <Grid item container spacing={3} xs={6}>
-                    <Grid item xs={12}>
-                        <MemberPromotionsDetail promotions={promotions} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <MemberPromotionsDetail promotions={promotions} />
-                    </Grid>
+                <Grid item container xs={6}>
+                    <MemberPromotionsDetail promotions={promotions} />
                 </Grid>
+                <Grid item xs={6} />
             </Grid>
         );
     }

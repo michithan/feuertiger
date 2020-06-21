@@ -1,14 +1,14 @@
 import React from 'react';
-import MaterialTable from 'material-table';
-import { PersonPromotionsFragment } from '@feuertiger/schema-graphql';
+import {
+    PersonPromotionsFragment,
+    Promotion
+} from '@feuertiger/schema-graphql';
 
-import { DetailTable } from '../index';
+import { DetailEditTable } from '../index';
 
 export interface MemberPromotionsDetailProps extends PersonPromotionsFragment {}
 
-interface State {
-    editMode: boolean;
-}
+interface State {}
 
 export class MemberPromotionsDetail extends React.Component<
     MemberPromotionsDetailProps,
@@ -16,50 +16,38 @@ export class MemberPromotionsDetail extends React.Component<
 > {
     constructor(props: MemberPromotionsDetailProps) {
         super(props);
-        this.state = { editMode: false };
+        this.state = {};
     }
 
-    private handleClickEdit = () => this.setState({ editMode: true });
-
-    private handleClickDiscard = () => {
-        this.setState({ editMode: true });
-    };
-
-    private handleClickBack = () => {
-        this.setState({ editMode: false });
-    };
-
-    private handleClickSave = () => {
-        this.setState({ editMode: false });
+    private handleSave = async (changes: Promotion[]) => {
+        console.log(changes);
     };
 
     render() {
         const { promotions } = this.props;
-        const { editMode } = this.state;
 
         return (
-            <DetailTable
+            <DetailEditTable
                 label="Beförderungen"
-                editMode={editMode}
-                handleClickSave={this.handleClickSave}
-                handleClickDiscard={this.handleClickDiscard}
-                handleClickBack={this.handleClickBack}
-                handleClickEdit={this.handleClickEdit}
-            >
-                <MaterialTable
-                    options={{
-                        search: true
-                    }}
-                    columns={[
+                handleSave={this.handleSave}
+                connectionTableProps={{
+                    columns: [
                         { title: 'Dienstgrad', field: 'grade' },
-                        { title: 'Datum', field: 'dateOfPromotion' }
-                    ]}
-                    data={promotions.map(promotion => ({
-                        ...promotion
-                    }))}
-                    title="Beförderungen"
-                />
-            </DetailTable>
+                        {
+                            title: 'Datum',
+                            field: 'dateOfPromotion',
+                            type: 'date'
+                        }
+                    ]
+                }}
+                columns={[
+                    { title: 'Dienstgrad', field: 'grade' },
+                    { title: 'Datum', field: 'dateOfPromotion', type: 'date' }
+                ]}
+                title=""
+                connectionData={[]}
+                data={promotions}
+            />
         );
     }
 }
