@@ -4,7 +4,6 @@ import {
     Typography,
     Button,
     Dialog,
-    DialogTitle,
     DialogContent,
     DialogActions
 } from '@material-ui/core';
@@ -56,10 +55,7 @@ export class DetailTable extends React.Component<DetailTableProps, State> {
 
         return (
             <Paper>
-                <Dialog open={addMode}>
-                    <DialogTitle id="alert-dialog-title">
-                        Hinzufügen
-                    </DialogTitle>
+                <Dialog open={addMode} maxWidth="md" fullWidth>
                     <DialogContent>{addDialogContent}</DialogContent>
                     <DialogActions>
                         <Button

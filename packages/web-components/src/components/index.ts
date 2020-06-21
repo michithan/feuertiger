@@ -11,6 +11,7 @@ export * from './paper/paper';
 export * from './detail/detail';
 export * from './detail/detailTable';
 export * from './detail/detailAddress';
+export * from './detail/detailEditTable';
 export * from './preSaveDialog/preSaveDialog';
 export * from './preDiscardDialog/preDiscardDialog';
 export * from './editButtonGroup/editButtonGroup';
