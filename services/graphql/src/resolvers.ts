@@ -4,6 +4,7 @@ import Node from './resolver/node';
 import Mutation from './resolver/mutation';
 import Person from './resolver/person';
 import Dashboard from './resolver/dashboard';
+import Exercise from './resolver/exercise';
 
 const resolvers: Resolvers = {
     DateTime: DateTimeResolver,
@@ -11,7 +12,8 @@ const resolvers: Resolvers = {
     Node,
     Mutation,
     Person,
-    Dashboard
+    Dashboard,
+    Exercise
 };
 
 export default resolvers;

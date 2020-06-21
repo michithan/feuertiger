@@ -1,5 +1,5 @@
 query personDetails($id: ID!) {
-    node(id: $id) {
+    member: node(id: $id) {
         __typename
         id
         ... on Person {
@@ -32,6 +32,7 @@ query personDetails($id: ID!) {
             ...personPromotions
             ...personExercisesLeaded
             ...personExercisesParticipated
+            ...personExercisesNotParticipated
         }
     }
 }

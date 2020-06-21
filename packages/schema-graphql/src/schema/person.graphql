@@ -19,6 +19,7 @@ type Person implements Node {
     memberships: [Membership]
     promotions: [Promotion]
     exercisesParticipated: [Exercise]
+    exercisesNotParticipated: [Exercise]
     exercisesLeaded: [Exercise]
 }
 

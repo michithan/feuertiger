@@ -2,7 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useQuery, useMutation } from '@apollo/client';
 import dynamic from 'next/dynamic';
-
 import {
     MemberDetailsProps,
     MemberDetails,
@@ -11,7 +10,8 @@ import {
 import {
     PersonDetailsDocument,
     PersonDetailsQueryResult,
-    UpdatePersonDocument
+    UpdatePersonDocument,
+    Person
 } from '@feuertiger/schema-graphql';
 
 export default dynamic(
@@ -25,9 +25,9 @@ export default dynamic(
 
         const [updatePerson] = useMutation(UpdatePersonDocument);
 
-        const { node: member } = data || {};
+        const { member } = data || {};
         const memberDetailsProps: MemberDetailsProps = {
-            member,
+            member: member as Person,
             updatePerson
         };
         return (

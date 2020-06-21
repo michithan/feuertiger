@@ -1,0 +1,10 @@
+fragment personExercisesNotParticipated on Person {
+    exercisesNotParticipated {
+        id
+        topic
+        timeslot {
+            start
+            end
+        }
+    }
+}

@@ -1,16 +1,13 @@
 import React from 'react';
 import { Grid, Typography, Breadcrumbs } from '@material-ui/core';
-import {
-    PersonDetailsQueryResult,
-    UpdatePersonMutationFn
-} from '@feuertiger/schema-graphql';
+import { UpdatePersonMutationFn, Person } from '@feuertiger/schema-graphql';
 
 import { Link, MemberBasicDetails } from '../index';
 import { MemberExercisesDetails } from './memberExercisesDetails';
 import { MemberPromotionsDetail } from './memberPromotionsDetail';
 
 export interface MemberDetailsProps {
-    member: PersonDetailsQueryResult['data']['node'];
+    member: Person;
     updatePerson: UpdatePersonMutationFn;
 }
 
@@ -29,7 +26,8 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
             firstname,
             lastname,
             promotions,
-            exercisesParticipated
+            exercisesParticipated,
+            exercisesNotParticipated
         } = member;
         return (
             <Grid container spacing={3}>
@@ -51,6 +49,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                 <Grid item xs={6}>
                     <MemberExercisesDetails
                         exercisesParticipated={exercisesParticipated}
+                        exercisesNotParticipated={exercisesNotParticipated}
                     />
                 </Grid>
                 <Grid item container spacing={3} xs={6}>

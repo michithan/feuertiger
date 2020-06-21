@@ -24,6 +24,18 @@ const Person: PersonResolvers = {
         });
         return persons?.exercisesParticipated ?? [];
     },
+    exercisesNotParticipated: async ({ id }, args, context: Context) => {
+        const exercises = await context.db.exercise.findMany({
+            where: {
+                participants: {
+                    none: {
+                        id
+                    }
+                }
+            }
+        });
+        return exercises ?? [];
+    },
     address: async ({ id }, args, context: Context) => {
         const persons = await context.db.person.findOne({
             where: {

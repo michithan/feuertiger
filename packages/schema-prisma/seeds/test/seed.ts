@@ -98,7 +98,7 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
         timeslotFakes.map(timeslot => ({
             timeslot,
             leaders: personsFakes.slice(personsFakes.length - 5),
-            participants: personsFakes.slice(personsFakes.length - 20)
+            participants: personsFakes.slice(20)
         }))
     );
 
