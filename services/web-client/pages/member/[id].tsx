@@ -11,7 +11,8 @@ import {
     PersonDetailsDocument,
     PersonDetailsQueryResult,
     UpdatePersonDocument,
-    Person
+    Person,
+    UpdatePersonExercisesConnectionDocument
 } from '@feuertiger/schema-graphql';
 
 export default dynamic(
@@ -24,11 +25,15 @@ export default dynamic(
         }) as PersonDetailsQueryResult;
 
         const [updatePerson] = useMutation(UpdatePersonDocument);
+        const [updatePersonExercisesConnection] = useMutation(
+            UpdatePersonExercisesConnectionDocument
+        );
 
         const { member } = data || {};
         const memberDetailsProps: MemberDetailsProps = {
             member: member as Person,
-            updatePerson
+            updatePerson,
+            updatePersonExercisesConnection
         };
         return (
             <LoadingContainer loading={loading || !member}>

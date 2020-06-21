@@ -2,29 +2,55 @@ import React from 'react';
 import {
     PersonExercisesParticipatedFragment,
     PersonExercisesNotParticipatedFragment,
-    Exercise
+    Exercise,
+    UpdatePersonExercisesConnectionMutationFn
 } from '@feuertiger/schema-graphql';
 
-import { Box } from '@material-ui/core';
-import { DetailEditTable } from '../index';
+import { withSnackbar, ProviderContext } from 'notistack';
+import { DetailEditTable, Update } from '../index';
 
 export interface MemberExercisesDetailsProps
     extends PersonExercisesParticipatedFragment,
-        PersonExercisesNotParticipatedFragment {}
+        PersonExercisesNotParticipatedFragment {
+    personId: string;
+    updatePersonExercisesConnection: UpdatePersonExercisesConnectionMutationFn;
+}
 
 interface State {}
 
-export class MemberExercisesDetails extends React.Component<
-    MemberExercisesDetailsProps,
+class MemberExercisesDetailsWithSnackbar extends React.Component<
+    MemberExercisesDetailsProps & ProviderContext,
     State
 > {
-    constructor(props: MemberExercisesDetailsProps) {
+    constructor(props: MemberExercisesDetailsProps & ProviderContext) {
         super(props);
         this.state = {};
     }
 
-    private handleSave = async (changes: Exercise[]) => {
-        console.log(changes);
+    private handleSave = async (changes: Array<Exercise & Update>) => {
+        const {
+            updatePersonExercisesConnection,
+            personId,
+            enqueueSnackbar
+        } = this.props;
+        try {
+            await updatePersonExercisesConnection({
+                variables: {
+                    update: {
+                        id: personId,
+                        changes: changes.map(({ action, id }) => ({
+                            action,
+                            id
+                        }))
+                    }
+                }
+            });
+            enqueueSnackbar('Änderungen übernommen.', { variant: 'success' });
+        } catch (error) {
+            enqueueSnackbar('Fehler! ', {
+                variant: 'error'
+            });
+        }
     };
 
     render() {
@@ -59,3 +85,7 @@ export class MemberExercisesDetails extends React.Component<
         );
     }
 }
+
+export const MemberExercisesDetails = withSnackbar(
+    MemberExercisesDetailsWithSnackbar
+);

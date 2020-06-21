@@ -8,13 +8,8 @@ type Query {
 
 type Mutation {
     delete(id: ID!): Boolean
-    createPerson(person: PersonUpdate!): Person
     createExercise(exercise: _Exercise!): Exercise
-    updatePerson(person: PersonUpdate!): Person
     updateExercise(exercise: _Exercise!): Exercise
-    addExerciseToPerson(exerciseId: ID!, personId: ID!): Boolean
-    addLeadersToExercise(exerciseId: ID!, personId: ID!): Boolean
-    addParticipantsToExercise(exerciseId: ID!, personId: ID!): Boolean
     removeLeadersFromExercise(exerciseId: ID!, personId: ID!): Boolean
     removeExerciseFromPerson(exerciseId: ID!, personId: ID!): Boolean
     removeParticipantsFromExercise(exerciseId: ID!, personId: ID!): Boolean

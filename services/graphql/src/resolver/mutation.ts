@@ -57,33 +57,37 @@ const Mutation: MutationResolvers = {
         }
         return update || null;
     },
-    addExerciseToPerson: async (_parent, args, context: Context) => {
-        const { personId, exerciseId } = args;
-        const update = await context.db.person.update({
+    updatePersonExercisesConnection: async (
+        _parent,
+        args,
+        context: Context
+    ) => {
+        const { update } = args;
+        const { id: personId, changes } = update;
+
+        const data = {
+            exercisesParticipated: {
+                connect: changes
+                    .filter(({ action }) => action === 'ADD')
+                    .map(({ id }) => ({ id })),
+                disconnect: changes
+                    .filter(({ action }) => action === 'DELETE')
+                    .map(({ id }) => ({ id }))
+            }
+        };
+
+        if (data.exercisesParticipated.disconnect.length <= 0)
+            delete data.exercisesParticipated.disconnect;
+        if (data.exercisesParticipated.connect.length <= 0)
+            delete data.exercisesParticipated.connect;
+
+        const personUpdate = await context.db.person.update({
             where: {
                 id: personId
             },
-            data: {
-                exercisesParticipated: {
-                    connect: { id: exerciseId }
-                }
-            }
+            data
         });
-        return !!update;
-    },
-    removeExerciseFromPerson: async (_parent, args, context: Context) => {
-        const { personId, exerciseId } = args;
-        const update = await context.db.person.update({
-            where: {
-                id: personId
-            },
-            data: {
-                exercisesParticipated: {
-                    disconnect: { id: exerciseId }
-                }
-            }
-        });
-        return !!update;
+        return personUpdate;
     }
 };
 

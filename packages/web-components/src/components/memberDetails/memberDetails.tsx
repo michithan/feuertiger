@@ -1,6 +1,10 @@
 import React from 'react';
 import { Grid, Typography, Breadcrumbs } from '@material-ui/core';
-import { UpdatePersonMutationFn, Person } from '@feuertiger/schema-graphql';
+import {
+    UpdatePersonMutationFn,
+    UpdatePersonExercisesConnectionMutationFn,
+    Person
+} from '@feuertiger/schema-graphql';
 
 import { Link, MemberBasicDetails } from '../index';
 import { MemberExercisesDetails } from './memberExercisesDetails';
@@ -9,6 +13,7 @@ import { MemberPromotionsDetail } from './memberPromotionsDetail';
 export interface MemberDetailsProps {
     member: Person;
     updatePerson: UpdatePersonMutationFn;
+    updatePersonExercisesConnection: UpdatePersonExercisesConnectionMutationFn;
 }
 
 interface State {}
@@ -20,7 +25,11 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
     }
 
     render() {
-        const { member, updatePerson } = this.props;
+        const {
+            member,
+            updatePerson,
+            updatePersonExercisesConnection
+        } = this.props;
         const {
             id,
             firstname,
@@ -48,8 +57,12 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                 </Grid>
                 <Grid item xs={6}>
                     <MemberExercisesDetails
+                        personId={id}
                         exercisesParticipated={exercisesParticipated}
                         exercisesNotParticipated={exercisesNotParticipated}
+                        updatePersonExercisesConnection={
+                            updatePersonExercisesConnection
+                        }
                     />
                 </Grid>
                 <Grid item container xs={6}>

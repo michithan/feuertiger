@@ -34,3 +34,16 @@ input PersonUpdate {
     placeOfBirth: String
     dateOfBirth: DateTime
 }
+
+input PersonExerciseConnectionUpdate {
+    id: ID!
+    changes: [ConnectionUpdate!]!
+}
+
+extend type Mutation {
+    createPerson(person: PersonUpdate!): Person
+    updatePerson(person: PersonUpdate!): Person
+    updatePersonExercisesConnection(
+        update: PersonExerciseConnectionUpdate!
+    ): Person
+}

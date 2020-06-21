@@ -20,3 +20,13 @@ input AddressUpdate {
     city: String
     country: String
 }
+
+enum ConnectionUpdateAction {
+    ADD
+    DELETE
+}
+
+input ConnectionUpdate {
+    id: ID!
+    action: ConnectionUpdateAction!
+}
