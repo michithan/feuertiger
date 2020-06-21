@@ -1,4 +1,5 @@
 type Timeslot {
+    id: ID!
     start: DateTime
     end: DateTime
 }

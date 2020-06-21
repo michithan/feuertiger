@@ -55,7 +55,7 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                         updatePerson={updatePerson}
                     />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item sm={12} md={6}>
                     <MemberExercisesDetails
                         personId={id}
                         exercisesParticipated={exercisesParticipated}
@@ -65,10 +65,10 @@ export class MemberDetails extends React.Component<MemberDetailsProps, State> {
                         }
                     />
                 </Grid>
-                <Grid item container xs={6}>
+                <Grid item container sm={12} md={6}>
                     <MemberPromotionsDetail promotions={promotions} />
                 </Grid>
-                <Grid item xs={6} />
+                <Grid item sm={false} md={6} />
             </Grid>
         );
     }

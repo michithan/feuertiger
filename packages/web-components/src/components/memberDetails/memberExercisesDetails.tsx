@@ -7,7 +7,7 @@ import {
 } from '@feuertiger/schema-graphql';
 
 import { withSnackbar, ProviderContext } from 'notistack';
-import { DetailEditTable, Update } from '../index';
+import { DetailEditTable, Update, Link } from '../index';
 
 export interface MemberExercisesDetailsProps
     extends PersonExercisesParticipatedFragment,
@@ -71,7 +71,19 @@ class MemberExercisesDetailsWithSnackbar extends React.Component<
                     ]
                 }}
                 columns={[
-                    { title: 'Thema', field: 'topic' },
+                    {
+                        title: 'Thema',
+                        field: 'topic',
+                        render: ({ id, topic }: Exercise) => (
+                            <Link
+                                href="/exercices/[id]"
+                                as={`/exercices/${id}`}
+                                inherit
+                            >
+                                {topic}
+                            </Link>
+                        )
+                    },
                     {
                         title: 'Datum',
                         field: 'timeslot.start',

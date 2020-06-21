@@ -1,0 +1,11 @@
+query allExercises {
+    allExercises {
+        id
+        topic
+        timeslot {
+            id
+            start
+            end
+        }
+    }
+}
