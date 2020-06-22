@@ -1,4 +1,4 @@
-import faker from 'faker';
+import faker from './faker';
 import { PersonCreateInput, AddressCreateInput, Sex } from '../../dist';
 
 export interface PersonConnectionNeeds {

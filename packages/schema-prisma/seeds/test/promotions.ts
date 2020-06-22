@@ -1,4 +1,4 @@
-import faker from 'faker';
+import faker from './faker';
 import { Grade, PromotionCreateInput, PersonCreateInput } from '../../dist';
 
 export interface PromotionConnectionNeeds {

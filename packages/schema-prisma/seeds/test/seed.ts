@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import faker from 'faker';
 import { PrismaClient } from '../../dist';
 import { createPerson } from './person';
 import { createAddress } from './address';
@@ -10,17 +9,15 @@ import { createExercise } from './exercise';
 
 const client = new PrismaClient();
 
-const save = async (delegate: any, { id, ...data }: any) => {
+const upsert = async (delegate: any, { id, ...data }: any) => {
     try {
-        const result = await delegate.upsert({
+        return await delegate.upsert({
             where: {
                 id
             },
             create: { id, ...data },
             update: data
         });
-        console.log('result ', result);
-        console.log('Saved ', id);
     } catch (error) {
         console.log('Seeding error: ', error);
     }
@@ -31,7 +28,7 @@ type FakeFnWithConnectionNeeds<T, TConnectionNeeds> = (
     connectionNeeds: TConnectionNeeds
 ) => T;
 
-const upsertSome = async <T, TD, TConnectionNeeds>(
+const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
     fakerFn: FakeFn<T> | FakeFnWithConnectionNeeds<T, TConnectionNeeds>,
     number: number,
     delegate: TD,
@@ -43,21 +40,29 @@ const upsertSome = async <T, TD, TConnectionNeeds>(
             ? (_, index) => fakerFn(connectionNeeds[index])
             : fakerFn
     );
-    await Promise.all(fakes.map(fake => save(delegate, fake)));
+    const upserts = fakes.map(fake => upsert(delegate, fake));
+    const results = await Promise.all(upserts);
+    console.log(
+        `Seeded ${results.length} ${fakes?.[0]?.id?.split(':').shift()}`
+    );
     return fakes;
 };
 
 (async () => {
-    faker.locale = 'de';
-    faker.seed(1000);
+    const PERSONS_COUNT = 118;
+    const EXERCICES_COUNT = 32;
 
     // upsert some addresses
-    const addressFakes = await upsertSome(createAddress, 100, client.address);
+    const addressFakes = await upsertSome(
+        createAddress,
+        PERSONS_COUNT,
+        client.address
+    );
 
     // upsert some persons
     const personsFakes = await upsertSome(
         createPerson,
-        100,
+        PERSONS_COUNT,
         client.person,
         addressFakes.map(address => ({ address }))
     );
@@ -65,7 +70,7 @@ const upsertSome = async <T, TD, TConnectionNeeds>(
     // upsert some memberships
     await upsertSome(
         createMembership,
-        100,
+        PERSONS_COUNT,
         client.membership,
         personsFakes.map(person => ({ person }))
     );
@@ -73,7 +78,7 @@ const upsertSome = async <T, TD, TConnectionNeeds>(
     // upsert some promotions
     await upsertSome(
         createPromotion,
-        100,
+        PERSONS_COUNT,
         client.promotion,
         personsFakes.map(person => ({ person }))
     );
@@ -81,14 +86,14 @@ const upsertSome = async <T, TD, TConnectionNeeds>(
     // upsert some timeslot
     const timeslotFakes = await upsertSome(
         createTimeslot,
-        100,
+        EXERCICES_COUNT,
         client.timeslot
     );
 
     // upsert some exercises
     await upsertSome(
         createExercise,
-        100,
+        EXERCICES_COUNT,
         client.exercise,
         timeslotFakes.map(timeslot => ({
             timeslot,

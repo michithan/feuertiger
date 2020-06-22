@@ -1,4 +1,4 @@
-import faker from 'faker';
+import faker from './faker';
 import { AddressCreateInput } from '../../dist';
 
 export const createAddress = (): AddressCreateInput => ({

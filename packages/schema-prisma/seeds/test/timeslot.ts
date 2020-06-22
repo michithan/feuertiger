@@ -1,4 +1,4 @@
-import faker from 'faker';
+import faker from './faker';
 import { TimeslotCreateInput } from '../../dist';
 
 export const createTimeslot = (): TimeslotCreateInput => ({
