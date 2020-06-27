@@ -11,8 +11,7 @@ const defaultProps: AddExerciseComponentProps = {
     open: true
 };
 
-storiesOf('AddExercise', module)
-.add('Default', () => {
+storiesOf('AddExercise', module).add('Default', () => {
     const props: AddExerciseComponentProps = {
         ...defaultProps,
         open: true
