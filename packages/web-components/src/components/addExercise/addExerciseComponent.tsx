@@ -1,5 +1,5 @@
 import React from 'react';
-import { 
+import {
     Button,
     Dialog,
     DialogTitle,
@@ -11,7 +11,7 @@ import {
     Typography,
     DialogContentText
 } from '@material-ui/core';
-import { KeyboardDateTimePicker} from '@material-ui/pickers';
+import { KeyboardDateTimePicker } from '@material-ui/pickers';
 import CenterFocusStrongIcon from '@material-ui/icons/CenterFocusStrong';
 
 interface State {
@@ -24,7 +24,7 @@ export interface AddExerciseComponentProps {
 }
 
 export class AddExerciseComponent extends React.Component<
-AddExerciseComponentProps,
+    AddExerciseComponentProps,
     State
 > {
     constructor(props: AddExerciseComponentProps) {
@@ -44,58 +44,72 @@ AddExerciseComponentProps,
                 open={open}
             >
                 <DialogTitle id="simple-dialog-title">
-                   Übung erstellen
+                    Übung erstellen
                 </DialogTitle>
                 <DialogContent style={{ overflowY: 'initial' }}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="exercise-titel"
-                                    name="Titel"
-                                    label="Titel"
-                                    fullWidth
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <KeyboardDateTimePicker
-                                    disableToolbar
-                                    variant="inline"
-                                    format="MM/dd/yyyy HH:mm"
-                                    margin="normal"
-                                    id="dateOfEvent"
-                                    label="Übungsdatum"
-                                    value={dateOfEvent}
-                                    onChange={() => {}}
-                                    KeyboardButtonProps={{
-                                        'aria-label': 'change date'
-                                    }}
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    id="location"
-                                    name="Ort"
-                                    label="Ort"
-                                    fullWidth
-                                />
-                            </Grid>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                id="exercise-titel"
+                                name="Titel"
+                                label="Titel"
+                                fullWidth
+                            />
                         </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                id="typeOfExcercise"
+                                name="Art/Gruppe"
+                                label="Art/Gruppe"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <KeyboardDateTimePicker
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy HH:mm"
+                                margin="normal"
+                                id="dateOfEvent"
+                                label="Übungsdatum"
+                                value={dateOfEvent}
+                                onChange={() => {}}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date'
+                                }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                id="duration"
+                                name="Dauer"
+                                label="Dauer"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                required
+                                id="location"
+                                name="Ort"
+                                label="Ort"
+                                fullWidth
+                            />
+                        </Grid>
+                    </Grid>
                 </DialogContent>
                 <DialogActions>
-                        <>
-                            <Button
-                                autoFocus
-                                onClick={handleClose}
-                                color="primary"
-                            >
-                                Abbrechen
-                            </Button>
-                            <Button onClick={handleClose} color="primary">
-                                Speichern
-                            </Button>
-                        </>
+                    <>
+                        <Button autoFocus onClick={handleClose} color="primary">
+                            Abbrechen
+                        </Button>
+                        <Button onClick={handleClose} color="primary">
+                            Speichern
+                        </Button>
+                    </>
                 </DialogActions>
             </Dialog>
         );
