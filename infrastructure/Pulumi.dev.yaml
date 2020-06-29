@@ -1,0 +1,5 @@
+encryptionsalt: v1:emNn9CC0J2w=:v1:fAV7HZBitF/bEQMd:PBmCzo4QRRUFM+0MiXm/H1nWvL/h8Q==
+config:
+    gcp:project: feuertiger-77a8a
+    gcp:region: europe-west1
+    gcp:zone: eur3

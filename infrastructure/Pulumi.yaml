@@ -1,0 +1,13 @@
+name: feuertiger
+runtime: nodejs
+description: feuertiger infrastructure
+template:
+    config:
+        gcp:project:
+            description: The Google Cloud project to deploy into
+        gcp:region:
+            description: The Google Cloud region
+            default: europe-west1
+        isMinikube:
+            description: Whether you are deploying to minikube
+            default: true
