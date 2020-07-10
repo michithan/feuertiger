@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/infrastructure",
     "version": "1.0.9-dev.87816d5a.0",
-    "main": "./src/index.ts",
+    "main": "./index.ts",
     "license": "MIT",
     "private": true,
     "scripts": {
