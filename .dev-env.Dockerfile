@@ -4,28 +4,28 @@ FROM apline:3.12.0
 # Install basics
 RUN apk update \
     && apk add --no-cache \
-                nodejs \ 
-                npm \
-                yarn \
-                sudo \
-                curl \
-                chromium \
-                # libgtk2.0-0 \
-                # libgtk-3-0 \
-                libnotify-dev \
-                # libgconf-2-4 \
-                # libnss3 \
-                # libxss1 \
-                # libasound2 \
-                # libxtst6 \
-                xauth \
-                # apt-transport-https \
-                ca-certificates \
-                gnupg \
-                xvfb \
-                postgresql \
-                postgresql-contrib \
-    && export NODE_OPTIONS="--max-old-space-size=4096"
+    nodejs \ 
+    npm \
+    yarn \
+    sudo \
+    curl \
+    chromium \
+    # libgtk2.0-0 \
+    # libgtk-3-0 \
+    libnotify-dev \
+    # libgconf-2-4 \
+    # libnss3 \
+    # libxss1 \
+    # libasound2 \
+    # libxtst6 \
+    xauth \
+    # apt-transport-https \
+    ca-certificates \
+    gnupg \
+    xvfb \
+    postgresql \
+    postgresql-contrib \
+    && export NODE_OPTIONS="--max-old-space-size=4096" \
     && update-rc.d postgresql enable
 
 USER postgres
