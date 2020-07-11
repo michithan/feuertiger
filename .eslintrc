@@ -15,7 +15,8 @@
             {
                 "endOfLine": "auto"
             }
-        ]
+        ],
+        "import/prefer-default-export": 0
     },
     "plugins": [
         "prettier",

@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "ts-node-dev --debounce -- ./src/startup.ts",
         "test": "jest --collect-coverage",
-        "build": "tsc"
+        "build": "tsc",
+        "start": "node ./dist/startup.js"
     },
     "repository": {
         "type": "git",

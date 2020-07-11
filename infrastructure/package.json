@@ -5,15 +5,17 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "dev": "ts-node-dev --debounce -- ./src/index.ts",
-        "preview": "pulumi preview",
-        "delpoy": "pulumi config set password --secret [your-cluster-password-here] && pulumi up"
+        "pre": "pulumi preview",
+        "up": "pulumi up -y -r -p 100",
+        "destroy": "pulumi destroy -r -p 100"
     },
     "dependencies": {
         "@feuertiger/graphql": "1.0.9-dev.87816d5a.0",
         "@feuertiger/tools": "1.0.9-dev.1cf47562.0",
         "@feuertiger/web-client": "1.0.9-dev.87816d5a.0",
+        "@pulumi/digitalocean": "2.6.0",
         "@pulumi/gcp": "3.11.0",
+        "@pulumi/gitlab": "2.4.0",
         "@pulumi/kubernetes": "2.3.1",
         "@pulumi/pulumi": "2.5.0"
     },

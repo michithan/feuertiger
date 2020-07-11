@@ -3,3 +3,4 @@ config:
     gcp:project: feuertiger-77a8a
     gcp:region: europe-west1
     gcp:zone: eur3
+    gitlab:token: jQ23LFsXQM81n7ngFkWo

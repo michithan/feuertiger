@@ -1,13 +1,10 @@
 {
     "compilerOptions": {
         "outDir": "./dist" /* Redirect output structure to the directory. */,
-        "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+        "rootDir": "./" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     },
     "extends": "../tsconfig.json",
-    "include": [
-        "./**/*",
-        "index.ts"
-    ],
+    "include": ["./**/*", "index.ts"],
     "devDependencies": {
         "ts-node": "8.10.1",
         "typescript": "3.9.2"

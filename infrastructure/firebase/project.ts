@@ -1,3 +1,9 @@
-import { firebase } from '@pulumi/gcp';
+import { Config } from '@pulumi/pulumi';
+import * as gcp from '@pulumi/gcp';
 
-export const project = new firebase.Project('feuertiger');
+const gcpConfig = new Config('gcp');
+
+export const project = gcp.firebase.Project.get(
+    'feuertiger',
+    gcpConfig.require('project')
+);

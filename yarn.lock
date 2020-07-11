@@ -3904,6 +3904,16 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@pulumi/digitalocean@2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@pulumi/digitalocean/-/digitalocean-2.6.0.tgz#f2860383077d2fc26079360bbfec48e2a6ed1b02"
+  integrity sha512-aAiNv7J1/Y7OIUA99mD3vKoWM3gh08WD8rvjpeZDimEH+NwUFl7YXGpArrcd6WzJQWPZk30zDTPLZzK5TFM6pA==
+  dependencies:
+    "@pulumi/pulumi" "^2.0.0"
+    builtin-modules "3.0.0"
+    read-package-tree "^5.2.1"
+    resolve "^1.7.1"
+
 "@pulumi/gcp@3.11.0":
   version "3.11.0"
   resolved "https://registry.yarnpkg.com/@pulumi/gcp/-/gcp-3.11.0.tgz#bd061a7b58db0333a1326decb440b8cccc3de7b4"
@@ -3912,6 +3922,16 @@
     "@pulumi/pulumi" "^2.0.0"
     "@types/express" "^4.16.0"
     read-package-json "^2.0.13"
+
+"@pulumi/gitlab@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@pulumi/gitlab/-/gitlab-2.4.0.tgz#2a9693be680edf15913ecab30df8e3894e9d8779"
+  integrity sha512-10jrqsOgWE/MRkRPXrwawlsLeuIiy68FIKqyReoeO/Ko1oISwQaD7489qFlkvglTeiTQvowvR1WmiFm7x9BhMw==
+  dependencies:
+    "@pulumi/pulumi" "^2.0.0"
+    builtin-modules "3.0.0"
+    read-package-tree "^5.2.1"
+    resolve "^1.7.1"
 
 "@pulumi/kubernetes@2.3.1":
   version "2.3.1"
@@ -7034,6 +7054,11 @@ buffer@^4.3.0:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
     isarray "^1.0.0"
+
+builtin-modules@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/builtin-modules/-/builtin-modules-3.0.0.tgz#1e587d44b006620d90286cc7a9238bbc6129cab1"
+  integrity sha512-hMIeU4K2ilbXV6Uv93ZZ0Avg/M91RaKXucQ+4me2Do1txxBDyDZWCBa5bJSLqoNTRpXTLwEzIk1KmloenDDjhg==
 
 builtin-status-codes@^3.0.0:
   version "3.0.0"
@@ -17423,7 +17448,7 @@ read-cmd-shim@^1.0.1:
   optionalDependencies:
     graceful-fs "^4.1.2"
 
-read-package-tree@^5.1.6, read-package-tree@^5.3.1:
+read-package-tree@^5.1.6, read-package-tree@^5.2.1, read-package-tree@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/read-package-tree/-/read-package-tree-5.3.1.tgz#a32cb64c7f31eb8a6f31ef06f9cedf74068fe636"
   integrity sha512-mLUDsD5JVtlZxjSlPPx1RETkNjjvQYuweKwNVt1Sn8kP5Jh44pvYuUHCp6xSVDZWbNxVxG5lyZJ921aJH61sTw==
@@ -18041,7 +18066,7 @@ resolve@1.1.7:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.1.7.tgz#203114d82ad2c5ed9e8e0411b3932875e889e97b"
   integrity sha1-IDEU2CrSxe2ejgQRs5ModeiJ6Xs=
 
-resolve@^1.0.0, resolve@^1.1.6, resolve@^1.10.0, resolve@^1.11.0, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.15.1, resolve@^1.17.0, resolve@^1.3.2, resolve@^1.8.1:
+resolve@^1.0.0, resolve@^1.1.6, resolve@^1.10.0, resolve@^1.11.0, resolve@^1.12.0, resolve@^1.13.1, resolve@^1.15.1, resolve@^1.17.0, resolve@^1.3.2, resolve@^1.7.1, resolve@^1.8.1:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.17.0.tgz#b25941b54968231cc2d1bb76a79cb7f2c0bf8444"
   integrity sha512-ic+7JYiV8Vi2yzQGFWOkiZD5Z9z7O2Zhm9XMaTxdJExKasieFCr+yXZ/WmXsckHiKl12ar0y6XiXDx3m4RHn1w==
