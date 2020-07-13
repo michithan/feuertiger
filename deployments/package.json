@@ -1,0 +1,22 @@
+{
+    "name": "@feuertiger/deployments",
+    "version": "1.0.9-dev.87816d5a.0",
+    "main": "./index.ts",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "pre": "pulumi preview",
+        "up": "pulumi up -y -r -p 100",
+        "destroy": "pulumi destroy -r -p 100"
+    },
+    "dependencies": {
+        "@pulumi/digitalocean": "2.6.0",
+        "@pulumi/kubernetes": "2.3.1",
+        "@pulumi/pulumi": "2.5.0"
+    },
+    "devDependencies": {
+        "@types/express": "4.16.0",
+        "@types/node": "8.0.0",
+        "typescript": "3.9.2"
+    }
+}
