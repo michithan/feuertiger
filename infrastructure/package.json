@@ -10,9 +10,6 @@
         "destroy": "pulumi destroy -r -p 100"
     },
     "dependencies": {
-        "@feuertiger/graphql": "1.0.9-dev.87816d5a.0",
-        "@feuertiger/tools": "1.0.9-dev.1cf47562.0",
-        "@feuertiger/web-client": "1.0.9-dev.87816d5a.0",
         "@pulumi/digitalocean": "2.6.0",
         "@pulumi/gcp": "3.11.0",
         "@pulumi/gitlab": "2.4.0",
@@ -22,7 +19,6 @@
     "devDependencies": {
         "@types/express": "4.16.0",
         "@types/node": "8.0.0",
-        "ts-node": "8.10.1",
         "typescript": "3.9.2"
     }
 }

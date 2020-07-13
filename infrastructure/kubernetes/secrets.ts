@@ -7,24 +7,17 @@ import { provider } from './provider';
 const gitConfig = new Config('git');
 const gitlabConfig = new Config('gitlab');
 
-export const gitlab = {
-    registry: 'registry.gitlab.com',
-    user: gitConfig.require('user'),
-    email: gitConfig.require('email'),
-    password: gitlabConfig.requireSecret('token')
-};
-
-export const gitlabRegistrySecret = new k8s.core.v1.Secret(
+export const gitlab = new k8s.core.v1.Secret(
     'gitlab-registry',
     {
         type: 'kubernetes.io/dockerconfigjson',
         stringData: {
             '.dockerconfigjson': pulumi
                 .all([
-                    gitlab.registry,
-                    gitlab.user,
-                    gitlab.password,
-                    gitlab.email
+                    'registry.gitlab.com',
+                    gitConfig.require('user'),
+                    gitlabConfig.requireSecret('token'),
+                    gitConfig.require('email')
                 ])
                 .apply(([server, username, password, email]) => {
                     return JSON.stringify({

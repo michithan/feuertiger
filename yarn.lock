@@ -3923,7 +3923,7 @@
     "@types/express" "^4.16.0"
     read-package-json "^2.0.13"
 
-"@pulumi/gitlab@^2.4.0":
+"@pulumi/gitlab@2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@pulumi/gitlab/-/gitlab-2.4.0.tgz#2a9693be680edf15913ecab30df8e3894e9d8779"
   integrity sha512-10jrqsOgWE/MRkRPXrwawlsLeuIiy68FIKqyReoeO/Ko1oISwQaD7489qFlkvglTeiTQvowvR1WmiFm7x9BhMw==

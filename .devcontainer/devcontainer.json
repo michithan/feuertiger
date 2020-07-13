@@ -21,6 +21,7 @@
         "jsayol.firebase-explorer",
         "anseki.vscode-color",
         "msjsdiag.debugger-for-chrome",
-        "naumovs.color-highlight"
+        "naumovs.color-highlight",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
     ]
 }

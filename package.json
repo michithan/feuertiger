@@ -17,12 +17,14 @@
         "packages/*",
         "services/*",
         "infrastructure",
+        "deployments",
         "e2e"
     ],
     "workspaces": [
         "packages/*",
         "services/*",
         "infrastructure",
+        "deployments",
         "e2e"
     ],
     "dependencies": {

@@ -2,5 +2,11 @@
     "npmClient": "yarn",
     "version": "1.0.9-dev.87816d5a.0",
     "useWorkspaces": true,
-    "packages": ["packages/*", "services/*", "infrastructure", "e2e"]
+    "packages": [
+        "packages/*",
+        "services/*",
+        "infrastructure",
+        "deployments",
+        "e2e"
+    ]
 }
