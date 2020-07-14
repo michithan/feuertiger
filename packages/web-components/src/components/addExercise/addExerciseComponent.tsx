@@ -6,13 +6,9 @@ import {
     DialogContent,
     DialogActions,
     Grid,
-    TextField,
-    Fab,
-    Typography,
-    DialogContentText
+    TextField
 } from '@material-ui/core';
 import { KeyboardDateTimePicker } from '@material-ui/pickers';
-import CenterFocusStrongIcon from '@material-ui/icons/CenterFocusStrong';
 
 interface State {
     dateOfEvent: Date;
@@ -66,7 +62,7 @@ export class AddExerciseComponent extends React.Component<
                                 fullWidth
                             />
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={6}>
                             <KeyboardDateTimePicker
                                 disableToolbar
                                 variant="inline"
