@@ -11,7 +11,8 @@ import {
 import { KeyboardDateTimePicker } from '@material-ui/pickers';
 
 interface State {
-    dateOfEvent: Date;
+    startOfEvent: Date;
+    endOfEvent: Date;
 }
 
 export interface AddExerciseComponentProps {
@@ -26,13 +27,15 @@ export class AddExerciseComponent extends React.Component<
     constructor(props: AddExerciseComponentProps) {
         super(props);
         this.state = {
-            dateOfEvent: new Date()
+            startOfEvent: new Date(),
+            endOfEvent: new Date()
         };
     }
 
     render() {
         const { handleClose, open } = this.props;
-        const { dateOfEvent } = this.state;
+        const { startOfEvent } = this.state;
+        const { endOfEvent } = this.state;
         return (
             <Dialog
                 onClose={handleClose}
@@ -68,9 +71,9 @@ export class AddExerciseComponent extends React.Component<
                                 variant="inline"
                                 format="MM/dd/yyyy HH:mm"
                                 margin="normal"
-                                id="dateOfEvent"
-                                label="Übungsdatum"
-                                value={dateOfEvent}
+                                id="startOfEvent"
+                                label="Übungsstart"
+                                value={startOfEvent}
                                 onChange={() => {}}
                                 KeyboardButtonProps={{
                                     'aria-label': 'change date'
@@ -78,12 +81,18 @@ export class AddExerciseComponent extends React.Component<
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                            <TextField
-                                required
-                                id="duration"
-                                name="Dauer"
-                                label="Dauer"
-                                fullWidth
+                            <KeyboardDateTimePicker
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy HH:mm"
+                                margin="normal"
+                                id="endOfEvent"
+                                label="Übungsende"
+                                value={endOfEvent}
+                                onChange={() => {}}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date'
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
