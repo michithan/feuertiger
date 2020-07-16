@@ -28,7 +28,6 @@ Prepare:
     services:
         - docker:dind
     before_script:
-        - docker info
         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
     script:
         - docker pull $DEV_ENVIRONMENT_IMAGE_TAG || true
@@ -48,9 +47,6 @@ Build:
     tags:
         - docker
     image: $DEV_ENVIRONMENT_IMAGE_TAG
-    cache:
-        key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-        untracked: true
     before_script:
         - >
             ${CI_COMMIT_REF_PROTECTED}
@@ -58,10 +54,9 @@ Build:
             || git remote set-url origin "https://${CI_JOB_USER_UNPROTECTED}:${CI_JOB_TOKEN_UNPROTECTED}@${CI_REPOSITORY_URL#*@}"
         - git config --global user.name "${GITLAB_USER_NAME}"
         - git config --global user.email "${GITLAB_USER_EMAIL}"
-        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
         - git checkout ${CI_COMMIT_REF_NAME}
+        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
     script:
-        - git tag -n
         - lerna bootstrap --since
         # TODO: format all globals and packages based on lerna run --since
         - yarn format
@@ -74,43 +69,34 @@ Build:
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --preid=${CI_COMMIT_REF_SLUG}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
         - git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true" --tags origin HEAD:$CI_COMMIT_REF_NAME
+
 #######################################################
 # Deploy firebase functions                           #
 # - triggered by pushes on deploy branches made by ci #
 #######################################################
-# Deploy:
-#     stage: deploy
-#     needs: ["Build"]
-#     only:
-#         refs:
-#             - dev
-#     except:
-#         variables:
-#             - $CI_SKIP == "true"
-#     interruptible: true
-#     tags:
-#         - docker
-#     image: $DEV_ENVIRONMENT_IMAGE_TAG
-#     cache:
-#         key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-#         untracked: true
-#     variables:
-#         FIREBASE_TOKEN: ${FIREBASE_TOKEN}
-#         FIREBASE_SECRETS_TYPE: ${FIREBASE_SECRETS_TYPE}
-#         FIREBASE_SECRETS_PROJECT_ID: ${FIREBASE_SECRETS_PROJECT_ID}
-#         FIREBASE_SECRETS_PRIVATE_KEY_ID: ${FIREBASE_SECRETS_PRIVATE_KEY_ID}
-#         FIREBASE_SECRETS_PRIVATE_KEY: ${FIREBASE_SECRETS_PRIVATE_KEY}
-#         FIREBASE_SECRETS_CLIENT_EMAIL: ${FIREBASE_SECRETS_CLIENT_EMAIL}
-#         FIREBASE_SECRETS_CLIENT_ID: ${FIREBASE_SECRETS_CLIENT_ID}
-#         FIREBASE_SECRETS_AUTH_URI: ${FIREBASE_SECRETS_AUTH_URI}
-#         FIREBASE_SECRETS_TOKEN_URI: ${FIREBASE_SECRETS_TOKEN_URI}
-#         FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL: ${FIREBASE_SECRETS_AUTH_PROVIDER_X509_CERT_URL}
-#         FIREBASE_SECRETS_CLIENT_X509_CERT_URL: ${FIREBASE_SECRETS_CLIENT_X509_CERT_URL}
-#     before_script:
-#         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
-#     script:
-#         - cd ./deployments/firebase/functions
-#         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
-#         - npm i --no-package-lock
-#         - npm run createSecrets
-#         - npm run deploy:ci
+Deploy:
+    stage: deploy
+    needs: ["Build"]
+    only:
+        refs:
+            - dev
+    except:
+        variables:
+            - $CI_SKIP == "true"
+    interruptible: true
+    tags:
+        - docker
+    image: $DEV_ENVIRONMENT_IMAGE_TAG
+    cache:
+        key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+        untracked: true
+    variables:
+        GOOGLE_CREDENTIALS: ${GOOGLE_CREDENTIALS}
+        DIGITALOCEAN_TOKEN: ${DIGITALOCEAN_TOKEN}
+    before_script:
+        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    script:
+        - cd ./deployments
+        - yarn
+        - yarn up
