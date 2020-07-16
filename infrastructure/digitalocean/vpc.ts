@@ -5,7 +5,8 @@ import { provider } from './provider';
 export const vpc = new digitalocean.Vpc(
     'feuer-vpc',
     {
-        region: 'fra1'
+        region: digitalocean.Regions.FRA1,
+        name: 'feuer-vpc'
     },
     {
         provider

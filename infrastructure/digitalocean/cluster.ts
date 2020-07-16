@@ -2,14 +2,16 @@ import * as digitalocean from '@pulumi/digitalocean';
 
 import { provider } from './provider';
 import { vpc } from './vpc';
+import { droplet } from './droplet';
 
 export const cluster = new digitalocean.KubernetesCluster(
     'feuer-cluster',
     {
         vpcUuid: vpc.id,
         nodePool: {
-            name: 'feuer-worker-pool',
-            size: 's-1vcpu-2gb',
+            name: droplet.name,
+            tags: [droplet.id],
+            size: digitalocean.DropletSlugs.DropletS1VCPU2GB,
             autoScale: true,
             minNodes: 1,
             maxNodes: 2

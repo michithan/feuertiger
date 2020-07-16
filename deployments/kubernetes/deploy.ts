@@ -44,21 +44,23 @@ export const deploy = ({
 
     const labels = { app: name };
 
-    const metadata = {
-        name,
-        namespace: namespace.metadata.name,
-        labels
-    };
-
     const deployment = new k8s.apps.v1.Deployment(
         name,
         {
-            metadata,
+            metadata: {
+                name,
+                labels,
+                namespace: namespace.metadata.name
+            },
             spec: {
-                replicas,
                 selector: { matchLabels: labels },
+                replicas,
                 template: {
-                    metadata: { labels },
+                    metadata: {
+                        name,
+                        labels,
+                        namespace: namespace.metadata.name
+                    },
                     spec: {
                         containers: [
                             {
@@ -73,8 +75,9 @@ export const deploy = ({
                                         name: key,
                                         value
                                     })),
-                                ports: ports.map(({ intern }) => ({
-                                    containerPort: intern
+                                ports: ports.map(({ intern, extern }) => ({
+                                    containerPort: intern,
+                                    hostPort: extern
                                 }))
                             }
                         ]
@@ -90,12 +93,16 @@ export const deploy = ({
     const service = new k8s.core.v1.Service(
         name,
         {
-            metadata,
+            metadata: {
+                name,
+                namespace: deployment.spec.template.metadata.namespace,
+                labels: deployment.spec.template.metadata.labels
+            },
             spec: {
-                type: 'LoadBalancer',
-                ports: ports.map(({ intern, extern }) => ({
+                type: 'NodePort',
+                ports: ports.map(({ extern }) => ({
                     targetPort: extern,
-                    port: intern
+                    port: extern
                 })),
                 selector: labels
             }
@@ -110,7 +117,16 @@ export const deploy = ({
         new k8s.networking.v1beta1.Ingress(
             name,
             {
-                metadata,
+                metadata: {
+                    name,
+                    namespace: namespace.metadata.name,
+                    annotations: {
+                        'kubernetes.io/ingress.class': 'nginx',
+                        'nginx.ingress.kubernetes.io/whitelist-source-range':
+                            // '217.80.127.19/32'
+                            '10.114.16.0/16'
+                    }
+                },
                 spec: {
                     rules: [
                         {
@@ -118,10 +134,10 @@ export const deploy = ({
                             http: {
                                 paths: [
                                     {
-                                        path: path || '/',
+                                        path: path ?? '/',
                                         backend: {
                                             serviceName: service.metadata.name,
-                                            servicePort: 'http'
+                                            servicePort: ports[0]?.extern || 80
                                         }
                                     }
                                 ]
@@ -141,11 +157,11 @@ export const deploy = ({
         images: deployment.spec.template.spec.containers.apply((containers) =>
             containers.map((container) => container.image)
         ),
-        hostNames: (ingress as k8s.networking.v1beta1.Ingress)?.status.loadBalancer.ingress.apply(
-            (address) => address.map(({ hostname }) => hostname)
+        hostNames: (ingress as k8s.networking.v1beta1.Ingress)?.spec.rules.apply(
+            (rules) => rules?.map((rule) => rule.host)
         ),
         ips: (ingress as k8s.networking.v1beta1.Ingress)?.status.loadBalancer.ingress.apply(
-            (address) => address.map(({ ip }) => ip)
+            (address) => address?.map(({ ip }) => ip)
         )
     };
 };

@@ -4,11 +4,12 @@ export const { name, namespace, hostNames, ips } = deploy({
     namespace: 'feuertiger',
     name: 'web-client',
     image: 'tutum/hello-world:latest',
+
     replicas: 1,
     ports: [
         {
             intern: 80,
-            extern: 8080
+            extern: 80
         }
     ],
     cpu: '50m',

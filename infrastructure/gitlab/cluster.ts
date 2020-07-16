@@ -1,15 +1,15 @@
 import * as gitlab from '@pulumi/gitlab';
-import { cluster, token, cert } from '../digitalocean/cluster';
 
-export const gitlabProject = gitlab.Project.get('feuertiger', '18726494');
+import { cluster as doCluster, token, cert } from '../digitalocean/cluster';
+import { project } from './project';
 
-export const gitlabCluster = new gitlab.ProjectCluster('feuer-cluster', {
+export const cluster = new gitlab.ProjectCluster('feuer-cluster', {
     enabled: true,
     environmentScope: '*',
-    kubernetesApiUrl: cluster.endpoint,
+    kubernetesApiUrl: doCluster.endpoint,
     kubernetesCaCert: cert,
     managed: true,
-    managementProjectId: gitlabProject.id,
+    managementProjectId: project.id,
     kubernetesToken: token,
-    project: gitlabProject.id
+    project: project.id
 });
