@@ -56,6 +56,7 @@ Build:
         - git config --global user.name "${GITLAB_USER_NAME}"
         - git config --global user.email "${GITLAB_USER_EMAIL}"
         - git checkout -B ${CI_COMMIT_REF_NAME}
+        - git push --set-upstream origin ${CI_COMMIT_REF_NAME}
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
     script:
         - lerna bootstrap --since
