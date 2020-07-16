@@ -38,43 +38,42 @@ Prepare:
 # Format Code, Build, Lint, Test and Publish all changed NPM packages of the project #
 # - triggered by every push except pushes from ci                                    #
 ######################################################################################
-# Build:
-#     stage: build
-#     needs: []
-#     except:
-#         variables:
-#             - $CI_SKIP == "true"
-#     interruptible: true
-#     tags:
-#         - docker
-#     image: $DEV_ENVIRONMENT_IMAGE_TAG
-#     cache:
-#         key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-#         untracked: true
-#     before_script:
-#         - >
-#             ${CI_COMMIT_REF_PROTECTED}
-#             && git remote set-url origin "https://${CI_JOB_USER_PROTECTED}:${CI_JOB_TOKEN_PROTECTED}@${CI_REPOSITORY_URL#*@}"
-#             || git remote set-url origin "https://${CI_JOB_USER_UNPROTECTED}:${CI_JOB_TOKEN_UNPROTECTED}@${CI_REPOSITORY_URL#*@}"
-#         - git config --global user.name "${GITLAB_USER_NAME}"
-#         - git config --global user.email "${GITLAB_USER_EMAIL}"
-#         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
-#         - git checkout ${CI_COMMIT_REF_NAME}
-#     script:
-#         - git tag -n
-#         - lerna bootstrap --since
-#         # TODO: format all globals and packages based on lerna run --since
-#         - yarn format
-#         - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
-#         - yarn build --since
-#         - yarn linkdist
-#         # TODO: lint based on lerna run --since
-#         - yarn lint --since
-#         - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
-#         - yarn test --since
-#         - lerna publish prerelease --no-push --yes --exact --preid=${CI_COMMIT_REF_SLUG}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
-#         - git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true" --tags origin HEAD:$CI_COMMIT_REF_NAME
-
+Build:
+    stage: build
+    needs: []
+    except:
+        variables:
+            - $CI_SKIP == "true"
+    interruptible: true
+    tags:
+        - docker
+    image: $DEV_ENVIRONMENT_IMAGE_TAG
+    cache:
+        key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+        untracked: true
+    before_script:
+        - >
+            ${CI_COMMIT_REF_PROTECTED}
+            && git remote set-url origin "https://${CI_JOB_USER_PROTECTED}:${CI_JOB_TOKEN_PROTECTED}@${CI_REPOSITORY_URL#*@}"
+            || git remote set-url origin "https://${CI_JOB_USER_UNPROTECTED}:${CI_JOB_TOKEN_UNPROTECTED}@${CI_REPOSITORY_URL#*@}"
+        - git config --global user.name "${GITLAB_USER_NAME}"
+        - git config --global user.email "${GITLAB_USER_EMAIL}"
+        - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
+        - git checkout ${CI_COMMIT_REF_NAME}
+    script:
+        - git tag -n
+        - lerna bootstrap --since
+        # TODO: format all globals and packages based on lerna run --since
+        - yarn format
+        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
+        - yarn build --since
+        - yarn linkdist
+        # TODO: lint based on lerna run --since
+        - yarn lint --since
+        - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
+        - yarn test --since
+        - lerna publish prerelease --no-push --yes --exact --preid=${CI_COMMIT_REF_SLUG}.${CI_COMMIT_SHORT_SHA} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/
+        - git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true" --tags origin HEAD:$CI_COMMIT_REF_NAME
 #######################################################
 # Deploy firebase functions                           #
 # - triggered by pushes on deploy branches made by ci #

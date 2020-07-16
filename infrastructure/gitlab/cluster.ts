@@ -7,7 +7,7 @@ import { project } from './project';
 export const cluster = new gitlab.ProjectCluster('feuer-cluster', {
     enabled: true,
     environmentScope: '*',
-    domain: `${loadBalancer}.nip.io`,
+    domain: loadBalancer.ip.apply((ip) => `${ip}.nip.io`),
     kubernetesApiUrl: doCluster.endpoint,
     kubernetesCaCert: cert,
     managed: true,
