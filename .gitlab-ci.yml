@@ -33,6 +33,7 @@ Prepare:
         - docker pull $DEV_ENVIRONMENT_IMAGE_TAG || true
         - docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG --file .dev-env.Dockerfile .
         - docker push $DEV_ENVIRONMENT_IMAGE_TAG
+
 ######################################################################################
 # Format Code, Build, Lint, Test and Publish all changed NPM packages of the project #
 # - triggered by every push except pushes from ci                                    #
@@ -54,7 +55,7 @@ Build:
             || git remote set-url origin "https://${CI_JOB_USER_UNPROTECTED}:${CI_JOB_TOKEN_UNPROTECTED}@${CI_REPOSITORY_URL#*@}"
         - git config --global user.name "${GITLAB_USER_NAME}"
         - git config --global user.email "${GITLAB_USER_EMAIL}"
-        # - git checkout ${CI_COMMIT_REF_NAME}
+        - git checkout -B ${CI_COMMIT_REF_NAME}
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
     script:
         - lerna bootstrap --since
