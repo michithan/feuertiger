@@ -16,25 +16,24 @@ variables:
 # Build and Push the docker image representing the dev and build environment for the project  #
 # - triggered if dockerfile hast changed                                                      #
 ###############################################################################################
-# Prepare:
-#     stage: .pre
-#     only:
-#         changes:
-#             - .dev-env.Dockerfile
-#     interruptible: true
-#     tags:
-#         - docker
-#     image: docker:latest
-#     services:
-#         - docker:dind
-#     before_script:
-#         - docker info
-#         - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#     script:
-#         - docker pull $DEV_ENVIRONMENT_IMAGE_TAG || true
-#         - docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG --file .dev-env.Dockerfile .
-#         - docker push $DEV_ENVIRONMENT_IMAGE_TAG
-
+Prepare:
+    stage: .pre
+    only:
+        changes:
+            - .dev-env.Dockerfile
+    interruptible: true
+    tags:
+        - docker
+    image: docker:latest
+    services:
+        - docker:dind
+    before_script:
+        - docker info
+        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    script:
+        - docker pull $DEV_ENVIRONMENT_IMAGE_TAG || true
+        - docker build --cache-from $DEV_ENVIRONMENT_IMAGE_TAG -t $DEV_ENVIRONMENT_IMAGE_TAG --file .dev-env.Dockerfile .
+        - docker push $DEV_ENVIRONMENT_IMAGE_TAG
 ######################################################################################
 # Format Code, Build, Lint, Test and Publish all changed NPM packages of the project #
 # - triggered by every push except pushes from ci                                    #
