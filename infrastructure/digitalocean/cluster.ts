@@ -7,6 +7,7 @@ import { droplet } from './droplet';
 export const cluster = new digitalocean.KubernetesCluster(
     'feuer-cluster',
     {
+        name: 'feuer-cluster',
         vpcUuid: vpc.id,
         nodePool: {
             name: droplet.name,

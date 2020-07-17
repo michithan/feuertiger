@@ -2,7 +2,7 @@ import * as digitalocean from '@pulumi/digitalocean';
 import * as k8s from '@pulumi/kubernetes';
 
 const cluster = digitalocean.getKubernetesCluster({
-    name: 'feuer-cluster-bebe0df'
+    name: 'feuer-cluster'
 });
 
 export const kubeconfig = cluster.then(

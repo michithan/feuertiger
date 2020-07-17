@@ -15,6 +15,7 @@ export interface DeploymentConfig {
     ];
     cpu: string;
     memory: string;
+    access?: { cidr: string }[];
     env?: {
         [key: string]: string;
     };
@@ -32,7 +33,8 @@ export const deploy = ({
     memory,
     env,
     host,
-    path
+    path,
+    access
 }: DeploymentConfig) => {
     const namespace = new k8s.core.v1.Namespace(
         namespacename,
@@ -112,6 +114,12 @@ export const deploy = ({
         }
     );
 
+    const ipWhitelist = access && {
+        'nginx.ingress.kubernetes.io/whitelist-source-range': access
+            .map(({ cidr }) => cidr)
+            .join(',')
+    };
+
     const ingress =
         host &&
         new k8s.networking.v1beta1.Ingress(
@@ -122,9 +130,7 @@ export const deploy = ({
                     namespace: namespace.metadata.name,
                     annotations: {
                         'kubernetes.io/ingress.class': 'nginx',
-                        'nginx.ingress.kubernetes.io/whitelist-source-range':
-                            // '217.80.127.19/32'
-                            '10.114.16.0/16'
+                        ...(ipWhitelist ?? {})
                     }
                 },
                 spec: {
@@ -158,7 +164,7 @@ export const deploy = ({
             containers.map((container) => container.image)
         ),
         hostNames: (ingress as k8s.networking.v1beta1.Ingress)?.spec.rules.apply(
-            (rules) => rules?.map((rule) => rule.host)
+            (rules) => rules?.map(({ host }) => host)
         ),
         ips: (ingress as k8s.networking.v1beta1.Ingress)?.status.loadBalancer.ingress.apply(
             (address) => address?.map(({ ip }) => ip)

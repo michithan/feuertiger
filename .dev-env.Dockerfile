@@ -68,13 +68,12 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s 
 
 # Install helm
 RUN apk add --update --no-cache curl ca-certificates \
-    && curl -L https://get.helm.sh/helm-v2.12.0-linux-amd64.tar.gz | tar xvz \
+    && curl -L https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz | tar xvz \
     && mv linux-amd64/helm /usr/bin/helm \
     && chmod +x /usr/bin/helm \
     && rm -rf linux-amd64 \
     && apk del curl \
-    && rm -f /var/cache/apk/* \
-    && helm init --client-only
+    && rm -f /var/cache/apk/*
 
 # Install lerna && firebase cli
 RUN npm i -g lerna
