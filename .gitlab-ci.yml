@@ -78,7 +78,7 @@ Build:
 #######################################################
 Deploy:
     stage: deploy
-    needs: ["Build"]
+    needs: ['Build']
     only:
         refs:
             - dev
@@ -90,7 +90,7 @@ Deploy:
         - docker
     image: $DEV_ENVIRONMENT_IMAGE_TAG
     cache:
-        key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+        key: '$CI_JOB_NAME-$CI_COMMIT_REF_SLUG'
         untracked: true
     variables:
         GOOGLE_CREDENTIALS: ${GOOGLE_CREDENTIALS}
