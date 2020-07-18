@@ -21,5 +21,5 @@ export const { name, namespace, hostNames, ips } = deploy({
     ],
     cpu: '50m',
     memory: '20Mi',
-    host: 'test.157.245.23.133.nip.io'
+    host: 'feuertiger.com'
 });

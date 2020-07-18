@@ -28,3 +28,10 @@ export const ingress = new k8s.helm.v3.Chart(
     },
     { provider }
 );
+
+export const { ip } = ingress.getResourceProperty(
+    'v1/Service',
+    'default',
+    'feuer-ingress-nginx-ingress',
+    'status'
+).loadBalancer.ingress[0];

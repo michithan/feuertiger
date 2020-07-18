@@ -5,9 +5,9 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "pre": "pulumi preview",
-        "up": "pulumi up -y -r -p 100",
-        "destroy": "pulumi destroy -r -p 100"
+        "pre": "pulumi pre -r -e",
+        "up": "pulumi up -y -r -e -p 100",
+        "destroy": "pulumi destroy -r -e -p 100"
     },
     "dependencies": {
         "@pulumi/digitalocean": "2.6.0",

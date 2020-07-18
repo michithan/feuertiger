@@ -15,7 +15,12 @@ export const firebaseWebAppName = firebaseWebApp.webApp.displayName;
 export const vpcName = vpc.vpc.name;
 export const clusterName = cluster.cluster.name;
 
-export const ingressIp = apps.ingress.resources;
+export const { ip } = apps.ingress.getResourceProperty(
+    'v1/Service',
+    'default',
+    'feuer-ingress-nginx-ingress',
+    'status'
+).loadBalancer.ingress[0];
 
 export const gitlabProject = project.project.name;
 export const gitlabClusterName = integration.cluster.name;
