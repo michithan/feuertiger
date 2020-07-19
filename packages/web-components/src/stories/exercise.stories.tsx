@@ -12,26 +12,26 @@ const defaultProps: ExerciseProps = Object.freeze({
     loading: false,
     error: null,
     data: {
-        allPersons: [
+        allExercises: [
             {
                 id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
+                topic: faker.random.word(),
+                timeslot: faker.date.future().toUTCString()
             },
             {
                 id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
+                topic: faker.random.word(),
+                timeslot: faker.date.future().toUTCString()
             },
             {
                 id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
+                topic: faker.random.word(),
+                timeslot: faker.date.future().toUTCString()
             },
             {
                 id: faker.random.uuid(),
-                firstname: faker.name.firstName(),
-                lastname: faker.name.lastName()
+                topic: faker.random.word(),
+                timeslot: faker.date.future().toUTCString()
             }
         ]
     }
