@@ -2,8 +2,7 @@ import React from 'react';
 import { Grid, Paper, Button, CircularProgress, Fab } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import EditIcon from '@material-ui/icons/Edit';
-import { startOcr } from '@feuertiger/ocr';
-import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
+import { AllExercisesQueryResult } from '@feuertiger/schema-graphql';
 import { AddExerciseComponent } from '../addExercise/addExerciseComponent';
 
 interface State {
@@ -13,7 +12,7 @@ interface State {
 const ExerciseTable = ({
     exercise
 }: {
-    exercise: AllPersonsQueryResult['data']['allPersons'];
+    exercise: AllExercisesQueryResult['data']['allExercises'];
 }) => {
     return (
         <MaterialTable
@@ -25,8 +24,8 @@ const ExerciseTable = ({
                 sorting: true
             }}
             columns={[
-                { title: 'Vorname', field: 'firstname' },
-                { title: 'Nachname', field: 'lastname' },
+                { title: 'Titel', field: 'topic' },
+                { title: 'Datum', field: 'timeslot' },
                 {
                     field: 'edit',
                     title: '',
@@ -39,12 +38,12 @@ const ExerciseTable = ({
                 }
             ]}
             data={exercise}
-            title="Mitglieder"
+            title="Übungen"
         />
     );
 };
 
-export interface ExerciseProps extends AllPersonsQueryResult {}
+export interface ExerciseProps extends AllExercisesQueryResult {}
 
 export class Exercise extends React.Component<ExerciseProps, State> {
     constructor(props: ExerciseProps) {
@@ -63,7 +62,7 @@ export class Exercise extends React.Component<ExerciseProps, State> {
         const {
             error,
             loading,
-            data: { allPersons }
+            data: { allExercises }
         } = this.props;
 
         let content = null;
@@ -72,8 +71,8 @@ export class Exercise extends React.Component<ExerciseProps, State> {
             content = <CircularProgress />;
         } else if (error) {
             content = <p>Error :(</p>;
-        } else if (allPersons) {
-            content = <ExerciseTable exercise={allPersons} />;
+        } else if (allExercises) {
+            content = <ExerciseTable exercise={allExercises} />;
         }
 
         return (
@@ -91,7 +90,7 @@ export class Exercise extends React.Component<ExerciseProps, State> {
                             color="primary"
                             onClick={this.handleOpenAddDialog}
                         >
-                            Mitglied hinzufügen
+                            Übung hinzufügen
                         </Button>
                     </Grid>
                     {/* Recent Deposits */}
