@@ -17,6 +17,10 @@ export const clusterName = cluster.cluster.name;
 
 export const { ip } = apps;
 export const dns = apps.dns.urn;
+export const { certConfig } = apps;
+export const { certNamespace } = apps;
+export const cert = apps.cert.urn;
+export const { issuer } = apps;
 
 export const gitlabProject = project.project.name;
 export const gitlabClusterName = integration.cluster.name;

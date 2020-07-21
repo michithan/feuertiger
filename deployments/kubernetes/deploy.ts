@@ -95,10 +95,18 @@ export const deploy = ({
                     namespace,
                     annotations: {
                         'kubernetes.io/ingress.class': 'nginx',
+                        'cert-manager.k8s.io/cluster-issuer':
+                            'letsencrypt-prod',
                         ...(ipWhitelist ?? {})
                     }
                 },
                 spec: {
+                    tls: [
+                        {
+                            hosts: [host],
+                            secretName: `${name}-tls`
+                        }
+                    ],
                     rules: [
                         {
                             host,
