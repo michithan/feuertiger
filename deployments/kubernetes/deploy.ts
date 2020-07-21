@@ -77,9 +77,8 @@ export const deploy = ({
                                         name: key,
                                         value
                                     })),
-                                ports: ports.map(({ intern, extern }) => ({
-                                    containerPort: intern,
-                                    hostPort: extern
+                                ports: ports.map(({ intern }) => ({
+                                    containerPort: intern
                                 }))
                             }
                         ]
@@ -101,10 +100,11 @@ export const deploy = ({
                 labels: deployment.spec.template.metadata.labels
             },
             spec: {
-                type: 'NodePort',
-                ports: ports.map(({ extern }) => ({
-                    targetPort: extern,
-                    port: extern
+                type: 'ClusterIP',
+                ports: ports.map(({ extern, intern }) => ({
+                    port: extern,
+                    targetPort: intern,
+                    nodePort: undefined
                 })),
                 selector: labels
             }
@@ -164,7 +164,7 @@ export const deploy = ({
             containers.map((container) => container.image)
         ),
         hostNames: (ingress as k8s.networking.v1beta1.Ingress)?.spec.rules.apply(
-            (rules) => rules?.map(({ host }) => host)
+            (rules) => rules?.map((rule) => rule.host)
         ),
         ips: (ingress as k8s.networking.v1beta1.Ingress)?.status.loadBalancer.ingress.apply(
             (address) => address?.map(({ ip }) => ip)
