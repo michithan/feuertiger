@@ -1,4 +1,5 @@
 import * as k8s from '@pulumi/kubernetes';
+import * as k8sx from '@pulumi/kubernetesx';
 
 import { provider } from './provider';
 
@@ -7,12 +8,9 @@ export interface DeploymentConfig {
     name: string;
     image: string;
     replicas: number;
-    ports: [
-        {
-            intern: number;
-            extern: number;
-        }
-    ];
+    ports: {
+        [key: string]: number;
+    };
     cpu: string;
     memory: string;
     access?: { cidr: string }[];
@@ -23,8 +21,19 @@ export interface DeploymentConfig {
     path?: string;
 }
 
+const namespaces: { [key: string]: k8s.core.v1.Namespace } = {};
+const ensureNamespace = (namespace: string) => {
+    namespaces[namespace] =
+        namespaces[namespace] ??
+        new k8s.core.v1.Namespace(
+            namespace,
+            { metadata: { name: namespace } },
+            { provider }
+        );
+};
+
 export const deploy = ({
-    namespace: namespacename,
+    namespace,
     name,
     image,
     replicas,
@@ -36,83 +45,39 @@ export const deploy = ({
     path,
     access
 }: DeploymentConfig) => {
-    const namespace = new k8s.core.v1.Namespace(
-        namespacename,
-        { metadata: { name: namespacename } },
-        {
-            provider
-        }
-    );
+    ensureNamespace(namespace);
 
-    const labels = { app: name };
-
-    const deployment = new k8s.apps.v1.Deployment(
-        name,
-        {
-            metadata: {
+    const pod = new k8sx.PodBuilder({
+        containers: [
+            {
                 name,
-                labels,
-                namespace: namespace.metadata.name
-            },
-            spec: {
-                selector: { matchLabels: labels },
-                replicas,
-                template: {
-                    metadata: {
-                        name,
-                        labels,
-                        namespace: namespace.metadata.name
-                    },
-                    spec: {
-                        containers: [
-                            {
-                                name,
-                                image,
-                                resources: {
-                                    requests: { cpu, memory }
-                                },
-                                env:
-                                    env &&
-                                    Object.entries(env).map(([key, value]) => ({
-                                        name: key,
-                                        value
-                                    })),
-                                ports: ports.map(({ intern }) => ({
-                                    containerPort: intern
-                                }))
-                            }
-                        ]
-                    }
+                image,
+                env,
+                ports,
+                resources: {
+                    requests: { cpu, memory }
                 }
             }
-        },
-        {
-            provider
-        }
-    );
+        ]
+    });
 
-    const service = new k8s.core.v1.Service(
+    const deployment = new k8sx.Deployment(
         name,
         {
             metadata: {
                 name,
-                namespace: deployment.spec.template.metadata.namespace,
-                labels: deployment.spec.template.metadata.labels
+                namespace
             },
-            spec: {
-                type: 'ClusterIP',
-                ports: ports.map(({ extern, intern }) => ({
-                    port: extern,
-                    targetPort: intern,
-                    nodePort: undefined
-                })),
-                selector: labels
-            }
+            spec: pod.asDeploymentSpec({
+                replicas
+            })
         },
-        {
-            provider
-        }
+        { provider }
     );
+
+    const service = deployment.createService({
+        type: 'ClusterIP'
+    });
 
     const ipWhitelist = access && {
         'nginx.ingress.kubernetes.io/whitelist-source-range': access
@@ -120,14 +85,14 @@ export const deploy = ({
             .join(',')
     };
 
-    const ingress =
-        host &&
-        new k8s.networking.v1beta1.Ingress(
+    let ingress;
+    if (host) {
+        ingress = new k8s.networking.v1beta1.Ingress(
             name,
             {
                 metadata: {
                     name,
-                    namespace: namespace.metadata.name,
+                    namespace,
                     annotations: {
                         'kubernetes.io/ingress.class': 'nginx',
                         ...(ipWhitelist ?? {})
@@ -143,7 +108,7 @@ export const deploy = ({
                                         path: path ?? '/',
                                         backend: {
                                             serviceName: service.metadata.name,
-                                            servicePort: ports[0]?.extern || 80
+                                            servicePort: ports.http ?? 80
                                         }
                                     }
                                 ]
@@ -156,18 +121,17 @@ export const deploy = ({
                 provider
             }
         );
+    }
 
     return {
-        name: service.metadata.name,
-        namespace: namespace.metadata.name,
-        images: deployment.spec.template.spec.containers.apply((containers) =>
-            containers.map((container) => container.image)
+        name,
+        namespace,
+        image: deployment.spec.template.spec.containers.apply(
+            (containers) => containers?.[0]?.image
         ),
-        hostNames: (ingress as k8s.networking.v1beta1.Ingress)?.spec.rules.apply(
-            (rules) => rules?.map((rule) => rule.host)
-        ),
-        ips: (ingress as k8s.networking.v1beta1.Ingress)?.status.loadBalancer.ingress.apply(
-            (address) => address?.map(({ ip }) => ip)
+        dns: ingress?.spec.rules.apply((rules) => rules?.[0]?.host),
+        ip: ingress?.status.loadBalancer.ingress.apply(
+            (address) => address?.[0]?.ip
         )
     };
 };

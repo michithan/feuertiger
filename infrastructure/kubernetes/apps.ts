@@ -1,5 +1,6 @@
 import * as k8s from '@pulumi/kubernetes';
 
+import { domain } from '../digitalocean/domain';
 import { provider } from './provider';
 
 export const ingress = new k8s.helm.v3.Chart(
@@ -9,19 +10,24 @@ export const ingress = new k8s.helm.v3.Chart(
         fetchOpts: {
             repo: 'https://helm.nginx.com/stable'
         },
-        namespace: 'default',
         values: {
             controller: {
                 // kind: 'DaemonSet',
+                // daemonset: {
+                //     useHostPort: 'true'
+                // },
                 config: {
                     entries: {
+                        //    'enable-real-ip': 'true',
+                        //    'proxy-add-original-uri-header': 'true',
+                        // 'use-forwarded-headers': 'true',
                         // 'compute-full-forwarded-for': 'true',
-                        'use-forwarded-headers': 'true',
                         'use-proxy-protocol': 'true'
                     }
                 },
                 service: {
                     type: 'LoadBalancer',
+                    // enabled: 'false',
                     annotations: {
                         'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
                             'true'
@@ -51,6 +57,29 @@ export const { ip } = ingress.getResourceProperty(
     'feuer-ingress-nginx-ingress',
     'status'
 ).loadBalancer.ingress[0];
+
+export const dns = new k8s.helm.v3.Chart(
+    'feuer-dns',
+    {
+        chart: 'external-dns',
+        fetchOpts: {
+            repo: 'https://charts.bitnami.com/bitnami'
+        },
+        values: {
+            rbac: {
+                create: 'true'
+            },
+            provider: 'digitalocean',
+            digitalocean: {
+                apiToken: process.env.DIGITALOCEAN_TOKEN
+            },
+            interval: '1m',
+            policy: 'sync',
+            domainFilters: [domain.name]
+        }
+    },
+    { provider }
+);
 
 // export const certManager = new k8s.helm.v3.Chart(
 //     'feuer-cert',

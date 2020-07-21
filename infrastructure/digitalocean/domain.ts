@@ -9,5 +9,5 @@ export const domain = new digitalocean.Domain(
         name: 'feuertiger.com',
         ipAddress: ip
     },
-    { provider }
+    { provider, deleteBeforeReplace: true }
 );
