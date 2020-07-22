@@ -2,17 +2,19 @@ import * as k8s from '@pulumi/kubernetes';
 import * as k8sx from '@pulumi/kubernetesx';
 
 import { provider } from './provider';
+import { ensureNamespace } from './namespace';
 
 export interface DeploymentConfig {
     namespace: string;
     name: string;
     image: string;
-    replicas: number;
+    minReplicas: number;
+    maxReplicas?: number;
     ports: {
         [key: string]: number;
     };
-    cpu: string;
-    memory: string;
+    cpu: number;
+    memory: number;
     access?: { cidr: string }[];
     env?: {
         [key: string]: string;
@@ -21,22 +23,12 @@ export interface DeploymentConfig {
     path?: string;
 }
 
-const namespaces: { [key: string]: k8s.core.v1.Namespace } = {};
-const ensureNamespace = (namespace: string) => {
-    namespaces[namespace] =
-        namespaces[namespace] ??
-        new k8s.core.v1.Namespace(
-            namespace,
-            { metadata: { name: namespace } },
-            { provider }
-        );
-};
-
 export const deploy = ({
     namespace,
     name,
     image,
-    replicas,
+    minReplicas,
+    maxReplicas,
     ports,
     cpu,
     memory,
@@ -45,9 +37,16 @@ export const deploy = ({
     path,
     access
 }: DeploymentConfig) => {
-    ensureNamespace(namespace);
+    const { imagePullSecret } = ensureNamespace(namespace);
+    const metadata = {
+        name,
+        namespace
+    };
 
     const pod = new k8sx.PodBuilder({
+        imagePullSecrets: [
+            { name: imagePullSecret.metadata.apply((m) => m.name) }
+        ],
         containers: [
             {
                 name,
@@ -55,7 +54,11 @@ export const deploy = ({
                 env,
                 ports,
                 resources: {
-                    requests: { cpu, memory }
+                    requests: {
+                        cpu: `${Math.floor(cpu * 0.5)}m`,
+                        memory: `${Math.floor(memory * 0.5)}Mi`
+                    },
+                    limits: { cpu: `${cpu}m`, memory: `${memory}Mi` }
                 }
             }
         ]
@@ -64,12 +67,9 @@ export const deploy = ({
     const deployment = new k8sx.Deployment(
         name,
         {
-            metadata: {
-                name,
-                namespace
-            },
+            metadata,
             spec: pod.asDeploymentSpec({
-                replicas
+                replicas: minReplicas
             })
         },
         { provider }
@@ -79,11 +79,39 @@ export const deploy = ({
         type: 'ClusterIP'
     });
 
-    const ipWhitelist = access && {
-        'nginx.ingress.kubernetes.io/whitelist-source-range': access
-            .map(({ cidr }) => cidr)
-            .join(',')
-    };
+    let autoscaling;
+    if (maxReplicas) {
+        autoscaling = new k8s.autoscaling.v2beta2.HorizontalPodAutoscaler(
+            name,
+            {
+                metadata,
+                spec: {
+                    minReplicas,
+                    maxReplicas,
+                    scaleTargetRef: {
+                        apiVersion: deployment.apiVersion,
+                        kind: deployment.kind,
+                        name: deployment.metadata.name
+                    },
+                    metrics: [
+                        {
+                            type: 'Resource',
+                            resource: {
+                                name: 'memory',
+                                target: {
+                                    type: 'Value',
+                                    averageValue: `${Math.floor(
+                                        memory * 0.8
+                                    )}Mi`
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            { provider }
+        );
+    }
 
     let ingress;
     if (host) {
@@ -91,13 +119,18 @@ export const deploy = ({
             name,
             {
                 metadata: {
-                    name,
-                    namespace,
+                    ...metadata,
                     annotations: {
                         'kubernetes.io/ingress.class': 'nginx',
                         'cert-manager.k8s.io/cluster-issuer':
                             'letsencrypt-prod',
-                        ...(ipWhitelist ?? {})
+                        ...(access
+                            ? {
+                                  'nginx.ingress.kubernetes.io/whitelist-source-range': access
+                                      .map(({ cidr }) => cidr)
+                                      .join(',')
+                              }
+                            : {})
                     }
                 },
                 spec: {
@@ -134,6 +167,7 @@ export const deploy = ({
     return {
         name,
         namespace,
+        autoscaling: autoscaling?.status,
         image: deployment.spec.template.spec.containers.apply(
             (containers) => containers?.[0]?.image
         ),
