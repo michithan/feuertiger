@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as k8s from '@pulumi/kubernetes';
 
-import { domain } from '../digitalocean/domain';
+import { domain, hostname } from '../digitalocean/domain';
 import { provider } from './provider';
 
 export const ingress = new k8s.helm.v3.Chart(
@@ -14,32 +14,20 @@ export const ingress = new k8s.helm.v3.Chart(
         values: {
             controller: {
                 // kind: 'DaemonSet',
-                // daemonset: {
-                //     useHostPort: 'true'
-                // },
                 config: {
                     entries: {
-                        //    'enable-real-ip': 'true',
-                        //    'proxy-add-original-uri-header': 'true',
-                        // 'use-forwarded-headers': 'true',
-                        // 'compute-full-forwarded-for': 'true',
-                        // 'use-proxy-protocol': 'true'
+                        'use-forwarded-headers': 'true',
+                        'use-proxy-protocol': 'true'
                     }
                 },
                 service: {
                     type: 'LoadBalancer',
-                    // enabled: 'false',
                     annotations: {
-                        // 'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
-                        //     'true'
-                        // 'service.beta.kubernetes.io/do-loadbalancer-protocol':
-                        //     'http',
-                        // 'service.beta.kubernetes.io/do-loadbalancer-tls-passthrough':
-                        //     'true',
-                        // 'service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https':
-                        //     'true'
-                        // maybe needed voer cert manager:
-                        // "service.beta.kubernetes.io/do-loadbalancer-hostname": "YOUR_HOSTNAME_POINTING_TO_THE_LOAD_BALANCER"
+                        'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
+                            'true',
+                        'service.beta.kubernetes.io/do-loadbalancer-hostname': hostname,
+                        'service.beta.kubernetes.io/do-loadbalancer-name':
+                            'feuer-loadbalancer'
                     },
                     externalTrafficPolicy: 'Local'
                 },
@@ -52,7 +40,7 @@ export const ingress = new k8s.helm.v3.Chart(
     { provider }
 );
 
-export const { ip } = ingress.getResourceProperty(
+export const address = ingress.getResourceProperty(
     'v1/Service',
     'default',
     'feuer-ingress-nginx-ingress',
@@ -68,7 +56,8 @@ export const dns = new k8s.helm.v3.Chart(
         },
         values: {
             rbac: {
-                create: 'true'
+                create: 'true',
+                apiVersion: 'v1'
             },
             provider: 'digitalocean',
             digitalocean: {
@@ -112,7 +101,7 @@ export const cert = new k8s.helm.v3.Chart(
 export const issuer = new k8s.yaml.ConfigFile(
     'issuer-config',
     {
-        file: path.resolve(__dirname, 'production_issuer.yaml')
+        file: path.resolve(__dirname, 'configs', 'production_issuer.yaml')
     },
     { provider }
 );

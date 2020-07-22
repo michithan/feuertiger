@@ -18,7 +18,7 @@ export const webClient = deploy({
         MESSAGE: 'Hello from the second deployment!'
     },
     cpu: 50,
-    memory: 20,
+    memory: 100,
     host: 'feuertiger.com'
 });
 
@@ -40,6 +40,6 @@ export const test = deploy({
         MESSAGE: 'Hello from the second deployment!'
     },
     cpu: 50,
-    memory: 20,
+    memory: 100,
     host: 'test.feuertiger.com'
 });

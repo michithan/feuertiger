@@ -1,13 +1,13 @@
 import * as digitalocean from '@pulumi/digitalocean';
 
 import { provider } from './provider';
-import { ip } from '../kubernetes/apps';
+
+export const hostname = 'feuertiger.com';
 
 export const domain = new digitalocean.Domain(
-    'feuertiger.com',
+    hostname,
     {
-        name: 'feuertiger.com',
-        ipAddress: ip
+        name: hostname
     },
     { provider, deleteBeforeReplace: true }
 );
