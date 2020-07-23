@@ -26,6 +26,9 @@
         "e2e"
     ],
     "dependencies": {
+        "@devexpress/dx-react-core": "^2.7.0",
+        "@devexpress/dx-react-scheduler": "^2.7.0",
+        "@devexpress/dx-react-scheduler-material-ui": "^2.7.0",
         "@lerna/package-graph": "3.18.5",
         "@lerna/project": "3.18.0",
         "@typescript-eslint/eslint-plugin": "2.33.0",
