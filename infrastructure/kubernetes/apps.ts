@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as k8s from '@pulumi/kubernetes';
 
-import { domain, hostname } from '../digitalocean/domain';
+import { hostname } from '../digitalocean/hostname';
 import { provider } from './provider';
 
 export const ingress = new k8s.helm.v3.Chart(
@@ -16,16 +16,17 @@ export const ingress = new k8s.helm.v3.Chart(
                 // kind: 'DaemonSet',
                 config: {
                     entries: {
-                        'use-forwarded-headers': 'true',
-                        'use-proxy-protocol': 'true'
+                        // 'use-proxy-protocol': 'true'
                     }
                 },
                 service: {
                     type: 'LoadBalancer',
                     annotations: {
-                        'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
-                            'true',
-                        'service.beta.kubernetes.io/do-loadbalancer-hostname': hostname,
+                        // 'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
+                        //     'true',
+                        // 'service.beta.kubernetes.io/do-loadbalancer-hostname': hostname,
+                        // 'service.beta.kubernetes.io/do-loadbalancer-tls-passthrough':
+                        //     'true',
                         'service.beta.kubernetes.io/do-loadbalancer-name':
                             'feuer-loadbalancer'
                     },
@@ -65,17 +66,8 @@ export const dns = new k8s.helm.v3.Chart(
             },
             interval: '1m',
             policy: 'sync',
-            domainFilters: [domain.name]
+            domainFilters: [hostname]
         }
-    },
-    { provider }
-);
-
-export const certConfig = new k8s.yaml.ConfigFile(
-    'feuer-cert-config',
-    {
-        file:
-            'https://github.com/jetstack/cert-manager/releases/download/v0.14.1/cert-manager.crds.yaml'
     },
     { provider }
 );
@@ -93,6 +85,10 @@ export const cert = new k8s.helm.v3.Chart(
         fetchOpts: {
             repo: 'https://charts.jetstack.io'
         },
+        values: {
+            installCRDs: 'true'
+        },
+        version: 'v0.16.0',
         namespace: 'cert-manager'
     },
     { provider }

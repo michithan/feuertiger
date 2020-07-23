@@ -15,9 +15,8 @@ export const firebaseWebAppName = firebaseWebApp.webApp.displayName;
 export const vpcName = vpc.vpc.name;
 export const clusterName = cluster.cluster.name;
 
-export const { hostname } = apps.address;
+export const { hostname, ip } = apps.address;
 export const dns = apps.dns.urn;
-export const certConfig = apps.certConfig.urn;
 export const certNamespace = apps.certNamespace.metadata.name;
 export const cert = apps.cert.urn;
 export const issuer = apps.issuer.urn;

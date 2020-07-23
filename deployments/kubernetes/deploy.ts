@@ -75,9 +75,23 @@ export const deploy = ({
         { provider }
     );
 
-    const service = deployment.createService({
-        type: 'ClusterIP'
-    });
+    const service = new k8sx.Service(
+        name,
+        {
+            metadata,
+            spec: {
+                ports: [
+                    {
+                        port: ports.http
+                    }
+                ],
+                selector: {
+                    app: name
+                }
+            }
+        },
+        { provider }
+    );
 
     let autoscaling;
     if (maxReplicas) {

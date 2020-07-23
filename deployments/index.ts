@@ -6,16 +6,16 @@ export const webClient = deploy({
     image: 'paulbouwer/hello-kubernetes:1.7',
     minReplicas: 1,
     ports: { http: 8080 },
-    access: [
-        {
-            cidr: '217.80.121.233/32'
-        },
-        {
-            cidr: '0.0.0.0/0'
-        }
-    ],
+    // access: [
+    //     // {
+    //     //     cidr: '217.80.121.233/32'
+    //     // },
+    //     {
+    //         cidr: '0.0.0.0/0'
+    //     }
+    // ],
     env: {
-        MESSAGE: 'Hello from the second deployment!'
+        MESSAGE: 'Hello from the first deployment!'
     },
     cpu: 50,
     memory: 100,
@@ -28,14 +28,14 @@ export const test = deploy({
     image: 'paulbouwer/hello-kubernetes:1.7',
     minReplicas: 1,
     ports: { http: 8080 },
-    access: [
-        {
-            cidr: '217.80.121.233/32'
-        },
-        {
-            cidr: '0.0.0.0/0'
-        }
-    ],
+    // access: [
+    //     // {
+    //     //     cidr: '217.80.121.233/32'
+    //     // },
+    //     {
+    //         cidr: '0.0.0.0/0'
+    //     }
+    // ],
     env: {
         MESSAGE: 'Hello from the second deployment!'
     },
