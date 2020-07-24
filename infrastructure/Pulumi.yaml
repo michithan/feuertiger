@@ -11,11 +11,5 @@ template:
         gcp:zone:
             description: The Google Cloud zone
             default: eur3
-        git:user:
-            description: The gitlab user to login for container registry
-            default: monomichi
-        git:email:
-            description: The gitlab users email to login for container registry
-            default: michael.thanei@googlemail.com
         gitlab:token:
-            description: The gitlab users token to login for container registry
+            description: gitlab token

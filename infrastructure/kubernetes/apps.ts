@@ -31,6 +31,7 @@ export const ingress = new k8s.helm.v3.Chart(
                             'feuer-loadbalancer'
                     },
                     externalTrafficPolicy: 'Local'
+                    // loadBalancerIP
                 },
                 publishService: {
                     enabled: 'true'
@@ -78,6 +79,25 @@ export const certNamespace = new k8s.core.v1.Namespace(
     { provider }
 );
 
+export const certToken = new k8s.core.v1.Secret(
+    'digitalocean-dns',
+    {
+        apiVersion: 'v1',
+        metadata: {
+            name: 'digitalocean-dns',
+            namespace: 'cert-manager'
+        },
+        data: {
+            'access-token': Buffer.from(
+                process.env.DIGITALOCEAN_TOKEN
+            ).toString('base64')
+        }
+    },
+    {
+        provider
+    }
+);
+
 export const cert = new k8s.helm.v3.Chart(
     'feuer-cert',
     {
@@ -86,18 +106,16 @@ export const cert = new k8s.helm.v3.Chart(
             repo: 'https://charts.jetstack.io'
         },
         values: {
-            installCRDs: 'true'
+            installCRDs: 'true',
+            ingressShim: {
+                defaultACMEChallengeType: 'dns01',
+                defaultACMEDNS01ChallengeProvider: 'digitalocean',
+                defaultIssuerName: 'letsencrypt-prod',
+                defaultIssuerKind: 'ClusterIssuer'
+            }
         },
         version: 'v0.16.0',
         namespace: 'cert-manager'
-    },
-    { provider }
-);
-
-export const issuer = new k8s.yaml.ConfigFile(
-    'issuer-config',
-    {
-        file: path.resolve(__dirname, 'configs', 'production_issuer.yaml')
     },
     { provider }
 );

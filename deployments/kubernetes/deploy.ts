@@ -160,7 +160,11 @@ export const deploy = ({
                             http: {
                                 paths: [
                                     {
-                                        path: path ?? '/',
+                                        ...(path
+                                            ? {
+                                                  path
+                                              }
+                                            : {}),
                                         backend: {
                                             serviceName: service.metadata.name,
                                             servicePort: ports.http ?? 80
