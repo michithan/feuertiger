@@ -29,6 +29,6 @@ const fix = ([key, value]: [string, any]) => {
 };
 
 export const transformation = (name: string) => (yaml: any) => {
-    yaml.name = yaml?.name?.replace(`${name}-`, '');
+    yaml.metadata.name = yaml?.metadata?.name?.replace(`${name}-`, '');
     Object.entries(yaml).forEach((entry) => fix(entry));
 };
