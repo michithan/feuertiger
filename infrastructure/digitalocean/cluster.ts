@@ -21,7 +21,9 @@ export const cluster = new digitalocean.KubernetesCluster(
         version: '1.18.6-do.0'
     },
     {
-        provider
+        provider,
+        dependsOn: [vpc, droplet],
+        customTimeouts: { create: '30m' }
     }
 );
 

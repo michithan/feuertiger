@@ -9,6 +9,7 @@ export const vpc = new digitalocean.Vpc(
         region: digitalocean.Regions.FRA1
     },
     {
-        provider
+        provider,
+        dependsOn: [provider]
     }
 );
