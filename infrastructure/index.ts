@@ -3,6 +3,7 @@ import * as firebaseWebApp from './firebase/webApp';
 
 import * as vpc from './digitalocean/vpc';
 import * as cluster from './digitalocean/cluster';
+import * as domain from './digitalocean/domain';
 
 import * as nginxIngress from './kubernetes/nginx-ingress';
 import * as externalDns from './kubernetes/external-dns';
@@ -16,6 +17,7 @@ export const firebaseWebAppName = firebaseWebApp.webApp.displayName;
 
 export const vpcName = vpc.vpc.name;
 export const clusterName = cluster.cluster.name;
+export const domainName = domain.domain.name;
 
 export const { hostname, ip } = nginxIngress.address;
 

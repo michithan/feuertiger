@@ -18,10 +18,17 @@ const deprecations: { [key: string]: string } = {
         'apiextensions.k8s.io/v1/CustomResourceDefinition'
 };
 
-export const transformation = (name: string) => ({
-    metadata,
-    apiVersion
-}: any) => {
-    metadata.name = metadata?.name?.replace(`${name}-`, '');
-    apiVersion = deprecations[apiVersion] || apiVersion;
+const fix = ([key, value]: [string, any]) => {
+    if (typeof value === 'string' && key === 'apiVersion') {
+        value = deprecations[value] || value;
+    } else if (Array.isArray(value)) {
+        value.map((element, index) => fix([element, index.toString()]));
+    } else if (typeof value === 'object') {
+        Object.entries(value).forEach(fix);
+    }
+};
+
+export const transformation = (name: string) => (yaml: any) => {
+    yaml.name = yaml?.name?.replace(`${name}-`, '');
+    Object.entries(yaml).forEach((entry) => fix(entry));
 };

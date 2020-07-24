@@ -1,7 +1,7 @@
 import * as gitlab from '@pulumi/gitlab';
 
 import { cluster as doCluster, token, cert } from '../digitalocean/cluster';
-import { domain } from '../digitalocean/domain';
+import { hostname } from '../digitalocean/hostname';
 import { project } from './project';
 
 export const cluster = new gitlab.ProjectCluster(
@@ -10,7 +10,7 @@ export const cluster = new gitlab.ProjectCluster(
         name: 'feuer-cluster',
         enabled: true,
         environmentScope: '*',
-        domain: domain.name,
+        domain: hostname,
         kubernetesApiUrl: doCluster.endpoint,
         kubernetesCaCert: cert,
         managed: true,
