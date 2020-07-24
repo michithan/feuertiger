@@ -55,8 +55,8 @@ export const deploy = ({
                 ports,
                 resources: {
                     requests: {
-                        cpu: `${Math.floor(cpu * 0.5)}m`,
-                        memory: `${Math.floor(memory * 0.5)}Mi`
+                        cpu: `${Math.floor(cpu * 0.8)}m`,
+                        memory: `${Math.floor(memory * 0.8)}Mi`
                     },
                     limits: { cpu: `${cpu}m`, memory: `${memory}Mi` }
                 }
