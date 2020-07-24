@@ -2,7 +2,7 @@ import * as digitalocean from '@pulumi/digitalocean';
 
 import { provider } from './provider';
 import { hostname } from './hostname';
-import { address } from '../kubernetes/cert-manager';
+import { address } from '../kubernetes/nginx-ingress';
 
 export const domain = new digitalocean.Domain(
     hostname,
@@ -10,5 +10,5 @@ export const domain = new digitalocean.Domain(
         name: hostname,
         ipAddress: address.ip
     },
-    { provider }
+    { provider, dependsOn: [provider] }
 );

@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-param-reassign */
+
 const deprecations: { [key: string]: string } = {
     'admissionregistration.k8s.io/v1beta1/ValidatingWebhookConfiguration':
         'admissionregistration.k8s.io/v1/ValidatingWebhookConfiguration',
@@ -20,5 +23,5 @@ export const transformation = (name: string) => ({
     apiVersion
 }: any) => {
     metadata.name = metadata?.name?.replace(`${name}-`, '');
-    apiVersion = (apiVersion && deprecations[apiVersion]) ?? apiVersion;
+    apiVersion = deprecations[apiVersion] || apiVersion;
 };

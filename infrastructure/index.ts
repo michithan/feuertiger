@@ -1,7 +1,6 @@
 import * as firebaseProject from './firebase/project';
 import * as firebaseWebApp from './firebase/webApp';
 
-import * as doProject from './digitalocean/project';
 import * as vpc from './digitalocean/vpc';
 import * as cluster from './digitalocean/cluster';
 
@@ -15,7 +14,6 @@ import * as gitlabProject from './gitlab/project';
 export const firebaseProjectName = firebaseProject.project.project;
 export const firebaseWebAppName = firebaseWebApp.webApp.displayName;
 
-export const doProjectName = doProject.project.name;
 export const vpcName = vpc.vpc.name;
 export const clusterName = cluster.cluster.name;
 
