@@ -60,7 +60,7 @@ export const cert = new k8s.helm.v3.Chart(
 export const certClusterIssuer = new k8s.yaml.ConfigFile(
     'cluster-issuer-config',
     {
-        file: path.resolve(__dirname, 'production_issuer.yaml')
+        file: path.resolve(__dirname, 'configs', 'production_issuer.yaml')
     },
     { provider }
 );

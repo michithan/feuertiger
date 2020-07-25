@@ -139,13 +139,11 @@ export const deploy = ({
                         'kubernetes.io/tls-acme': 'true',
                         'cert-manager.k8s.io/cluster-issuer':
                             'letsencrypt-prod',
-                        ...(access
-                            ? {
-                                  'nginx.ingress.kubernetes.io/whitelist-source-range': access
-                                      .map(({ cidr }) => cidr)
-                                      .join(',')
-                              }
-                            : {})
+                        ...(access && {
+                            'nginx.ingress.kubernetes.io/whitelist-source-range': access
+                                .map(({ cidr }) => cidr)
+                                .join(',')
+                        })
                     }
                 },
                 spec: {
@@ -161,15 +159,13 @@ export const deploy = ({
                             http: {
                                 paths: [
                                     {
-                                        ...(path
-                                            ? {
-                                                  path
-                                              }
-                                            : {}),
                                         backend: {
                                             serviceName: service.metadata.name,
                                             servicePort: ports.http ?? 80
-                                        }
+                                        },
+                                        ...(path && {
+                                            path
+                                        })
                                     }
                                 ]
                             }

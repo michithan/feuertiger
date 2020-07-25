@@ -14,22 +14,18 @@ export const ingress = new k8s.helm.v3.Chart(
                 // kind: 'DaemonSet',
                 config: {
                     entries: {
-                        // 'use-proxy-protocol': 'true'
+                        'use-proxy-protocol': 'true'
                     }
                 },
                 service: {
-                    type: 'LoadBalancer',
                     annotations: {
-                        // 'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
-                        //     'true',
                         // 'service.beta.kubernetes.io/do-loadbalancer-hostname': hostname,
-                        // 'service.beta.kubernetes.io/do-loadbalancer-tls-passthrough':
+                        // 'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
                         //     'true',
                         'service.beta.kubernetes.io/do-loadbalancer-name':
                             'feuer-loadbalancer'
                     },
                     externalTrafficPolicy: 'Local'
-                    // loadBalancerIP
                 },
                 publishService: {
                     enabled: 'true'
