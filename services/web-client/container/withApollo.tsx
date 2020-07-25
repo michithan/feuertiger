@@ -1,5 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/link-context';
+import getConfig from 'next/config';
 import withApollo, { WithApolloState } from 'next-with-apollo';
 import fetch from 'isomorphic-unfetch';
 
