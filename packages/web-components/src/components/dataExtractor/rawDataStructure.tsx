@@ -43,7 +43,7 @@ export class RawDataStructure {
 
         if (rowSeprator) {
             const rows = this.cleanText.split(rowSeprator);
-            this.flattData = rows.map((row) => row.split(colSeperator));
+            this.flattData = rows.map(row => row.split(colSeperator));
         } else if (rowLength) {
             const flattCells = this.cleanText.split(colSeperator);
             const rowCount = Math.ceil(flattCells.length / rowLength);

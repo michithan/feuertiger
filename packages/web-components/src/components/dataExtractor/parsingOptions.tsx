@@ -6,7 +6,7 @@ import {
     Typography,
     TextField
 } from '@material-ui/core';
-import type { ExtractorOptions } from './rawDataStructure';
+import { ExtractorOptions } from './rawDataStructure';
 
 export interface ParsingOptionsProps {
     options: ExtractorOptions;

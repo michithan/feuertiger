@@ -1,0 +1,12 @@
+query dashboard {
+    dashboard {
+        countMembersByGrade {
+            name
+            value
+        }
+        countExerciseByCategory {
+            name
+            value
+        }
+    }
+}

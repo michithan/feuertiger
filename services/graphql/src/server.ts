@@ -4,7 +4,6 @@ import { ApolloServer } from 'apollo-server-express';
 import schema from './schema';
 import context from './context';
 
-// eslint-disable-next-line import/prefer-default-export
 export const gqlServer = () => {
     const apolloServer = new ApolloServer({
         schema,

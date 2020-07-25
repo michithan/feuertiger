@@ -7,6 +7,7 @@ hooks:
 generates:
     ./dist/index.ts:
         plugins:
+            - add: 'export { DateTimeResolver } from "graphql-scalars";'
             - typescript
             - typescript-operations
             - typescript-resolvers
@@ -17,6 +18,7 @@ generates:
             withComponent: false
             withHOC: false
             withResultType: true
+            enumsAsTypes: true
             reactApolloVersion: 3
             gqlImport: '@apollo/client#gql'
     ./dist/schema.json:

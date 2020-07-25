@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import 'firebase/auth';
 import { AuthProps } from '@feuertiger/web-components';
 
@@ -12,11 +12,9 @@ export interface AuthStateProps {
 
 interface State extends AuthProps, AuthStateProps {}
 
-export default <TProps extends {}>(
-    WrappedComponent: React.ComponentType<TProps & AuthProps & AuthStateProps>
-): React.ComponentType<TProps> =>
-    class AuthWrapper extends React.Component<TProps, State> {
-        constructor(props: TProps) {
+export default <P extends object>(WrappedComponent: any): any =>
+    class AuthWrapper extends Component<P, State> {
+        constructor(props: any) {
             super(props);
             this.state = {
                 isSignedIn: true,
@@ -30,7 +28,7 @@ export default <TProps extends {}>(
             const authSignleton = new AuthSingleton();
             const { firebaseAuth } = authSignleton;
 
-            firebaseAuth.onAuthStateChanged(async (user) =>
+            firebaseAuth.onAuthStateChanged(async user =>
                 this?.setState({ isSignedIn: !!user, isLoading: false })
             );
 
@@ -68,7 +66,6 @@ export default <TProps extends {}>(
 
             return (
                 <WrappedComponent
-                    // eslint-disable-next-line
                     {...props}
                     auth={auth}
                     isSignedIn={isSignedIn}

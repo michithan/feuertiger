@@ -1,13 +1,12 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { CssBaseline, Container as MuiContainer } from '@material-ui/core';
-import Skeleton from '@material-ui/lab/Skeleton';
-import { AppBar } from '../appBar/appBar';
-import { SideBar } from '../sideBar/sideBar';
-import { AuthProps } from '../../types/authProps';
+import { SnackbarProvider } from 'notistack';
+
+import { AppBar, SideBar, AuthProps } from '../../index';
 
 export interface ContainerProps extends AuthProps {
-    children?: React.ReactNode | null | undefined;
+    children: ReactElement;
 }
 
 interface State {
@@ -69,20 +68,11 @@ export class Container extends React.Component<ContainerProps, State> {
                     handleDrawerClose={this.handleDrawerClose}
                 />
                 <StyledMain>
-                    <StyledContainer maxWidth="lg">
-                        {children || (
-                            <>
-                                <Skeleton height={40} />
-                                <Skeleton variant="rect" height={190} />
-                                <Skeleton height={40} />
-                                <Skeleton variant="rect" height={190} />
-                                <Skeleton height={40} />
-                                <Skeleton variant="rect" height={190} />
-                                <Skeleton height={40} />
-                                <Skeleton variant="rect" height={190} />
-                            </>
-                        )}
-                    </StyledContainer>
+                    <SnackbarProvider maxSnack={3}>
+                        <StyledContainer maxWidth="lg">
+                            {children}
+                        </StyledContainer>
+                    </SnackbarProvider>
                 </StyledMain>
             </RootDiv>
         );

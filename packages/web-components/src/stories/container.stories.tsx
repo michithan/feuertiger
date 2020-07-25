@@ -1,9 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Container, ContainerProps } from '../components/container/container';
-import { authPropsMock } from '../types/authProps.mock';
+import { Container, ContainerProps, authPropsMock } from '../index';
 
 const defaultProps: ContainerProps = {
     ...authPropsMock

@@ -1,14 +1,16 @@
 {
     "compilerOptions": {
+        "experimentalDecorators": true,
         "lib": ["dom", "dom.iterable", "esnext"],
         "types": ["react", "node"],
         "skipLibCheck": true,
         "noEmit": true,
         "module": "esnext",
+        "sourceMap": true,
         "moduleResolution": "node",
         "jsx": "preserve",
         "target": "es5",
-        "allowJs": true,
+        "allowJs": false,
         "strict": false,
         "forceConsistentCasingInFileNames": true,
         "esModuleInterop": true,
@@ -22,7 +24,8 @@
         "**/*.tsx",
         "pages/_document.js",
         "pages/_app.js",
-        "next.config.js"
+        "pages/_document.tsx",
+        "pages/_app.tsx"
     ],
     "exclude": ["node_modules"]
 }

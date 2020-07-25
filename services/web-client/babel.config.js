@@ -8,6 +8,7 @@ module.exports = {
                 displayName: true,
                 preprocess: false
             }
-        ]
+        ],
+        ['@babel/plugin-proposal-decorators', { legacy: true }]
     ]
 };

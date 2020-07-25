@@ -1,0 +1,18 @@
+enum Grade {
+    FA
+    FM
+    OFM
+    HFM
+    LM
+    OLM
+    HLM
+    BM
+    OBM
+    HBM
+}
+
+type Promotion implements Node {
+    id: ID!
+    grade: Grade
+    dateOfPromotion: DateTime
+}
