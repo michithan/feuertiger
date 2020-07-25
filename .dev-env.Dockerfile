@@ -53,9 +53,9 @@ RUN curl -fsSL https://get.pulumi.com/ | sh
 ENV PATH=$PATH:/root/.pulumi/bin
 ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
 RUN pulumi login -l \
-    && pulumi plugin install resource gcp v3.11.0 \
-    && pulumi plugin install resource gitlab v2.4.0 \
-    && pulumi plugin install resource kubernetes v2.3.1
+    && pulumi plugin install resource gcp v3.15.0 \
+    && pulumi plugin install resource gitlab v2.5.0 \
+    && pulumi plugin install resource kubernetes v2.4.1
 
 # Install google cloud cli
 # RUN curl -sSL https://sdk.cloud.google.com > /tmp/gcl && bash /tmp/gcl --install-dir=~/gcloud --disable-prompts \

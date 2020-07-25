@@ -5,6 +5,7 @@ template:
     config:
         gcp:project:
             description: The Google Cloud project to deploy into
+            default: feuertiger-77a8a
         gcp:region:
             description: The Google Cloud region
             default: europe-west1

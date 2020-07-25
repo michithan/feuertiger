@@ -1,3 +1,4 @@
+import * as path from 'path';
 import * as k8s from '@pulumi/kubernetes';
 
 import { provider } from './provider';
@@ -54,4 +55,12 @@ export const cert = new k8s.helm.v3.Chart(
         namespace: 'cert-manager'
     },
     { provider, dependsOn: [certToken, certNamespace, domain] }
+);
+
+export const certClusterIssuer = new k8s.yaml.ConfigFile(
+    'cluster-issuer-config',
+    {
+        file: path.resolve(__dirname, 'production_issuer.yaml')
+    },
+    { provider }
 );
