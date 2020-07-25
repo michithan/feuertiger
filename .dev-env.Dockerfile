@@ -53,7 +53,7 @@ RUN curl -fsSL https://get.pulumi.com/ | sh
 ENV PATH=$PATH:/root/.pulumi/bin
 ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
 RUN pulumi login -l \
-    && pulumi plugin install resource gcp v3.15.0 \
+    # && pulumi plugin install resource gcp v3.15.0 \
     && pulumi plugin install resource gitlab v2.5.0 \
     && pulumi plugin install resource kubernetes v2.4.1
 
@@ -62,8 +62,8 @@ RUN pulumi login -l \
 #     && export PATH=$PATH:~/gcloud/google-cloud-sdk/bin
 
 # Install doctl
-RUN curl -L https://github.com/digitalocean/doctl/releases/download/v1.23.1/doctl-1.23.1-linux-amd64.tar.gz | tar xz
-ENV PATH=$PATH:/
+# RUN curl -L https://github.com/digitalocean/doctl/releases/download/v1.23.1/doctl-1.23.1-linux-amd64.tar.gz | tar xz
+# ENV PATH=$PATH:/
 
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl \
