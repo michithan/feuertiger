@@ -136,6 +136,7 @@ export const deploy = ({
                     ...metadata,
                     annotations: {
                         'kubernetes.io/ingress.class': 'nginx',
+                        'kubernetes.io/tls-acme': 'true',
                         'cert-manager.k8s.io/cluster-issuer':
                             'letsencrypt-prod',
                         ...(access

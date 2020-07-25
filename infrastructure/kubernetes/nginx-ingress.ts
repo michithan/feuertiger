@@ -1,7 +1,6 @@
 import * as k8s from '@pulumi/kubernetes';
 
 import { provider } from './provider';
-import { transformation } from './transformation';
 
 export const ingress = new k8s.helm.v3.Chart(
     'feuer-ingress',
@@ -36,8 +35,7 @@ export const ingress = new k8s.helm.v3.Chart(
                     enabled: 'true'
                 }
             }
-        },
-        transformations: [transformation('feuer-ingress')]
+        }
     },
     { provider, dependsOn: [provider] }
 );
@@ -45,6 +43,6 @@ export const ingress = new k8s.helm.v3.Chart(
 export const address = ingress.getResourceProperty(
     'v1/Service',
     'default',
-    'nginx-ingress',
+    'feuer-ingress-nginx-ingress',
     'status'
 ).loadBalancer.ingress[0];

@@ -2,7 +2,6 @@ import * as k8s from '@pulumi/kubernetes';
 
 import { provider } from './provider';
 import { domain } from '../digitalocean/domain';
-import { transformation } from './transformation';
 
 export const certNamespace = new k8s.core.v1.Namespace(
     'cert-manager',
@@ -52,8 +51,7 @@ export const cert = new k8s.helm.v3.Chart(
             }
         },
         version: 'v0.16.0',
-        namespace: 'cert-manager',
-        transformations: [transformation('feuer-cert')]
+        namespace: 'cert-manager'
     },
     { provider, dependsOn: [certToken, certNamespace, domain] }
 );
