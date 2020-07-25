@@ -2,9 +2,9 @@
     // eslint-disable-next-line global-require
     const firebase = require('firebase');
     // eslint-disable-next-line global-require
-    const secrets = require('@feuertiger/tools').getFirebaseAppSecrets();
+    const { firebaseAdminConfig } = require('@feuertiger/config');
     try {
-        await firebase.initializeApp(secrets);
+        await firebase.initializeApp(firebaseAdminConfig);
         // eslint-disable-next-line global-require
         require('./server')
             .gqlServer()

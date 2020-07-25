@@ -11,7 +11,7 @@
         "lint": "lerna exec 'eslint ./**/*.{ts,tsx} --fix --ignore-path ../../.eslintignore --config ../../.eslintrc --resolve-plugins-relative-to ../../ --no-error-on-unmatched-pattern' --no-private --stream",
         "test": "lerna run test --no-private --stream",
         "e2e": "lerna run e2e --stream",
-        "dev": "yarn linkdist && /etc/init.d/postgresql start && lerna run dev --no-private --stream --parallel",
+        "dev": "yarn linkdist && lerna run dev --no-private --stream --parallel",
         "clean:db": "sudo service postgresql stop && sudo service postgresql start && runuser -l postgres -c 'psql --command \"DROP DATABASE IF EXISTS feuertiger;\"'",
         "clean:node_modules": "git clean -fdx -e !node_modules",
         "clean:all": "yarn clean:db && git clean -fdX"
@@ -19,6 +19,7 @@
     "packages": [
         "packages/*",
         "services/*",
+        "config",
         "infrastructure",
         "deployments",
         "e2e"
@@ -26,6 +27,7 @@
     "workspaces": [
         "packages/*",
         "services/*",
+        "config",
         "infrastructure",
         "deployments",
         "e2e"

@@ -5,6 +5,7 @@
     "packages": [
         "packages/*",
         "services/*",
+        "config",
         "infrastructure",
         "deployments",
         "e2e"

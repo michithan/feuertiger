@@ -5,7 +5,7 @@ import fetch from 'isomorphic-unfetch';
 
 import AuthSingleton from './authSingleton';
 
-const GRAPHQL_URL = 'http://localhost:4000/';
+const { graphqlUri } = getConfig();
 
 const authLink = setContext(async (_, { headers }) => {
     try {
@@ -25,7 +25,7 @@ const authLink = setContext(async (_, { headers }) => {
 
 const httpLink = createHttpLink({
     fetch,
-    uri: GRAPHQL_URL
+    uri: graphqlUri
 });
 
 export interface ApolloProps {

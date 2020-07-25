@@ -1,0 +1,14 @@
+version: '3'
+services:
+    postgres:
+        image: 'postgres:13'
+        ports:
+            - '5432:5432'
+    graphql:
+        build: ./services/graphql
+        ports:
+            - '4000:4000'
+    web-client:
+        build: ./services/web-client
+        ports:
+            - '3000:3000'
