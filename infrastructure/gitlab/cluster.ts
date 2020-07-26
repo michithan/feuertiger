@@ -1,13 +1,17 @@
 import * as gitlab from '@pulumi/gitlab';
+import { projectName } from '@feuertiger/config';
 
 import { cluster as doCluster, token, cert } from '../digitalocean/cluster';
 import { hostname } from '../digitalocean/hostname';
 import { project } from './project';
+import { provider } from './provider';
+
+const name = `${projectName}-cluster`;
 
 export const cluster = new gitlab.ProjectCluster(
-    'feuer-cluster',
+    name,
     {
-        name: 'feuer-cluster',
+        name,
         enabled: true,
         environmentScope: '*',
         domain: hostname,
@@ -18,5 +22,5 @@ export const cluster = new gitlab.ProjectCluster(
         kubernetesToken: token,
         project: project.id
     },
-    { dependsOn: [project, doCluster] }
+    { provider, dependsOn: [project, doCluster] }
 );

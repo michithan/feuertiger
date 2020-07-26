@@ -1,11 +1,14 @@
 import * as digitalocean from '@pulumi/digitalocean';
+import { projectName } from '@feuertiger/config';
 
 import { provider } from './provider';
 
+const name = `${projectName}-vpc`;
+
 export const vpc = new digitalocean.Vpc(
-    'feuer-vpc',
+    name,
     {
-        name: 'feuer-vpc',
+        name,
         region: digitalocean.Regions.FRA1
     },
     {

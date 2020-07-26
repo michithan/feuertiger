@@ -1,13 +1,16 @@
 import * as digitalocean from '@pulumi/digitalocean';
+import { projectName } from '@feuertiger/config';
 
 import { provider } from './provider';
 import { vpc } from './vpc';
 import { droplet } from './droplet';
 
+const name = `${projectName}-cluster`;
+
 export const cluster = new digitalocean.KubernetesCluster(
-    'feuer-cluster',
+    name,
     {
-        name: 'feuer-cluster',
+        name,
         vpcUuid: vpc.id,
         nodePool: {
             name: droplet.name,
@@ -29,9 +32,9 @@ export const cluster = new digitalocean.KubernetesCluster(
 
 export const kubeconfig = cluster.kubeConfigs.apply(([config]) => config);
 
-export const cert = kubeconfig.apply((config) => {
+export const cert = kubeconfig.apply(config => {
     const base64Cert = config.clusterCaCertificate;
     return Buffer.from(base64Cert, 'base64').toString('ascii');
 });
 
-export const token = kubeconfig.apply((config) => config.token);
+export const token = kubeconfig.apply(config => config.token);

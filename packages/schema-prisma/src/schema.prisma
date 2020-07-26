@@ -1,5 +1,5 @@
 datasource postgresql {
-  url      = "postgresql://feuertiger:feuertiger@localhost:5432/feuertiger"
+  url      = env("POSTGRES_URI")
   provider = "postgresql"
 }
 

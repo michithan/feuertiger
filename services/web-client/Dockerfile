@@ -4,4 +4,6 @@ WORKDIR /workspaces
 
 COPY . /workspaces
 
+RUN yarn
+
 CMD yarn start

@@ -5,7 +5,7 @@ import { domain } from '../digitalocean/domain';
 import { provider } from './provider';
 
 export const dns = new k8s.helm.v3.Chart(
-    'feuer-dns',
+    'dns',
     {
         chart: 'external-dns',
         fetchOpts: {

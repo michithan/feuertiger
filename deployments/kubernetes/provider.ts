@@ -1,14 +1,27 @@
 import * as digitalocean from '@pulumi/digitalocean';
 import * as k8s from '@pulumi/kubernetes';
+import { digitaloceanToken, projectName } from '@feuertiger/config';
 
-const cluster = digitalocean.getKubernetesCluster({
-    name: 'feuer-cluster'
-});
+const name = `${projectName}-cluster`;
+
+export const doProvider = new digitalocean.Provider(
+    `${projectName}-cluster-provider`,
+    {
+        token: digitaloceanToken
+    }
+);
+
+const cluster = digitalocean.getKubernetesCluster(
+    {
+        name
+    },
+    { provider: doProvider }
+);
 
 export const kubeconfig = cluster.then(
     ({ kubeConfigs: [config] }) => config.rawConfig
 );
 
-export const provider = new k8s.Provider('feuer-cluster', {
+export const provider = new k8s.Provider(name, {
     kubeconfig
 });

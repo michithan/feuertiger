@@ -1,19 +1,13 @@
+import { projectName } from '@feuertiger/config';
+
 import { deploy } from './kubernetes/deploy';
 
 export const webClient = deploy({
-    namespace: 'feuertiger',
+    namespace: projectName,
     name: 'web-client',
     image: 'paulbouwer/hello-kubernetes:1.7',
     minReplicas: 1,
     ports: { http: 8080 },
-    // access: [
-    //     // {
-    //     //     cidr: '217.80.121.233/32'
-    //     // },
-    //     {
-    //         cidr: '0.0.0.0/0'
-    //     }
-    // ],
     env: {
         MESSAGE: 'Hello from the first deployment!'
     },
@@ -23,19 +17,11 @@ export const webClient = deploy({
 });
 
 export const test = deploy({
-    namespace: 'feuertiger',
-    name: 'test-web-client',
+    namespace: projectName,
+    name: 'graphql',
     image: 'paulbouwer/hello-kubernetes:1.7',
     minReplicas: 1,
     ports: { http: 8080 },
-    // access: [
-    //     // {
-    //     //     cidr: '217.80.121.233/32'
-    //     // },
-    //     {
-    //         cidr: '0.0.0.0/0'
-    //     }
-    // ],
     env: {
         MESSAGE: 'Hello from the second deployment!'
     },

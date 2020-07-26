@@ -5,7 +5,7 @@ import { provider } from './provider';
 import { domain } from '../digitalocean/domain';
 
 export const certNamespace = new k8s.core.v1.Namespace(
-    'cert-manager',
+    'cert-manager-namespace',
     {
         metadata: {
             name: 'cert-manager',
@@ -36,7 +36,7 @@ export const certToken = new k8s.core.v1.Secret(
 );
 
 export const cert = new k8s.helm.v3.Chart(
-    'feuer-cert',
+    'certificate',
     {
         chart: 'cert-manager',
         fetchOpts: {

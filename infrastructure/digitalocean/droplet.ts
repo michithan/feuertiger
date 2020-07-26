@@ -1,11 +1,14 @@
 import * as digitalocean from '@pulumi/digitalocean';
+import { projectName } from '@feuertiger/config';
 
 import { provider } from './provider';
 
+const name = `${projectName}-droplet`;
+
 export const droplet = new digitalocean.Tag(
-    'feuer-droplet',
+    name,
     {
-        name: 'feuer-droplet'
+        name
     },
     { provider, dependsOn: [provider] }
 );

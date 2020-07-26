@@ -1,9 +1,13 @@
-import { Config } from '@pulumi/pulumi';
 import * as gcp from '@pulumi/gcp';
+import { gcp as gcpConfig, projectName } from '@feuertiger/config';
 
-const gcpConfig = new Config('gcp');
+import { provider } from './provider';
 
 export const project = gcp.firebase.Project.get(
-    'feuertiger',
-    gcpConfig.require('project')
+    projectName,
+    gcpConfig.project,
+    {},
+    {
+        provider
+    }
 );

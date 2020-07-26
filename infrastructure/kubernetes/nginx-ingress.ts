@@ -1,9 +1,10 @@
 import * as k8s from '@pulumi/kubernetes';
+import { projectName } from '@feuertiger/config';
 
 import { provider } from './provider';
 
 export const ingress = new k8s.helm.v3.Chart(
-    'feuer-ingress',
+    'ingress',
     {
         chart: 'nginx-ingress',
         fetchOpts: {
@@ -22,8 +23,7 @@ export const ingress = new k8s.helm.v3.Chart(
                         // 'service.beta.kubernetes.io/do-loadbalancer-hostname': hostname,
                         // 'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
                         //     'true',
-                        'service.beta.kubernetes.io/do-loadbalancer-name':
-                            'feuer-loadbalancer'
+                        'service.beta.kubernetes.io/do-loadbalancer-name': `${projectName}-loadbalancer`
                     },
                     externalTrafficPolicy: 'Local'
                 },
@@ -39,6 +39,6 @@ export const ingress = new k8s.helm.v3.Chart(
 export const address = ingress.getResourceProperty(
     'v1/Service',
     'default',
-    'feuer-ingress-nginx-ingress',
+    'ingress-nginx-ingress',
     'status'
 ).loadBalancer.ingress[0];

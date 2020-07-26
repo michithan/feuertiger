@@ -1,12 +1,14 @@
 import * as gcp from '@pulumi/gcp';
+import { projectName } from '@feuertiger/config';
 
 import { project } from './project';
+import { provider } from './provider';
 
 export const webApp = new gcp.firebase.WebApp(
-    'feuertiger',
+    projectName,
     {
-        displayName: 'feuertiger',
+        displayName: projectName,
         project: project.id
     },
-    { dependsOn: [project] }
+    { dependsOn: [project], provider }
 );
