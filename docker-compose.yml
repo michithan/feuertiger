@@ -8,9 +8,15 @@ services:
             - '5432:5432'
     graphql:
         build: ./services/graphql
+        environment:
+            - GOOGLE_CREDENTIALS
+            - POSTGRES_URI
         ports:
             - '4000:4000'
     web-client:
         build: ./services/web-client
+        environment:
+            - FIREBASE_CONFIG
+            - GRAPHQL_URI
         ports:
             - '3000:3000'

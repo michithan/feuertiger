@@ -6,6 +6,9 @@ hooks:
         - prettier --write
 generates:
     ./dist/index.ts:
+        hooks:
+            afterOneFileWrite:
+                - tsc && rm
         plugins:
             - add: 'export { DateTimeResolver } from "graphql-scalars";'
             - typescript

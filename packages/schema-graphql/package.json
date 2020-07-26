@@ -2,7 +2,7 @@
     "name": "@feuertiger/schema-graphql",
     "version": "1.0.9-dev.1cf47562.0",
     "description": "graphql schema",
-    "main": "./dist/index.ts",
+    "main": "./dist/index.js",
     "scripts": {
         "build": "graphql-codegen --config codegen.yml",
         "dev": "yarn build --watch"
