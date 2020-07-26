@@ -5,27 +5,17 @@ import EditIcon from '@material-ui/icons/Edit';
 import { AllExercisesQueryResult } from '@feuertiger/schema-graphql';
 import { AddExerciseComponent } from '../addExercise/addExerciseComponent';
 
-import {
-    Scheduler,
-    WeekView,
-    Appointments
-} from '@devexpress/dx-react-scheduler-material-ui';
-
 interface State {
     addDialogOpen: boolean;
 }
 
-const ExerciseCalendar = ({
+const ExerciseTable = ({
     exercise
 }: {
     exercise: AllExercisesQueryResult['data']['allExercises'];
 }) => {
     return (
-        <Scheduler data={exercise} height={660}>
-            <WeekView startDayHour={9} endDayHour={19} />
-            <Appointments />
-        </Scheduler>
-        /*  <MaterialTable
+        <MaterialTable
             options={{
                 exportButton: true,
                 filtering: true,
@@ -49,7 +39,7 @@ const ExerciseCalendar = ({
             ]}
             data={exercise}
             title="Übungen"
-        />*/
+        />
     );
 };
 
@@ -82,7 +72,7 @@ export class Exercise extends React.Component<ExerciseProps, State> {
         } else if (error) {
             content = <p>Error :(</p>;
         } else if (allExercises) {
-            content = <ExerciseCalendar exercise={allExercises} />;
+            content = <ExerciseTable exercise={allExercises} />;
         }
 
         return (
