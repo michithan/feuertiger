@@ -54,7 +54,7 @@ RUN apk update && apk add --no-cache \
 
 # Install powershell
 RUN sudo apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache lttng-ust \
-    && curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.0.1/powershell-7.0.3-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz \
+    && curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.0.3/powershell-7.0.3-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz \
     && sudo mkdir -p /opt/microsoft/powershell/7 \
     && sudo tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7 \
     && sudo chmod +x /opt/microsoft/powershell/7/pwsh \

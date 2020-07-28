@@ -12,8 +12,10 @@
     "editor.fontSize": 14,
     "editor.fontFamily": "Fira Code",
     "editor.codeActionsOnSave": {
-        "source.fixAll": true
+        "source.fixAll": true,
+        "source.organizeImports": true
     },
+    "eslint.codeActionsOnSave.mode": "all",
     "typescript.tsdk": "./node_modules/typescript/lib",
     "vscode-postgres.defaultDatabase": "feuertiger",
     "vscode-postgres.defaultConnection": "feuertiger",
