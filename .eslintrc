@@ -2,8 +2,11 @@
     "extends": [
         "airbnb-typescript",
         "prettier",
+        "prettier/@typescript-eslint",
         "prettier/react",
-        "prettier/@typescript-eslint"
+        "prettier/babel",
+        "prettier/standard",
+        "airbnb-typescript-prettier"
     ],
     "parserOptions": {
         "project": "./tsconfig.json"
@@ -21,13 +24,7 @@
         "import/prefer-default-export": 0,
         "consistent-return": 0
     },
-    "plugins": [
-        "prettier",
-        "eslint-plugin-import",
-        "eslint-plugin-jsx-a11y",
-        "eslint-plugin-react",
-        "eslint-plugin-react-hooks"
-    ],
+    "plugins": ["prettier"],
     "globals": {
         "cy": true,
         "Cypress": true
