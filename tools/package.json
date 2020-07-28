@@ -1,16 +1,14 @@
 {
-    "name": "@feuertiger/config",
+    "name": "@feuertiger/tools",
     "version": "1.0.9-dev.1cf47562.0",
-    "description": "config",
-    "main": "./index.js",
-    "files": [
-        "./index.js",
-        "./index.d.ts"
-    ],
+    "description": "tools",
+    "bin": {
+        "feuertiger": "./bin/feuertiger"
+    },
     "repository": {
         "type": "git",
         "url": "https://gitlab.com/feuertiger/feuertiger",
-        "directory": "config"
+        "directory": "tools"
     },
     "publishConfig": {
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"

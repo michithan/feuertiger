@@ -1,7 +1,7 @@
 {
     "name": "feuertiger",
     "dockerFile": "../.dev-env.Dockerfile",
-    "postCreateCommand": "yarn && yarn linkdist && yarn build",
+    "postCreateCommand": "yarn && yarn linkdist",
     "forwardPorts": [3000, 4000, 5000, 6000],
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
@@ -21,10 +21,10 @@
         "esbenp.prettier-vscode",
         "Prisma.prisma",
         "ckolkman.vscode-postgres",
-        "jsayol.firebase-explorer",
         "anseki.vscode-color",
         "msjsdiag.debugger-for-chrome",
         "naumovs.color-highlight",
+        "ms-vscode.powershell",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "ms-azuretools.vscode-docker"
     ]

@@ -19,18 +19,16 @@
     "packages": [
         "packages/*",
         "services/*",
+        "ci/*",
         "config",
-        "infrastructure",
-        "deployments",
-        "e2e"
+        "tools"
     ],
     "workspaces": [
         "packages/*",
         "services/*",
+        "ci/*",
         "config",
-        "infrastructure",
-        "deployments",
-        "e2e"
+        "tools"
     ],
     "dependencies": {
         "@lerna/package-graph": "3.18.5",

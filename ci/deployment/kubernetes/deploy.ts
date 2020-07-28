@@ -45,7 +45,7 @@ export const deploy = ({
 
     const pod = new k8sx.PodBuilder({
         imagePullSecrets: [
-            { name: imagePullSecret.metadata.apply((m) => m.name) }
+            { name: imagePullSecret.metadata.apply(m => m.name) }
         ],
         containers: [
             {
@@ -184,11 +184,11 @@ export const deploy = ({
         namespace,
         autoscaling: autoscaling?.status,
         image: deployment.spec.template.spec.containers.apply(
-            (containers) => containers?.[0]?.image
+            containers => containers?.[0]?.image
         ),
-        dns: ingress?.spec.rules.apply((rules) => rules?.[0]?.host),
+        dns: ingress?.spec.rules.apply(rules => rules?.[0]?.host),
         ip: ingress?.status.loadBalancer.ingress.apply(
-            (address) => address?.[0]?.ip
+            address => address?.[0]?.ip
         )
     };
 };

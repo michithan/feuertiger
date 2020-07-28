@@ -13,7 +13,7 @@
         "prettier/prettier": [
             "error",
             {
-                "endOfLine": "auto"
+                "endOfLine": "lf"
             }
         ],
         "import/no-cycle": 0,

@@ -4,6 +4,10 @@ export default interface Config {
         projectId: string;
         token: string;
         user: string;
+        email: string;
+        repositoryUrl: string;
+        branchSlug: string;
+        commit: string;
     };
     gcp: {
         project: string;
@@ -12,8 +16,6 @@ export default interface Config {
         accessToken: string;
     };
     digitaloceanToken: string;
-    gitBranchSlug: string;
-    gitCommitHashShort: string;
     firebaseAppConfig: {
         projectId: string;
         apiKey: string;

@@ -37,8 +37,11 @@
     },
     "git.enableSmartCommit": true,
     "terminal.integrated.enableBell": true,
+    "terminal.integrated.shell.linux": "/usr/bin/pwsh",
+    "terminal.integrated.shell.windows": "/usr/bin/pwsh",
     "typescript.updateImportsOnFileMove.enabled": "always",
     "javascript.updateImportsOnFileMove.enabled": "always",
+    "files.eol": "\n",
     "diffEditor.renderSideBySide": false,
     "diffEditor.ignoreTrimWhitespace": false,
     "vs-kubernetes": {
