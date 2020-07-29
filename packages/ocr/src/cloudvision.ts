@@ -1,5 +1,4 @@
 // import firebase from 'firebase/app';
-// @ts-ignore
 import vision from '@google-cloud/vision';
 
 // TODO fix web import problem

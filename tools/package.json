@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/tools",
     "version": "1.0.9-dev.1cf47562.0",
-    "description": "tools",
+    "description": "🔥🐯 Feuertiger tools 🐯🔥",
     "bin": {
         "feuertiger": "./bin/feuertiger"
     },
@@ -13,5 +13,11 @@
     "publishConfig": {
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
-    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
+    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb",
+    "dependencies": {
+        "execa": "4.0.3",
+        "chalk": "4.1.0",
+        "figlet": "1.5.0",
+        "meow": "7.0.1"
+    }
 }
