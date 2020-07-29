@@ -8,17 +8,6 @@ ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
 # Install basics
 RUN apk update && apk add --no-cache \
     # apt-transport-https \
-    ca-certificates \
-    chromium \
-    curl \
-    docker \
-    gcc \
-    git \
-    gnupg \
-    groff \
-    icu-libs \
-    krb5-libs \
-    less \
     # libasound2 \
     # libgconf-2-4 \
     # libgtk-3-0 \
@@ -26,6 +15,23 @@ RUN apk update && apk add --no-cache \
     # libnss3 \
     # libxss1 \
     # libxtst6 \
+    bash \
+    binutils \
+    ca-certificates \
+    chromium \
+    coreutils  \
+    curl \
+    docker \
+    findutils \
+    g++ \
+    gcc \
+    git \
+    gnupg \
+    grep  \
+    groff \
+    icu-libs \
+    krb5-libs \
+    less \
     libc-dev \
     libc6-compat \
     libffi-dev \
@@ -34,19 +40,24 @@ RUN apk update && apk add --no-cache \
     libnotify-dev \
     libssl1.1 \
     libstdc++ \
+    linux-headers \
     make \
+    ncurses  \
     ncurses-terminfo-base \
-    nodejs \
+    nodejs-current \
     npm \
+    openssl  \
     openssl-dev \
     postgresql \
     postgresql-contrib \
     py-pip \
+    python2  \
     python3-dev \
     sudo \
     tzdata \
     unzip \
     userspace-rcu \
+    util-linux \
     xauth \
     xvfb \
     yarn \
@@ -92,10 +103,9 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.6/b
     && sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Install helm
-# RUN curl -L https://get.helm.sh/helm-v3.2.4-linux-amd64.tar.gz | tar xvz \
-#     && mv linux-amd64/helm /usr/bin/helm \
-#     && chmod +x /usr/bin/helm \
-#     && rm -rf linux-amd64
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \
+    && chmod 700 get_helm.sh \
+    && ./get_helm.sh
 
 # Install lerna
 RUN npm i -g lerna

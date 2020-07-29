@@ -12,8 +12,9 @@
     "editor.fontSize": 14,
     "editor.fontFamily": "Fira Code",
     "editor.codeActionsOnSave": {
-        "source.fixAll": true,
-        "source.organizeImports": true
+        "source.fixAll": false,
+        "source.fixAll.eslint": true
+        // "source.organizeImports": true
     },
     "eslint.codeActionsOnSave.mode": "all",
     "typescript.tsdk": "./node_modules/typescript/lib",
@@ -50,5 +51,14 @@
         "vs-kubernetes.minikube-path.linux": "/root/.vs-kubernetes/tools/minikube/linux-amd64/minikube",
         "vs-kubernetes.helm-path.linux": "/root/.vs-kubernetes/tools/helm/linux-amd64/helm",
         "vs-kubernetes.draft-path.linux": "/root/.vs-kubernetes/tools/draft/linux-amd64/draft"
-    }
+    },
+    "eslint.format.enable": true,
+    "eslint.options": {
+        "ignorePath": "/workspaces/feuertiger/.eslintignore",
+        "config": "/workspaces/feuertiger/.eslintrc",
+        "ResolvePluginsRelativeTo": "/workspaces/feuertiger",
+        "noErrorOnUnmatchedPattern": true
+    },
+    "eslint.run": "onSave",
+    "eslint.alwaysShowStatus": true
 }

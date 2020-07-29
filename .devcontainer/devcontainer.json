@@ -6,30 +6,25 @@
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
-    "runArgs": [
-        "--mount",
-        "type=volume,target=/workspace/node_modules"
-    ],
+    "runArgs": ["--mount", "type=volume,target=/workspace/node_modules"],
     "extensions": [
-        "max-SS.Cyberpunk",
-        "eamodio.gitlens",
-        "vscode-icons-team.vscode-icons",
-        "tomoki1207.pdf",
-        "jpoissonnier.vscode-styled-components",
-        "dbaeumer.vscode-eslint",
-        "Prisma.vscode-graphql",
-        "mikestead.dotenv",
         "CoenraadS.bracket-pair-colorizer",
-        "ecmel.vscode-html-css",
+        "Prisma.prisma",
+        "Prisma.vscode-graphql",
+        "anseki.vscode-color",
+        "ckolkman.vscode-postgres",
+        "dbaeumer.vscode-eslint",
+        "eamodio.gitlens",
         "eg2.vscode-npm-script",
         "esbenp.prettier-vscode",
-        "Prisma.prisma",
-        "ckolkman.vscode-postgres",
-        "anseki.vscode-color",
-        "msjsdiag.debugger-for-chrome",
-        "naumovs.color-highlight",
-        "ms-vscode.powershell",
+        "jpoissonnier.vscode-styled-components",
+        "max-SS.Cyberpunk",
+        "ms-azuretools.vscode-docker",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "ms-azuretools.vscode-docker"
+        "ms-vscode.powershell",
+        "msjsdiag.debugger-for-chrome",
+        "tomoki1207.pdf",
+        "visualstudioexptteam.vscodeintellicode",
+        "vscode-icons-team.vscode-icons"
     ]
 }
