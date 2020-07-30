@@ -1,12 +1,26 @@
 const execa = require('execa');
 
-exports.list = scope => {
+const getLernaBinary = async cwd => {
+    const { stdout } = await execa('yarn', ['bin', 'lerna'], { cwd });
+    return stdout;
+};
+
+const cwd = process.cwd();
+
+exports.list = async ({ package, changed } = {}) => {
+    const bin = await getLernaBinary(cwd);
+
     const arguments = ['list'];
-    if (scope) {
-        arguments.push(`--scope "${scope}"`);
+    if (package) {
+        arguments.push(`--scope`);
+        arguments.push(package);
+        arguments.push(`--include-dependents`);
+    }
+    if (changed) {
+        arguments.push(`--since`);
     }
     arguments.push('--json');
-    return execa('lerna', arguments).then(
-        ({ stdout }) => stdout && JSON.parse(stdout)
-    );
+
+    const { stdout } = await execa(bin, arguments);
+    return stdout && JSON.parse(stdout);
 };

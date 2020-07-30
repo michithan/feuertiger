@@ -3,9 +3,15 @@ const figlet = require('figlet');
 const chalk = require('chalk');
 const log = console.log;
 
+const feuertiger = `${chalk.red('feuer')}${chalk.yellow('t')}${chalk.grey(
+    'i'
+)}${chalk.yellow('g')}${chalk.grey('e')}${chalk.yellow('r')}`;
+
 const cli = meow(
     `
     Usage
+      $ list            lists all packages
+      $ linkdist        links all ./dist/index.js to ./src/index.js
       $ format          formats the code
       $ lint            lints the code
       $ test            tests the code
@@ -20,10 +26,11 @@ const cli = meow(
 
     Options
       --package, -p  reduce scope to package
+      --changed, -c  reduce scope to packages affected by changes since last publish
  
     Examples
-      $ feuertiger lint --package web-client
-      🔎 linting project web-client, web-components 🔍
+      $ feuertiger list --package web-client
+      ${feuertiger} - 📜 list 📜
 `,
     {
         flags: {
@@ -35,25 +42,25 @@ const cli = meow(
     }
 );
 
-const tiger = input =>
-    log(
-        `${chalk.red('feuer')}${chalk.yellow('t')}${chalk.grey(
-            'i'
-        )}${chalk.yellow('g')}${chalk.grey('e')}${chalk.yellow('r')} - ${input}`
-    );
+const tiger = input => log(`${feuertiger} - ${input}`);
 
 (async () => {
     switch (cli.input[0]) {
-        case 'list':
-            tiger('📜 list 📜');
-            const utils = require('./src/utils');
-            const list = await utils.list(cli.flags.package);
-            console.log(list);
+        case 'linkdist':
+            tiger('🔗 linkdist 🔗');
+            const linkdist = require('./src/linkdist');
+            linkdist();
             break;
         case 'lint':
             tiger('🔎 lints 🔍');
             const lint = require('./src/lint');
             lint(cli.flags);
+            break;
+        case 'list':
+            tiger('📜 list 📜');
+            const utils = require('./src/utils');
+            const list = await utils.list(cli.flags);
+            console.log(list);
             break;
         default:
             console.log(cli.help);
