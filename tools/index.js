@@ -51,6 +51,11 @@ const tiger = input => log(`${feuertiger} - ${input}`);
             const linkdist = require('./src/linkdist');
             linkdist();
             break;
+        case 'format':
+            tiger('🧹 formats 🧹');
+            const format = require('./src/format');
+            format(cli.flags);
+            break;
         case 'lint':
             tiger('🔎 lints 🔍');
             const lint = require('./src/lint');
