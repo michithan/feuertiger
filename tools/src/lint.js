@@ -1,18 +1,26 @@
 const path = require('path');
 const { list } = require('./utils');
-const { Linter } = require('eslint');
+const { ESLint } = require('eslint');
+const eslintrc = require('../../.eslintrc');
 
-const linter = new Linter();
 const root = path.resolve(__dirname, '..', '..');
 
-const lintrc = require('../../.eslintrc');
+const eslint = new ESLint({
+    fix: true,
+    useEslintrc: false,
+    baseConfig: eslintrc,
+    resolvePluginsRelativeTo: `${root}/`,
+    errorOnUnmatchedPattern: false
+});
 
-module.exports = flags => {
+module.exports = async flags => {
     const packages = await list(flags);
-
-    // exec({
-    //     cmd: `eslint ./**/*.{ts,tsx} --fix --ignore-path ${root}/.eslintignore --config  ${root}/.eslintrc --resolve-plugins-relative-to  ${root}/ --no-error-on-unmatched-pattern`,
-    //     noPrivate: true,
-    //     stream: true
-    // });
+    for (const { location } of packages) {
+        const location = packages[0].location;
+        console.log('lintFiles: ', location);
+        const results = await eslint.lintFiles(
+            `${location}/**/*.{js,jsx,ts,tsx}`
+        );
+        console.log('results: ', results);
+    }
 };

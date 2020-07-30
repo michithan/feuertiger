@@ -4,11 +4,9 @@ const { list } = require('./utils');
 const linkscript = 'module.exports = require("../src/index");';
 const linktypesscript = 'export * from "../src/index";';
 
-const cwd = process.cwd();
-
-module.exports = async (flags) => {
+module.exports = async flags => {
     const packages = await list(flags);
-    packages.forEach(({ location }) => {
+    for (const { location } of packages) {
         const packageJsonPath = `${location}/package.json`;
         const distpath = `${location}/dist`;
         const distpathindex = `${distpath}/index.js`;
@@ -40,5 +38,5 @@ module.exports = async (flags) => {
         });
 
         console.log(`linked "${distpathindex}" to "../src/index.ts"`);
-    });
+    }
 };
