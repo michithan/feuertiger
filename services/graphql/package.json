@@ -42,7 +42,7 @@
         "babel-jest": "26.0.1",
         "jest": "26.0.1",
         "ts-node": "8.10.1",
-        "ts-node-dev": "1.0.0-pre.44",
+        "ts-node-dev": "1.0.0-pre.56",
         "typescript": "3.9.7"
     }
 }
