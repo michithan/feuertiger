@@ -1,7 +1,7 @@
 const { execSync } = require('child_process');
 
 const constants = require('./constants.json');
-const defaults = require('./constants.json');
+const defaults = require('./defaults.json');
 
 /*
  * Get all existing variables
@@ -37,7 +37,7 @@ const tryGetGitUserEmail = () => tryGetFromShell('git config --get user.email');
 /*
  * Compute configs
  */
-exports = {
+const config = {
     projectName: constants.projectName,
     gitlab: {
         ...constants.gitlab,
@@ -64,4 +64,15 @@ exports = {
     postgresUri: POSTGRES_URI || defaults.postgresUri,
     graphqlUri: GRAPHQL_URI || defaults.graphqlUri,
     webClientUri: WEB_CLIENT_URI || defaults.webClientUri
+};
+
+module.exports = {
+    ...config,
+    env: {
+        GIT_USER: config.gitlab.user,
+        GIT_EMAIL: config.gitlab.email,
+        POSTGRES_URI: config.postgresUri,
+        GRAPHQL_URI: config.graphqlUri,
+        WEB_CLIENT_URI: config.webClientUri
+    }
 };
