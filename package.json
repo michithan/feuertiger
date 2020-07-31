@@ -21,14 +21,14 @@
         "services/*",
         "ci/*",
         "config",
-        "tools"
+        "cli"
     ],
     "workspaces": [
         "packages/*",
         "services/*",
         "ci/*",
         "config",
-        "tools"
+        "cli"
     ],
     "dependencies": {
         "@lerna/package-graph": "3.18.5",

@@ -2,7 +2,7 @@
 FROM alpine:3.12.0
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/tools/bin:/
+ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/cli/bin:/
 ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
 
 # Install basics

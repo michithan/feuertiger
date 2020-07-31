@@ -1,7 +1,7 @@
 {
-    "name": "@feuertiger/tools",
+    "name": "@feuertiger/cli",
     "version": "1.0.9-dev.1cf47562.0",
-    "description": "🔥🐯 Feuertiger tools 🐯🔥",
+    "description": "🔥🐯 Feuertiger cli 🐯🔥",
     "bin": {
         "feuertiger": "./bin/feuertiger"
     },

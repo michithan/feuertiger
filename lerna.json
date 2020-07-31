@@ -2,5 +2,5 @@
     "npmClient": "yarn",
     "version": "1.0.9-dev.87816d5a.0",
     "useWorkspaces": true,
-    "packages": ["packages/*", "services/*", "ci/*", "config", "tools"]
+    "packages": ["packages/*", "services/*", "ci/*", "config", "cli"]
 }
