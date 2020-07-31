@@ -48,9 +48,9 @@ RUN apk update && apk add --no-cache \
     npm \
     openssl  \
     openssl-dev \
-    # openrc \
+    openrc \
     postgresql \
-    # postgresql-contrib \
+    postgresql-contrib \
     py-pip \
     python2  \
     python3-dev \
@@ -83,11 +83,8 @@ RUN sudo apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache l
 # Install docker-compose
 RUN pip3 install docker-compose
 
-# USER postgres
-# RUN /etc/init.d/postgresql start \
-#     && psql --command "CREATE USER feuertiger WITH SUPERUSER PASSWORD 'feuertiger';" \
-#     && createdb -O feuertiger feuertiger
-# USER root
+# Enable postgres openrc service
+RUN openrc || rc-update add postgresql
 
 # Install pulumi
 RUN curl -fsSL https://get.pulumi.com/ | sh
