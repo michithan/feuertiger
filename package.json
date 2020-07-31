@@ -5,7 +5,7 @@
     "author": "",
     "license": "MIT",
     "scripts": {
-        "format": "prettier ./**/*.ts ./**/*.js ./**/*.tsx ./**/*.json ./**/*.graphql ./**/*.yml --write --check",
+        "format": "feuertiger format",
         "build": "lerna run build --no-private --stream",
         "linkdist": "feuertiger linkdist",
         "lint": "feuertiger lint",

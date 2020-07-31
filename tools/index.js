@@ -10,19 +10,21 @@ const feuertiger = `${chalk.red('feuer')}${chalk.yellow('t')}${chalk.grey(
 const cli = meow(
     `
     Usage
+      $ init            installs all dependencies and setups workspace // TODO
       $ list            lists all packages
       $ linkdist        links all ./dist/index.js to ./src/index.js
       $ format          formats the code
-      $ lint            lints the code
-      $ test            tests the code
-      $ build           builds the code
-      $ e2e             e2e test all the things
-      $ dev             starts all in dev mode
-      $ start           starts all in prod mode
-      $ publish         publishes all changed npm packages
-      $ dockerize       build and publishes all services as docker images
-      $ deploy          deploys docker images to kubernetes cluster
-      $ provision       provision the cloud infrastructure
+      $ lint            lints the code  // TODO
+      $ test            tests the code  // TODO
+      $ build           builds the code  // TODO
+      $ e2e             e2e test all the things  // TODO
+      $ dev             starts all in dev mode  // TODO
+      $ start           starts all in prod mode  // TODO
+      $ publish         publishes all changed npm packages  // TODO
+      $ dockerize       build and publishes all services as docker images  // TODO
+      $ deploy          deploys docker images to kubernetes cluster  // TODO
+      $ provision       provision the cloud infrastructure  // TODO
+      $ clean           back to git clone  // TODO
 
     Options
       --package, -p  reduce scope to package
@@ -46,6 +48,11 @@ const tiger = input => log(`${feuertiger} - ${input}`);
 
 (async () => {
     switch (cli.input[0]) {
+        case 'init':
+            tiger('🎬 init 🎬');
+            const init = require('./src/init');
+            init(cli.flags);
+            break;
         case 'linkdist':
             tiger('🔗 linkdist 🔗');
             const linkdist = require('./src/linkdist');

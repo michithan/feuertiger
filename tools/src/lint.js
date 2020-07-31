@@ -1,9 +1,7 @@
-const path = require('path');
 const { list } = require('./utils');
+const { root } = require('./paths');
 const { ESLint } = require('eslint');
 const eslintrc = require('../../.eslintrc');
-
-const root = path.resolve(__dirname, '..', '..');
 
 const eslint = new ESLint({
     fix: true,
