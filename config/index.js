@@ -52,7 +52,7 @@ const config = {
     gcp: constants.gcp,
     digitaloceanToken: DIGITALOCEAN_TOKEN,
     firebaseAppConfig: {
-        projectId: FIREBASE_CONFIG && FIREBASE_CONFIG.project_id,
+        projectId: FIREBASE_CONFIG && FIREBASE_CONFIG.projectId,
         apiKey: FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey,
         authDomain: FIREBASE_CONFIG && FIREBASE_CONFIG.authDomain
     },

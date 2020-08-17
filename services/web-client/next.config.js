@@ -1,5 +1,5 @@
 const merge = require('lodash.merge');
-const { firebaseAppConfig, graphqlUrl } = require('@feuertiger/config');
+const { firebaseAppConfig, graphqlUri } = require('@feuertiger/config');
 const withTM = require('next-transpile-modules');
 const withSourceMaps = require('@zeit/next-source-maps');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
@@ -39,7 +39,7 @@ module.exports = compose(
     },
     publicRuntimeConfig: {
         tokens: firebaseAppConfig,
-        graphqlUrl
+        graphqlUri
     },
     distDir: './dist'
 });
