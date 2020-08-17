@@ -64,5 +64,10 @@
     "typescript.implementationsCodeLens.enabled": true,
     "typescript.tsserver.experimental.enableProjectDiagnostics": true,
     "typescript.tsserver.maxTsServerMemory": 4096,
-    "typescript.workspaceSymbols.scope": "currentProject"
+    "typescript.workspaceSymbols.scope": "currentProject",
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/.hg/store/**": true
+    }
 }

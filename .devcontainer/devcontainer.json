@@ -8,6 +8,7 @@
     ],
     "runArgs": ["--mount", "type=volume,target=/workspace/node_modules"],
     "extensions": [
+        "gitlab.gitlab-workflow",
         "CoenraadS.bracket-pair-colorizer",
         "Prisma.prisma",
         "Prisma.vscode-graphql",
