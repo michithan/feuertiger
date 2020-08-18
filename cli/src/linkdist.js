@@ -20,7 +20,7 @@ module.exports = async flags => {
         const hasDistIndexJs = packageJson.main === './dist/index.js';
 
         if (!hasIndexJs || !hasDistIndexJs) {
-            return;
+            continue;
         }
 
         if (!fs.existsSync(distpath)) {
