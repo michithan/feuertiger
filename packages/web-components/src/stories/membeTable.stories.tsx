@@ -11,7 +11,8 @@ import {
 } from '../index';
 
 const defaultContainerProps: ContainerProps = {
-    ...authPropsMock
+    ...authPropsMock,
+    children: null
 };
 
 faker.locale = 'de';

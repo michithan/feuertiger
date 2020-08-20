@@ -22,7 +22,11 @@ export const mockDefaultPerson = (): Person => ({
     birthName: faker.name.lastName(),
     dateOfBirth: faker.date.past().toDateString(),
     grade: 'FM',
-    membershipNumber: faker.random.number().toString(),
+    actualMembership: {
+        id: `membership:${faker.random.uuid()}`,
+        entryDate: faker.date.past(),
+        active: true
+    },
     placeOfBirth: faker.address.city(),
     promotions: [
         {
@@ -57,7 +61,11 @@ export const mockLeaderPerson = (): Person => ({
     birthName: faker.name.lastName(),
     dateOfBirth: faker.date.past().toDateString(),
     grade: 'LM',
-    membershipNumber: faker.random.number().toString(),
+    actualMembership: {
+        id: `membership:${faker.random.uuid()}`,
+        entryDate: faker.date.past(),
+        active: true
+    },
     placeOfBirth: faker.address.city(),
     promotions: [
         {

@@ -51,6 +51,7 @@ RUN apk update && apk add --no-cache \
     openrc \
     postgresql \
     postgresql-contrib \
+    # powerline-extra-symbols \
     py-pip \
     python2  \
     python3-dev \
@@ -67,7 +68,11 @@ RUN apk update && apk add --no-cache \
     zsh
 
 # Install zsh
-RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+    # use agnoster theme
+    && sed -i 's/robbyrussell/agnoster/g' ~/.zshrc \
+    # dont use git promt, since info is already shown in vs code and it slows down the cli
+    && sed -i 's/  prompt_git/  #prompt_git/g' ~/.oh-my-zsh/themes/agnoster.zsh-theme
 
 # Use zsh as default shell
 SHELL ["zsh", "-c"]

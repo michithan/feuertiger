@@ -18,6 +18,7 @@
     "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
     "exclude": [
         "node_modules",
+        "**/node_modules/**",
         "dist",
         "coverage",
         "**/*.test.ts",

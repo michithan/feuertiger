@@ -5,18 +5,20 @@ faker.locale = 'de';
 faker.seed(4);
 
 export const defaultExerciseMock: Exercise = {
-    id: `timeslot:${faker.random.uuid()}`,
+    id: `exercise:${faker.random.uuid()}`,
     topic: faker.random.words(2),
     timeslot: {
+        id: `timeslot:${faker.random.uuid()}`,
         start: new Date().toDateString(),
         end: new Date().toDateString()
     }
 };
 
 export const secondExerciseMock: Exercise = {
-    id: `timeslot:${faker.random.uuid()}`,
+    id: `exercise:${faker.random.uuid()}`,
     topic: faker.random.words(2),
     timeslot: {
+        id: `timeslot:${faker.random.uuid()}`,
         start: new Date().toDateString(),
         end: new Date().toDateString()
     }

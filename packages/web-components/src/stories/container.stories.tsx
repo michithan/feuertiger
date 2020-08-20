@@ -4,7 +4,8 @@ import Skeleton from '@material-ui/lab/Skeleton';
 import { Container, ContainerProps, authPropsMock } from '../index';
 
 const defaultProps: ContainerProps = {
-    ...authPropsMock
+    ...authPropsMock,
+    children: null
 };
 
 storiesOf('Container', module)

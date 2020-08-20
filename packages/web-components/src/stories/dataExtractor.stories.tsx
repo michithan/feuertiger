@@ -8,7 +8,8 @@ import { Container, ContainerProps, authPropsMock } from '../index';
 
 const defaultProps: DataExtractorProps = {};
 const defaultContainerProps: ContainerProps = {
-    ...authPropsMock
+    ...authPropsMock,
+    children: null
 };
 
 storiesOf('DataExtractor', module)

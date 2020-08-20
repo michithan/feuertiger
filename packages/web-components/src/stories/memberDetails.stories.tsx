@@ -11,14 +11,17 @@ import {
 } from '../index';
 
 const defaultContainerProps: ContainerProps = {
-    ...authPropsMock
+    ...authPropsMock,
+    children: null
 };
 
 faker.locale = 'de';
 faker.seed(4);
 
 const defaultProps: MemberDetailsProps = Object.freeze({
-    member: mockDefaultPerson()
+    member: mockDefaultPerson(),
+    updatePerson: () => {},
+    updatePersonExercisesConnection: () => {}
 } as unknown) as MemberDetailsProps;
 
 storiesOf('MemberDetails', module)
