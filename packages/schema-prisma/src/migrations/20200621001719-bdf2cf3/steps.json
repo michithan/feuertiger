@@ -1,0 +1,17 @@
+{
+    "version": "0.3.14-fixed",
+    "steps": [
+        {
+            "tag": "CreateField",
+            "model": "Timeslot",
+            "field": "exercise",
+            "type": "Exercise",
+            "arity": "List"
+        },
+        {
+            "tag": "DeleteField",
+            "model": "Timeslot",
+            "field": "Exercise"
+        }
+    ]
+}

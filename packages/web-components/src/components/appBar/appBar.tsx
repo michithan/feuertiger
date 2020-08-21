@@ -8,12 +8,11 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { AuthProps } from '../../types/authProps';
+
+import { AuthProps } from '../../index';
 
 const drawerWidth = 240;
 
-// remove it here
-// eslint-disable-next-line react/jsx-props-no-spreading
 const StyledAppBar = styled(({ open, ...props }) => <MuiAppBar {...props} />)`
     z-index: 1;
     transition: ${({ open, theme: { transitions } }) =>
@@ -38,9 +37,7 @@ const StyledToolbar = styled(Toolbar)`
     padding-right: 24;
 `;
 
-// remove it here
 const StyledIconButton = styled(({ open, ...props }) => (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <IconButton {...props} />
 ))`
     margin-right: 36;
@@ -49,6 +46,9 @@ const StyledIconButton = styled(({ open, ...props }) => (
 
 const StyledTypography = styled(Typography)`
     flex-grow: 1;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
 `;
 
 export interface AppBarProps extends AuthProps {
@@ -77,7 +77,13 @@ export class AppBar extends React.Component<AppBarProps> {
                         <MenuIcon />
                     </StyledIconButton>
                     <StyledTypography variant="h6" color="inherit" noWrap>
-                        Dashboard
+                        <span role="img" aria-label="Feuer">
+                            🔥
+                        </span>
+                        <span>Feuertiger</span>
+                        <span role="img" aria-label="Tiger">
+                            🐯
+                        </span>
                     </StyledTypography>
                     <IconButton
                         color="inherit"

@@ -1,0 +1,11 @@
+{
+    "projectName": "feuertiger",
+    "gitlab": {
+        "projectId": "18726494"
+    },
+    "gcp": {
+        "project": "feuertiger-77a8a",
+        "region": "europe-west1",
+        "zone": "eur3"
+    }
+}

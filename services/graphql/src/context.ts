@@ -1,7 +1,6 @@
 import admin from 'firebase-admin';
-// import { AuthenticationError } from 'apollo-server';
+import { AuthenticationError } from 'apollo-server';
 import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
-
 import { PrismaClient } from '@feuertiger/schema-prisma';
 
 export interface Context {
@@ -23,9 +22,6 @@ export default async ({ req }: ExpressContext) => {
             }
         };
     } catch (error) {
-        return {
-            db: prisma
-        };
-        // throw new AuthenticationError('you must be logged in');
+        throw new AuthenticationError('you must be logged in');
     }
 };

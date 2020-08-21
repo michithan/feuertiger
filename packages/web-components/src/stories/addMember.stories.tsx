@@ -1,7 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { AddMember, AddMemberProps } from '../components/addMember/addMember';
+import { AddMember, AddMemberProps } from '../index';
 
 const defaultProps: AddMemberProps = {
     handleClose: () => {},

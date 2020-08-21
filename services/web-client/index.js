@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const next = require('next');
 
-// eslint-disable-next-line import/prefer-default-export
 exports.webServer = () => {
     const server = express();
     server.use(bodyParser.urlencoded({ extended: false }));

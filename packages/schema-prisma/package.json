@@ -4,8 +4,8 @@
     "description": "prisma schema",
     "main": "./dist/index.js",
     "scripts": {
-        "build": " prisma generate --schema=./src/schema.prisma",
-        "migrate:save": "prisma migrate save --experimental --name=$(git rev-parse --short HEAD) --schema=./src/schema.prisma",
+        "build": "prisma generate --schema=./src/schema.prisma",
+        "migrate:save": "prisma migrate save --experimental --create-db --name=$(git rev-parse --short HEAD) --schema=./src/schema.prisma",
         "migrate:up": "prisma migrate up --experimental --create-db --schema=./src/schema.prisma",
         "seed:test": "ts-node ./seeds/test/seed.ts",
         "dev": "yarn migrate:save && yarn migrate:up && yarn build && yarn seed:test && yarn build --watch"

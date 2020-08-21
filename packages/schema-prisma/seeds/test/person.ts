@@ -1,49 +1,26 @@
-import faker from 'faker';
-import { PersonCreateInput } from '../../dist';
-import exercises from './exercise';
+import faker from './faker';
+import { PersonCreateInput, AddressCreateInput, Sex } from '../../dist';
 
-const length = 100;
+export interface PersonConnectionNeeds {
+    address: AddressCreateInput;
+}
 
-faker.locale = 'de';
-faker.seed(length);
-
-const persons: Array<PersonCreateInput> = Array.from({ length }, () => ({
+export const createPerson = ({
+    address
+}: PersonConnectionNeeds): PersonCreateInput => ({
     id: `person:${faker.random.uuid()}`,
     firstname: faker.name.firstName(),
     lastname: faker.name.lastName(),
-    exercisesParticipated: {
-        connect: [
-            {
-                id: exercises[0].id
-            },
-            {
-                id: exercises[1].id
-            },
-            {
-                id: exercises[2].id
-            },
-            {
-                id: exercises[4].id
-            }
-        ]
-    }
-}));
-
-persons[0].exercisesLeaded = {
-    connect: [
-        {
-            id: exercises[0].id
-        },
-        {
-            id: exercises[1].id
-        },
-        {
-            id: exercises[2].id
-        },
-        {
-            id: exercises[4].id
+    avatar: faker.image.cats(),
+    phone: faker.phone.phoneNumber(),
+    sex: Sex.FEMAL,
+    address: {
+        connect: {
+            id: address.id
         }
-    ]
-};
-
-export default persons;
+    },
+    birthName: faker.name.lastName(),
+    dateOfBirth: faker.date.past(),
+    membershipNumber: faker.random.number().toString(),
+    placeOfBirth: faker.address.city()
+});

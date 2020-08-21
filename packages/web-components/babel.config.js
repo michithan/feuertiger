@@ -9,6 +9,7 @@ module.exports = {
                 preprocess: false
             }
         ],
-        ['@babel/plugin-proposal-class-properties']
+        ['@babel/plugin-proposal-class-properties'],
+        ['@babel/plugin-proposal-decorators', { legacy: true }]
     ]
 };

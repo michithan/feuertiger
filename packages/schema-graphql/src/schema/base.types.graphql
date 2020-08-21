@@ -1,4 +1,33 @@
 type Timeslot {
-    start: String
-    end: String
+    id: ID!
+    start: DateTime
+    end: DateTime
+}
+
+type Address implements Node {
+    id: ID!
+    street: String
+    streetNumber: String
+    postalCode: String
+    city: String
+    country: String
+}
+
+input AddressUpdate {
+    id: ID!
+    street: String
+    streetNumber: String
+    postalCode: String
+    city: String
+    country: String
+}
+
+enum ConnectionUpdateAction {
+    ADD
+    DELETE
+}
+
+input ConnectionUpdate {
+    id: ID!
+    action: ConnectionUpdateAction!
 }

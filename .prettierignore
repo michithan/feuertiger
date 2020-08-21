@@ -5,7 +5,6 @@ dist
 
 package-lock.json
 
-*.vscode
 *.log
 *.code-workspace
 .next

@@ -13,9 +13,9 @@ export const FlattData = (props: FlattData) => {
     return flattData ? (
         <Table size="small" aria-label="a dense table">
             <TableBody>
-                {flattData.map((row) => (
+                {flattData.map(row => (
                     <TableRow>
-                        {row.map((cell) => (
+                        {row.map(cell => (
                             <TableCell align="right">{cell}</TableCell>
                         ))}
                     </TableRow>

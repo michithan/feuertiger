@@ -3,5 +3,6 @@
         "rootDir": "./" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
     },
     "extends": "../../tsconfig.json",
+    "exclude": ["node_modules"],
     "include": ["./seeds/**/*", "./dist/**/*"]
 }

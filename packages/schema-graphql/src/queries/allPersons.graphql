@@ -3,5 +3,23 @@ query allPersons {
         id
         firstname
         lastname
+        sex
+        avatar
+        birthName
+        placeOfBirth
+        dateOfBirth
+        actualMembership {
+            active
+            entryDate
+        }
+        grade
+        address {
+            id
+            street
+            streetNumber
+            postalCode
+            city
+            country
+        }
     }
 }

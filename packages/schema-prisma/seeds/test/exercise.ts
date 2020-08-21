@@ -1,19 +1,32 @@
-import faker from 'faker';
-import { ExerciseCreateInput } from '../../dist';
+import faker from './faker';
+import {
+    ExerciseCreateInput,
+    PersonCreateInput,
+    TimeslotCreateInput
+} from '../../dist';
 
-const length = 200;
+export interface ExerciseConnectionNeeds {
+    timeslot: TimeslotCreateInput;
+    participants: PersonCreateInput[];
+    leaders: PersonCreateInput[];
+}
 
-faker.locale = 'de';
-faker.seed(length);
-
-export default Array.from({ length }, () => ({
+export const createExercise = ({
+    participants,
+    leaders,
+    timeslot
+}: ExerciseConnectionNeeds): ExerciseCreateInput => ({
     id: `exercise:${faker.random.uuid()}`,
     topic: faker.random.words(2),
     timeslot: {
-        create: {
-            id: `timeslot:${faker.random.uuid()}`,
-            start: new Date(),
-            end: new Date()
+        connect: {
+            id: timeslot.id
         }
+    },
+    participants: {
+        connect: participants.map(({ id }) => ({ id }))
+    },
+    leaders: {
+        connect: leaders.map(({ id }) => ({ id }))
     }
-})) as Array<ExerciseCreateInput>;
+});

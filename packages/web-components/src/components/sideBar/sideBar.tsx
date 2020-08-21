@@ -12,8 +12,9 @@ import {
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
+import ExerciceIcon from '@material-ui/icons/SportsKabaddi';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import OperationIcon from '@material-ui/icons/Whatshot';
 
 const drawerWidth = 240;
 
@@ -60,7 +61,7 @@ export interface SideBarProps {
 
 export const mainListItems = (
     <div>
-        <Link href="/">
+        <Link href="/index">
             <ListItem button>
                 <ListItemIcon>
                     <DashboardIcon />
@@ -79,9 +80,17 @@ export const mainListItems = (
         <Link href="/exercices ">
             <ListItem button>
                 <ListItemIcon>
-                    <PeopleIcon />
+                    <ExerciceIcon />
                 </ListItemIcon>
                 <ListItemText primary="Übungen" />
+            </ListItem>
+        </Link>
+        <Link href="/operations ">
+            <ListItem button>
+                <ListItemIcon>
+                    <OperationIcon />
+                </ListItemIcon>
+                <ListItemText primary="Einsätze " />
             </ListItem>
         </Link>
     </div>

@@ -1,15 +1,49 @@
-type Person implements Node {
-    id: ID!
-    firstname: String
-    lastname: String
-    exercisesParticipated: [Exercise]
-    exercisesLeaded: [Exercise]
+enum Sex {
+    MALE
+    FEMAL
+    DIVERSE
 }
 
-input _Person {
+type Person implements Node {
     id: ID!
     firstname: String!
     lastname: String!
-    exercisesParticipated: [_Node!]
-    exercisesLeaded: [_Node!]
+    sex: Sex
+    avatar: String
+    address: Address
+    birthName: String
+    placeOfBirth: String
+    dateOfBirth: DateTime!
+    grade: Grade
+    actualMembership: Membership
+    memberships: [Membership]
+    promotions: [Promotion]
+    exercisesParticipated: [Exercise]
+    exercisesNotParticipated: [Exercise]
+    exercisesLeaded: [Exercise]
+}
+
+input PersonUpdate {
+    id: ID!
+    firstname: String
+    lastname: String
+    sex: Sex
+    avatar: String
+    address: AddressUpdate
+    birthName: String
+    placeOfBirth: String
+    dateOfBirth: DateTime
+}
+
+input PersonExerciseConnectionUpdate {
+    id: ID!
+    changes: [ConnectionUpdate!]!
+}
+
+extend type Mutation {
+    createPerson(person: PersonUpdate!): Person
+    updatePerson(person: PersonUpdate!): Person
+    updatePersonExercisesConnection(
+        update: PersonExerciseConnectionUpdate!
+    ): Person
 }

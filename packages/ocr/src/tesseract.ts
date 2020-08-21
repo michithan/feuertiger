@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
-import { createWorker, createScheduler } from 'tesseract.js';
+import { createScheduler, createWorker } from 'tesseract.js';
 
-// eslint-disable-next-line import/prefer-default-export
 export const ocr = async (image: string): Promise<string> => {
     const worker = createWorker();
     await worker.load();
@@ -62,7 +61,7 @@ export const startOcr = async (
             // eslint-disable-next-line no-await-in-loop
             await startOCR();
             // eslint-disable-next-line no-await-in-loop
-            await new Promise((resolve) => setTimeout(resolve, 250));
+            await new Promise(resolve => setTimeout(resolve, 250));
         }
     })();
 

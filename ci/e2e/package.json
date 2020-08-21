@@ -1,0 +1,24 @@
+{
+    "name": "@feuertiger/e2e",
+    "version": "1.0.9-dev.87816d5a.0",
+    "description": "e2e testing",
+    "private": true,
+    "scripts": {
+        "cypress": "cypress",
+        "open": "cypress open -p 6000",
+        "e2e": "cypress run -p 6000"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@cypress/webpack-preprocessor": "5.4.1",
+        "@feuertiger/graphql": "1.0.9-dev.87816d5a.0",
+        "@feuertiger/web-client": "1.0.9-dev.87816d5a.0"
+    },
+    "devDependencies": {
+        "cypress": "4.6.0",
+        "ts-loader": "7.0.5",
+        "typescript": "4.0.2",
+        "webpack": "4.43.0"
+    }
+}

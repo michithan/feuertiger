@@ -15,6 +15,13 @@
         "resolveJsonModule": true,
         "isolatedModules": true
     },
-    "include": ["**/*.js", "**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules", "**/*.test.ts"]
+    "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
+    "exclude": [
+        "node_modules",
+        "**/node_modules/**",
+        "dist",
+        "coverage",
+        "**/*.test.ts",
+        "babel.config.js"
+    ]
 }

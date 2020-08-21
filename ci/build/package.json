@@ -1,0 +1,14 @@
+{
+    "name": "@feuertiger/build",
+    "version": "1.0.9-dev.87816d5a.0",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+        "ci:build": "ts-node build"
+    },
+    "dependencies": {
+        "@feuertiger/config": "1.0.9-dev.1cf47562.0",
+        "ts-node": "8.10.1",
+        "simple-git": "2.15.0"
+    }
+}
