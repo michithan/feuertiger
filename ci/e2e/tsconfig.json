@@ -13,5 +13,6 @@
         "rootDir": "./",
         "outDir": "./"
     },
+    "exclude": ["node_modules"],
     "include": ["./node_modules/cypress", "**/*.ts"]
 }

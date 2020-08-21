@@ -73,7 +73,7 @@
         "eslint.alwaysShowStatus": true,
         "typescript.implementationsCodeLens.enabled": true,
         "typescript.tsserver.experimental.enableProjectDiagnostics": true,
-        "typescript.tsserver.maxTsServerMemory": 4096,
+        "typescript.tsserver.maxTsServerMemory": 8192,
         "typescript.workspaceSymbols.scope": "currentProject",
         "files.watcherExclude": {
             "**/.git/objects/**": true,
@@ -82,6 +82,7 @@
         }
     },
     "extensions": [
+        "ms-vscode.vscode-typescript-next",
         "gitlab.gitlab-workflow",
         "CoenraadS.bracket-pair-colorizer",
         "Prisma.prisma",

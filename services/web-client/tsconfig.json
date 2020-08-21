@@ -19,6 +19,7 @@
         "rootDirs": ["./pages", "./container"]
     },
     "extends": "../../tsconfig.web.json",
+    "exclude": ["node_modules"],
     "include": [
         "next-env.d.ts",
         "**/*.ts",

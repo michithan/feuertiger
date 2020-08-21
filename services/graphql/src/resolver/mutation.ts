@@ -77,8 +77,10 @@ const Mutation: MutationResolvers = {
         };
 
         if (data.exercisesParticipated.disconnect.length <= 0)
+            // @ts-ignore
             delete data.exercisesParticipated.disconnect;
         if (data.exercisesParticipated.connect.length <= 0)
+            // @ts-ignore
             delete data.exercisesParticipated.connect;
 
         const personUpdate = await context.db.person.update({

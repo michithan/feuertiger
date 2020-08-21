@@ -3,5 +3,6 @@
         "rootDir": "./dist"
     },
     "extends": "../../tsconfig.json",
+    "exclude": ["node_modules"],
     "include": ["./dist/index.ts"]
 }
