@@ -18,6 +18,7 @@
         "isolatedModules": true,
         "rootDirs": ["./pages", "./container"]
     },
+    "extends": "../../tsconfig.web.json",
     "include": [
         "next-env.d.ts",
         "**/*.ts",
@@ -26,6 +27,5 @@
         "pages/_app.js",
         "pages/_document.tsx",
         "pages/_app.tsx"
-    ],
-    "exclude": ["node_modules"]
+    ]
 }
