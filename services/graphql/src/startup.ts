@@ -4,7 +4,6 @@
     // eslint-disable-next-line global-require
     const { firebaseAdminConfig, graphqlUri } = require('@feuertiger/config');
     try {
-        console.log('firebaseAdminConfig: ', firebaseAdminConfig);
         await firebase.initializeApp(firebaseAdminConfig);
         // eslint-disable-next-line global-require
         require('./server')

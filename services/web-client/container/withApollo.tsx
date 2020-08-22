@@ -13,7 +13,6 @@ const {
 const authLink = setContext(async (_, { headers }) => {
     try {
         const token = await new AuthSingleton().firebaseAuth.currentUser.getIdToken();
-        console.log('token: ', token);
         return {
             headers: {
                 ...headers,
