@@ -25,20 +25,21 @@ export class Container extends React.Component<ContainerProps, any, any> {
             pageProps,
             apollo,
             auth,
-            isLoading,
+            isLoading: isSignInLoading,
             isSignedIn
         } = this.props;
 
-        const showLogin = !isLoading && !isSignedIn;
+        const showLogin = !isSignedIn || isSignInLoading;
 
         return (
             <ApolloProvider client={apollo}>
                 <ThemeProvider>
                     <UiContainer auth={auth}>
-                        <>
-                            {showLogin && <Login auth={auth} />}
-                            {Component && <Component {...pageProps} />}
-                        </>
+                        {showLogin ? (
+                            <Login auth={auth} />
+                        ) : (
+                            Component && <Component {...pageProps} />
+                        )}
                     </UiContainer>
                 </ThemeProvider>
             </ApolloProvider>
