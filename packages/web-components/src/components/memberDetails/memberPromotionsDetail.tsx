@@ -6,7 +6,7 @@ import {
 
 import { DetailEditTable } from '../index';
 
-export interface MemberPromotionsDetailProps extends PersonPromotionsFragment {}
+export type MemberPromotionsDetailProps = PersonPromotionsFragment;
 
 interface State {}
 

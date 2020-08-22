@@ -32,5 +32,3 @@ migration 20200620170225-c3cde7e..20200621001719-bdf2cf3
 +  exercise Exercise[]
  }
 ```
-
-

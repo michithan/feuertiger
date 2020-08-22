@@ -15,9 +15,9 @@ export class RawDataStructure {
 
     public file: File;
 
-    public rawText: string = '';
+    public rawText = '';
 
-    public cleanText: string = '';
+    public cleanText = '';
 
     public flattData: string[][] = [];
 

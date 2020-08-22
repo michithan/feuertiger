@@ -34,7 +34,7 @@ const SubmitButton = styled(Button)`
     margin: ${({ theme }) => theme.spacing(3, 0, 2)};
 `;
 
-export interface LoginProps extends AuthProps {}
+export type LoginProps = AuthProps;
 
 export class Login extends React.Component<LoginProps> {
     handleLogin = (event: any) => {

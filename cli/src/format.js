@@ -1,5 +1,6 @@
 const execa = require('execa');
-const { list } = require('./utils');
+const { exec } = require('./utils');
+
 const prettierrc = require.resolve('../../.prettierrc');
 
 const getPrettierBinary = async cwd => {
@@ -13,9 +14,7 @@ const types = ['js', 'jsx', 'ts', 'tsx', 'json', 'graphql', 'yml', 'md'];
 
 module.exports = async flags => {
     const bin = await getPrettierBinary(cwd);
-    const packages = await list(flags);
-    for (const { location, name } of packages) {
-        const location = packages[0].location;
+    await exec(flags, async ({ name, location }) => {
         const arguments = [
             `${location}/**/*.{${types.join(',')}}`,
             '--check',
@@ -28,9 +27,9 @@ module.exports = async flags => {
             '--loglevel',
             'debug'
         ];
-        console.log(`formating ${name}`);
+        console.log(`Formating ${name}`);
         await execa(bin, arguments, {
             stdout: 'inherit'
         });
-    }
+    });
 };

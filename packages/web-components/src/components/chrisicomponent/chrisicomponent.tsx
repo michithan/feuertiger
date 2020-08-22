@@ -6,7 +6,7 @@ interface State {
 }
 
 export interface ChrisComponentProps {
-    name: String;
+    name: string;
 }
 
 export class ChrisComponent extends React.Component<

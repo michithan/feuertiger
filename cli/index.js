@@ -1,7 +1,8 @@
 const meow = require('meow');
 const figlet = require('figlet');
 const chalk = require('chalk');
-const log = console.log;
+
+const { log } = console;
 
 const feuertiger = `${chalk.red('feuer')}${chalk.yellow('t')}${chalk.grey(
     'i'

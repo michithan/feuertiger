@@ -81,7 +81,7 @@ const syncEnv = async () => {
     writeFileSync(`/etc/profile.d/env.sh`, exports);
 };
 
-module.exports = async flags => {
+module.exports = async () => {
     await installDependencies();
     await linkDistFolders();
     await setupDb();
