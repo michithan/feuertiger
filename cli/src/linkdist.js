@@ -1,42 +1,51 @@
 const fs = require('fs');
-const { list } = require('./utils');
+const { exec } = require('./utils');
 
 const linkscript = 'module.exports = require("../src/index");';
 const linktypesscript = 'export * from "../src/index";';
 
+const exists = async path => {
+    try {
+        await fs.promises.access(path);
+        return true;
+    } catch (error) {
+        return false;
+    }
+};
+
 module.exports = async flags => {
-    const packages = await list(flags);
-    for (const { location } of packages) {
-        const packageJsonPath = `${location}/package.json`;
+    await exec(flags, async ({ location }) => {
         const distpath = `${location}/dist`;
         const distpathindex = `${distpath}/index.js`;
         const distpathindextypes = `${distpath}/index.d.ts`;
 
-        const hasIndexJs =
-            fs.existsSync(`${location}/src/index.ts`) ||
-            fs.existsSync(`${location}/src/index.js`);
+        const hasIndexJs = await Promise.all([
+            exists(`${location}/src/index.ts`),
+            exists(`${location}/src/index.js`)
+        ]).then(([ts, js]) => ts || js);
 
-        const packageJson = require(packageJsonPath);
+        const packageJson = require(`${location}/package.json`);
         const hasDistIndexJs = packageJson.main === './dist/index.js';
 
         if (!hasIndexJs || !hasDistIndexJs) {
-            continue;
+            return;
         }
 
-        if (!fs.existsSync(distpath)) {
-            fs.mkdirSync(distpath);
+        if (!(await exists(distpath))) {
+            await fs.promises.mkdir(distpath);
         }
 
-        fs.writeFileSync(distpathindex, linkscript, {
-            encoding: 'utf8',
-            flag: 'w'
-        });
-
-        fs.writeFileSync(distpathindextypes, linktypesscript, {
-            encoding: 'utf8',
-            flag: 'w'
-        });
+        await Promise.all([
+            fs.promises.writeFile(distpathindex, linkscript, {
+                encoding: 'utf8',
+                flag: 'w'
+            }),
+            fs.promises.writeFile(distpathindextypes, linktypesscript, {
+                encoding: 'utf8',
+                flag: 'w'
+            })
+        ]);
 
         console.log(`linked "${distpathindex}" to "../src/index.ts"`);
-    }
+    });
 };

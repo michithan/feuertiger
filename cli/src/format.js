@@ -2,6 +2,7 @@ const execa = require('execa');
 const { exec } = require('./utils');
 
 const prettierrc = require.resolve('../../.prettierrc');
+const prettierignore = require.resolve('../../.prettierignore');
 
 const getPrettierBinary = async cwd => {
     const { stdout } = await execa('yarn', ['bin', 'prettier'], { cwd });
@@ -18,16 +19,15 @@ module.exports = async flags => {
         const arguments = [
             `${location}/**/*.{${types.join(',')}}`,
             '--check',
-            // '--list-different',
             '--write',
             '--config',
             prettierrc,
             '--ignore-path',
-            prettierrc.replace('.prettierrc', '.prettierignore'),
+            prettierignore,
             '--loglevel',
             'debug'
         ];
-        console.log(`Formating ${name}`);
+        console.log(`Formating ${name} \n`);
         await execa(bin, arguments, {
             stdout: 'inherit'
         });
