@@ -9,8 +9,8 @@
     "runArgs": ["--mount", "type=volume,target=/workspace/node_modules"],
     "settings": {
         "window.zoomLevel": 1,
-        "workbench.iconTheme": "vscode-icons",
-        "workbench.colorTheme": "Cyberpunk",
+        "workbench.colorTheme": "Material Theme",
+        "workbench.preferredDarkColorTheme": "Material Theme",
         "files.autoSave": "off",
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.renderWhitespace": "all",
