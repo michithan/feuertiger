@@ -8,7 +8,7 @@ import { Link } from '../index';
 
 interface State {}
 
-export interface ExerciseTableProps extends AllExercisesQueryResult {}
+export type ExerciseTableProps = AllExercisesQueryResult;
 
 export class ExerciseTable extends React.Component<ExerciseTableProps, State> {
     constructor(props: ExerciseTableProps) {

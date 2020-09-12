@@ -1,7 +1,7 @@
 {
     "name": "feuertiger",
     "dockerFile": "../.dev-env.Dockerfile",
-    "postCreateCommand": "feuertiger init",
+    "postCreateCommand": "yarn && feuertiger init",
     "forwardPorts": [3000, 4000, 5000, 6000],
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
@@ -9,6 +9,7 @@
     "runArgs": ["--mount", "type=volume,target=/workspace/node_modules"],
     "settings": {
         "window.zoomLevel": 1,
+        "workbench.iconTheme": "material-icon-theme",
         "workbench.colorTheme": "Material Theme",
         "workbench.preferredDarkColorTheme": "Material Theme",
         "files.autoSave": "off",
@@ -73,7 +74,7 @@
         "eslint.alwaysShowStatus": true,
         "typescript.implementationsCodeLens.enabled": true,
         "typescript.tsserver.experimental.enableProjectDiagnostics": true,
-        "typescript.tsserver.maxTsServerMemory": 8192,
+        "typescript.tsserver.maxTsServerMemory": 4096,
         "typescript.workspaceSymbols.scope": "currentProject",
         "files.watcherExclude": {
             "**/.git/objects/**": true,
@@ -94,13 +95,14 @@
         "eg2.vscode-npm-script",
         "esbenp.prettier-vscode",
         "jpoissonnier.vscode-styled-components",
-        "max-SS.Cyberpunk",
+        "Equinusocio.vsc-material-theme",
         "ms-azuretools.vscode-docker",
+        "rvest.vs-code-prettier-eslint",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
         "ms-vscode.powershell",
         "msjsdiag.debugger-for-chrome",
         "tomoki1207.pdf",
         "visualstudioexptteam.vscodeintellicode",
-        "vscode-icons-team.vscode-icons"
+        "PKief.material-icon-theme"
     ]
 }

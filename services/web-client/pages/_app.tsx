@@ -4,8 +4,10 @@ import Head from 'next/head';
 import { Container } from '../container/container';
 import withApollo, { ApolloProps } from '../container/withApollo';
 
+export type AppProps = AppInitialProps & ApolloProps;
+
 @withApollo
-export default class App extends NextApp<AppInitialProps & ApolloProps> {
+export default class App extends NextApp<AppProps> {
     componentDidMount() {
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles?.parentNode) {

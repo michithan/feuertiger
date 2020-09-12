@@ -80,5 +80,3 @@ migration 20200621001719-bdf2cf3..20200816113210-6ba17e7
  }
  generator client {
 ```
-
-

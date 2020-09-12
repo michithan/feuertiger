@@ -13,8 +13,9 @@ export default class AuthSingleton {
             return AuthSingleton.instance;
         }
 
-        const { publicRuntimeConfig } = getConfig();
-        const { tokens } = publicRuntimeConfig;
+        const {
+            publicRuntimeConfig: { tokens }
+        } = getConfig();
 
         const firebaseApp = firebase.initializeApp(tokens);
         this.firebaseAuth = firebaseApp.auth();

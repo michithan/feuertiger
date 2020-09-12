@@ -10,17 +10,22 @@ const cwd = process.cwd();
 exports.list = async ({ package, changed } = {}) => {
     const bin = await getLernaBinary(cwd);
 
-    const arguments = ['list'];
+    const args = ['list'];
     if (package) {
-        arguments.push(`--scope`);
-        arguments.push(package);
-        arguments.push(`--include-dependents`);
+        args.push(`--scope`);
+        args.push(package);
+        args.push(`--include-dependents`);
     }
     if (changed) {
-        arguments.push(`--since`);
+        args.push(`--since`);
     }
-    arguments.push('--json');
+    args.push('--json');
 
-    const { stdout } = await execa(bin, arguments);
+    const { stdout } = await execa(bin, args);
     return stdout && JSON.parse(stdout);
+};
+
+exports.exec = async (flags, func) => {
+    const packages = await exports.list(flags);
+    await Promise.all(packages.map(func));
 };

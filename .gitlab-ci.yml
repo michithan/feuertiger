@@ -60,13 +60,9 @@ Build:
         - npm config set '//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken' "${CI_JOB_TOKEN}"
     script:
         - lerna bootstrap --since
-        # TODO: format all globals and packages based on lerna run --since
-        - yarn format
-        - git diff-index --quiet HEAD || (git commit -am "format" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
         - yarn build --since
-        - yarn linkdist
-        # TODO: lint based on lerna run --since
-        - yarn lint --since
+        - feuertiger linkdist --since
+        - feuertiger lint --since
         - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
         - yarn test --since
         - lerna publish prerelease --no-push --yes --exact --preid=${GIT_BRANCH_SLUG}.${GIT_COMMIT_HASH_SHORT} --registry=//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/

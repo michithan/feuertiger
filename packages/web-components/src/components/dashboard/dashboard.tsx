@@ -6,7 +6,7 @@ import { Paper, Link, PieChart } from '../../index';
 
 interface State {}
 
-export interface DashboardProps extends DashboardQueryResult {}
+export type DashboardProps = DashboardQueryResult;
 
 export class Dashboard extends React.Component<DashboardProps, State> {
     constructor(props: DashboardProps) {

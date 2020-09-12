@@ -18,7 +18,7 @@ interface State {
     addDialogOpen: boolean;
 }
 
-export interface MemberTableProps extends AllPersonsQueryResult {}
+export type MemberTableProps = AllPersonsQueryResult;
 
 export class MemberTable extends React.Component<MemberTableProps, State> {
     constructor(props: MemberTableProps) {

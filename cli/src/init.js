@@ -42,7 +42,6 @@ const setupDb = async () => {
         });
         console.log('started postgresql service');
     } catch (error) {
-        console.error(error);
         console.log('database service already started');
     }
 
@@ -52,7 +51,6 @@ const setupDb = async () => {
         });
         console.log('created database user');
     } catch (error) {
-        console.error(error);
         console.log('database user already created');
     }
 
@@ -62,7 +60,6 @@ const setupDb = async () => {
         });
         console.log('created database');
     } catch (error) {
-        console.error(error);
         console.log('database already created');
     }
 
@@ -71,17 +68,17 @@ const setupDb = async () => {
 
 const syncEnv = async () => {
     console.log('sync project config with env');
-    console.log(config.env);
 
     const exports = Object.entries(config.env).reduce(
         (acc, [key, value]) => `${acc}export ${key}=${value}\n`,
         ''
     );
+
     console.log(exports);
     writeFileSync(`/etc/profile.d/env.sh`, exports);
 };
 
-module.exports = async flags => {
+module.exports = async () => {
     await installDependencies();
     await linkDistFolders();
     await setupDb();

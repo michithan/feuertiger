@@ -6,7 +6,9 @@ import fetch from 'isomorphic-unfetch';
 
 import AuthSingleton from './authSingleton';
 
-const { graphqlUri } = getConfig();
+const {
+    publicRuntimeConfig: { graphqlUri }
+} = getConfig();
 
 const authLink = setContext(async (_, { headers }) => {
     try {
@@ -18,6 +20,7 @@ const authLink = setContext(async (_, { headers }) => {
             }
         };
     } catch (error) {
+        console.log('error: ', error);
         return {
             headers
         };

@@ -6,9 +6,9 @@ const appPropsMock: AppProps = {
     auth: {
         signInWithEmailAndPassword: () => {},
         signOut: () => {}
-    },
+    } as any,
     error: undefined,
-    apollo: {},
+    apollo: {} as any,
     isLoading: false,
     isSignedIn: true,
     pageProps: {}
