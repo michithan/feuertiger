@@ -19,7 +19,7 @@ const cli = meow(
       $ test            tests the code  // TODO
       $ build           builds the code  // TODO
       $ e2e             e2e test all the things  // TODO
-      $ dev             starts all in dev mode  // TODO
+      $ dev             starts all in dev mode
       $ start           starts all in prod mode  // TODO
       $ publish         publishes all changed npm packages  // TODO
       $ dockerize       build and publishes all services as docker images  // TODO
@@ -74,6 +74,12 @@ const tiger = input => log(`${feuertiger} - ${input}`);
             const utils = require('./src/utils');
             const list = await utils.list(cli.flags);
             console.log(list);
+            break;
+        case 'dev':
+            tiger('👟🧪 running everything in development mode 🧪👟');
+            const dev = require('./src/dev');
+            await dev(cli.flags);
+            tiger('👟🧪 stoped everything 🧪👟');
             break;
         default:
             console.log(cli.help);
