@@ -1,12 +1,7 @@
 const meow = require('meow');
 const figlet = require('figlet');
 const chalk = require('chalk');
-
-const { log } = console;
-
-const feuertiger = `${chalk.red('feuer')}${chalk.yellow('t')}${chalk.grey(
-    'i'
-)}${chalk.yellow('g')}${chalk.grey('e')}${chalk.yellow('r')}`;
+const { feuertiger, tiger } = require('./src/utils');
 
 const cli = meow(
     `
@@ -45,8 +40,6 @@ const cli = meow(
     }
 );
 
-const tiger = input => log(`${feuertiger} - ${input}`);
-
 (async () => {
     switch (cli.input[0]) {
         case 'init':
@@ -79,7 +72,6 @@ const tiger = input => log(`${feuertiger} - ${input}`);
             tiger('👟🧪 running everything in development mode 🧪👟');
             const dev = require('./src/dev');
             await dev(cli.flags);
-            tiger('👟🧪 stoped everything 🧪👟');
             break;
         default:
             console.log(cli.help);

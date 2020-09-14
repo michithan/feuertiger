@@ -3,6 +3,14 @@ const faker = require('faker');
 const { EventEmitter } = require('events');
 const chalk = require('chalk');
 
+const { log } = console;
+
+const feuertiger = `${chalk.red('feuer')}${chalk.yellow('t')}${chalk.grey(
+    'i'
+)}${chalk.yellow('g')}${chalk.grey('e')}${chalk.yellow('r')}`;
+
+const tiger = input => log(`${feuertiger} - ${input}`);
+
 const getLernaBinary = async cwd => {
     const { stdout } = await execa('yarn', ['bin', 'lerna'], { cwd });
     return stdout;
@@ -29,16 +37,12 @@ const list = async ({ package, changed } = {}) => {
 };
 
 const colors = index => {
-    const r = [3, 4, 5, 6].includes(index % 8)
-    const g = [1, 2, 5, 6].includes(index % 8)
-    const b = [0, 2, 4, 6].includes(index % 8)
+    const r = [3, 4, 5, 6].includes(index % 8);
+    const g = [1, 2, 5, 6].includes(index % 8);
+    const b = [0, 2, 4, 6].includes(index % 8);
     const base = Math.ceil(255 / (Math.ceil(index / 8) || 1));
-    return [
-        r * base,
-        g * base,
-        b * base,
-    ];
-}
+    return [r * base, g * base, b * base];
+};
 
 const exec = async (flags, func) => {
     const packages = await list(flags);
@@ -60,6 +64,7 @@ const exec = async (flags, func) => {
     EventEmitter.defaultMaxListeners = (packages.length + 1) * 2;
     await Promise.all(packageInfos.map(func));
 };
-
+exports.feuertiger = feuertiger;
+exports.tiger = tiger;
 exports.list = list;
 exports.exec = exec;
