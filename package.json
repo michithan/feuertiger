@@ -2,7 +2,7 @@
     "name": "feuertiger",
     "private": true,
     "version": "1.0.0",
-    "author": "",
+    "author": "Michael Thanei",
     "license": "MIT",
     "scripts": {
         "init": "feuertiger init",

@@ -1,8 +1,12 @@
 import * as gitlab from '@pulumi/gitlab';
-import { projectName, gitlab as gitlabConfig } from '@feuertiger/config';
+import config from '@feuertiger/config';
 
+const {
+    projectName,
+    gitlab: { token }
+} = config;
 const name = `${projectName}-gitlab-provider`;
 
 export const provider = new gitlab.Provider(name, {
-    token: gitlabConfig.token
+    token
 });

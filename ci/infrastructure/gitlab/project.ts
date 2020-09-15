@@ -1,10 +1,10 @@
 import * as gitlab from '@pulumi/gitlab';
-import { projectName } from '@feuertiger/config';
+import config from '@feuertiger/config';
 
 import { provider } from './provider';
 
 export const project = gitlab.Project.get(
-    projectName,
+    config.projectName,
     '18726494',
     {},
     {

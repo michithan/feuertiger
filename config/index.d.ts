@@ -1,4 +1,4 @@
-export default interface Config {
+export interface Config {
     projectName: string;
     gitlab: {
         projectId: string;
@@ -6,6 +6,7 @@ export default interface Config {
         user: string;
         email: string;
         repositoryUrl: string;
+        branch: string;
         branchSlug: string;
         commit: string;
     };
@@ -30,3 +31,7 @@ export default interface Config {
     graphqlUri: string;
     webClientUri: string;
 }
+
+declare const config: Config;
+
+export default config;

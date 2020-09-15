@@ -1,5 +1,5 @@
 const { ESLint } = require('eslint');
-const { exec } = require('./utils');
+const { exec, addPackagePrefix } = require('./utils');
 const { root } = require('./paths');
 const eslintrc = require('../../.eslintrc');
 
@@ -13,8 +13,10 @@ const eslint = new ESLint({
 
 module.exports = async flags => {
     const formatter = await eslint.loadFormatter('stylish');
-    await exec(flags, async ({ name, location }) => {
-        console.log(`linting ${name}`);
+    await exec(flags, async packageInfo => {
+        const { name, location } = packageInfo;
+
+        console.log(addPackagePrefix(`linting ${name}`, packageInfo).trim());
 
         const results = await eslint.lintFiles(
             `${location}/**/*.{js,jsx,ts,tsx}`
@@ -24,6 +26,6 @@ module.exports = async flags => {
 
         const resultText = formatter.format(results);
 
-        console.log(resultText);
+        console.log(addPackagePrefix(resultText, packageInfo).trim());
     });
 };

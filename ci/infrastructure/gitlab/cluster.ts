@@ -1,12 +1,12 @@
 import * as gitlab from '@pulumi/gitlab';
-import { projectName } from '@feuertiger/config';
+import config from '@feuertiger/config';
 
 import { cluster as doCluster, token, cert } from '../digitalocean/cluster';
 import { hostname } from '../digitalocean/hostname';
 import { project } from './project';
 import { provider } from './provider';
 
-const name = `${projectName}-cluster`;
+const name = `${config.projectName}-cluster`;
 
 export const cluster = new gitlab.ProjectCluster(
     name,

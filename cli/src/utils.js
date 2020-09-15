@@ -1,7 +1,7 @@
 const execa = require('execa');
-const faker = require('faker');
 const { EventEmitter } = require('events');
 const chalk = require('chalk');
+const { Transform } = require('stream');
 
 const { log } = console;
 
@@ -33,7 +33,27 @@ const list = async ({ package, changed } = {}) => {
     args.push('--json');
 
     const { stdout } = await execa(bin, args);
-    return stdout && JSON.parse(stdout);
+    const packages = stdout && JSON.parse(stdout);
+
+    return packages;
+};
+
+const extendedList = async flags => {
+    const packages = await list(flags);
+    const longestName = packages
+        .map(({ name }) => name.length + 1)
+        .sort()
+        .pop();
+    return packages.map(({ name, ...package }, index) => {
+        const color = colors(index);
+        const distance = new Array(longestName - name.length).join(' ');
+        const prefix = chalk.rgb(...color)(`${name} ${distance}=> `);
+        return {
+            ...package,
+            name,
+            prefix
+        };
+    });
 };
 
 const colors = index => {
@@ -44,26 +64,45 @@ const colors = index => {
     return [r * base, g * base, b * base];
 };
 
-const exec = async (flags, func) => {
-    const packages = await list(flags);
-    faker.seed(packages.length);
-    const longestName = packages
-        .map(({ name }) => name.length + 1)
-        .sort()
-        .pop();
-    const packageInfos = packages.map(({ name, ...package }, index) => {
-        const color = colors(index);
-        const distance = new Array(longestName - name.length).join(' ');
-        const prefix = chalk.rgb(...color)(`${name} ${distance}=> `);
-        return {
-            ...package,
-            name,
-            prefix
-        };
-    });
-    EventEmitter.defaultMaxListeners = (packages.length + 1) * 2;
-    await Promise.all(packageInfos.map(func));
+const addPackagePrefix = (text, { prefix }) =>
+    `${prefix}${text.trim().replace(/\r\n|\n|\r/g, `\r\n${prefix}`)}\r\n`;
+
+const transformExecaOutput = (execution, packageInfo) => {
+    const transform = (chunk, encoding, callback) => {
+        const text = addPackagePrefix(chunk.toString(), packageInfo);
+        chunk = Buffer.from(text);
+        callback(null, chunk);
+    };
+    execution.stdout
+        .pipe(
+            new Transform({
+                transform
+            })
+        )
+        .pipe(process.stdout);
+    execution.stderr
+        .pipe(
+            new Transform({
+                transform
+            })
+        )
+        .pipe(process.stderr);
 };
+
+const exec = async (flags, func) => {
+    const packageInfos = await extendedList(flags);
+    EventEmitter.defaultMaxListeners = packageInfos.length * 3;
+    const executions = packageInfos.map(packageInfo => {
+        const execution = func(packageInfo);
+        if (execution.stdout && execution.stderr) {
+            transformExecaOutput(execution, packageInfo);
+        }
+        return execution;
+    });
+    await Promise.all(executions);
+};
+
+exports.addPackagePrefix = addPackagePrefix;
 exports.feuertiger = feuertiger;
 exports.tiger = tiger;
 exports.list = list;

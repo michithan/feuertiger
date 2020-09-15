@@ -73,6 +73,11 @@ const cli = meow(
             const dev = require('./src/dev');
             await dev(cli.flags);
             break;
+        case 'build':
+            tiger('🔧 building everything 🔧');
+            const build = require('./src/build');
+            await build(cli.flags);
+            break;
         default:
             console.log(cli.help);
             break;

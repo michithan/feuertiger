@@ -5,10 +5,10 @@ const cwd = process.cwd();
 
 module.exports = async flags => {
     const bin = 'yarn';
-    const arguments = ['dev'];
+    const arguments = ['build'];
 
     try {
-        await exec(flags, ({ name, location, prefix }) => {
+        await exec(flags, ({ name, location }) => {
             const execution = execa(bin, arguments, {
                 cwd: location,
                 detached: true,
@@ -20,7 +20,7 @@ module.exports = async flags => {
                     execution.kill('SIGTERM', {
                         forceKillAfterTimeout: 2000
                     });
-                    tiger(`✋ stopping ${name} ✋`);
+                    tiger(`✋ stoping building ${name} ✋`);
                     stopping = true;
                 }
             };

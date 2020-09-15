@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { exec } = require('./utils');
+const { exec, addPackagePrefix } = require('./utils');
 
 const linkscript = 'module.exports = require("../src/index");';
 const linktypesscript = 'export * from "../src/index";';
@@ -14,7 +14,8 @@ const exists = async path => {
 };
 
 module.exports = async flags => {
-    await exec(flags, async ({ location }) => {
+    await exec(flags, async packageInfo => {
+        const { location } = packageInfo;
         const distpath = `${location}/dist`;
         const distpathindex = `${distpath}/index.js`;
         const distpathindextypes = `${distpath}/index.d.ts`;
@@ -46,6 +47,11 @@ module.exports = async flags => {
             })
         ]);
 
-        console.log(`linked "${distpathindex}" to "../src/index.ts"`);
+        console.log(
+            addPackagePrefix(
+                `linked "${distpathindex}" to "../src/index.ts"`,
+                packageInfo
+            ).trim()
+        );
     });
 };

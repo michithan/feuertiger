@@ -1,9 +1,9 @@
-import { projectName } from '@feuertiger/config';
+import config from '@feuertiger/config';
 
 import { deploy } from './kubernetes/deploy';
 
 export const webClient = deploy({
-    namespace: projectName,
+    namespace: config.projectName,
     name: 'web-client',
     image: 'paulbouwer/hello-kubernetes:1.7',
     minReplicas: 1,
@@ -17,7 +17,7 @@ export const webClient = deploy({
 });
 
 export const test = deploy({
-    namespace: projectName,
+    namespace: config.projectName,
     name: 'graphql',
     image: 'paulbouwer/hello-kubernetes:1.7',
     minReplicas: 1,

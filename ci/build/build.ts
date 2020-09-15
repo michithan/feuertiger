@@ -11,7 +11,9 @@ const hasDiffs = async (): Promise<boolean> =>
     !!execSync('git diff-index --quiet HEAD || echo none');
 
 const checkout = async () => {
-    const { branch, projectId, user, email, token, repositoryUrl } = config;
+    const {
+        gitlab: { branch, projectId, user, email, token, repositoryUrl }
+    } = config;
 
     await repo.remote([
         'set-url',
@@ -60,7 +62,9 @@ const ensureLint = async () => {
 };
 
 const publish = async () => {
-    const { branchSlug, commit, projectId } = config;
+    const {
+        gitlab: { branchSlug, commit, projectId }
+    } = config;
     execSync(
         `lerna publish prerelease --no-push --yes --exact --preid=${branchSlug}.${commit} --registry=//gitlab.com/api/v4/projects/${projectId}/packages/npm/`
     );

@@ -1,5 +1,5 @@
 import * as k8s from '@pulumi/kubernetes';
-import { projectName } from '@feuertiger/config';
+import config from '@feuertiger/config';
 
 import { provider } from './provider';
 
@@ -23,7 +23,7 @@ export const ingress = new k8s.helm.v3.Chart(
                         // 'service.beta.kubernetes.io/do-loadbalancer-hostname': hostname,
                         // 'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
                         //     'true',
-                        'service.beta.kubernetes.io/do-loadbalancer-name': `${projectName}-loadbalancer`
+                        'service.beta.kubernetes.io/do-loadbalancer-name': `${config.projectName}-loadbalancer`
                     },
                     externalTrafficPolicy: 'Local'
                 },

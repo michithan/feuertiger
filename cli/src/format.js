@@ -15,21 +15,26 @@ const types = ['js', 'jsx', 'ts', 'tsx', 'json', 'graphql', 'yml', 'md'];
 
 module.exports = async flags => {
     const bin = await getPrettierBinary(cwd);
-    await exec(flags, async ({ name, location }) => {
-        const arguments = [
-            `${location}/**/*.{${types.join(',')}}`,
-            '--check',
-            '--write',
-            '--config',
-            prettierrc,
-            '--ignore-path',
-            prettierignore,
-            '--loglevel',
-            'debug'
-        ];
-        console.log(`Formating ${name} \n`);
-        await execa(bin, arguments, {
-            stdout: 'inherit'
+
+    try {
+        await exec(flags, ({ location }) => {
+            const arguments = [
+                `${location}/**/*.{${types.join(',')}}`,
+                '--check',
+                '--write',
+                '--config',
+                prettierrc,
+                '--ignore-path',
+                prettierignore,
+                '--loglevel',
+                'debug'
+            ];
+            return execa(bin, arguments, {
+                detached: true,
+                stdout: 'pipe'
+            });
         });
-    });
+    } catch (error) {
+        console.log(error);
+    }
 };

@@ -1,6 +1,6 @@
 import * as digitalocean from '@pulumi/digitalocean';
-import { digitaloceanToken } from '@feuertiger/config';
+import config from '@feuertiger/config';
 
 export const provider = new digitalocean.Provider('feuer-cluster-provider', {
-    token: digitaloceanToken
+    token: config.digitaloceanToken
 });
