@@ -9,9 +9,10 @@ import { createExercise } from './exercise';
 
 const client = new PrismaClient();
 
-const upsert = async (delegate: any, { id, ...data }: any) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const upsert = (delegate: any, { id, ...data }: { id: string }) => {
     try {
-        return await delegate.upsert({
+        return delegate.upsert({
             where: {
                 id
             },

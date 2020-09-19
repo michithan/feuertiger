@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 const fs = require('fs');
 const { exec, addPackagePrefix } = require('./utils');
 
@@ -13,8 +15,8 @@ const exists = async path => {
     }
 };
 
-module.exports = async flags => {
-    await exec(flags, async packageInfo => {
+module.exports = flags =>
+    exec(flags, async packageInfo => {
         const { location } = packageInfo;
         const distpath = `${location}/dist`;
         const distpathindex = `${distpath}/index.js`;
@@ -54,4 +56,3 @@ module.exports = async flags => {
             ).trim()
         );
     });
-};

@@ -20,7 +20,7 @@ const cluster = digitalocean.getKubernetesCluster(
 );
 
 export const kubeconfig = cluster.then(
-    ({ kubeConfigs: [config] }) => config.rawConfig
+    ({ kubeConfigs: [{ rawConfig }] }) => rawConfig
 );
 
 export const provider = new k8s.Provider(name, {

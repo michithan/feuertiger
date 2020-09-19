@@ -11,21 +11,22 @@ const eslint = new ESLint({
     errorOnUnmatchedPattern: false
 });
 
+const lint = formatter => async packageInfo => {
+    const { name, location } = packageInfo;
+    const log = text => console.log(addPackagePrefix(text, packageInfo).trim());
+
+    log(`linting ${name}`);
+
+    const results = await eslint.lintFiles(`${location}/**/*.{js,jsx,ts,tsx}`);
+
+    await ESLint.outputFixes(results);
+
+    const resultText = formatter.format(results);
+
+    log(resultText);
+};
+
 module.exports = async flags => {
     const formatter = await eslint.loadFormatter('stylish');
-    await exec(flags, async packageInfo => {
-        const { name, location } = packageInfo;
-
-        console.log(addPackagePrefix(`linting ${name}`, packageInfo).trim());
-
-        const results = await eslint.lintFiles(
-            `${location}/**/*.{js,jsx,ts,tsx}`
-        );
-
-        await ESLint.outputFixes(results);
-
-        const resultText = formatter.format(results);
-
-        console.log(addPackagePrefix(resultText, packageInfo).trim());
-    });
+    await exec(flags, lint(formatter), true);
 };

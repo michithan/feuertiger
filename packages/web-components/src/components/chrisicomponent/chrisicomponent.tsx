@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Button } from '@material-ui/core';
 
 interface State {
@@ -20,7 +20,7 @@ export class ChrisComponent extends React.Component<
         };
     }
 
-    render() {
+    render(): ReactNode {
         const { showName } = this.state;
         const { name } = this.props;
         return showName ? (

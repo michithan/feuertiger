@@ -26,10 +26,14 @@ export const startOcr = async (
     const canvas = document.createElement('canvas');
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    const canvasContext = canvas?.getContext('2d');
+    const canvasContext = canvas.getContext('2d');
+
+    if (canvasContext === null) {
+        return () => {};
+    }
 
     const doOCR = async (): Promise<string> => {
-        canvasContext?.drawImage(
+        canvasContext.drawImage(
             video,
             0,
             0,

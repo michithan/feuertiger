@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import {
     AppBar as MuiAppBar,
@@ -57,12 +57,12 @@ export interface AppBarProps extends AuthProps {
 }
 
 export class AppBar extends React.Component<AppBarProps> {
-    handleLogout = () => {
+    handleLogout = (): void => {
         const { auth } = this.props;
         auth.signOut();
     };
 
-    render() {
+    render(): ReactNode {
         const { open, handleDrawerOpen } = this.props;
         return (
             <StyledAppBar open={open}>

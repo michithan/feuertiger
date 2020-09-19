@@ -65,8 +65,7 @@
         },
         "eslint.format.enable": true,
         "eslint.options": {
-            "ignorePath": "/workspaces/feuertiger/.eslintignore",
-            "config": "/workspaces/feuertiger/.eslintrc",
+            "config": "/workspaces/feuertiger/.eslintrc.js",
             "ResolvePluginsRelativeTo": "/workspaces/feuertiger",
             "noErrorOnUnmatchedPattern": true
         },

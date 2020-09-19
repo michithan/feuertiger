@@ -15,25 +15,27 @@ const types = ['js', 'jsx', 'ts', 'tsx', 'json', 'graphql', 'yml', 'md'];
 
 module.exports = async flags => {
     const bin = await getPrettierBinary(cwd);
-
     try {
-        await exec(flags, ({ location }) => {
-            const arguments = [
-                `${location}/**/*.{${types.join(',')}}`,
-                '--check',
-                '--write',
-                '--config',
-                prettierrc,
-                '--ignore-path',
-                prettierignore,
-                '--loglevel',
-                'debug'
-            ];
-            return execa(bin, arguments, {
-                detached: true,
-                stdout: 'pipe'
-            });
-        });
+        await exec(flags, ({ location }) =>
+            execa(
+                bin,
+                [
+                    `${location}/**/*.{${types.join(',')}}`,
+                    '--check',
+                    '--write',
+                    '--config',
+                    prettierrc,
+                    '--ignore-path',
+                    prettierignore,
+                    '--loglevel',
+                    'debug'
+                ],
+                {
+                    detached: true,
+                    stdout: 'pipe'
+                }
+            )
+        );
     } catch (error) {
         console.log(error);
     }

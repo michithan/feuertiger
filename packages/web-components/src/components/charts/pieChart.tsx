@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     PieChart as RechartsPieChart,
     Pie,
@@ -16,7 +16,7 @@ export interface PieChartProps extends Partial<PieProps> {
     data: CountPerGroup[];
 }
 
-export const PieChart = (props: PieChartProps) => {
+export const PieChart = (props: PieChartProps): ReactNode => {
     const { data } = props;
     const sum =
         data?.reduce((acc, { value }) => acc + value, 0).toString() || '';

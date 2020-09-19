@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     Button,
     Dialog,
@@ -50,37 +50,37 @@ export class AddMember extends React.Component<AddMemberProps, State> {
         this.webcamRef = React.createRef();
     }
 
-    componentWillUnmount() {
+    componentWillUnmount(): void {
         if (this.stopOcr) {
             this.stopOcr();
         }
     }
 
-    handleOCR = async () => {
+    handleOCR = async (): Promise<void> => {
         this.setState({ showCam: true });
     };
 
-    handleCapture = () => {
+    handleCapture = (): void => {
         if (this.stopOcr) {
             this.stopOcr();
         }
         this.setState({ showCam: false });
     };
 
-    handleOCRData = (data: string) => {
+    handleOCRData = (data: string): void => {
         this.setState({
             ocrData: data
         });
     };
 
-    handleUserMedia = async () => {
+    handleUserMedia = async (): Promise<void> => {
         const { startOcr } = this.props;
         const { video } = this.webcamRef.current;
         const stopOCR = await startOcr(video, this.handleOCRData);
         this.stopOcr = stopOCR;
     };
 
-    render() {
+    render(): ReactNode {
         const { handleClose, open } = this.props;
         const { showCam, ocrData, dateOfBirth } = this.state;
         return (

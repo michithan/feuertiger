@@ -1,6 +1,5 @@
+/* eslint-disable global-require */
 const meow = require('meow');
-const figlet = require('figlet');
-const chalk = require('chalk');
 const { feuertiger, tiger } = require('./src/utils');
 
 const cli = meow(
@@ -44,39 +43,31 @@ const cli = meow(
     switch (cli.input[0]) {
         case 'init':
             tiger('🎬 init 🎬');
-            const init = require('./src/init');
-            init(cli.flags);
+            require('./src/init')(cli.flags);
             break;
         case 'linkdist':
             tiger('🔗 linkdist 🔗');
-            const linkdist = require('./src/linkdist');
-            linkdist();
+            require('./src/linkdist')();
             break;
         case 'format':
             tiger('🧹 formats 🧹');
-            const format = require('./src/format');
-            format(cli.flags);
+            require('./src/format')(cli.flags);
             break;
         case 'lint':
             tiger('🔎 lints 🔍');
-            const lint = require('./src/lint');
-            lint(cli.flags);
+            require('./src/lint')(cli.flags);
             break;
         case 'list':
             tiger('📜 list 📜');
-            const utils = require('./src/utils');
-            const list = await utils.list(cli.flags);
-            console.log(list);
+            await require('./src/utils').list(cli.flags).then(console.log);
             break;
         case 'dev':
             tiger('👟🧪 running everything in development mode 🧪👟');
-            const dev = require('./src/dev');
-            await dev(cli.flags);
+            await require('./src/dev').dev(cli.flags);
             break;
         case 'build':
             tiger('🔧 building everything 🔧');
-            const build = require('./src/build');
-            await build(cli.flags);
+            await require('./src/build')(cli.flags);
             break;
         default:
             console.log(cli.help);
