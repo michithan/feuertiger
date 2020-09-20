@@ -92,12 +92,14 @@ class MemberBasicDetailsWithForm extends React.Component<
     private handleClickEdit = () => this.setState({ editMode: true });
 
     private handleClickDiscard = () => {
-        this.props?.resetForm();
+        const { resetForm } = this.props;
+        resetForm();
         this.setState({ editMode: true });
     };
 
     private handleClickBack = () => {
-        this.props?.resetForm();
+        const { resetForm } = this.props;
+        resetForm();
         this.setState({ editMode: false });
     };
 

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import {
     Grid,
     Typography,
@@ -35,11 +35,13 @@ export class DetailTable extends React.Component<DetailTableProps, State> {
         };
     }
 
-    private handleClickStartAdding = () => this.setState({ addMode: true });
+    private handleClickStartAdding = (): void =>
+        this.setState({ addMode: true });
 
-    private handleClickFinishAdding = () => this.setState({ addMode: false });
+    private handleClickFinishAdding = (): void =>
+        this.setState({ addMode: false });
 
-    render() {
+    render(): ReactNode {
         const {
             label,
             editMode,

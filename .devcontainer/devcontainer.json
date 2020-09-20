@@ -71,6 +71,8 @@
         },
         "eslint.run": "onSave",
         "eslint.alwaysShowStatus": true,
+        "vsintellicode.typescript.completionsEnabled": true,
+        "typescript.tsserver.useSeparateSyntaxServer": true,
         "typescript.implementationsCodeLens.enabled": true,
         "typescript.tsserver.experimental.enableProjectDiagnostics": true,
         "typescript.tsserver.maxTsServerMemory": 4096,
@@ -88,7 +90,6 @@
         "Prisma.prisma",
         "Prisma.vscode-graphql",
         "anseki.vscode-color",
-        "ckolkman.vscode-postgres",
         "dbaeumer.vscode-eslint",
         "eamodio.gitlens",
         "eg2.vscode-npm-script",
@@ -102,6 +103,7 @@
         "msjsdiag.debugger-for-chrome",
         "tomoki1207.pdf",
         "visualstudioexptteam.vscodeintellicode",
-        "PKief.material-icon-theme"
+        "PKief.material-icon-theme",
+        "planbcoding.vscode-react-refactor"
     ]
 }

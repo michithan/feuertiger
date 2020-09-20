@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Paper } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { LazyLog } from 'react-lazylog';
@@ -9,7 +9,7 @@ export interface TextDataProps {
     showClean?: boolean;
 }
 
-export const TextData = (props: TextDataProps) => {
+export const TextData = (props: TextDataProps): ReactElement => {
     const { dataStructure, showClean } = props;
     const { rawText, cleanText } = dataStructure || {};
     const text = showClean ? cleanText : rawText;

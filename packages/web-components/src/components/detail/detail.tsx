@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { MouseEventHandler, ReactElement } from 'react';
 import { Grid, Typography, Button as MuiButton } from '@material-ui/core';
 import format from 'date-fns/format';
 import { FormikTextField, FormikDatePicker } from '../index';
@@ -18,7 +18,7 @@ export interface DetailProps {
     children?: ReactElement | ReactElement[];
     type: DetailType;
     edit?: boolean;
-    handleClick?: (_: any) => void;
+    handleClick?: MouseEventHandler;
 }
 
 export const Detail = ({
@@ -29,7 +29,7 @@ export const Detail = ({
     edit,
     type,
     handleClick
-}: DetailProps) => {
+}: DetailProps): ReactElement => {
     let content: ReactElement;
     if (edit) {
         switch (type) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     Dialog,
     DialogTitle,
@@ -34,9 +34,9 @@ export class CleaningOptions extends React.Component<
         };
     }
 
-    handleAddRule = () => this.setState({ showAddRuleDialog: true });
+    handleAddRule = (): void => this.setState({ showAddRuleDialog: true });
 
-    render() {
+    render(): ReactNode {
         const { showAddRuleDialog } = this.state;
         const { options } = this.props;
         const { cleaningRules } = options || {};

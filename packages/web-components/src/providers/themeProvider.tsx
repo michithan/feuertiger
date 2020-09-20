@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
 import { ThemeProvider as StyledComponentThemeProvider } from 'styled-components';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
@@ -19,14 +19,14 @@ export interface ThemeProviderProps {
 }
 
 export class ThemeProvider extends React.Component<ThemeProviderProps> {
-    componentDidMount() {
+    componentDidMount(): void {
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles && jssStyles.parentNode) {
             jssStyles.parentNode.removeChild(jssStyles);
         }
     }
 
-    render() {
+    render(): ReactNode {
         const { children } = this.props;
 
         return (

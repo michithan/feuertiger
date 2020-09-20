@@ -2,7 +2,7 @@ export interface ExtractorOptions {
     rowSeprator: string;
     colSeperator: string | null | undefined;
     rowLength: number | null | undefined;
-    cleaningRules: Array<any>;
+    cleaningRules: Array<Record<string, unknown>>;
 }
 
 const createEmptyData = (rowCount: number, rowLength: number): string[][] =>
@@ -25,20 +25,20 @@ export class RawDataStructure {
         this.options = options;
     }
 
-    public setOptions(options: ExtractorOptions) {
+    public setOptions(options: ExtractorOptions): void {
         this.options = options;
     }
 
-    public async load(file: File) {
+    public async load(file: File): Promise<void> {
         this.file = file;
         this.rawText = await file.text();
     }
 
-    public async clean() {
+    public async clean(): Promise<void> {
         this.cleanText = this.rawText;
     }
 
-    public async parse() {
+    public async parse(): Promise<void> {
         const { colSeperator, rowSeprator, rowLength } = this.options;
 
         if (rowSeprator) {

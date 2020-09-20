@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { List, ListItem, ListItemText } from '@material-ui/core';
 
@@ -7,7 +7,7 @@ export interface FileInfoProps {
     handleChangeDropzone: (files: File[]) => void | Promise<void>;
 }
 
-export const FileInfo = (props: FileInfoProps) => {
+export const FileInfo = (props: FileInfoProps): ReactElement => {
     const { file, handleChangeDropzone } = props;
     return file ? (
         <List>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     PersonExercisesParticipatedFragment,
     PersonExercisesNotParticipatedFragment,
@@ -16,87 +16,80 @@ export interface MemberExercisesDetailsProps
     updatePersonExercisesConnection: UpdatePersonExercisesConnectionMutationFn;
 }
 
-interface State {}
-
-class MemberExercisesDetailsWithSnackbar extends React.Component<
-    MemberExercisesDetailsProps & ProviderContext,
-    State
-> {
-    constructor(props: MemberExercisesDetailsProps & ProviderContext) {
-        super(props);
-        this.state = {};
-    }
-
-    private handleSave = async (changes: Array<Exercise & Update>) => {
-        const {
-            updatePersonExercisesConnection,
-            personId,
-            enqueueSnackbar
-        } = this.props;
-        try {
-            await updatePersonExercisesConnection({
-                variables: {
-                    update: {
-                        id: personId,
-                        changes: changes.map(({ action, id }) => ({
-                            action,
-                            id
-                        }))
-                    }
+const handleSave = async (
+    changes: Array<Exercise & Update>,
+    props: MemberExercisesDetailsProps & ProviderContext
+) => {
+    const {
+        updatePersonExercisesConnection,
+        personId,
+        enqueueSnackbar
+    } = props;
+    try {
+        await updatePersonExercisesConnection({
+            variables: {
+                update: {
+                    id: personId,
+                    changes: changes.map(({ action, id }) => ({
+                        action,
+                        id
+                    }))
                 }
-            });
-            enqueueSnackbar('Änderungen übernommen.', { variant: 'success' });
-        } catch (error) {
-            enqueueSnackbar('Fehler! ', {
-                variant: 'error'
-            });
-        }
-    };
-
-    render() {
-        const { exercisesParticipated, exercisesNotParticipated } = this.props;
-
-        return (
-            <DetailEditTable
-                label="Übungen"
-                handleSave={this.handleSave}
-                connectionTableProps={{
-                    columns: [
-                        { title: 'Thema', field: 'topic' },
-                        {
-                            title: 'Datum',
-                            field: 'timeslot.start',
-                            type: 'datetime'
-                        }
-                    ]
-                }}
-                columns={[
-                    {
-                        title: 'Thema',
-                        field: 'topic',
-                        render: ({ id, topic }: Exercise) => (
-                            <Link
-                                href="/exercices/[id]"
-                                as={`/exercices/${id}`}
-                                inherit
-                            >
-                                {topic}
-                            </Link>
-                        )
-                    },
-                    {
-                        title: 'Datum',
-                        field: 'timeslot.start',
-                        type: 'datetime'
-                    }
-                ]}
-                title=""
-                connectionData={exercisesNotParticipated}
-                data={exercisesParticipated}
-            />
-        );
+            }
+        });
+        enqueueSnackbar('Änderungen übernommen.', { variant: 'success' });
+    } catch (error) {
+        enqueueSnackbar('Fehler! ', {
+            variant: 'error'
+        });
     }
-}
+};
+
+const MemberExercisesDetailsWithSnackbar = ({
+    exercisesParticipated,
+    exercisesNotParticipated,
+    ...props
+}: MemberExercisesDetailsProps & ProviderContext): ReactElement => (
+    <DetailEditTable
+        label="Übungen"
+        handleSave={(changes: Array<Exercise & Update>) =>
+            handleSave(changes, props)
+        }
+        connectionTableProps={{
+            columns: [
+                { title: 'Thema', field: 'topic' },
+                {
+                    title: 'Datum',
+                    field: 'timeslot.start',
+                    type: 'datetime'
+                }
+            ]
+        }}
+        columns={[
+            {
+                title: 'Thema',
+                field: 'topic',
+                render: ({ id, topic }: Exercise) => (
+                    <Link
+                        href="/exercices/[id]"
+                        as={`/exercices/${id}`}
+                        inherit
+                    >
+                        {topic}
+                    </Link>
+                )
+            },
+            {
+                title: 'Datum',
+                field: 'timeslot.start',
+                type: 'datetime'
+            }
+        ]}
+        title=""
+        connectionData={exercisesNotParticipated}
+        data={exercisesParticipated}
+    />
+);
 
 export const MemberExercisesDetails = withSnackbar(
     MemberExercisesDetailsWithSnackbar

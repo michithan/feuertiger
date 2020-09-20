@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
 import { CssBaseline, Container as MuiContainer } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
@@ -48,11 +48,11 @@ export class Container extends React.Component<ContainerProps, State> {
         };
     }
 
-    handleDrawerOpen = () => this.setState({ open: true });
+    handleDrawerOpen = (): void => this.setState({ open: true });
 
-    handleDrawerClose = () => this.setState({ open: false });
+    handleDrawerClose = (): void => this.setState({ open: false });
 
-    render() {
+    render(): ReactNode {
         const { open } = this.state;
         const { children, auth } = this.props;
         return (

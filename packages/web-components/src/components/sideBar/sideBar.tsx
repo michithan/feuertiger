@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import {
@@ -98,7 +98,10 @@ export const mainListItems = (
 
 export const secondaryListItems = <div />;
 
-export const SideBar = ({ open, handleDrawerClose }: SideBarProps) => (
+export const SideBar = ({
+    open,
+    handleDrawerClose
+}: SideBarProps): ReactElement => (
     <StyledDrawer variant="permanent" open={open}>
         <StyledDiv>
             <IconButton id="sidebar-close-button" onClick={handleDrawerClose}>

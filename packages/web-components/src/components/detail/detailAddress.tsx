@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { Address } from '@feuertiger/schema-graphql';
 
@@ -14,7 +14,7 @@ export const DetailAddress = ({
     namespace,
     editMode,
     address: { postalCode, city, street, streetNumber }
-}: DetailAddressProps) => (
+}: DetailAddressProps): ReactElement => (
     <Detail
         label="Adresse"
         edit={editMode}

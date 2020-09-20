@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import MaterialTable, { MaterialTableProps } from 'material-table';
 import { Node, ConnectionUpdateAction } from '@feuertiger/schema-graphql';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
@@ -150,7 +150,7 @@ export class DetailEditTable extends React.Component<
             .concat(changes)
             .reverse();
 
-    render() {
+    render(): ReactNode {
         const {
             label,
             data,

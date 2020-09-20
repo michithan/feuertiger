@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     Grid,
     Button,
@@ -14,8 +14,6 @@ import { CleaningOptions } from './cleaningOptions';
 import { ParsingOptions } from './parsingOptions';
 import { FlattData } from './flattData';
 
-export interface DataExtractorProps {}
-
 interface State {
     file: File | null | undefined;
     dataStructure: RawDataStructure;
@@ -30,8 +28,11 @@ const DEFAULT_OPTIONS = {
     cleaningRules: []
 };
 
-export class DataExtractor extends React.Component<DataExtractorProps, State> {
-    constructor(props: DataExtractorProps) {
+export class DataExtractor extends React.Component<
+    Record<string, unknown>,
+    State
+> {
+    constructor(props: Record<string, unknown>) {
         super(props);
         this.state = {
             activeStep: 1,
@@ -52,35 +53,35 @@ export class DataExtractor extends React.Component<DataExtractorProps, State> {
         }
     };
 
-    handleReset = () =>
+    handleReset = (): void =>
         this.setState({
             file: null,
             dataStructure: null,
             options: DEFAULT_OPTIONS
         });
 
-    loadFile = async (file: File) => {
+    loadFile = async (file: File): Promise<void> => {
         const { options } = this.state;
         const dataStructure = new RawDataStructure(options);
         await dataStructure.load(file);
         this.setState({ dataStructure });
     };
 
-    clean = async () => {
+    clean = async (): Promise<void> => {
         const { dataStructure, options } = this.state;
         dataStructure.setOptions(options);
         await dataStructure.clean();
         this.setState({ dataStructure });
     };
 
-    parse = async () => {
+    parse = async (): Promise<void> => {
         const { dataStructure, options } = this.state;
         dataStructure.setOptions(options);
         await dataStructure.parse();
         this.setState({ dataStructure });
     };
 
-    handleNext = () =>
+    handleNext = (): void =>
         this.setState(({ activeStep }) => {
             const nextStep = activeStep + 1;
             switch (nextStep) {
@@ -102,12 +103,12 @@ export class DataExtractor extends React.Component<DataExtractorProps, State> {
             };
         });
 
-    handleBack = () =>
+    handleBack = (): void =>
         this.setState(({ activeStep }) => ({
             activeStep: activeStep - 1
         }));
 
-    render() {
+    render(): ReactNode {
         const { file, dataStructure, options, activeStep } = this.state;
         return (
             <Stepper activeStep={activeStep} orientation="vertical">

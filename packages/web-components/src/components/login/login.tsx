@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FormEvent, ReactNode } from 'react';
 import {
     TextField,
     CssBaseline,
@@ -37,7 +37,7 @@ const SubmitButton = styled(Button)`
 export type LoginProps = AuthProps;
 
 export class Login extends React.Component<LoginProps> {
-    handleLogin = (event: any) => {
+    handleLogin = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
@@ -45,7 +45,7 @@ export class Login extends React.Component<LoginProps> {
         auth.signInWithEmailAndPassword(email, password);
     };
 
-    render() {
+    render(): ReactNode {
         return (
             <Dialog aria-labelledby="login" id="login-dialog" open>
                 <DialogContent>

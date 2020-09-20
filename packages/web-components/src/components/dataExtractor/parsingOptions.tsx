@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     Grid,
     Card,
@@ -12,7 +12,7 @@ export interface ParsingOptionsProps {
     options: ExtractorOptions;
 }
 
-export const ParsingOptions = (props: ParsingOptionsProps) => {
+export const ParsingOptions = (props: ParsingOptionsProps): ReactElement => {
     const { options } = props;
     const { colSeperator, rowSeprator, rowLength } = options || {};
     return (

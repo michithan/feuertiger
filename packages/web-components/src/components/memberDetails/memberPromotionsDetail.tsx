@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     PersonPromotionsFragment,
     Promotion
@@ -8,22 +8,14 @@ import { DetailEditTable } from '../index';
 
 export type MemberPromotionsDetailProps = PersonPromotionsFragment;
 
-interface State {}
-
 export class MemberPromotionsDetail extends React.Component<
-    MemberPromotionsDetailProps,
-    State
+    MemberPromotionsDetailProps
 > {
-    constructor(props: MemberPromotionsDetailProps) {
-        super(props);
-        this.state = {};
-    }
-
     private handleSave = async (changes: Promotion[]) => {
         console.log(changes);
     };
 
-    render() {
+    render(): ReactNode {
         const { promotions } = this.props;
 
         return (

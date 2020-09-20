@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ButtonGroup, Button } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
@@ -55,7 +55,7 @@ export class EditButtonGroup extends React.Component<
             showPreBackDialog: true
         });
 
-    reset = (afterReset?: () => any) =>
+    reset = (afterReset?: () => any): void =>
         this.setState(
             {
                 showPreSaveDialog: false,
@@ -65,16 +65,18 @@ export class EditButtonGroup extends React.Component<
             afterReset
         );
 
-    handleClickConfirmSave = () => this.reset(this.props?.handleClickSave);
+    handleClickConfirmSave = (): void =>
+        this.reset(this.props?.handleClickSave);
 
-    handleClickConfirmDiscard = () =>
+    handleClickConfirmDiscard = (): void =>
         this.reset(this.props?.handleClickDiscard);
 
-    handleClickConfirmBack = () => this.reset(this.props?.handleClickBack);
+    handleClickConfirmBack = (): void =>
+        this.reset(this.props?.handleClickBack);
 
-    handleClickConfirmCancel = () => this.reset();
+    handleClickConfirmCancel = (): void => this.reset();
 
-    render() {
+    render(): ReactNode {
         const { editMode, handleClickEdit, dirty } = this.props;
         const {
             showPreSaveDialog,
