@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { TextField, TextFieldProps } from '@material-ui/core';
 import { DatePicker, DatePickerProps } from '@material-ui/pickers';
 import { Field, FieldProps } from 'formik';
@@ -7,9 +7,9 @@ const FormikTextFieldWrapper = ({
     field,
     form,
     ...props
-}: TextFieldProps & any) => <TextField {...field} {...props} />;
+}: TextFieldProps & FieldProps) => <TextField {...field} {...props} />;
 
-export const FormikTextField = (props: TextFieldProps) => (
+export const FormikTextField = (props: TextFieldProps): ReactElement => (
     <Field {...props} component={FormikTextFieldWrapper} />
 );
 
@@ -17,7 +17,7 @@ const FormikDatePickerWrapper = ({
     form: { setFieldValue, setFieldError, errors },
     field: { name, value },
     ...other
-}: Partial<DatePickerProps> & FieldProps<any>) => {
+}: Partial<DatePickerProps> & FieldProps): ReactElement => {
     const currentError = errors[name];
     return (
         <DatePicker
@@ -55,7 +55,7 @@ export const FormikDatePicker = ({
     label,
     disableFuture,
     disablePast
-}: Partial<DatePickerProps>) => (
+}: Partial<DatePickerProps>): ReactElement => (
     <Field
         name={name}
         label={label}

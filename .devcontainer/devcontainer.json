@@ -86,7 +86,6 @@
     "extensions": [
         "ms-vscode.vscode-typescript-next",
         "gitlab.gitlab-workflow",
-        "CoenraadS.bracket-pair-colorizer",
         "Prisma.prisma",
         "Prisma.vscode-graphql",
         "anseki.vscode-color",
@@ -99,7 +98,6 @@
         "ms-azuretools.vscode-docker",
         "rvest.vs-code-prettier-eslint",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
-        "ms-vscode.powershell",
         "msjsdiag.debugger-for-chrome",
         "tomoki1207.pdf",
         "visualstudioexptteam.vscodeintellicode",

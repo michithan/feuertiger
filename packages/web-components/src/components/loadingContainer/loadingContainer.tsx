@@ -10,7 +10,7 @@ export interface LoadingContainerrProps {
 export const LoadingContainer = ({
     loading,
     children
-}: LoadingContainerrProps) =>
+}: LoadingContainerrProps): ReactElement =>
     loading ? (
         <Grid container spacing={3}>
             <Grid item xs={12}>

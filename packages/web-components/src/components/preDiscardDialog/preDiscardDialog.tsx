@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     Dialog,
     DialogTitle,
@@ -10,15 +10,15 @@ import {
 
 export interface PreDiscardDialogProps {
     show: boolean;
-    handleClickDiscard: () => any;
-    handleClickCancel: () => any;
+    handleClickDiscard: () => unknown;
+    handleClickCancel: () => unknown;
 }
 
 export const PreDiscardDialog = ({
     show,
     handleClickDiscard,
     handleClickCancel
-}: PreDiscardDialogProps) => (
+}: PreDiscardDialogProps): ReactElement => (
     <Dialog
         open={show}
         aria-labelledby="alert-dialog-title"

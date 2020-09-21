@@ -9,7 +9,12 @@ export interface LinkProps {
     inherit?: boolean;
 }
 
-export const Link = ({ href, as, children, inherit }: LinkProps) => (
+export const Link = ({
+    href,
+    as,
+    children,
+    inherit
+}: LinkProps): ReactElement => (
     <NextLink href={href} as={as} passHref>
         <MaterialLink color={inherit ? 'inherit' : 'primary'}>
             {children}

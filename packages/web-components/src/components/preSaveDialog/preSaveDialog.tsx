@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import {
     Dialog,
     DialogTitle,
@@ -10,9 +10,9 @@ import {
 
 export interface PreSaveDialogProps {
     show: boolean;
-    handleClickSave: () => any;
-    handleClickDiscard: () => any;
-    handleClickCancel: () => any;
+    handleClickSave: () => unknown;
+    handleClickDiscard: () => unknown;
+    handleClickCancel: () => unknown;
 }
 
 export const PreSaveDialog = ({
@@ -20,7 +20,7 @@ export const PreSaveDialog = ({
     handleClickSave,
     handleClickDiscard,
     handleClickCancel
-}: PreSaveDialogProps) => (
+}: PreSaveDialogProps): ReactElement => (
     <Dialog
         open={show}
         aria-labelledby="alert-dialog-title"

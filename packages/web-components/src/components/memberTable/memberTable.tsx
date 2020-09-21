@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     Grid,
     Button,
@@ -28,11 +28,11 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
         };
     }
 
-    handleOpenAddDialog = () => this.setState({ addDialogOpen: true });
+    handleOpenAddDialog = (): void => this.setState({ addDialogOpen: true });
 
-    handleCloseAddDialog = () => this.setState({ addDialogOpen: false });
+    handleCloseAddDialog = (): void => this.setState({ addDialogOpen: false });
 
-    render() {
+    render(): ReactNode {
         const { addDialogOpen } = this.state;
         const {
             data: { allPersons }

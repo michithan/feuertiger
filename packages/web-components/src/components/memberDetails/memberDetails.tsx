@@ -20,7 +20,7 @@ export const MemberDetails = ({
     member,
     updatePerson,
     updatePersonExercisesConnection
-}): ReactElement => {
+}: MemberDetailsProps): ReactElement => {
     const {
         id,
         firstname,

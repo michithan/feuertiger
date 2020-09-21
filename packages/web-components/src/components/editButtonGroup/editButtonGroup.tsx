@@ -9,10 +9,10 @@ import { PreSaveDialog, PreDiscardDialog } from '../index';
 export interface EditButtonGroupProps {
     editMode: boolean;
     dirty: boolean;
-    handleClickEdit: () => any;
-    handleClickSave: () => any;
-    handleClickDiscard: () => any;
-    handleClickBack: () => any;
+    handleClickEdit: () => unknown;
+    handleClickSave: () => unknown;
+    handleClickDiscard: () => unknown;
+    handleClickBack: () => unknown;
 }
 
 interface State {
@@ -34,28 +34,28 @@ export class EditButtonGroup extends React.Component<
         };
     }
 
-    handleClickSave = () =>
+    handleClickSave = (): void =>
         this.setState({
             showPreSaveDialog: true,
             showPreDiscardDialog: false,
             showPreBackDialog: false
         });
 
-    handleClickDiscard = () =>
+    handleClickDiscard = (): void =>
         this.setState({
             showPreSaveDialog: false,
             showPreDiscardDialog: true,
             showPreBackDialog: false
         });
 
-    handleClickBack = () =>
+    handleClickBack = (): void =>
         this.setState({
             showPreSaveDialog: false,
             showPreDiscardDialog: false,
             showPreBackDialog: true
         });
 
-    reset = (afterReset?: () => any): void =>
+    reset = (afterReset?: () => unknown): void =>
         this.setState(
             {
                 showPreSaveDialog: false,
