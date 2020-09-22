@@ -5,6 +5,7 @@ import NextDocument, {
 } from 'next/document';
 import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
 import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/styles';
+import { AppType } from 'next/dist/next-server/lib/utils';
 
 export default class Document extends NextDocument {
     static async getInitialProps(
@@ -17,7 +18,7 @@ export default class Document extends NextDocument {
         try {
             ctx.renderPage = () =>
                 originalRenderPage({
-                    enhanceApp: (App: any) => (props: any) =>
+                    enhanceApp: (App: AppType) => props =>
                         styledComponentSheet.collectStyles(
                             materialUiSheets.collect(<App {...props} />)
                         )

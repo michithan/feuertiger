@@ -5,7 +5,9 @@ const Node: NodeResolvers = {
     __resolveType: parent => {
         const { id } = parent;
         const { type } = parseGlobalId(id);
-        return [type[0].toUpperCase(), ...type.slice(1)].join('') as any;
+        return [type[0].toUpperCase(), ...type.slice(1)].join('') as ReturnType<
+            NodeResolvers['__resolveType']
+        >;
     }
 };
 

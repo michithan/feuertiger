@@ -35,20 +35,21 @@ type Connection = {
     };
 };
 
-export const mapInput = <T>(
-    { id, ...rest }: _Node,
+export const mapInput = <
+    T extends _Node & Record<string, unknown | _Node | _Node[]>,
+    O extends _Node & Record<string, unknown | Connection[]> = T
+>(
+    { id, ...rest }: T,
     options: Options | null | undefined
-): T => {
-    const data = rest as T;
+): O => {
+    const data = rest as Record<string, unknown | Connection[]>;
 
     options?.connections?.forEach(key => {
-        // @ts-ignore
         const connections = data[key];
-        if (connections) {
-            // @ts-ignore
-            data[key] = connectInput(connections);
+        if (Array.isArray(connections) && key !== '0') {
+            data[key] = connectInput(connections as _Node[]);
         }
     });
 
-    return { id, ...data };
+    return { id, ...data } as O;
 };

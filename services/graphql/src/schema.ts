@@ -14,7 +14,7 @@ const typeDefs = fs.readFileSync(
 
 const schema: IExecutableSchemaDefinition<Context> = {
     typeDefs,
-    resolvers: resolvers as IResolvers<any, Context>
+    resolvers: resolvers as IResolvers<unknown, Context>
 };
 
 const apiSchema = makeExecutableSchema(schema);

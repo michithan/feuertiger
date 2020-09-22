@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { ApolloProvider } from '@apollo/client';
 import {
     Container as UiContainer,
@@ -17,32 +17,28 @@ export interface ContainerProps
         AuthProps,
         AuthStateProps {}
 
-@withAuth
-export class Container extends React.Component<ContainerProps, any, any> {
-    render() {
-        const {
-            Component,
-            pageProps,
-            apollo,
-            auth,
-            isLoading: isSignInLoading,
-            isSignedIn
-        } = this.props;
+export const ContainerWithAuth = ({
+    Component,
+    pageProps,
+    apollo,
+    auth,
+    isLoading: isSignInLoading,
+    isSignedIn
+}: ContainerProps): ReactElement => {
+    const showLogin = !isSignedIn || isSignInLoading;
+    return (
+        <ApolloProvider client={apollo}>
+            <ThemeProvider>
+                <UiContainer auth={auth}>
+                    {showLogin ? (
+                        <Login auth={auth} />
+                    ) : (
+                        Component && <Component {...pageProps} />
+                    )}
+                </UiContainer>
+            </ThemeProvider>
+        </ApolloProvider>
+    );
+};
 
-        const showLogin = !isSignedIn || isSignInLoading;
-
-        return (
-            <ApolloProvider client={apollo}>
-                <ThemeProvider>
-                    <UiContainer auth={auth}>
-                        {showLogin ? (
-                            <Login auth={auth} />
-                        ) : (
-                            Component && <Component {...pageProps} />
-                        )}
-                    </UiContainer>
-                </ThemeProvider>
-            </ApolloProvider>
-        );
-    }
-}
+export const Container = withAuth(ContainerWithAuth);

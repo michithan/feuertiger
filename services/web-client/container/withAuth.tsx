@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import 'firebase/auth';
 import { AuthProps } from '@feuertiger/web-components';
 
@@ -7,14 +7,30 @@ import AuthSingleton from './authSingleton';
 export interface AuthStateProps {
     isSignedIn: boolean;
     isLoading: boolean;
-    error: any;
+    error: unknown;
 }
 
 interface State extends AuthProps, AuthStateProps {}
 
-export default <P extends object>(WrappedComponent: any): any =>
-    class AuthWrapper extends Component<P, State> {
-        constructor(props: any) {
+export default <
+    P,
+    S,
+    SS,
+    CA extends React.ClassType<
+        P & AuthProps,
+        React.Component<P & AuthProps, S, SS>,
+        React.ComponentClass<P & AuthProps, S>
+    >,
+    C extends React.ClassType<
+        P,
+        React.Component<P, State, SS>,
+        React.ComponentClass<P, State>
+    >
+>(
+    WrappedComponent: CA | ((props: P & AuthProps) => ReactElement)
+): C =>
+    class AuthWrapper extends React.Component<P, State, SS> {
+        constructor(props: P) {
             super(props);
             this.state = {
                 isSignedIn: true,
@@ -24,7 +40,7 @@ export default <P extends object>(WrappedComponent: any): any =>
             };
         }
 
-        componentDidMount() {
+        componentDidMount(): void {
             const authSignleton = new AuthSingleton();
             const { firebaseAuth } = authSignleton;
 
@@ -60,7 +76,7 @@ export default <P extends object>(WrappedComponent: any): any =>
             });
         }
 
-        render() {
+        render(): ReactNode {
             const { ...props } = this.props;
             const { auth, isSignedIn, isLoading, error } = this.state;
 
@@ -74,4 +90,4 @@ export default <P extends object>(WrappedComponent: any): any =>
                 />
             );
         }
-    };
+    } as C;

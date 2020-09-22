@@ -1,5 +1,13 @@
-import { MutationResolvers, Person } from '@feuertiger/schema-graphql';
-import { PersonCreateInput } from '@feuertiger/schema-prisma';
+import {
+    MutationResolvers,
+    Person,
+    PersonUpdate,
+    _Node
+} from '@feuertiger/schema-graphql';
+import {
+    PersonCreateInput,
+    PersonUpdateInput
+} from '@feuertiger/schema-prisma';
 import { Context } from '../context';
 import { mapInput, parseGlobalId } from '../utils/id';
 
@@ -11,15 +19,16 @@ export const deleteNode = ({
     context: Context;
 }): Promise<boolean> | boolean => {
     const { type } = parseGlobalId(id);
-    // @ts-ignore
-    const resolver = context.db[type];
+    const resolver = ((context.db as unknown) as Record<string, unknown>)[
+        type
+    ] as (node: _Node) => Promise<boolean> | boolean;
     return resolver ? resolver({ id }) : false;
 };
 
 const Mutation: MutationResolvers = {
     delete: (_parent, { id }, context) => deleteNode({ id, context }),
     createPerson: async (_parent, args, context: Context) => {
-        const data = mapInput<PersonCreateInput>(args.person, {
+        const data = mapInput<PersonUpdate, PersonCreateInput>(args.person, {
             connections: ['exercisesParticipated', 'exercisesLeaded']
         });
         const created = await context.db.person.create({ data });
@@ -65,23 +74,25 @@ const Mutation: MutationResolvers = {
         const { update } = args;
         const { id: personId, changes } = update;
 
-        const data = {
-            exercisesParticipated: {
-                connect: changes
-                    .filter(({ action }) => action === 'ADD')
-                    .map(({ id }) => ({ id })),
-                disconnect: changes
-                    .filter(({ action }) => action === 'DELETE')
-                    .map(({ id }) => ({ id }))
-            }
+        const connect = changes
+            .filter(({ action }) => action === 'ADD')
+            .map(({ id }) => ({ id }));
+
+        const disconnect = changes
+            .filter(({ action }) => action === 'DELETE')
+            .map(({ id }) => ({ id }));
+
+        const data: PersonUpdateInput = {
+            exercisesParticipated: {}
         };
 
-        if (data.exercisesParticipated.disconnect.length <= 0)
-            // @ts-ignore
-            delete data.exercisesParticipated.disconnect;
-        if (data.exercisesParticipated.connect.length <= 0)
-            // @ts-ignore
-            delete data.exercisesParticipated.connect;
+        if (data.exercisesParticipated && connect.length <= 0) {
+            data.exercisesParticipated.connect = connect;
+        }
+
+        if (data.exercisesParticipated && disconnect.length <= 0) {
+            data.exercisesParticipated.disconnect = disconnect;
+        }
 
         const personUpdate = await context.db.person.update({
             where: {
@@ -89,6 +100,7 @@ const Mutation: MutationResolvers = {
             },
             data
         });
+
         return personUpdate;
     }
 };

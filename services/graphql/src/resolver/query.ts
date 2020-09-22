@@ -2,16 +2,22 @@ import { QueryResolvers, Node } from '@feuertiger/schema-graphql';
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
 
+interface NodeResolver {
+    findOne: (query: { where: { id: string } }) => Promise<Node>;
+}
+
 export const getNode = async ({
     id,
     context
 }: {
     id: string;
     context: Context;
-}) => {
+}): Promise<Node> => {
     const { type } = parseGlobalId(id);
-    // @ts-ignore
-    const resolver = context.db[type];
+    const resolver = ((context?.db as unknown) as Record<
+        string,
+        NodeResolver
+    >)?.[type];
     const node = await resolver.findOne({
         where: {
             id
@@ -24,11 +30,11 @@ const Query: QueryResolvers = {
     node: (_parent, { id }, context) => getNode({ id, context }),
     nodes: (_parent, args, context) =>
         Promise.all(args.ids.map(id => getNode({ id, context }))),
-    allPersons: async (parent: any, args, context: Context) => {
+    allPersons: async (parent, args, context: Context) => {
         const persons = await context.db.person.findMany();
         return persons;
     },
-    allExercises: async (parent: any, args, context: Context) => {
+    allExercises: async (parent, args, context: Context) => {
         const exercises = await context.db.exercise.findMany();
         return exercises;
     },

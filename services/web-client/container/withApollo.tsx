@@ -4,6 +4,7 @@ import getConfig from 'next/config';
 import withApollo, { WithApolloState } from 'next-with-apollo';
 import fetch from 'isomorphic-unfetch';
 
+import NextApp from 'next/app';
 import AuthSingleton from './authSingleton';
 
 const {
@@ -33,8 +34,8 @@ const httpLink = createHttpLink({
 });
 
 export interface ApolloProps {
-    apollo: ApolloClient<any>;
-    apolloState: WithApolloState<any>;
+    apollo: ApolloClient<unknown>;
+    apolloState: WithApolloState<unknown>;
 }
 
 const initClient = ({ initialState }) =>
@@ -43,5 +44,14 @@ const initClient = ({ initialState }) =>
         cache: new InMemoryCache().restore(initialState || {})
     });
 
-export default (WrappedComponent: any): any =>
-    withApollo(initClient)(WrappedComponent);
+export default <
+    P,
+    S,
+    C extends React.ComponentClass<P, S>,
+    CA extends React.ComponentClass<P & ApolloProps, S>
+>(
+    WrappedComponent: CA
+): C =>
+    (withApollo(initClient)(
+        (WrappedComponent as unknown) as typeof NextApp
+    ) as unknown) as C;

@@ -5,22 +5,24 @@ import { PrismaClient } from '@feuertiger/schema-prisma';
 
 export interface Context {
     db: PrismaClient;
-    uid: string;
-    userUUID: string;
+    user: {
+        uid: string;
+    };
 }
 
 export const prisma = new PrismaClient();
 
-export default async ({ req }: ExpressContext) => {
+export default async ({ req }: ExpressContext): Promise<Context | void> => {
     const token = req.headers.authorization || '';
     try {
         const decodedToken = await firebase.auth().verifyIdToken(token);
-        return {
+        const context: Context = {
             db: prisma,
             user: {
                 uid: decodedToken.uid
             }
         };
+        return context;
     } catch (error) {
         throw new AuthenticationError('you must be logged in');
     }
