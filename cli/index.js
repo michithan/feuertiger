@@ -5,13 +5,13 @@ const { feuertiger, tiger } = require('./src/utils');
 const cli = meow(
     `
     Usage
-      $ init            installs all dependencies and setups workspace // TODO
+      $ init            installs all dependencies and setups workspace
       $ list            lists all packages
       $ linkdist        links all ./dist/index.js to ./src/index.js
       $ format          formats the code
-      $ lint            lints the code  // TODO
+      $ lint            lints the code
       $ test            tests the code  // TODO
-      $ build           builds the code  // TODO
+      $ build           builds the code
       $ e2e             e2e test all the things  // TODO
       $ dev             starts all in dev mode
       $ start           starts all in prod mode  // TODO
@@ -58,16 +58,20 @@ const cli = meow(
             require('./src/lint')(cli.flags);
             break;
         case 'list':
-            tiger('📜 list 📜');
-            await require('./src/utils').list(cli.flags).then(console.log);
+            tiger('📜 lists 📜');
+            require('./src/utils').list(cli.flags).then(console.log);
+            break;
+        case 'test':
+            tiger('🧪 tests 🧪');
+            require('./src/test')(cli.flags);
             break;
         case 'dev':
             tiger('👟🧪 running everything in development mode 🧪👟');
-            await require('./src/dev')(cli.flags);
+            require('./src/dev')(cli.flags);
             break;
         case 'build':
             tiger('🔧 building everything 🔧');
-            await require('./src/build')(cli.flags);
+            require('./src/build')(cli.flags);
             break;
         default:
             console.log(cli.help);

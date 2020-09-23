@@ -4,6 +4,7 @@ const execa = require('execa');
 const { EventEmitter } = require('events');
 const chalk = require('chalk');
 const { Transform } = require('stream');
+const randomcolor = require('randomcolor');
 
 const { log } = console;
 const { red, yellow, grey } = chalk;
@@ -50,30 +51,25 @@ const listDependencies = async name => {
     return dependencies.filter(dependency => dependency.name !== name);
 };
 
-const colors = index => {
-    const r = [3, 4, 5, 6].includes(index % 8);
-    const g = [1, 2, 5, 6].includes(index % 8);
-    const b = [0, 2, 4, 6].includes(index % 8);
-    const a = Math.ceil(index / 8) || 1;
-    const base = Math.ceil(255 / a);
-    return [r * base, g * base, b * base];
-};
-
 const extendedList = async flags => {
     const packages = await list(flags);
     const longestName = packages
         .map(({ name }) => name.length + 1)
         .sort()
         .pop();
+    const colors = randomcolor({
+        seed: 1,
+        count: packages.length
+    });
     return Promise.all(
         packages.map(async ({ name, ...package }, index) => {
             let dependencies = await listDependencies(name);
             dependencies = dependencies.map(dependency =>
                 packages.find(pgk => pgk.name === dependency.name)
             );
-            const color = colors(index);
-            const distance = new Array(longestName - name.length).join(' ');
-            const prefix = chalk.rgb(...color)(`${name} ${distance}=> `);
+            const color = colors[index];
+            const distance = new Array(longestName - name.length).join('═');
+            const prefix = chalk.hex(color)(`${name} ${distance}═▷ `);
             return {
                 ...package,
                 dependencies,
@@ -85,7 +81,7 @@ const extendedList = async flags => {
 };
 
 const addPackagePrefix = (text, { prefix }) =>
-    `${prefix}${text.trim().replace(/\r?\n|\r/gi, `\r\n${prefix}`)}\r\n`;
+    `${prefix}${text.trimRight().replace(/\r?\n|\r/gi, `\r\n${prefix}`)}\r\n`;
 
 const transformExecaOutput = (execution, packageInfo) => {
     const transform = (chunk, encoding, callback) => {
