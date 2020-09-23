@@ -63,7 +63,7 @@ const cli = meow(
             break;
         case 'dev':
             tiger('👟🧪 running everything in development mode 🧪👟');
-            await require('./src/dev').dev(cli.flags);
+            await require('./src/dev')(cli.flags);
             break;
         case 'build':
             tiger('🔧 building everything 🔧');

@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 const execa = require('execa');
 const { EventEmitter } = require('events');
 const chalk = require('chalk');
@@ -196,8 +198,14 @@ const exec = async (flags, func, parallel) => {
     await Promise.all(executions);
 };
 
+const checkIfNpmScriptExists = ({ location, command }) => {
+    const package = require(`${location}/package.json`);
+    return !!(package.scripts && package.scripts[command]);
+};
+
 exports.addPackagePrefix = addPackagePrefix;
 exports.feuertiger = feuertiger;
 exports.tiger = tiger;
 exports.list = list;
 exports.exec = exec;
+exports.checkIfNpmScriptExists = checkIfNpmScriptExists;

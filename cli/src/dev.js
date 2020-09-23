@@ -1,12 +1,18 @@
 const execa = require('execa');
-const { exec } = require('./utils');
+const { exec, checkIfNpmScriptExists } = require('./utils');
 
-const dev = ({ location }) =>
-    execa('yarn', ['dev'], {
-        cwd: location,
-        detached: true,
-        stdout: 'pipe'
-    });
+const dev = ({ location }) => {
+    const command = 'dev';
+    const hasDevScript = checkIfNpmScriptExists({ location, command });
+    if (hasDevScript) {
+        return execa('yarn', [command], {
+            cwd: location,
+            detached: true,
+            stdout: 'pipe'
+        });
+    }
+    return Promise.resolve;
+};
 
 module.exports = async flags => {
     try {
