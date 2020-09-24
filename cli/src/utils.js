@@ -83,6 +83,13 @@ const extendedList = async flags => {
 const addPackagePrefix = (text, { prefix }) =>
     `${prefix}${text.trimRight().replace(/\r?\n|\r/gi, `\r\n${prefix}`)}\r\n`;
 
+const addErrorPackagePrefix = (text, { prefix }) => {
+    const errorPrefix = prefix.replace('▷', '💥');
+    return `${errorPrefix}${text
+        .trimRight()
+        .replace(/\r?\n|\r/gi, `\r\n${errorPrefix}`)}\r\n`;
+};
+
 const transformExecaOutput = (execution, packageInfo) => {
     const transform = (chunk, encoding, callback) => {
         const text = addPackagePrefix(chunk.toString(), packageInfo);
@@ -90,6 +97,18 @@ const transformExecaOutput = (execution, packageInfo) => {
         chunk = Buffer.from(text);
         callback(null, chunk);
     };
+    const transformError = (chunk, encoding, callback) => {
+        const text = addErrorPackagePrefix(chunk.toString(), packageInfo);
+        // eslint-disable-next-line no-param-reassign
+        chunk = Buffer.from(text);
+        callback(null, chunk);
+    };
+    execution.catch(error => {
+        const text = error;
+        if (typeof text === 'string') {
+            console.log(addErrorPackagePrefix(text, packageInfo));
+        }
+    });
     execution.stdout
         .pipe(
             new Transform({
@@ -100,7 +119,7 @@ const transformExecaOutput = (execution, packageInfo) => {
     execution.stderr
         .pipe(
             new Transform({
-                transform
+                transform: transformError
             })
         )
         .pipe(process.stderr);
@@ -171,27 +190,33 @@ const exec = async (flags, func, parallel) => {
         if (parallel) {
             await queue.enqueue(packageInfo);
         }
+        try {
+            const execution = func(packageInfo, packageInfos);
 
-        const execution = func(packageInfo, packageInfos);
+            if (execution.stdout && execution.stderr && execution.kill) {
+                transformExecaOutput(execution, packageInfo);
+                killOnExit(execution, packageInfo);
+            }
 
-        if (execution.stdout && execution.stderr && execution.kill) {
-            transformExecaOutput(execution, packageInfo);
-            killOnExit(execution, packageInfo);
+            if (execution instanceof Promise) {
+                await execution;
+            }
+
+            if (parallel) {
+                // eslint-disable-next-line no-param-reassign
+                packageInfo.completed = true;
+                queue.check(queue);
+            }
+
+            return execution;
+        } catch (error) {
+            if (typeof error === 'string') {
+                console.log(addErrorPackagePrefix(error, packageInfo));
+            }
+            return Promise.reject;
         }
-
-        if (execution instanceof Promise) {
-            await execution;
-        }
-
-        if (parallel) {
-            // eslint-disable-next-line no-param-reassign
-            packageInfo.completed = true;
-            queue.check(queue);
-        }
-
-        return execution;
     });
-    await Promise.all(executions);
+    await Promise.allSettled(executions);
 };
 
 const checkIfNpmScriptExists = ({ location, command }) => {

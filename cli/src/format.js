@@ -28,7 +28,7 @@ module.exports = async flags => {
                     '--ignore-path',
                     prettierignore,
                     '--loglevel',
-                    'debug'
+                    'log'
                 ],
                 {
                     detached: true,

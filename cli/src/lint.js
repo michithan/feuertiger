@@ -23,7 +23,9 @@ const lint = formatter => async packageInfo => {
 
     const resultText = formatter.format(results);
 
-    log(resultText);
+    if (resultText) {
+        log(resultText);
+    }
 };
 
 module.exports = async flags => {
