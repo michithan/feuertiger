@@ -17,7 +17,7 @@ exports[`Test side bar should be closed 1`] = `
   <WithStyles(ForwardRef(List))>
     <div>
       <Link
-        href="/"
+        href="/index"
       >
         <WithStyles(ForwardRef(ListItem))
           button={true}
@@ -51,10 +51,24 @@ exports[`Test side bar should be closed 1`] = `
           button={true}
         >
           <WithStyles(ForwardRef(ListItemIcon))>
-            <PeopleIcon />
+            <SportsKabaddiIcon />
           </WithStyles(ForwardRef(ListItemIcon))>
           <WithStyles(ForwardRef(ListItemText))
             primary="Übungen"
+          />
+        </WithStyles(ForwardRef(ListItem))>
+      </Link>
+      <Link
+        href="/operations "
+      >
+        <WithStyles(ForwardRef(ListItem))
+          button={true}
+        >
+          <WithStyles(ForwardRef(ListItemIcon))>
+            <WhatshotIcon />
+          </WithStyles(ForwardRef(ListItemIcon))>
+          <WithStyles(ForwardRef(ListItemText))
+            primary="Einsätze "
           />
         </WithStyles(ForwardRef(ListItem))>
       </Link>
@@ -84,7 +98,7 @@ exports[`Test side bar should be open 1`] = `
   <WithStyles(ForwardRef(List))>
     <div>
       <Link
-        href="/"
+        href="/index"
       >
         <WithStyles(ForwardRef(ListItem))
           button={true}
@@ -118,10 +132,24 @@ exports[`Test side bar should be open 1`] = `
           button={true}
         >
           <WithStyles(ForwardRef(ListItemIcon))>
-            <PeopleIcon />
+            <SportsKabaddiIcon />
           </WithStyles(ForwardRef(ListItemIcon))>
           <WithStyles(ForwardRef(ListItemText))
             primary="Übungen"
+          />
+        </WithStyles(ForwardRef(ListItem))>
+      </Link>
+      <Link
+        href="/operations "
+      >
+        <WithStyles(ForwardRef(ListItem))
+          button={true}
+        >
+          <WithStyles(ForwardRef(ListItemIcon))>
+            <WhatshotIcon />
+          </WithStyles(ForwardRef(ListItemIcon))>
+          <WithStyles(ForwardRef(ListItemText))
+            primary="Einsätze "
           />
         </WithStyles(ForwardRef(ListItem))>
       </Link>
@@ -151,7 +179,7 @@ exports[`Test side bar should create side bar 1`] = `
   <WithStyles(ForwardRef(List))>
     <div>
       <Link
-        href="/"
+        href="/index"
       >
         <WithStyles(ForwardRef(ListItem))
           button={true}
@@ -185,10 +213,24 @@ exports[`Test side bar should create side bar 1`] = `
           button={true}
         >
           <WithStyles(ForwardRef(ListItemIcon))>
-            <PeopleIcon />
+            <SportsKabaddiIcon />
           </WithStyles(ForwardRef(ListItemIcon))>
           <WithStyles(ForwardRef(ListItemText))
             primary="Übungen"
+          />
+        </WithStyles(ForwardRef(ListItem))>
+      </Link>
+      <Link
+        href="/operations "
+      >
+        <WithStyles(ForwardRef(ListItem))
+          button={true}
+        >
+          <WithStyles(ForwardRef(ListItemIcon))>
+            <WhatshotIcon />
+          </WithStyles(ForwardRef(ListItemIcon))>
+          <WithStyles(ForwardRef(ListItemText))
+            primary="Einsätze "
           />
         </WithStyles(ForwardRef(ListItem))>
       </Link>

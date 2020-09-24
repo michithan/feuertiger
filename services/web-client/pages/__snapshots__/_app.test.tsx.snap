@@ -1,20 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test nextjs app should create _app 1`] = `
-<AuthWrapper
+<App
   apollo={Object {}}
-  auth={
-    Object {
-      "signInWithEmailAndPassword": [Function],
-      "signOut": [Function],
-    }
-  }
-  isLoading={false}
-  isSignedIn={true}
   pageProps={Object {}}
 >
   <div>
     test
   </div>
-</AuthWrapper>
+</App>
 `;
