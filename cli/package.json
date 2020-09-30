@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/cli",
-    "version": "1.0.9-dev.ad68145.0",
+    "version": "1.0.9-dev.951e698.0",
     "description": "🔥🐯 Feuertiger cli 🐯🔥",
     "private": true,
     "bin": {
