@@ -3,10 +3,6 @@
     "version": "1.0.9-dev.05e4076.0",
     "description": "config",
     "main": "./index.js",
-    "files": [
-        "./index.js",
-        "./index.d.ts"
-    ],
     "repository": {
         "type": "git",
         "url": "https://gitlab.com/feuertiger/feuertiger",
