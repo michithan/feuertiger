@@ -3,10 +3,15 @@ const config = require('@feuertiger/config');
 
 module.exports = async flags => {
     const {
-        gitlab: { branchSlug, commit },
+        gitlab: { branchSlug, commit, token },
         npmRegistry
     } = config;
     try {
+        await execa('npm', [
+            'config',
+            'set',
+            `'${npmRegistry}:_authToken' "${token}"`
+        ]);
         await execa('lerna', [
             'publish',
             'prerelease',
