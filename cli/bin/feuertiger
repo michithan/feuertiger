@@ -1,3 +1,2 @@
 #!/usr/bin/env node
-const path = require('path');
-require(path.resolve(__dirname, '..', 'index'));
+require(__dirname.replace('bin', 'index'));

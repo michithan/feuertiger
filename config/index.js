@@ -49,6 +49,7 @@ const config = {
         branchSlug: tryGetGitBranchSlug(),
         commit: tryGetGitCommitHashShort()
     },
+    npmRegistry: `//gitlab.com/api/v4/projects/${constants.gitlab.projectId}/packages/npm/`,
     gcp: constants.gcp,
     digitaloceanToken: DIGITALOCEAN_TOKEN,
     firebaseAppConfig: {

@@ -3,6 +3,8 @@
     "version": "1.0.9-dev.87816d5a.0",
     "main": "./index.js",
     "sideEffects": false,
+    "author": "Michael Thanei",
+    "license": "MIT",
     "scripts": {
         "dev": "next dev",
         "test": "jest --collect-coverage",

@@ -73,6 +73,10 @@ const cli = meow(
             tiger('🔧 building everything 🔧');
             require('./src/build')(cli.flags);
             break;
+        case 'publish':
+            tiger('🌎 publishing everything 🌎');
+            require('./src/publish')(cli.flags);
+            break;
         default:
             console.log(cli.help);
             break;

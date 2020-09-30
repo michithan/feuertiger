@@ -10,6 +10,7 @@ export interface Config {
         branchSlug: string;
         commit: string;
     };
+    npmRegistry: string;
     gcp: {
         project: string;
         region: string;

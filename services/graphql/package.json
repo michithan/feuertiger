@@ -3,6 +3,8 @@
     "version": "1.0.9-dev.87816d5a.0",
     "description": "graphql backend",
     "main": "./dist/index.js",
+    "author": "Michael Thanei",
+    "license": "MIT",
     "scripts": {
         "dev": "ts-node-dev --debounce -- ./src/startup.ts",
         "test": "jest --collect-coverage",
@@ -17,8 +19,6 @@
     "publishConfig": {
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
-    "author": "",
-    "license": "ISC",
     "dependencies": {
         "@feuertiger/ocr": "1.0.9-dev.1cf47562.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.1cf47562.0",

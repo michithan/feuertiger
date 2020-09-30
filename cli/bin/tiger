@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require('./feuertiger');
+require(__dirname.replace('bin', 'index'));
