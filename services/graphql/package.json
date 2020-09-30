@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/graphql",
-    "version": "1.0.9-dev.05e4076.0",
+    "version": "1.0.9-dev.532b11a.0",
     "description": "graphql backend",
     "main": "./dist/index.js",
     "author": "Michael Thanei",
@@ -20,10 +20,10 @@
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
-        "@feuertiger/config": "1.0.9-dev.05e4076.0",
-        "@feuertiger/ocr": "1.0.9-dev.05e4076.0",
-        "@feuertiger/schema-graphql": "1.0.9-dev.05e4076.0",
-        "@feuertiger/schema-prisma": "1.0.9-dev.05e4076.0",
+        "@feuertiger/config": "1.0.9-dev.532b11a.0",
+        "@feuertiger/ocr": "1.0.9-dev.532b11a.0",
+        "@feuertiger/schema-graphql": "1.0.9-dev.532b11a.0",
+        "@feuertiger/schema-prisma": "1.0.9-dev.532b11a.0",
         "apollo-server": "2.13.1",
         "apollo-server-express": "2.13.1",
         "express": "4.17.1",

@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/deployment",
-    "version": "1.0.9-dev.05e4076.0",
+    "version": "1.0.9-dev.532b11a.0",
     "main": "./index.ts",
     "license": "MIT",
     "private": true,
@@ -8,7 +8,7 @@
         "ci:deploy": "pulumi up -y -e"
     },
     "dependencies": {
-        "@feuertiger/config": "1.0.9-dev.05e4076.0",
+        "@feuertiger/config": "1.0.9-dev.532b11a.0",
         "@pulumi/digitalocean": "2.6.0",
         "@pulumi/kubernetes": "2.4.1",
         "@pulumi/kubernetesx": "0.1.3",

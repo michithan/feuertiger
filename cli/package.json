@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/cli",
-    "version": "1.0.9-dev.05e4076.0",
+    "version": "1.0.9-dev.532b11a.0",
     "description": "🔥🐯 Feuertiger cli 🐯🔥",
     "private": true,
     "bin": {
@@ -16,7 +16,7 @@
     },
     "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb",
     "dependencies": {
-        "@feuertiger/config": "1.0.9-dev.05e4076.0",
+        "@feuertiger/config": "1.0.9-dev.532b11a.0",
         "chalk": "4.1.0",
         "eslint": "7.0.0",
         "execa": "4.0.3",
