@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/schema-prisma",
-    "version": "1.0.9-dev.5481ff4.0",
+    "version": "1.0.9-dev.05e4076.0",
     "description": "prisma schema",
     "main": "./dist/index.js",
     "scripts": {
@@ -28,5 +28,5 @@
         "@prisma/cli": "2.0.0",
         "ts-node": "8.10.1"
     },
-    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
+    "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
 }

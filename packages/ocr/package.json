@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/ocr",
-    "version": "1.0.9-dev.5481ff4.0",
+    "version": "1.0.9-dev.05e4076.0",
     "description": "ocr for feuertiger",
     "main": "./dist/index.js",
     "sideEffects": false,
@@ -25,5 +25,6 @@
     "devDependencies": {
         "@types/node-fetch": "2.5.7",
         "@types/uuid": "7.0.3"
-    }
+    },
+    "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
 }

@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/schema-graphql",
-    "version": "1.0.9-dev.5481ff4.0",
+    "version": "1.0.9-dev.05e4076.0",
     "description": "graphql schema",
     "main": "./dist/index.js",
     "scripts": {
@@ -33,5 +33,5 @@
         "@graphql-codegen/typescript-resolvers": "1.13.5",
         "prettier": "1.19.1"
     },
-    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb"
+    "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
 }
