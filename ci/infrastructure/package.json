@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/infrastructure",
-    "version": "1.0.9-dev.87816d5a.0",
+    "version": "1.0.9-dev.ad68145.0",
     "main": "./index.ts",
     "license": "MIT",
     "private": true,
@@ -11,7 +11,7 @@
         "destroy": "pulumi destroy -e"
     },
     "dependencies": {
-        "@feuertiger/config": "1.0.9-dev.1cf47562.0",
+        "@feuertiger/config": "1.0.9-dev.ad68145.0",
         "@pulumi/digitalocean": "2.6.0",
         "@pulumi/gcp": "3.15.0",
         "@pulumi/gitlab": "2.5.0",
