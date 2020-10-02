@@ -77,6 +77,10 @@ const cli = meow(
             tiger('🌎 publishing everything 🌎');
             require('./src/publish')(cli.flags);
             break;
+        case 'dockerize':
+            tiger('🐳 building docker images 🐳');
+            require('./src/dockerize')(cli.flags);
+            break;
         default:
             console.log(cli.help);
             break;

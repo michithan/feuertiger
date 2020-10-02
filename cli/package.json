@@ -9,7 +9,7 @@
     "repository": {
         "type": "git",
         "url": "https://gitlab.com/feuertiger/feuertiger",
-        "directory": "tools"
+        "directory": "cli"
     },
     "publishConfig": {
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
