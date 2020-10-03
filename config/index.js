@@ -50,6 +50,7 @@ const config = {
         commit: tryGetGitCommitHashShort()
     },
     npmRegistry: `//gitlab.com/api/v4/projects/${constants.gitlab.projectId}/packages/npm/`,
+    dockerRegistry: constants.dockerRegistry,
     gcp: constants.gcp,
     digitaloceanToken: DIGITALOCEAN_TOKEN,
     firebaseAppConfig: {

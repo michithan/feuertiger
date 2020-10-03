@@ -3,6 +3,7 @@
     "gitlab": {
         "projectId": "18726494"
     },
+    "dockerRegistry": "registry.gitlab.com",
     "gcp": {
         "project": "feuertiger-77a8a",
         "region": "europe-west1",

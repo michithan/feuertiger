@@ -11,6 +11,7 @@ export interface Config {
         commit: string;
     };
     npmRegistry: string;
+    dockerRegistry: string;
     gcp: {
         project: string;
         region: string;
