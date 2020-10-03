@@ -51,6 +51,7 @@ const config = {
     },
     npmRegistry: `//gitlab.com/api/v4/projects/${constants.gitlab.projectId}/packages/npm/`,
     dockerRegistry: constants.dockerRegistry,
+    dockerRegistryRepository: `${constants.dockerRegistry}/${constants.projectName}/${constants.projectName}`,
     gcp: constants.gcp,
     digitaloceanToken: DIGITALOCEAN_TOKEN,
     firebaseAppConfig: {

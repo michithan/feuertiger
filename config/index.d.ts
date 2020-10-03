@@ -12,6 +12,7 @@ export interface Config {
     };
     npmRegistry: string;
     dockerRegistry: string;
+    dockerRegistryRepository: string;
     gcp: {
         project: string;
         region: string;

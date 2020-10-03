@@ -5,6 +5,16 @@ const execa = require('execa');
 const config = require('@feuertiger/config');
 const { exec } = require('./utils');
 
+const createTag = ({ name }) => {
+    const { dockerRegistryRepository } = config;
+    const version = 'latest';
+    const imageName = name
+        .toLowerCase()
+        .replace(/[^a-z^0-9]/g, '-')
+        .replace(/^[^a-z^0-9]/g, '');
+    return `${dockerRegistryRepository}/${imageName}:${version}`;
+};
+
 const login = () => {
     const {
         gitlab: { token, user },
@@ -26,20 +36,12 @@ const dockerize = ({ location, name }) => {
     const dockerfile = path.resolve(location, 'Dockerfile');
     const hasDockerfile = fs.existsSync(dockerfile);
     if (hasDockerfile) {
-        const version = 'latest';
-        const imageName = name
-            .toLowerCase()
-            .replace(/[^a-z^0-9]/g, '-')
-            .replace(/^[^a-z^0-9]/g, '');
-        const tag = `${imageName}:${version}`;
-
+        const tag = createTag({ name });
         return execa(
             'docker',
             ['build', '--pull', '--rm', '-f', 'Dockerfile', '-t', tag, '.'],
             {
-                cwd: location,
-                stderr: 'pipe',
-                stdout: 'pipe'
+                cwd: location
             }
         );
     }
@@ -50,16 +52,11 @@ const push = ({ location, name }) => {
     const dockerfile = path.resolve(location, 'Dockerfile');
     const hasDockerfile = fs.existsSync(dockerfile);
     if (hasDockerfile) {
-        const version = 'latest';
-        const imageName = name
-            .toLowerCase()
-            .replace(/[^a-z^0-9]/g, '-')
-            .replace(/^[^a-z^0-9]/g, '');
-        const tag = `${imageName}:${version}`;
+        const tag = createTag({ name });
         return execa('docker', ['push', tag], {
             cwd: location,
-            stderr: 'pipe',
-            stdout: 'pipe'
+            stderr: 'inherit',
+            stdout: 'inherit'
         });
     }
     return Promise.resolve;
