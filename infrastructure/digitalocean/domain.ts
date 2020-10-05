@@ -10,5 +10,8 @@ export const domain = new digitalocean.Domain(
         name: hostname,
         ipAddress: address.ip
     },
-    { provider, dependsOn: [provider] }
+    {
+        provider,
+        dependsOn: [provider]
+    }
 );

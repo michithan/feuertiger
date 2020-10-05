@@ -21,7 +21,7 @@ export const cluster = new digitalocean.KubernetesCluster(
             maxNodes: 2
         },
         region: digitalocean.Regions.FRA1,
-        version: '1.18.6-do.0'
+        version: '1.18.8-do.1'
     },
     {
         provider,
@@ -30,10 +30,10 @@ export const cluster = new digitalocean.KubernetesCluster(
     }
 );
 
-export const kubeconfig = cluster.kubeConfigs.apply(([config]) => config);
+export const kubeconfig = cluster.kubeConfigs.apply(([kc]) => kc);
 
-export const cert = kubeconfig.apply(config => {
-    const base64Cert = config.clusterCaCertificate;
+export const cert = kubeconfig.apply(kc => {
+    const base64Cert = kc.clusterCaCertificate;
     return Buffer.from(base64Cert, 'base64').toString('ascii');
 });
 

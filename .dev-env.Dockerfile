@@ -2,7 +2,7 @@
 FROM alpine:3.12.0
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/cli/bin:/
+ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/cli/bin:/root/google-cloud-sdk/bin:/
 ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
 
 # Install basics
@@ -61,6 +61,7 @@ RUN apk update && apk add --no-cache \
     userspace-rcu \
     util-linux \
     wget \
+    which \
     xauth \
     xvfb \
     yarn \
@@ -93,10 +94,9 @@ RUN openrc || rc-update add postgresql
 
 # Install pulumi
 RUN curl -fsSL https://get.pulumi.com/ | sh
-RUN pulumi login -l \
+RUN pulumi plugin install resource kubernetes v2.4.1 \
     # && pulumi plugin install resource gcp v3.15.0 \
-    && pulumi plugin install resource gitlab v2.5.0 \
-    && pulumi plugin install resource kubernetes v2.4.1
+    && pulumi plugin install resource gitlab v2.5.0 
 
 # Install doctl
 RUN curl -L https://github.com/digitalocean/doctl/releases/download/v1.23.1/doctl-1.23.1-linux-amd64.tar.gz | tar xz
@@ -105,6 +105,10 @@ RUN curl -L https://github.com/digitalocean/doctl/releases/download/v1.23.1/doct
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.18.6/bin/linux/amd64/kubectl \
     && chmod +x ./kubectl \
     && sudo mv ./kubectl /usr/local/bin/kubectl
+
+# Install google cloud cli
+RUN curl https://sdk.cloud.google.com > install.sh \
+    && bash install.sh --disable-prompts
 
 # Install helm
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 \

@@ -39,6 +39,7 @@ export const cert = new k8s.helm.v3.Chart(
     'certificate',
     {
         chart: 'cert-manager',
+        version: 'v1.0.2',
         fetchOpts: {
             repo: 'https://charts.jetstack.io'
         },
@@ -51,7 +52,6 @@ export const cert = new k8s.helm.v3.Chart(
                 defaultIssuerKind: 'ClusterIssuer'
             }
         },
-        version: 'v0.16.0',
         namespace: 'cert-manager'
     },
     { provider, dependsOn: [certToken, certNamespace, domain] }

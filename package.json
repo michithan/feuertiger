@@ -21,14 +21,16 @@
     "packages": [
         "packages/*",
         "services/*",
-        "ci/*",
+        "infrastructure",
+        "deployment",
         "config",
         "cli"
     ],
     "workspaces": [
         "packages/*",
         "services/*",
-        "ci/*",
+        "infrastructure",
+        "deployment",
         "config",
         "cli"
     ],

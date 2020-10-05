@@ -8,6 +8,7 @@ export const dns = new k8s.helm.v3.Chart(
     'dns',
     {
         chart: 'external-dns',
+        version: '3.4.3',
         fetchOpts: {
             repo: 'https://charts.bitnami.com/bitnami'
         },

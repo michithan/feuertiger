@@ -7,12 +7,12 @@ export const ingress = new k8s.helm.v3.Chart(
     'ingress',
     {
         chart: 'nginx-ingress',
+        version: '0.6.1',
         fetchOpts: {
             repo: 'https://helm.nginx.com/stable'
         },
         values: {
             controller: {
-                // kind: 'DaemonSet',
                 config: {
                     entries: {
                         'use-proxy-protocol': 'true'
