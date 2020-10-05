@@ -80,11 +80,7 @@ export const deploy = ({
         {
             metadata,
             spec: {
-                ports: [
-                    {
-                        port: ports.http
-                    }
-                ],
+                ports: Object.values(ports).map(port => ({ port })),
                 selector: {
                     app: name
                 }
