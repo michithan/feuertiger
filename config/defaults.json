@@ -1,4 +1,6 @@
 {
+    "postgresUser": "feuertiger",
+    "postgresPassword": "feuertiger",
     "postgresUri": "postgresql://feuertiger:feuertiger@localhost:5432/feuertiger",
     "graphqlUri": "http://localhost:4000/graphql",
     "webClientUri": "http://localhost:3000/"

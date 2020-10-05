@@ -3,7 +3,8 @@ services:
     postgres:
         image: 'postgres:13'
         environment:
-            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=feuertiger
+            - POSTGRES_PASSWORD=feuertiger
         ports:
             - 5432:5432
     graphql:

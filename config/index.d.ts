@@ -31,6 +31,8 @@ export interface Config {
         clientEmail: string;
     };
     postgresUri: string;
+    postgresUser: string;
+    postgresPassword: string;
     graphqlUri: string;
     webClientUri: string;
 }

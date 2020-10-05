@@ -7,6 +7,8 @@ const defaults = require('./defaults.json');
  * Get all existing variables
  */
 const {
+    POSTGRES_USER,
+    POSTGRES_PASSWORD,
     POSTGRES_URI,
     GRAPHQL_URI,
     WEB_CLIENT_URI,
@@ -64,6 +66,8 @@ const config = {
         privateKey: GOOGLE_CREDENTIALS && GOOGLE_CREDENTIALS.private_key,
         clientEmail: GOOGLE_CREDENTIALS && GOOGLE_CREDENTIALS.client_email
     },
+    postgresUser: POSTGRES_USER || defaults.postgresUser,
+    postgresPassword: POSTGRES_PASSWORD || defaults.postgresPassword,
     postgresUri: POSTGRES_URI || defaults.postgresUri,
     graphqlUri: GRAPHQL_URI || defaults.graphqlUri,
     webClientUri: WEB_CLIENT_URI || defaults.webClientUri

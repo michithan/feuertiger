@@ -9,7 +9,7 @@
         "dev": "ts-node-dev --debounce -- ./src/startup.ts",
         "test": "jest --collect-coverage",
         "build": "tsc",
-        "start": "node ./dist/startup.js"
+        "start": "node ./dist/startup.js --port 8080"
     },
     "repository": {
         "type": "git",
