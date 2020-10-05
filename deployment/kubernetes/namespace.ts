@@ -1,9 +1,11 @@
-import { Config } from '@pulumi/pulumi';
 import * as k8s from '@pulumi/kubernetes';
+import config from '@feuertiger/config';
 
 import { provider } from './provider';
 
-const gitlabConfig = new Config('gitlab');
+const {
+    gitlab: { user, token, email }
+} = config;
 
 interface Namespace {
     namespace: k8s.core.v1.Namespace;
@@ -33,14 +35,12 @@ export const ensureNamespace = (namespace: string): Namespace => {
                     '.dockerconfigjson': JSON.stringify({
                         auths: {
                             'registry.gitlab.com': {
-                                auth: Buffer.from(
-                                    `${gitlabConfig.require(
-                                        'user'
-                                    )}:${gitlabConfig.require('token')}`
-                                ).toString('base64'),
-                                username: gitlabConfig.require('user'),
-                                email: gitlabConfig.require('user'),
-                                password: gitlabConfig.require('token')
+                                auth: Buffer.from(`${user}:${token}`).toString(
+                                    'base64'
+                                ),
+                                username: user,
+                                email,
+                                password: token
                             }
                         }
                     })
