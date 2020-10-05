@@ -5,7 +5,6 @@ coverage
 videos
 screenshots
 
-package-lock.json
 secrets.json
 
 *.en
