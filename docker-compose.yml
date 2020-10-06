@@ -6,18 +6,27 @@ services:
             - POSTGRES_USER=feuertiger
             - POSTGRES_PASSWORD=feuertiger
         ports:
-            - 5432:5432
+            - target: 5432
+              published: 5432
+              protocol: tcp
+              mode: host
     graphql:
         build: ./services/graphql
         environment:
             - GOOGLE_CREDENTIALS
             - POSTGRES_URI
         ports:
-            - 4000:4000
+            - target: 8080
+              published: 4000
+              protocol: tcp
+              mode: host
     web-client:
         build: ./services/web-client
         environment:
             - FIREBASE_CONFIG
             - GRAPHQL_URI
         ports:
-            - 3000:3000
+            - target: 8080
+              published: 3000
+              protocol: tcp
+              mode: host

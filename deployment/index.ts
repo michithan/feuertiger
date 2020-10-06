@@ -2,16 +2,23 @@ import config from '@feuertiger/config';
 
 import { deploy } from './kubernetes/deploy';
 
-const { firebaseAdminConfig, postgresUser, postgresPassword } = config;
+const {
+    firebaseAppConfig,
+    firebaseAdminConfig,
+    postgresUser,
+    postgresPassword
+} = config;
 
 export const webClient = deploy({
     namespace: config.projectName,
     name: 'web-client',
-    image: 'registry.gitlab.com/feuertiger/feuertiger/dev-environment:latest',
+    image:
+        'registry.gitlab.com/feuertiger/feuertiger/feuertiger-web-client:latest',
     minReplicas: 1,
     ports: { http: 8080 },
     env: {
-        FIREBASE_CONFIG: JSON.stringify(config.firebaseAdminConfig),
+        DEPLOY_DATE: new Date().toISOString(),
+        FIREBASE_CONFIG: JSON.stringify(firebaseAppConfig, null, 2),
         GRAPHQL_URI: 'https://api.dev.feuertiger.com/graphql'
     },
     cpu: 50,
@@ -27,7 +34,8 @@ export const webApi = deploy({
     minReplicas: 1,
     ports: { http: 8080 },
     env: {
-        GOOGLE_CREDENTIALS: JSON.stringify(firebaseAdminConfig),
+        DEPLOY_DATE: new Date().toISOString(),
+        GOOGLE_CREDENTIALS: JSON.stringify(firebaseAdminConfig, null, 2),
         POSTGRES_URI: `postgresql://${postgresUser}:${postgresPassword}@postgres:5432/feuertiger`
     },
     cpu: 50,
@@ -42,6 +50,7 @@ export const db = deploy({
     minReplicas: 1,
     ports: { tcp: 5432 },
     env: {
+        POSTGRES_DB: 'feuertiger',
         POSTGRES_USER: postgresUser,
         POSTGRES_PASSWORD: postgresPassword
     },

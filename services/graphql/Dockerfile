@@ -4,6 +4,6 @@ WORKDIR /workspaces
 
 COPY . /workspaces
 
-RUN yarn
+RUN npm i
 
-CMD yarn start
+CMD npm run start
