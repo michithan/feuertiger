@@ -2,6 +2,7 @@
     "name": "feuertiger",
     "dockerFile": "../.dev-env.Dockerfile",
     "postCreateCommand": "yarn && feuertiger init",
+    "forwardPorts": [3000, 4000, 5000],
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
