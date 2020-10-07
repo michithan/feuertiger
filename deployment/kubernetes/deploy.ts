@@ -3,6 +3,7 @@ import * as k8sx from '@pulumi/kubernetesx';
 
 import { provider } from './provider';
 import { ensureNamespace } from './namespace';
+import { Output } from '@pulumi/pulumi';
 
 export interface DeploymentConfig {
     namespace: string;
@@ -23,6 +24,15 @@ export interface DeploymentConfig {
     path?: string;
 }
 
+export interface DeploymentResult {
+    name: string;
+    namespace: string;
+    autoscaling?: Output<unknown>;
+    image: Output<string>;
+    dns?: Output<string>;
+    ip?: Output<string>;
+}
+
 export const deploy = ({
     namespace,
     name,
@@ -36,7 +46,7 @@ export const deploy = ({
     host,
     path,
     access
-}: DeploymentConfig) => {
+}: DeploymentConfig): DeploymentResult => {
     const { imagePullSecret } = ensureNamespace(namespace);
     const metadata = {
         name,
@@ -135,11 +145,9 @@ export const deploy = ({
                         'kubernetes.io/tls-acme': 'true',
                         'cert-manager.k8s.io/cluster-issuer':
                             'letsencrypt-prod',
-                        ...(access && {
-                            'nginx.ingress.kubernetes.io/whitelist-source-range': access
-                                .map(({ cidr }) => cidr)
-                                .join(',')
-                        })
+                        'nginx.ingress.kubernetes.io/whitelist-source-range':
+                            access?.map(({ cidr }) => cidr)?.join(',') ??
+                            '0.0.0.0/0'
                     }
                 },
                 spec: {
@@ -155,13 +163,11 @@ export const deploy = ({
                             http: {
                                 paths: [
                                     {
+                                        path: path ?? '/',
                                         backend: {
                                             serviceName: service.metadata.name,
                                             servicePort: ports.http ?? 80
-                                        },
-                                        ...(path && {
-                                            path
-                                        })
+                                        }
                                     }
                                 ]
                             }

@@ -25,7 +25,7 @@ export const certToken = new k8s.core.v1.Secret(
         },
         data: {
             'access-token': Buffer.from(
-                process.env.DIGITALOCEAN_TOKEN
+                process.env.DIGITALOCEAN_TOKEN as string
             ).toString('base64')
         }
     },
@@ -39,7 +39,7 @@ export const cert = new k8s.helm.v3.Chart(
     'certificate',
     {
         chart: 'cert-manager',
-        version: 'v1.0.2',
+        version: '1.0.2',
         fetchOpts: {
             repo: 'https://charts.jetstack.io'
         },

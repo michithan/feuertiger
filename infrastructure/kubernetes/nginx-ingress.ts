@@ -6,23 +6,28 @@ import { provider } from './provider';
 export const ingress = new k8s.helm.v3.Chart(
     'ingress',
     {
-        chart: 'nginx-ingress',
-        version: '0.6.1',
+        chart: 'ingress-nginx',
+        version: '3.4.1',
         fetchOpts: {
-            repo: 'https://helm.nginx.com/stable'
+            repo: 'https://kubernetes.github.io/ingress-nginx'
         },
         values: {
             controller: {
+                kind: 'DaemonSet',
+                hostPort: {
+                    enabled: true
+                },
+                admissionWebhooks: {
+                    enabled: false
+                },
                 config: {
-                    entries: {
-                        'use-proxy-protocol': 'true'
-                    }
+                    'use-proxy-protocol': 'true',
+                    'enable-real-ip': 'true'
                 },
                 service: {
                     annotations: {
-                        // 'service.beta.kubernetes.io/do-loadbalancer-hostname': hostname,
-                        // 'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
-                        //     'true',
+                        'service.beta.kubernetes.io/do-loadbalancer-enable-proxy-protocol':
+                            'true',
                         'service.beta.kubernetes.io/do-loadbalancer-name': `${config.projectName}-loadbalancer`
                     },
                     externalTrafficPolicy: 'Local'
@@ -36,9 +41,7 @@ export const ingress = new k8s.helm.v3.Chart(
     { provider, dependsOn: [provider] }
 );
 
-export const address = ingress.getResourceProperty(
+export const address = ingress.getResource(
     'v1/Service',
-    'default',
-    'ingress-nginx-ingress',
-    'status'
-).loadBalancer.ingress[0];
+    'ingress-ingress-nginx-controller'
+).status.loadBalancer.ingress[0];
