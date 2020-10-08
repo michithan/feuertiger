@@ -5,7 +5,7 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "connect": "doctl auth init -t $DIGITALOCEAN_TOKEN && doctl kubernetes cluster kubeconfig save feuer-cluster",
+        "connect": "doctl auth init -t $DIGITALOCEAN_TOKEN && doctl kubernetes cluster kubeconfig save feuertiger-cluster",
         "pre": "pulumi pre -e",
         "up": "pulumi up -y -e",
         "destroy": "pulumi destroy -e"

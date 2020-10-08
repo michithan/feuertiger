@@ -1,16 +1,21 @@
 import config from '@feuertiger/config';
 
-import { deploy } from './kubernetes/deploy';
+import { service } from './kubernetes/service';
+import { ingress } from './kubernetes/ingress';
 
 const {
     firebaseAppConfig,
     firebaseAdminConfig,
     postgresUser,
-    postgresPassword
+    postgresPassword,
+    gitlab: { branchSlug }
 } = config;
 
-export const webClient = deploy({
-    namespace: config.projectName,
+const namespace = `${branchSlug}-${config.projectName}`;
+const subDomainPrefix = branchSlug === 'main' ? '' : `${branchSlug}.`;
+
+export const webClient = service({
+    namespace,
     name: 'web-client',
     image:
         'registry.gitlab.com/feuertiger/feuertiger/feuertiger-web-client:latest',
@@ -22,12 +27,11 @@ export const webClient = deploy({
         GRAPHQL_URI: 'https://api.dev.feuertiger.com/graphql'
     },
     cpu: 50,
-    memory: 100,
-    host: 'dev.feuertiger.com'
+    memory: 100
 });
 
-export const webApi = deploy({
-    namespace: config.projectName,
+export const webApi = service({
+    namespace,
     name: 'graphql',
     image:
         'registry.gitlab.com/feuertiger/feuertiger/feuertiger-graphql:latest',
@@ -39,12 +43,11 @@ export const webApi = deploy({
         POSTGRES_URI: `postgresql://${postgresUser}:${postgresPassword}@postgres:5432/feuertiger`
     },
     cpu: 50,
-    memory: 100,
-    host: 'api.dev.feuertiger.com'
+    memory: 100
 });
 
-export const db = deploy({
-    namespace: config.projectName,
+export const db = service({
+    namespace,
     name: 'postgres',
     image: 'postgres:13',
     minReplicas: 1,
@@ -56,4 +59,21 @@ export const db = deploy({
     },
     cpu: 50,
     memory: 100
+});
+
+export const mainIngress = ingress({
+    namespace,
+    host: `${subDomainPrefix}feuertiger.com`,
+    paths: [
+        {
+            path: '/',
+            serviceName: webClient.name,
+            servicePort: webClient.ports.http
+        },
+        {
+            path: '/graphql',
+            serviceName: webApi.name,
+            servicePort: webApi.ports.http
+        }
+    ]
 });
