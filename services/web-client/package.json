@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/web-client",
-    "version": "1.0.9-dev.89e996c.0",
+    "version": "1.0.9-dev.721ea15.0",
     "main": "./index.js",
     "sideEffects": false,
     "author": "Michael Thanei",
