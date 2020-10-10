@@ -4,7 +4,7 @@ import { PackageInfo } from './list';
 export class Queue {
     queue: Array<{
         packageInfo: ExtendedPackageInfo;
-        awaiter: () => void;
+        resolve: () => void;
     }> = [];
 
     packageInfos: Array<ExtendedPackageInfo> = [];
@@ -15,7 +15,7 @@ export class Queue {
 
     enqueue = (packageInfo: ExtendedPackageInfo): Promise<void> =>
         new Promise(resolve => {
-            this.queue.push({ packageInfo, awaiter: resolve });
+            this.queue.push({ packageInfo, resolve });
             this.check();
         });
 
@@ -27,14 +27,12 @@ export class Queue {
         dependencies.every(({ name }) => this.findPackageInfo(name));
 
     check(): void {
-        this.queue = this.queue.filter(
-            ({ packageInfo: { dependencies }, awaiter }) => {
-                const ready = this.isReady(dependencies);
-                if (ready) {
-                    awaiter();
-                }
-                return !ready;
-            }
+        const readies = this.queue.filter(({ packageInfo: { dependencies } }) =>
+            this.isReady(dependencies)
         );
+
+        readies.forEach(({ resolve }) => resolve());
+
+        this.queue = this.queue.filter(waiting => !readies.includes(waiting));
     }
 }

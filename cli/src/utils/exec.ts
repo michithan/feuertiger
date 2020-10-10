@@ -86,14 +86,19 @@ const killOnExit = (
     process.once('uncaughtException', killer);
 };
 
-const transformOutputIfExecaExecution = (
+const transformOutputIfExecaExecution = async (
     execution: execa.ExecaChildProcess<string> | unknown,
     packageInfo: ExtendedPackageInfo
-): void => {
+): Promise<void> => {
     const execaExecution = execution as execa.ExecaChildProcess<string>;
-    if (execaExecution.stdout && execaExecution.stderr && execaExecution.kill) {
+    if (
+        execaExecution?.stdout &&
+        execaExecution?.stderr &&
+        execaExecution?.kill
+    ) {
         transformExecaOutput(execaExecution, packageInfo);
         killOnExit(execaExecution, packageInfo);
+        await execaExecution;
     }
 };
 
@@ -114,23 +119,19 @@ export const exec = async <
     EventEmitter.defaultMaxListeners = packageInfos.length * 3;
 
     const executions = packageInfos.map(async packageInfo => {
-        if (parallel) {
+        if (!parallel) {
             await queue.enqueue(packageInfo);
         }
         try {
             const execution = func(packageInfo, packageInfos);
 
-            transformOutputIfExecaExecution(execution, packageInfo);
+            await transformOutputIfExecaExecution(execution, packageInfo);
 
             if (execution instanceof Promise) {
-                const completedExecution = await execution;
-                transformOutputIfExecaExecution(
-                    completedExecution,
-                    packageInfo
-                );
+                await execution;
             }
 
-            if (parallel) {
+            if (!parallel) {
                 // eslint-disable-next-line no-param-reassign
                 packageInfo.completed = true;
                 queue.check();
@@ -140,6 +141,8 @@ export const exec = async <
         } catch (error) {
             if (typeof error === 'string') {
                 console.log(addErrorPackagePrefix(error, packageInfo));
+            } else if (typeof error?.message === 'string') {
+                console.log(addErrorPackagePrefix(error?.message, packageInfo));
             }
             return Promise.reject;
         }

@@ -1,6 +1,8 @@
 {
     "name": "@feuertiger/config",
     "version": "1.0.9-dev.89e996c.0",
+    "author": "Michael Thanei",
+    "license": "MIT",
     "description": "config",
     "main": "./dist/index.js",
     "repository": {
