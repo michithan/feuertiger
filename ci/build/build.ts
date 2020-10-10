@@ -1,8 +1,8 @@
 import { execSync } from 'child_process';
-import git from 'simple-git';
+import simpleGit, { SimpleGit } from 'simple-git';
 import config from '@feuertiger/config';
 
-const repo = git({
+const repo: SimpleGit = simpleGit({
     baseDir: process.cwd(),
     binary: 'git'
 });

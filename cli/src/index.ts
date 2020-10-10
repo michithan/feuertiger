@@ -1,6 +1,7 @@
+/* eslint-disable no-case-declarations */
 /* eslint-disable global-require */
-const meow = require('meow');
-const { feuertiger, tiger } = require('./src/utils');
+import meow from 'meow';
+import { feuertiger, tiger } from './utils/logging';
 
 const cli = meow(
     `
@@ -34,52 +35,72 @@ const cli = meow(
             package: {
                 type: 'string',
                 alias: 'p'
+            },
+            changed: {
+                type: 'boolean',
+                alias: 'c'
             }
         }
     }
 );
 
+export interface Flags {
+    package?: string;
+    changed?: boolean;
+}
+
 (async () => {
     switch (cli.input[0]) {
         case 'init':
             tiger('🎬 init 🎬');
-            require('./src/init')(cli.flags);
+            const init = await import('./init');
+            await init.default();
             break;
         case 'linkdist':
             tiger('🔗 linkdist 🔗');
-            require('./src/linkdist')();
+            const linkdist = await import('./linkdist');
+            await linkdist.default(cli.flags);
             break;
         case 'format':
             tiger('🧹 formats 🧹');
-            require('./src/format')(cli.flags);
+            const format = await import('./format');
+            await format.default(cli.flags);
             break;
         case 'lint':
             tiger('🔎 lints 🔍');
-            require('./src/lint')(cli.flags);
+            const lint = await import('./lint');
+            await lint.default(cli.flags);
             break;
         case 'list':
             tiger('📜 lists 📜');
-            require('./src/utils').list(cli.flags).then(console.log);
+            const utils = await import('./utils/list');
+            const list = await utils.list(cli.flags);
+            console.log(list);
             break;
         case 'test':
             tiger('🧪 tests 🧪');
-            require('./src/test')(cli.flags);
+            const test = await import('./test');
+            await test.default(cli.flags);
             break;
         case 'dev':
             tiger('👟🧪 running everything in development mode 🧪👟');
-            require('./src/dev')(cli.flags);
+            const dev = await import('./dev');
+            await dev.default(cli.flags);
             break;
         case 'build':
             tiger('🔧 building everything 🔧');
-            require('./src/build')(cli.flags);
+            const build = await import('./build');
+            await build.default(cli.flags);
             break;
         case 'publish':
             tiger('🌎 publishing everything 🌎');
-            require('./src/publish')(cli.flags);
+            const publish = await import('./publish');
+            await publish.default();
             break;
         case 'dockerize':
             tiger('🐳 building docker images 🐳');
-            require('./src/dockerize')(cli.flags);
+            const dockerize = await import('./dockerize');
+            await dockerize.default(cli.flags);
             break;
         default:
             console.log(cli.help);

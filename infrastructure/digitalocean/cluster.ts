@@ -37,4 +37,4 @@ export const cert = kubeconfig.apply(kc => {
     return Buffer.from(base64Cert, 'base64').toString('ascii');
 });
 
-export const token = kubeconfig.apply(config => config.token);
+export const token = kubeconfig.apply(({ token: kubeToken }) => kubeToken);

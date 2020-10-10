@@ -1,10 +1,12 @@
-const execa = require('execa');
-const { exec } = require('./utils');
+import execa from 'execa';
+import { Flags } from '.';
+import { exec } from './utils/exec';
+import { PackageInfo } from './utils/list';
 
 const prettierrc = require.resolve('../../.prettierrc');
 const prettierignore = require.resolve('../../.prettierignore');
 
-const getPrettierBinary = async cwd => {
+const getPrettierBinary = async (cwd: string): Promise<string> => {
     const { stdout } = await execa('yarn', ['bin', 'prettier'], { cwd });
     return stdout;
 };
@@ -13,10 +15,10 @@ const cwd = process.cwd();
 
 const types = ['js', 'jsx', 'ts', 'tsx', 'json', 'graphql', 'yml', 'md'];
 
-module.exports = async flags => {
+export default async (flags: Flags): Promise<void> => {
     const bin = await getPrettierBinary(cwd);
     try {
-        await exec(flags, ({ location }) =>
+        await exec(flags, ({ location }: PackageInfo) =>
             execa(
                 bin,
                 [

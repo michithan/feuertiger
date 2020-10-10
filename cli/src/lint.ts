@@ -1,7 +1,11 @@
-const { ESLint } = require('eslint');
-const { exec, addPackagePrefix } = require('./utils');
-const { root } = require('./paths');
-const eslintrc = require('../../.eslintrc');
+import { ESLint } from 'eslint';
+
+import eslintrc from '../../.eslintrc';
+import { Flags } from '.';
+import { exec } from './utils/exec';
+import { root } from './paths';
+import { addPackagePrefix } from './utils/logging';
+import { ExtendedPackageInfo } from './utils/extendedList';
 
 const eslint = new ESLint({
     fix: true,
@@ -11,9 +15,12 @@ const eslint = new ESLint({
     errorOnUnmatchedPattern: false
 });
 
-const lint = formatter => async packageInfo => {
+const lint = (formatter: ESLint.Formatter) => async (
+    packageInfo: ExtendedPackageInfo
+): Promise<void> => {
     const { name, location } = packageInfo;
-    const log = text => console.log(addPackagePrefix(text, packageInfo).trim());
+    const log = (text: string) =>
+        console.log(addPackagePrefix(text, packageInfo).trim());
 
     log(`linting ${name}`);
 
@@ -28,7 +35,7 @@ const lint = formatter => async packageInfo => {
     }
 };
 
-module.exports = async flags => {
+export default async (flags: Flags): Promise<void> => {
     const formatter = await eslint.loadFormatter('stylish');
     await exec(flags, lint(formatter), true);
 };

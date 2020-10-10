@@ -1,11 +1,11 @@
-const { execSync } = require('child_process');
-const { writeFileSync, existsSync } = require('fs');
-const execa = require('execa');
-const config = require('@feuertiger/config');
-const { root } = require('./paths');
-const linkdist = require('./linkdist');
+import { execSync } from 'child_process';
+import { writeFileSync, existsSync } from 'fs';
+import execa from 'execa';
+import config from '@feuertiger/config';
+import { root } from './paths';
+import linkdist from './linkdist';
 
-const asPostgres = command => `su - postgres -c "${command}"`;
+const asPostgres = (command: string): string => `su - postgres -c "${command}"`;
 
 const dbCreateUser = asPostgres(
     'psql --command \\"CREATE USER feuertiger WITH SUPERUSER PASSWORD \'feuertiger\';\\"'
@@ -23,7 +23,7 @@ const installDependencies = async () => {
 
 const linkDistFolders = async () => {
     console.log('linking dist folders');
-    await linkdist();
+    await linkdist({});
 };
 
 const setupDb = async () => {
@@ -78,7 +78,7 @@ const syncEnv = async () => {
     writeFileSync(`/etc/profile.d/env.sh`, exports);
 };
 
-module.exports = async () => {
+export default async (): Promise<void> => {
     await installDependencies();
     await linkDistFolders();
     await setupDb();

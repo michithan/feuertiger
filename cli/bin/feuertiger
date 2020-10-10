@@ -1,2 +1,2 @@
-#!/usr/bin/env node
-require(__dirname.replace('bin', 'index'));
+#!/usr/bin/env ts-node
+require('../src/index');

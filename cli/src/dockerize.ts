@@ -1,11 +1,14 @@
-const fs = require('fs');
-const { Readable } = require('stream');
-const path = require('path');
-const execa = require('execa');
-const config = require('@feuertiger/config');
-const { exec } = require('./utils');
+import { Readable } from 'stream';
+import * as fs from 'fs';
+import * as path from 'path';
+import execa from 'execa';
+import config from '@feuertiger/config';
 
-const createTag = ({ name }) => {
+import { exec } from './utils/exec';
+import { PackageInfo } from './utils/list';
+import { Flags } from '.';
+
+const createTag = (name: string): string => {
     const { dockerRegistryRepository } = config;
     const version = 'latest';
     const imageName = name
@@ -15,7 +18,7 @@ const createTag = ({ name }) => {
     return `${dockerRegistryRepository}/${imageName}:${version}`;
 };
 
-const login = () => {
+const login = (): execa.ExecaChildProcess<string> => {
     const {
         gitlab: { token, user },
         dockerRegistry
@@ -28,15 +31,20 @@ const login = () => {
             stdout: 'inherit'
         }
     );
-    Readable.from([token]).pipe(execution.stdin);
+    if (execution.stdin) {
+        Readable.from([token]).pipe(execution.stdin);
+    }
     return execution;
 };
 
-const dockerize = ({ location, name }) => {
+const dockerize = ({
+    location,
+    name
+}: PackageInfo): Promise<void> | execa.ExecaChildProcess<string> => {
     const dockerfile = path.resolve(location, 'Dockerfile');
     const hasDockerfile = fs.existsSync(dockerfile);
     if (hasDockerfile) {
-        const tag = createTag({ name });
+        const tag = createTag(name);
         return execa(
             'docker',
             ['build', '--pull', '--rm', '-f', 'Dockerfile', '-t', tag, '.'],
@@ -45,24 +53,27 @@ const dockerize = ({ location, name }) => {
             }
         );
     }
-    return Promise.resolve;
+    return Promise.resolve();
 };
 
-const push = ({ location, name }) => {
+const push = ({
+    location,
+    name
+}: PackageInfo): Promise<void> | execa.ExecaChildProcess<string> => {
     const dockerfile = path.resolve(location, 'Dockerfile');
     const hasDockerfile = fs.existsSync(dockerfile);
     if (hasDockerfile) {
-        const tag = createTag({ name });
+        const tag = createTag(name);
         return execa('docker', ['push', tag], {
             cwd: location,
             stderr: 'inherit',
             stdout: 'inherit'
         });
     }
-    return Promise.resolve;
+    return Promise.resolve();
 };
 
-module.exports = async flags => {
+export default async (flags: Flags): Promise<void> => {
     try {
         await login();
         await exec(flags, dockerize, true);

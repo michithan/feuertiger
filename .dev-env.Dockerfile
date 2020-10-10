@@ -116,7 +116,7 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
     && ./get_helm.sh
 
 # Install lerna
-RUN npm i -g lerna typescript
+RUN npm i -g lerna typescript ts-node
 
 # Use PowerShell
 ENTRYPOINT zsh

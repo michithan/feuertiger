@@ -1,7 +1,7 @@
-const execa = require('execa');
-const config = require('@feuertiger/config');
+import execa from 'execa';
+import config from '@feuertiger/config';
 
-module.exports = async flags => {
+export default async (): Promise<void> => {
     const {
         gitlab: { branchSlug, commit, token },
         npmRegistry

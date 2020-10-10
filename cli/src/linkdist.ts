@@ -1,12 +1,14 @@
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
-const fs = require('fs');
-const { exec, addPackagePrefix } = require('./utils');
+import fs from 'fs';
+import { Flags } from '.';
+import { exec } from './utils/exec';
+import { addPackagePrefix } from './utils/logging';
 
 const linkscript = 'module.exports = require("../src/index");';
 const linktypesscript = 'export * from "../src/index";';
 
-const exists = async path => {
+const exists = async (path: string): Promise<boolean> => {
     try {
         await fs.promises.access(path);
         return true;
@@ -15,7 +17,7 @@ const exists = async path => {
     }
 };
 
-module.exports = flags =>
+export default (flags: Flags): Promise<void> =>
     exec(flags, async packageInfo => {
         const { location } = packageInfo;
         const distpath = `${location}/dist`;

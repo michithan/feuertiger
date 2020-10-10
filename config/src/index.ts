@@ -1,7 +1,53 @@
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
 
-const constants = require('./constants.json');
-const defaults = require('./defaults.json');
+import constants from './constants.json';
+import defaults from './defaults.json';
+
+export interface Config {
+    projectName: string;
+    gitlab: {
+        projectId: string;
+        token: string;
+        user: string;
+        email: string;
+        repositoryUrl: string;
+        branch: string;
+        branchSlug: string;
+        commit: string;
+    };
+    npmRegistry: string;
+    dockerRegistry: string;
+    dockerRegistryRepository: string;
+    gcp: {
+        project: string;
+        region: string;
+        zone: string;
+        accessToken: string;
+    };
+    digitaloceanToken: string;
+    firebaseAppConfig: {
+        projectId: string;
+        apiKey: string;
+        authDomain: string;
+    };
+    firebaseAdminConfig: {
+        projectId: string;
+        privateKey: string;
+        clientEmail: string;
+    };
+    postgresUri: string;
+    postgresUser: string;
+    postgresPassword: string;
+    graphqlUri: string;
+    webClientUri: string;
+    env: {
+        GIT_USER: string;
+        GIT_EMAIL: string;
+        POSTGRES_URI: string;
+        GRAPHQL_URI: string;
+        WEB_CLIENT_URI: string;
+    };
+}
 
 /*
  * Get all existing variables
@@ -21,7 +67,7 @@ const {
 const FIREBASE_CONFIG = JSON.parse(process.env.FIREBASE_CONFIG || '{}');
 const GOOGLE_CREDENTIALS = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
 
-const tryGetFromShell = command =>
+const tryGetFromShell = (command: string): string =>
     execSync(`${command} || echo`, {
         stdio: ['pipe', 'pipe', 'ignore']
     })
@@ -73,7 +119,7 @@ const config = {
     webClientUri: WEB_CLIENT_URI || defaults.webClientUri
 };
 
-module.exports = {
+export default {
     ...config,
     env: {
         GIT_USER: config.gitlab.user,
@@ -82,4 +128,4 @@ module.exports = {
         GRAPHQL_URI: config.graphqlUri,
         WEB_CLIENT_URI: config.webClientUri
     }
-};
+} as Config;

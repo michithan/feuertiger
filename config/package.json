@@ -2,7 +2,7 @@
     "name": "@feuertiger/config",
     "version": "1.0.9-dev.89e996c.0",
     "description": "config",
-    "main": "./index.js",
+    "main": "./dist/index.js",
     "repository": {
         "type": "git",
         "url": "https://gitlab.com/feuertiger/feuertiger",
@@ -11,5 +11,10 @@
     "publishConfig": {
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
-    "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
+    "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0",
+    "sideEffects": false,
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch"
+    }
 }

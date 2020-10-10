@@ -1,7 +1,13 @@
-const execa = require('execa');
-const { exec, checkIfNpmScriptExists } = require('./utils');
+import execa from 'execa';
 
-const test = ({ location }) => {
+import { Flags } from '.';
+import { checkIfNpmScriptExists } from './utils/checkIfNpmScriptExists';
+import { exec } from './utils/exec';
+import { ExtendedPackageInfo } from './utils/extendedList';
+
+const test = ({
+    location
+}: ExtendedPackageInfo): execa.ExecaChildPromise<string> | void => {
     const command = 'test';
     const hasTestScript = checkIfNpmScriptExists({ location, command });
     if (hasTestScript) {
@@ -11,10 +17,9 @@ const test = ({ location }) => {
             stdout: 'pipe'
         });
     }
-    return Promise.resolve;
 };
 
-module.exports = async flags => {
+export default async (flags: Flags): Promise<void> => {
     try {
         await exec(flags, test, true);
     } catch (error) {
