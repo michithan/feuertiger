@@ -94,9 +94,10 @@ RUN openrc || rc-update add postgresql
 
 # Install pulumi
 RUN curl -fsSL https://get.pulumi.com/ | sh
-RUN pulumi plugin install resource kubernetes v2.4.1 \
-    # && pulumi plugin install resource gcp v3.15.0 \
-    && pulumi plugin install resource gitlab v2.5.0 
+RUN pulumi plugin install resource digitalocean v2.8.0 \
+    && pulumi plugin install resource kubernetes v2.6.1 \
+    && pulumi plugin install resource gcp v3.25.0 \
+    && pulumi plugin install resource gitlab v2.5.0
 
 # Install doctl
 RUN curl -L https://github.com/digitalocean/doctl/releases/download/v1.23.1/doctl-1.23.1-linux-amd64.tar.gz | tar xz

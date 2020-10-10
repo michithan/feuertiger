@@ -1,9 +1,9 @@
 import * as digitalocean from '@pulumi/digitalocean';
-import config from '@feuertiger/config';
+import { projectName } from '@feuertiger/config';
 
 import { provider } from './provider';
 
-const name = `${config.projectName}-vpc`;
+const name = `${projectName}-vpc`;
 
 export const vpc = new digitalocean.Vpc(
     name,

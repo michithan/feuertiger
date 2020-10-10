@@ -1,17 +1,18 @@
-import config from '@feuertiger/config';
-
-import { service } from './kubernetes/service';
-import { ingress } from './kubernetes/ingress';
-
-const {
+import {
+    projectName,
     firebaseAppConfig,
     firebaseAdminConfig,
     postgresUser,
     postgresPassword,
-    gitlab: { branchSlug }
-} = config;
+    gitlab
+} from '@feuertiger/config';
 
-const namespace = `${branchSlug}-${config.projectName}`;
+import { service } from './kubernetes/service';
+import { ingress } from './kubernetes/ingress';
+
+const { branchSlug } = gitlab;
+
+const namespace = `${branchSlug}-${projectName}`;
 const subDomainPrefix = branchSlug === 'main' ? '' : `${branchSlug}.`;
 
 export const webClient = service({

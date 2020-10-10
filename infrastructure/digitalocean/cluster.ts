@@ -1,11 +1,11 @@
 import * as digitalocean from '@pulumi/digitalocean';
-import config from '@feuertiger/config';
+import { projectName } from '@feuertiger/config';
 
 import { provider } from './provider';
 import { vpc } from './vpc';
 import { droplet } from './droplet';
 
-const name = `${config.projectName}-cluster`;
+const name = `${projectName}-cluster`;
 
 export const cluster = new digitalocean.KubernetesCluster(
     name,

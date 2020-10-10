@@ -1,57 +1,13 @@
-import { execSync } from 'child_process';
-
+/* eslint-disable camelcase */
 import constants from './constants.json';
 import defaults from './defaults.json';
+import {
+    tryGetGitBranchSlug,
+    tryGetGitCommitHashShort,
+    tryGetGitUserEmail,
+    tryGetGitUserName
+} from './utils';
 
-export interface Config {
-    projectName: string;
-    gitlab: {
-        projectId: string;
-        token: string;
-        user: string;
-        email: string;
-        repositoryUrl: string;
-        branch: string;
-        branchSlug: string;
-        commit: string;
-    };
-    npmRegistry: string;
-    dockerRegistry: string;
-    dockerRegistryRepository: string;
-    gcp: {
-        project: string;
-        region: string;
-        zone: string;
-        accessToken: string;
-    };
-    digitaloceanToken: string;
-    firebaseAppConfig: {
-        projectId: string;
-        apiKey: string;
-        authDomain: string;
-    };
-    firebaseAdminConfig: {
-        projectId: string;
-        privateKey: string;
-        clientEmail: string;
-    };
-    postgresUri: string;
-    postgresUser: string;
-    postgresPassword: string;
-    graphqlUri: string;
-    webClientUri: string;
-    env: {
-        GIT_USER: string;
-        GIT_EMAIL: string;
-        POSTGRES_URI: string;
-        GRAPHQL_URI: string;
-        WEB_CLIENT_URI: string;
-    };
-}
-
-/*
- * Get all existing variables
- */
 const {
     POSTGRES_USER,
     POSTGRES_PASSWORD,
@@ -61,71 +17,60 @@ const {
     DIGITALOCEAN_TOKEN,
     GIT_TOKEN,
     GIT_USER,
-    GIT_EMAIL
+    GIT_EMAIL,
+    FIREBASE_CONFIG: FIREBASE_CONFIG_TEXT,
+    GOOGLE_CREDENTIALS: GOOGLE_CREDENTIALS_TEXT
 } = process.env;
 
-const FIREBASE_CONFIG = JSON.parse(process.env.FIREBASE_CONFIG || '{}');
-const GOOGLE_CREDENTIALS = JSON.parse(process.env.GOOGLE_CREDENTIALS || '{}');
+const FIREBASE_CONFIG = JSON.parse(FIREBASE_CONFIG_TEXT ?? '{}');
 
-const tryGetFromShell = (command: string): string =>
-    execSync(`${command} || echo`, {
-        stdio: ['pipe', 'pipe', 'ignore']
-    })
-        .toString('utf-8')
-        .trim();
-const tryGetGitBranchSlug = () =>
-    tryGetFromShell('git branch --show-current')
-        .toLowerCase()
-        .replace(/[^a-z^0-9]/g, '-');
-const tryGetGitCommitHashShort = () =>
-    tryGetFromShell('git rev-parse --short HEAD');
-const tryGetGitUserName = () => tryGetFromShell('git config --get user.name');
-const tryGetGitUserEmail = () => tryGetFromShell('git config --get user.email');
+const GOOGLE_CREDENTIALS = JSON.parse(GOOGLE_CREDENTIALS_TEXT ?? '{}');
 
-/*
- * Compute configs
- */
-const config = {
-    projectName: constants.projectName,
-    gitlab: {
-        ...constants.gitlab,
-        token: GIT_TOKEN,
-        user: GIT_USER || tryGetGitUserName(),
-        email: GIT_EMAIL || tryGetGitUserEmail(),
-        repositoryUrl: '',
-        branch: '',
-        branchSlug: tryGetGitBranchSlug(),
-        commit: tryGetGitCommitHashShort()
-    },
-    npmRegistry: `//gitlab.com/api/v4/projects/${constants.gitlab.projectId}/packages/npm/`,
-    dockerRegistry: constants.dockerRegistry,
-    dockerRegistryRepository: `${constants.dockerRegistry}/${constants.projectName}/${constants.projectName}`,
-    gcp: constants.gcp,
-    digitaloceanToken: DIGITALOCEAN_TOKEN,
-    firebaseAppConfig: {
-        projectId: FIREBASE_CONFIG && FIREBASE_CONFIG.projectId,
-        apiKey: FIREBASE_CONFIG && FIREBASE_CONFIG.apiKey,
-        authDomain: FIREBASE_CONFIG && FIREBASE_CONFIG.authDomain
-    },
-    firebaseAdminConfig: {
-        projectId: GOOGLE_CREDENTIALS && GOOGLE_CREDENTIALS.project_id,
-        privateKey: GOOGLE_CREDENTIALS && GOOGLE_CREDENTIALS.private_key,
-        clientEmail: GOOGLE_CREDENTIALS && GOOGLE_CREDENTIALS.client_email
-    },
-    postgresUser: POSTGRES_USER || defaults.postgresUser,
-    postgresPassword: POSTGRES_PASSWORD || defaults.postgresPassword,
-    postgresUri: POSTGRES_URI || defaults.postgresUri,
-    graphqlUri: GRAPHQL_URI || defaults.graphqlUri,
-    webClientUri: WEB_CLIENT_URI || defaults.webClientUri
+export const { projectName, gcp, dockerRegistry } = constants;
+
+export const gitlab = {
+    ...constants.gitlab,
+    token: GIT_TOKEN,
+    user: GIT_USER ?? tryGetGitUserName(),
+    email: GIT_EMAIL ?? tryGetGitUserEmail(),
+    repositoryUrl: '',
+    branch: '',
+    branchSlug: tryGetGitBranchSlug(),
+    commit: tryGetGitCommitHashShort()
 };
 
-export default {
-    ...config,
-    env: {
-        GIT_USER: config.gitlab.user,
-        GIT_EMAIL: config.gitlab.email,
-        POSTGRES_URI: config.postgresUri,
-        GRAPHQL_URI: config.graphqlUri,
-        WEB_CLIENT_URI: config.webClientUri
-    }
-} as Config;
+export const npmRegistry = `//gitlab.com/api/v4/projects/${constants.gitlab.projectId}/packages/npm/`;
+
+export const dockerRegistryRepository = `${constants.dockerRegistry}/${constants.projectName}/${constants.projectName}`;
+
+export const digitaloceanToken = DIGITALOCEAN_TOKEN;
+
+export const firebaseAppConfig = {
+    projectId: FIREBASE_CONFIG?.projectId,
+    apiKey: FIREBASE_CONFIG?.apiKey,
+    authDomain: FIREBASE_CONFIG?.authDomain
+};
+
+export const firebaseAdminConfig = {
+    projectId: GOOGLE_CREDENTIALS?.project_id,
+    privateKey: GOOGLE_CREDENTIALS?.private_key,
+    clientEmail: GOOGLE_CREDENTIALS?.client_email
+};
+
+export const postgresUser = POSTGRES_USER ?? defaults.postgresUser;
+
+export const postgresPassword = POSTGRES_PASSWORD ?? defaults.postgresPassword;
+
+export const postgresUri = POSTGRES_URI ?? defaults.postgresUri;
+
+export const graphqlUri = GRAPHQL_URI ?? defaults.graphqlUri;
+
+export const webClientUri = WEB_CLIENT_URI ?? defaults.webClientUri;
+
+export const env = {
+    GIT_USER: gitlab.user,
+    GIT_EMAIL: gitlab.email,
+    POSTGRES_URI: postgresUri,
+    GRAPHQL_URI: graphqlUri,
+    WEB_CLIENT_URI: webClientUri
+};

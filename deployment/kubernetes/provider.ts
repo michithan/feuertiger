@@ -1,8 +1,7 @@
 import * as digitalocean from '@pulumi/digitalocean';
 import * as k8s from '@pulumi/kubernetes';
-import config from '@feuertiger/config';
+import { digitaloceanToken, projectName } from '@feuertiger/config';
 
-const { digitaloceanToken, projectName } = config;
 const name = `${projectName}-cluster`;
 
 export const doProvider = new digitalocean.Provider(

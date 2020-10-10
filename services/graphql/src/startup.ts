@@ -1,11 +1,10 @@
 import firebase from 'firebase-admin';
-import config from '@feuertiger/config';
+import { firebaseAdminConfig, graphqlUri } from '@feuertiger/config';
 import * as server from './server';
 
 const [arg, number] = process.argv.slice(2);
 const defaultPort = 4000;
 const port = (arg === '--port' && number) || defaultPort;
-const { firebaseAdminConfig, graphqlUri } = config;
 
 try {
     firebase.initializeApp(firebaseAdminConfig);

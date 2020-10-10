@@ -1,11 +1,9 @@
 import * as k8s from '@pulumi/kubernetes';
-import config from '@feuertiger/config';
+import { gitlab } from '@feuertiger/config';
 
 import { provider } from './provider';
 
-const {
-    gitlab: { user, token, email }
-} = config;
+const { user, token, email } = gitlab;
 
 interface Namespace {
     namespace: k8s.core.v1.Namespace;
