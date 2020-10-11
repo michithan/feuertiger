@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 import { writeFileSync, existsSync } from 'fs';
 import execa from 'execa';
-import config from '@feuertiger/config';
+import { env } from '@feuertiger/config';
 import { root } from './paths';
 import linkdist from './linkdist';
 
@@ -32,13 +32,13 @@ const setupDb = async () => {
     const openrcSoftlevelPath = '/run/openrc/softlevel';
     if (!existsSync(openrcSoftlevelPath)) {
         execSync(`touch ${openrcSoftlevelPath}`, {
-            stdio: ['inherit', 'ignore', 'ignore']
+            stdio: ['inherit', 'ignore', 'inherit']
         });
     }
 
     try {
         execSync('rc-service postgresql start', {
-            stdio: ['inherit', 'ignore', 'ignore']
+            stdio: ['inherit', 'ignore', 'inherit']
         });
         console.log('started postgresql service');
     } catch (error) {
@@ -47,7 +47,7 @@ const setupDb = async () => {
 
     try {
         execSync(dbCreateUser, {
-            stdio: ['inherit', 'ignore', 'ignore']
+            stdio: ['inherit', 'ignore', 'inherit']
         });
         console.log('created database user');
     } catch (error) {
@@ -56,7 +56,7 @@ const setupDb = async () => {
 
     try {
         execSync(dbCreateDb, {
-            stdio: ['inherit', 'ignore', 'ignore']
+            stdio: ['inherit', 'ignore', 'inherit']
         });
         console.log('created database');
     } catch (error) {
@@ -69,7 +69,7 @@ const setupDb = async () => {
 const syncEnv = async () => {
     console.log('sync project config with env');
 
-    const exports = Object.entries(config.env).reduce(
+    const exports = Object.entries(env).reduce(
         (acc, [key, value]) => `${acc}export ${key}=${value}\n`,
         ''
     );

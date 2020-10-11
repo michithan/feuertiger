@@ -1,0 +1,26 @@
+{
+    "name": "@feuertiger/migrations",
+    "version": "1.0.9-dev.532b11a.0",
+    "description": "database migrations and seeder",
+    "main": "./dist/index.js",
+    "author": "Michael Thanei",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.com/feuertiger/feuertiger",
+        "directory": "packages/seeder"
+    },
+    "publishConfig": {
+        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
+    },
+    "dependencies": {
+        "@feuertiger/config": "1.0.9-dev.89e996c.0",
+        "@feuertiger/schema-prisma": "1.0.9-dev.532b11a.0",
+        "execa": "4.0.3",
+        "faker": "5.1.0"
+    },
+    "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
+}

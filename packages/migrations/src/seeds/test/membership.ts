@@ -1,5 +1,9 @@
+import {
+    PersonCreateInput,
+    MembershipCreateInput
+} from '@feuertiger/schema-prisma';
+
 import faker from './faker';
-import { PersonCreateInput, MembershipCreateInput } from '../../dist';
 
 export interface MembershipConnectionNeeds {
     person: PersonCreateInput;

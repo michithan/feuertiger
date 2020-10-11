@@ -7,8 +7,11 @@ export const tryGetFromShell = (command: string): string =>
         .toString('utf-8')
         .trim();
 
+export const tryGetGitBranch = (): string =>
+    tryGetFromShell('git branch --show-current');
+
 export const tryGetGitBranchSlug = (): string =>
-    tryGetFromShell('git branch --show-current')
+    tryGetGitBranch()
         .toLowerCase()
         .replace(/[^a-z^0-9]/g, '-');
 

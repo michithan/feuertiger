@@ -1,11 +1,9 @@
 import execa from 'execa';
-import config from '@feuertiger/config';
+import { gitlab, git, npmRegistry } from '@feuertiger/config';
 
 export default async (): Promise<void> => {
-    const {
-        gitlab: { branchSlug, commit, token },
-        npmRegistry
-    } = config;
+    const { branchSlug, commit } = git;
+    const { token } = gitlab;
     try {
         await execa(
             'npm',

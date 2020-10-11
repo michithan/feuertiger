@@ -148,5 +148,5 @@ export const exec = async <
         }
     });
 
-    await Promise.allSettled(executions);
+    await Promise.all(executions);
 };

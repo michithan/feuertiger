@@ -1,5 +1,10 @@
+import {
+    PersonCreateInput,
+    AddressCreateInput,
+    Sex
+} from '@feuertiger/schema-prisma';
+
 import faker from './faker';
-import { PersonCreateInput, AddressCreateInput, Sex } from '../../dist';
 
 export interface PersonConnectionNeeds {
     address: AddressCreateInput;

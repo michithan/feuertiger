@@ -1,5 +1,10 @@
+import {
+    Grade,
+    PromotionCreateInput,
+    PersonCreateInput
+} from '@feuertiger/schema-prisma';
+
 import faker from './faker';
-import { Grade, PromotionCreateInput, PersonCreateInput } from '../../dist';
 
 export interface PromotionConnectionNeeds {
     person: PersonCreateInput;

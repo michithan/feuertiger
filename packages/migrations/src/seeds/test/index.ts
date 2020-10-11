@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-import { PrismaClient } from '../../dist';
+import { PrismaClient } from '@feuertiger/schema-prisma';
+
 import { createPerson } from './person';
 import { createAddress } from './address';
 import { createMembership } from './membership';
@@ -24,8 +25,8 @@ const upsert = (delegate: any, { id, ...data }: { id: string }) => {
     }
 };
 
-type FakeFn<T> = () => T;
-type FakeFnWithConnectionNeeds<T, TConnectionNeeds> = (
+export type FakeFn<T> = () => T;
+export type FakeFnWithConnectionNeeds<T, TConnectionNeeds> = (
     connectionNeeds: TConnectionNeeds
 ) => T;
 
@@ -49,7 +50,7 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
     return fakes;
 };
 
-(async () => {
+export default async (): Promise<void> => {
     const PERSONS_COUNT = 118;
     const EXERCICES_COUNT = 32;
 
@@ -103,5 +104,5 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
         }))
     );
 
-    client.disconnect();
-})();
+    await client.$disconnect();
+};

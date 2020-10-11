@@ -1,5 +1,6 @@
+import { TimeslotCreateInput } from '@feuertiger/schema-prisma';
+
 import faker from './faker';
-import { TimeslotCreateInput } from '../../dist';
 
 export const createTimeslot = (): TimeslotCreateInput => ({
     id: `timeslot:${faker.random.uuid()}`,

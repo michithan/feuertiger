@@ -2,6 +2,7 @@
 import constants from './constants.json';
 import defaults from './defaults.json';
 import {
+    tryGetGitBranch,
     tryGetGitBranchSlug,
     tryGetGitCommitHashShort,
     tryGetGitUserEmail,
@@ -33,11 +34,16 @@ export const gitlab = {
     token: GIT_TOKEN,
     user: GIT_USER ?? tryGetGitUserName(),
     email: GIT_EMAIL ?? tryGetGitUserEmail(),
-    repositoryUrl: '',
-    branch: '',
+    repositoryUrl: ''
+};
+
+export const git = {
+    branch: tryGetGitBranch(),
     branchSlug: tryGetGitBranchSlug(),
     commit: tryGetGitCommitHashShort()
 };
+
+export const isMainBranch = git.branch === 'main';
 
 export const npmRegistry = `//gitlab.com/api/v4/projects/${constants.gitlab.projectId}/packages/npm/`;
 

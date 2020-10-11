@@ -4,13 +4,13 @@ import {
     firebaseAdminConfig,
     postgresUser,
     postgresPassword,
-    gitlab
+    git
 } from '@feuertiger/config';
 
 import { service } from './kubernetes/service';
 import { ingress } from './kubernetes/ingress';
 
-const { branchSlug } = gitlab;
+const { branchSlug } = git;
 
 const namespace = `${branchSlug}-${projectName}`;
 const subDomainPrefix = branchSlug === 'main' ? '' : `${branchSlug}.`;

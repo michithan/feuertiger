@@ -1,9 +1,10 @@
-import faker from './faker';
 import {
     ExerciseCreateInput,
     PersonCreateInput,
     TimeslotCreateInput
-} from '../../dist';
+} from '@feuertiger/schema-prisma';
+
+import faker from './faker';
 
 export interface ExerciseConnectionNeeds {
     timeslot: TimeslotCreateInput;
