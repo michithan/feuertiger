@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/graphql",
-    "version": "1.0.9-dev.0e699a5.0",
+    "version": "1.0.9-dev.49ab420.0",
     "description": "graphql backend",
     "main": "./dist/index.js",
     "author": "Michael Thanei",
@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@feuertiger/config": "1.0.9-dev.0e699a5.0",
-        "@feuertiger/migrations": "1.0.9-dev.0e699a5.0",
+        "@feuertiger/migrations": "1.0.9-dev.49ab420.0",
         "@feuertiger/ocr": "1.0.9-dev.0e699a5.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.0e699a5.0",
         "@feuertiger/schema-prisma": "1.0.9-dev.0e699a5.0",
