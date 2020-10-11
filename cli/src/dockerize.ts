@@ -2,14 +2,17 @@ import { Readable } from 'stream';
 import * as fs from 'fs';
 import * as path from 'path';
 import execa from 'execa';
-import config from '@feuertiger/config';
+import {
+    dockerRegistry,
+    dockerRegistryRepository,
+    gitlab
+} from '@feuertiger/config';
 
 import { exec } from './utils/exec';
 import { PackageInfo } from './utils/list';
 import { Flags } from '.';
 
 const createTag = (name: string): string => {
-    const { dockerRegistryRepository } = config;
     const version = 'latest';
     const imageName = name
         .toLowerCase()
@@ -19,10 +22,7 @@ const createTag = (name: string): string => {
 };
 
 const login = (): execa.ExecaChildProcess<string> => {
-    const {
-        gitlab: { token, user },
-        dockerRegistry
-    } = config;
+    const { token, user } = gitlab;
     const execution = execa(
         'docker',
         ['login', '-u', user, '--password-stdin', dockerRegistry],
