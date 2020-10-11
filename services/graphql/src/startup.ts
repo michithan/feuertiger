@@ -9,8 +9,9 @@ const defaultPort = 4000;
 const port = (arg === '--port' && number) || defaultPort;
 
 try {
-    migrateAndSeed();
-    firebase.initializeApp(firebaseAdminConfig);
+    firebase.initializeApp({
+        credential: firebase.credential.cert(firebaseAdminConfig)
+    });
     server.gqlServer().listen({ port }, () =>
         // eslint-disable-next-line no-console
         console.log(
@@ -19,6 +20,7 @@ try {
             }`
         )
     );
+    migrateAndSeed();
 } catch (error) {
     // eslint-disable-next-line no-console
     console.log('error: ', error);

@@ -8,8 +8,6 @@ import { createPromotion } from './promotions';
 import { createTimeslot } from './timeslot';
 import { createExercise } from './exercise';
 
-const client = new PrismaClient();
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const upsert = (delegate: any, { id, ...data }: { id: string }) => {
     try {
@@ -51,6 +49,8 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
 };
 
 export default async (): Promise<void> => {
+    const client = new PrismaClient();
+
     const PERSONS_COUNT = 118;
     const EXERCICES_COUNT = 32;
 
@@ -103,6 +103,4 @@ export default async (): Promise<void> => {
             participants: personsFakes.slice(20)
         }))
     );
-
-    await client.$disconnect();
 };
