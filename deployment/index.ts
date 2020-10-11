@@ -45,7 +45,7 @@ export const webApi = service({
         POSTGRES_URI: `postgresql://${postgresUser}:${postgresPassword}@postgres.${namespace}:5432/feuertiger`
     },
     cpu: 50,
-    memory: 100
+    memory: 200
 });
 
 export const db = service({
