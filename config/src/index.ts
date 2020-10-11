@@ -58,9 +58,9 @@ export const firebaseAppConfig = {
 };
 
 export const firebaseAdminConfig = {
-    projectId: GOOGLE_CREDENTIALS?.project_id,
-    privateKey: GOOGLE_CREDENTIALS?.private_key,
-    clientEmail: GOOGLE_CREDENTIALS?.client_email
+    project_id: GOOGLE_CREDENTIALS?.project_id,
+    private_key: GOOGLE_CREDENTIALS?.private_key,
+    client_email: GOOGLE_CREDENTIALS?.client_email
 };
 
 export const postgresUser = POSTGRES_USER ?? defaults.postgresUser;
