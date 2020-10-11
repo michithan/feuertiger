@@ -3,6 +3,7 @@ services:
     postgres:
         image: 'postgres:13'
         environment:
+            - POSTGRES_DB=feuertiger
             - POSTGRES_USER=feuertiger
             - POSTGRES_PASSWORD=feuertiger
         ports:
@@ -14,7 +15,7 @@ services:
         build: ./services/graphql
         environment:
             - GOOGLE_CREDENTIALS
-            - POSTGRES_URI
+            - POSTGRES_URI=postgresql://feuertiger:feuertiger@postgres:5432/feuertiger
         ports:
             - target: 8080
               published: 4000

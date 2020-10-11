@@ -42,7 +42,7 @@ export const webApi = service({
     env: {
         DEPLOY_DATE: new Date().toISOString(),
         GOOGLE_CREDENTIALS,
-        POSTGRES_URI: `postgresql://${postgresUser}:${postgresPassword}@postgres:5432/feuertiger`
+        POSTGRES_URI: `postgresql://${postgresUser}:${postgresPassword}@postgres.${namespace}:5432/feuertiger`
     },
     cpu: 50,
     memory: 100
