@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/web-client",
     "version": "1.0.9-dev.0e699a5.0",
-    "main": "./index.js",
+    "private": true,
     "sideEffects": false,
     "author": "Michael Thanei",
     "license": "MIT",

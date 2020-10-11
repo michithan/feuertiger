@@ -2,7 +2,7 @@
     "name": "@feuertiger/graphql",
     "version": "1.0.9-dev.49ab420.0",
     "description": "graphql backend",
-    "main": "./dist/index.js",
+    "private": true,
     "author": "Michael Thanei",
     "license": "MIT",
     "scripts": {
