@@ -16,21 +16,26 @@ export const migrate = async (): Promise<void> => {
     );
     const schemaPath = path.resolve(schemaProjectPath, 'src', 'schema.prisma');
     console.log('Migrate: ', schemaProjectPath);
-    await execa(
-        bin,
-        [
-            'migrate',
-            'up',
-            '--experimental',
-            '--create-db',
-            `--schema=${schemaPath}`
-        ],
-        {
-            stdout: 'inherit',
-            stderr: 'inherit',
-            cwd: schemaProjectPath
-        }
-    );
+
+    try {
+        await execa(
+            bin,
+            [
+                'migrate',
+                'up',
+                '--experimental',
+                '--create-db',
+                `--schema=${schemaPath}`
+            ],
+            {
+                stdout: 'inherit',
+                stderr: 'inherit',
+                cwd: schemaProjectPath
+            }
+        );
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 export const seed = async (): Promise<void> => {
