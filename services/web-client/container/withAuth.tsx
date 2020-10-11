@@ -12,7 +12,7 @@ export interface AuthStateProps {
 
 interface State extends AuthProps, AuthStateProps {}
 
-export default <
+const withAuth = <
     P,
     S,
     SS,
@@ -91,3 +91,5 @@ export default <
             );
         }
     } as C;
+
+export default withAuth;

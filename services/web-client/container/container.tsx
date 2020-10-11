@@ -8,7 +8,7 @@ import {
 } from '@feuertiger/web-components';
 import { AppInitialProps, AppProps } from 'next/app';
 import withAuth, { AuthStateProps } from './withAuth';
-import { ApolloProps } from './withApollo';
+import withApollo, { ApolloProps } from './withApollo';
 
 export interface ContainerProps
     extends AppProps,
@@ -27,8 +27,8 @@ export const ContainerWithAuth = ({
 }: ContainerProps): ReactElement => {
     const showLogin = !isSignedIn || isSignInLoading;
     return (
-        <ApolloProvider client={apollo}>
-            <ThemeProvider>
+        <ThemeProvider>
+            <ApolloProvider client={apollo}>
                 <UiContainer auth={auth}>
                     {showLogin ? (
                         <Login auth={auth} />
@@ -36,9 +36,9 @@ export const ContainerWithAuth = ({
                         Component && <Component {...pageProps} />
                     )}
                 </UiContainer>
-            </ThemeProvider>
-        </ApolloProvider>
+            </ApolloProvider>
+        </ThemeProvider>
     );
 };
 
-export const Container = withAuth(ContainerWithAuth);
+export const Container = withApollo(withAuth(ContainerWithAuth));

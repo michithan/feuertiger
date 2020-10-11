@@ -1,7 +1,7 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/link-context';
 import getConfig from 'next/config';
-import withApollo, { WithApolloState } from 'next-with-apollo';
+import nextWithApollo, { WithApolloState } from 'next-with-apollo';
 import fetch from 'isomorphic-unfetch';
 
 import NextApp from 'next/app';
@@ -44,7 +44,7 @@ const initClient = ({ initialState }) =>
         cache: new InMemoryCache().restore(initialState || {})
     });
 
-export default <
+const withApollo = <
     P,
     S,
     C extends React.ComponentClass<P, S>,
@@ -52,6 +52,8 @@ export default <
 >(
     WrappedComponent: CA
 ): C =>
-    (withApollo(initClient)(
+    (nextWithApollo(initClient)(
         (WrappedComponent as unknown) as typeof NextApp
     ) as unknown) as C;
+
+export default withApollo;

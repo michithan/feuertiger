@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useQuery, useMutation } from '@apollo/client';
 import dynamic from 'next/dynamic';
+import { useQuery, useMutation } from '@apollo/client';
 import {
     MemberDetailsProps,
     MemberDetails,
@@ -15,7 +15,7 @@ import {
     UpdatePersonExercisesConnectionDocument
 } from '@feuertiger/schema-graphql';
 
-export default dynamic(
+const member = dynamic(
     async () => () => {
         const router = useRouter();
         const { id } = router.query;
@@ -45,3 +45,5 @@ export default dynamic(
         ssr: false
     }
 );
+
+export default member;

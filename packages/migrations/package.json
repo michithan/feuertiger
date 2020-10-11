@@ -3,6 +3,7 @@
     "version": "1.0.9-dev.fc5afdd.0",
     "description": "database migrations and seeder",
     "main": "./dist/index.js",
+    "sideEffects": false,
     "author": "Michael Thanei",
     "license": "MIT",
     "scripts": {

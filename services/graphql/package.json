@@ -1,6 +1,7 @@
 {
     "name": "@feuertiger/graphql",
     "description": "graphql backend",
+    "version": "1.0.0",
     "private": true,
     "author": "Michael Thanei",
     "license": "MIT",

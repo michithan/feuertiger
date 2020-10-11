@@ -1,19 +1,9 @@
 import React from 'react';
 import NextApp, { AppInitialProps } from 'next/app';
 import Head from 'next/head';
-import { Container, ContainerProps } from '../container/container';
-import withApollo, { ApolloProps } from '../container/withApollo';
+import { Container } from '../container/container';
 
-export type AppProps = AppInitialProps & ApolloProps;
-
-class App extends NextApp<AppProps> {
-    componentDidMount(): void {
-        const jssStyles = document.querySelector('#jss-server-side');
-        if (jssStyles?.parentNode) {
-            jssStyles.parentNode.removeChild(jssStyles);
-        }
-    }
-
+export default class App extends NextApp<AppInitialProps> {
     render(): JSX.Element {
         return (
             <>
@@ -29,10 +19,8 @@ class App extends NextApp<AppProps> {
                         href="https://fonts.googleapis.com/icon?family=Material+Icons"
                     />
                 </Head>
-                <Container {...(this.props as ContainerProps)} />
+                <Container {...this.props} />
             </>
         );
     }
 }
-
-export default withApollo(App);

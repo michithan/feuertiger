@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode } from 'react';
 import styled from 'styled-components';
-import { CssBaseline, Container as MuiContainer } from '@material-ui/core';
+import { Container as MuiContainer } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
 
 import { AppBar, SideBar, AuthProps } from '../../index';
@@ -57,7 +57,6 @@ export class Container extends React.Component<ContainerProps, State> {
         const { children, auth } = this.props;
         return (
             <RootDiv>
-                <CssBaseline />
                 <AppBar
                     open={open}
                     handleDrawerOpen={this.handleDrawerOpen}

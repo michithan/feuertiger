@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import { createMuiTheme, CssBaseline } from '@material-ui/core';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
 import { ThemeProvider as StyledComponentThemeProvider } from 'styled-components';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
@@ -30,13 +31,14 @@ export class ThemeProvider extends React.Component<ThemeProviderProps> {
         const { children } = this.props;
 
         return (
-            <StyledComponentThemeProvider theme={theme}>
-                <MuiThemeProvider theme={theme}>
-                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={de}>
+            <MuiThemeProvider theme={theme}>
+                <CssBaseline />
+                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={de}>
+                    <StyledComponentThemeProvider theme={theme}>
                         <>{children}</>
-                    </MuiPickersUtilsProvider>
-                </MuiThemeProvider>
-            </StyledComponentThemeProvider>
+                    </StyledComponentThemeProvider>
+                </MuiPickersUtilsProvider>
+            </MuiThemeProvider>
         );
     }
 }

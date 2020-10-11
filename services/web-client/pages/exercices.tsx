@@ -9,7 +9,7 @@ import {
 } from '@feuertiger/web-components';
 import { AllExercisesDocument } from '@feuertiger/schema-graphql';
 
-export default dynamic(
+const exercices = dynamic(
     async () => () => {
         const props = useQuery(AllExercisesDocument);
         const exercisesProps: ExerciseTableProps = {
@@ -30,3 +30,5 @@ export default dynamic(
         ssr: false
     }
 );
+
+export default exercices;

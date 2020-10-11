@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import NextDocument, {
     DocumentContext,
-    DocumentInitialProps
+    Head,
+    Html,
+    Main,
+    NextScript
 } from 'next/document';
-import { ServerStyleSheet as StyledComponentSheets } from 'styled-components';
-import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/styles';
+import {
+    StyledComponentServerSheets,
+    MaterialUiServerServerStyleSheets
+} from '@feuertiger/web-components';
 import { AppType } from 'next/dist/next-server/lib/utils';
 
-export default class Document extends NextDocument {
-    static async getInitialProps(
-        ctx: DocumentContext
-    ): Promise<DocumentInitialProps> {
-        const styledComponentSheet = new StyledComponentSheets();
-        const materialUiSheets = new MaterialUiServerStyleSheets();
-        const originalRenderPage = ctx.renderPage;
+interface Props {
+    styledComponentStyleTag: React.ReactElement;
+    materialUiStyleTag: React.ReactElement;
+}
+
+export default class Document extends NextDocument<Props> {
+    static async getInitialProps(context: DocumentContext) {
+        const styledComponentSheet = new StyledComponentServerSheets();
+        const materialUiSheets = new MaterialUiServerServerStyleSheets();
+        const originalRenderPage = context.renderPage;
 
         try {
-            ctx.renderPage = () =>
+            context.renderPage = () =>
                 originalRenderPage({
                     enhanceApp: (App: AppType) => props =>
                         styledComponentSheet.collectStyles(
@@ -24,20 +32,39 @@ export default class Document extends NextDocument {
                         )
                 });
 
-            const initialProps = await NextDocument.getInitialProps(ctx);
+            const initialProps = await NextDocument.getInitialProps(context);
+
+            const materialUiStyleTag = materialUiSheets.getStyleElement();
+            const styledComponentStyleTag = styledComponentSheet.getStyleElement();
 
             return {
                 ...initialProps,
-                styles: [
-                    <React.Fragment key="styles">
-                        {initialProps.styles}
-                        {materialUiSheets.getStyleElement()}
-                        {styledComponentSheet.getStyleElement()}
-                    </React.Fragment>
-                ]
+                styledComponentStyleTag,
+                materialUiStyleTag
             };
         } finally {
             styledComponentSheet.seal();
         }
+    }
+
+    render() {
+        const {
+            styles,
+            materialUiStyleTag,
+            styledComponentStyleTag
+        } = this.props;
+        return (
+            <Html>
+                <Head>
+                    {styles}
+                    {materialUiStyleTag}
+                    {styledComponentStyleTag}
+                </Head>
+                <body>
+                    <Main />
+                    <NextScript />
+                </body>
+            </Html>
+        );
     }
 }

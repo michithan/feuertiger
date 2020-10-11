@@ -4,6 +4,8 @@
     "description": "ocr for feuertiger",
     "main": "./dist/index.js",
     "sideEffects": false,
+    "author": "Michael Thanei",
+    "license": "MIT",
     "scripts": {
         "build": "tsc"
     },
@@ -15,8 +17,6 @@
     "publishConfig": {
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
-    "author": "",
-    "license": "ISC",
     "dependencies": {
         "@google-cloud/vision": "1.11.0",
         "firebase": "7.14.4",

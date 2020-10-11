@@ -103,4 +103,6 @@ export default async (): Promise<void> => {
             participants: personsFakes.slice(20)
         }))
     );
+
+    client.$disconnect();
 };

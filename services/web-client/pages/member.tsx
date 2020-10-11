@@ -9,7 +9,7 @@ import {
 } from '@feuertiger/web-components';
 import { AllPersonsDocument } from '@feuertiger/schema-graphql';
 
-export default dynamic(
+const member = dynamic(
     async () => () => {
         const props = useQuery(AllPersonsDocument);
         const memberProps: MemberTableProps = {
@@ -30,3 +30,5 @@ export default dynamic(
         ssr: false
     }
 );
+
+export default member;

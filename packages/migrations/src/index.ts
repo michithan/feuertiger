@@ -39,8 +39,12 @@ export const migrate = async (): Promise<void> => {
 };
 
 export const seed = async (): Promise<void> => {
-    if (isMainBranch) {
-        await test();
+    if (!isMainBranch) {
+        try {
+            await test();
+        } catch (error) {
+            console.log(error);
+        }
     }
 };
 

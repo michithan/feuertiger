@@ -11,7 +11,11 @@ const compose = (...plugins) => config =>
 
 module.exports = compose(
     withSourceMaps,
-    withTM,
+    withTM([
+        '@feuertiger/ocr',
+        '@feuertiger/schema-graphql',
+        '@feuertiger/web-components'
+    ]),
     withBundleAnalyzer
 )({
     devtool: 'hidden-source-map',

@@ -1,1 +1,3 @@
-export default (): null => null;
+const operations = (): null => null;
+
+export default operations;
