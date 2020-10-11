@@ -1,9 +1,9 @@
 import {
     projectName,
     firebaseAppConfig,
-    firebaseAdminConfig,
     postgresUser,
     postgresPassword,
+    env,
     git
 } from '@feuertiger/config';
 
@@ -11,6 +11,7 @@ import { service } from './kubernetes/service';
 import { ingress } from './kubernetes/ingress';
 
 const { branchSlug } = git;
+const { GOOGLE_CREDENTIALS } = env;
 
 const namespace = `${branchSlug}-${projectName}`;
 const subDomainPrefix = branchSlug === 'main' ? '' : `${branchSlug}.`;
@@ -40,7 +41,7 @@ export const webApi = service({
     ports: { http: 8080 },
     env: {
         DEPLOY_DATE: new Date().toISOString(),
-        GOOGLE_CREDENTIALS: JSON.stringify(firebaseAdminConfig, null, 2),
+        GOOGLE_CREDENTIALS,
         POSTGRES_URI: `postgresql://${postgresUser}:${postgresPassword}@postgres:5432/feuertiger`
     },
     cpu: 50,

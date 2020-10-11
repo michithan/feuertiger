@@ -58,9 +58,9 @@ export const firebaseAppConfig = {
 };
 
 export const firebaseAdminConfig = {
-    project_id: GOOGLE_CREDENTIALS?.project_id,
-    private_key: GOOGLE_CREDENTIALS?.private_key,
-    client_email: GOOGLE_CREDENTIALS?.client_email
+    projectId: GOOGLE_CREDENTIALS?.project_id,
+    privateKey: GOOGLE_CREDENTIALS?.private_key,
+    clientEmail: GOOGLE_CREDENTIALS?.client_email
 };
 
 export const postgresUser = POSTGRES_USER ?? defaults.postgresUser;
@@ -74,6 +74,7 @@ export const graphqlUri = GRAPHQL_URI ?? defaults.graphqlUri;
 export const webClientUri = WEB_CLIENT_URI ?? defaults.webClientUri;
 
 export const env = {
+    GOOGLE_CREDENTIALS: JSON.stringify(GOOGLE_CREDENTIALS),
     GIT_USER: gitlab.user,
     GIT_EMAIL: gitlab.email,
     POSTGRES_URI: postgresUri,
