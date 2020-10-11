@@ -1,6 +1,5 @@
 {
     "name": "@feuertiger/deployment",
-    "version": "1.0.9-dev.0e699a5.0",
     "main": "./index.ts",
     "license": "MIT",
     "private": true,

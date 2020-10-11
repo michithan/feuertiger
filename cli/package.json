@@ -6,15 +6,6 @@
     "bin": {
         "feuertiger": "./bin/feuertiger"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://gitlab.com/feuertiger/feuertiger",
-        "directory": "cli"
-    },
-    "publishConfig": {
-        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
-    },
-    "gitHead": "7d224ef51bbc23af4badd7b61540546319995beb",
     "dependencies": {
         "@feuertiger/config": "1.0.9-dev.0e699a5.0",
         "chalk": "4.1.0",

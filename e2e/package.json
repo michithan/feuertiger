@@ -1,6 +1,5 @@
 {
     "name": "@feuertiger/e2e",
-    "version": "1.0.9-dev.532b11a.0",
     "author": "Michael Thanei",
     "license": "MIT",
     "description": "e2e testing",

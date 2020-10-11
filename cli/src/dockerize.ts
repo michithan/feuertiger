@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
-import * as fs from 'fs';
-import * as path from 'path';
+import { existsSync } from 'fs';
+import { resolve } from 'path';
 import execa from 'execa';
 import {
     dockerRegistry,
@@ -41,15 +41,17 @@ const dockerize = ({
     location,
     name
 }: PackageInfo): Promise<void> | execa.ExecaChildProcess<string> => {
-    const dockerfile = path.resolve(location, 'Dockerfile');
-    const hasDockerfile = fs.existsSync(dockerfile);
+    const dockerfile = resolve(location, 'Dockerfile');
+    const hasDockerfile = existsSync(dockerfile);
     if (hasDockerfile) {
         const tag = createTag(name);
         return execa(
             'docker',
             ['build', '--pull', '--rm', '-f', 'Dockerfile', '-t', tag, '.'],
             {
-                cwd: location
+                cwd: location,
+                stderr: 'inherit',
+                stdout: 'inherit'
             }
         );
     }
@@ -60,8 +62,8 @@ const push = ({
     location,
     name
 }: PackageInfo): Promise<void> | execa.ExecaChildProcess<string> => {
-    const dockerfile = path.resolve(location, 'Dockerfile');
-    const hasDockerfile = fs.existsSync(dockerfile);
+    const dockerfile = resolve(location, 'Dockerfile');
+    const hasDockerfile = existsSync(dockerfile);
     if (hasDockerfile) {
         const tag = createTag(name);
         return execa('docker', ['push', tag], {

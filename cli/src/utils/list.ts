@@ -15,7 +15,7 @@ export const list = async ({
 }: Flags): Promise<Array<PackageInfo>> => {
     const bin = await getLernaBinary();
 
-    const args = ['list'];
+    const args = ['list', '-a'];
     if (packageInfo) {
         args.push(...['--scope', packageInfo, '--include-dependents']);
     }

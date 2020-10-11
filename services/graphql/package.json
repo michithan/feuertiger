@@ -1,6 +1,5 @@
 {
     "name": "@feuertiger/graphql",
-    "version": "1.0.9-dev.49ab420.0",
     "description": "graphql backend",
     "private": true,
     "author": "Michael Thanei",
@@ -10,14 +9,6 @@
         "test": "jest --collect-coverage",
         "build": "tsc",
         "start": "node ./dist/startup.js --port 8080"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://gitlab.com/feuertiger/feuertiger",
-        "directory": "services/graphql"
-    },
-    "publishConfig": {
-        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
         "@feuertiger/config": "1.0.9-dev.0e699a5.0",
@@ -45,6 +36,5 @@
         "ts-node": "8.10.1",
         "ts-node-dev": "1.0.0-pre.56",
         "typescript": "4.0.2"
-    },
-    "gitHead": "79069ac7f86d40030a847201ac2303a8cff74def"
+    }
 }
