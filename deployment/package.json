@@ -8,7 +8,7 @@
         "ci:deploy": "pulumi up -y -e"
     },
     "dependencies": {
-        "@feuertiger/config": "1.0.9-dev.0e699a5.0",
+        "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
         "@pulumi/digitalocean": "2.8.0",
         "@pulumi/kubernetes": "2.6.1",
         "@pulumi/kubernetesx": "0.1.3",

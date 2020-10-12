@@ -11,7 +11,7 @@
         "destroy": "pulumi destroy -e"
     },
     "dependencies": {
-        "@feuertiger/config": "1.0.9-dev.0e699a5.0",
+        "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
         "@pulumi/digitalocean": "2.8.0",
         "@pulumi/gcp": "3.25.0",
         "@pulumi/gitlab": "3.0.0",
