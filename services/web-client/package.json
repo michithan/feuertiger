@@ -3,7 +3,7 @@
     "private": true,
     "sideEffects": false,
     "author": "Michael Thanei",
-    "version": "1.0.9-dev.76d518c.0",
+    "version": "1.0.9-dev.cb0eb49.0",
     "license": "MIT",
     "scripts": {
         "dev": "next dev",
@@ -19,7 +19,7 @@
         "@apollo/link-context": "2.0.0-beta.3",
         "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.2478669.0",
-        "@feuertiger/web-components": "1.0.9-dev.2478669.0",
+        "@feuertiger/web-components": "1.0.9-dev.cb0eb49.0",
         "@next/bundle-analyzer": "9.5.5",
         "@zeit/next-source-maps": "0.0.3",
         "body-parser": "1.19.0",
