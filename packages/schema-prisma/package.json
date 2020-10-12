@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/schema-prisma",
-    "version": "1.0.9-dev.835ab37.0",
+    "version": "1.0.9-dev.76d518c.0",
     "description": "prisma schema",
     "main": "./dist/index.js",
     "author": "Michael Thanei",
