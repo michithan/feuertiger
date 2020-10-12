@@ -3,7 +3,7 @@
     "private": true,
     "sideEffects": false,
     "author": "Michael Thanei",
-    "version": "1.0.9-dev.fc5afdd.0",
+    "version": "1.0.9-dev.835ab37.0",
     "license": "MIT",
     "scripts": {
         "dev": "next dev",
@@ -18,8 +18,8 @@
         "@apollo/client": "3.2.3",
         "@apollo/link-context": "2.0.0-beta.3",
         "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
-        "@feuertiger/schema-graphql": "1.0.9-dev.0e699a5.0",
-        "@feuertiger/web-components": "1.0.9-dev.0e699a5.0",
+        "@feuertiger/schema-graphql": "1.0.9-dev.835ab37.0",
+        "@feuertiger/web-components": "1.0.9-dev.835ab37.0",
         "@next/bundle-analyzer": "9.5.5",
         "@zeit/next-source-maps": "0.0.3",
         "body-parser": "1.19.0",
@@ -37,7 +37,6 @@
         "react-dom": "16.13.1"
     },
     "devDependencies": {
-        "typescript": "4.0.2",
         "@babel/plugin-proposal-decorators": "7.10.1",
         "@jest/globals": "26.0.1",
         "@types/enzyme-adapter-react-16": "1.0.6",
@@ -53,6 +52,7 @@
         "ignore-loader": "0.1.2",
         "jest": "26.0.1",
         "jest-environment-enzyme": "7.1.2",
-        "jest-enzyme": "7.1.2"
+        "jest-enzyme": "7.1.2",
+        "typescript": "4.0.2"
     }
 }

@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/graphql",
     "description": "graphql backend",
-    "version": "1.0.9-dev.fc5afdd.0",
+    "version": "1.0.9-dev.835ab37.0",
     "private": true,
     "author": "Michael Thanei",
     "license": "MIT",
@@ -13,10 +13,10 @@
     },
     "dependencies": {
         "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
-        "@feuertiger/migrations": "1.0.9-dev.fc5afdd.0",
-        "@feuertiger/ocr": "1.0.9-dev.0e699a5.0",
-        "@feuertiger/schema-graphql": "1.0.9-dev.0e699a5.0",
-        "@feuertiger/schema-prisma": "1.0.9-dev.0e699a5.0",
+        "@feuertiger/migrations": "1.0.9-dev.835ab37.0",
+        "@feuertiger/ocr": "1.0.9-dev.835ab37.0",
+        "@feuertiger/schema-graphql": "1.0.9-dev.835ab37.0",
+        "@feuertiger/schema-prisma": "1.0.9-dev.835ab37.0",
         "apollo-server": "2.18.2",
         "apollo-server-express": "2.18.2",
         "express": "4.17.1",
