@@ -19,8 +19,8 @@
     "license": "ISC",
     "dependencies": {
         "@apollo/client": "3.2.3",
-        "graphql": "14.5.8",
-        "graphql-scalars": "1.1.7"
+        "graphql": "15.3.0",
+        "graphql-scalars": "1.4.0"
     },
     "devDependencies": {
         "@graphql-codegen/add": "1.15.4",

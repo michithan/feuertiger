@@ -1,6 +1,7 @@
 import * as path from 'path';
 import execa from 'execa';
 import { isMainBranch } from '@feuertiger/config';
+import { PrismaClient } from '@feuertiger/schema-prisma';
 
 import { test } from './seeds';
 
@@ -38,17 +39,18 @@ export const migrate = async (): Promise<void> => {
     }
 };
 
-export const seed = async (): Promise<void> => {
+export const seed = async (client: PrismaClient): Promise<void> => {
     if (!isMainBranch) {
         try {
-            await test();
+            await test(client);
+            console.log('finished seeding!');
         } catch (error) {
             console.log(error);
         }
     }
 };
 
-export const migrateAndSeed = async (): Promise<void> => {
+export const migrateAndSeed = async (client: PrismaClient): Promise<void> => {
     await migrate();
-    await seed();
+    await seed(client);
 };

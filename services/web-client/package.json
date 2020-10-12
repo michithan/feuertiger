@@ -3,7 +3,7 @@
     "private": true,
     "sideEffects": false,
     "author": "Michael Thanei",
-    "version": "1.0.0",
+    "version": "1.0.9-dev.fc5afdd.0",
     "license": "MIT",
     "scripts": {
         "dev": "next dev",
@@ -17,7 +17,7 @@
     "dependencies": {
         "@apollo/client": "3.2.3",
         "@apollo/link-context": "2.0.0-beta.3",
-        "@feuertiger/config": "1.0.9-dev.0e699a5.0",
+        "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.0e699a5.0",
         "@feuertiger/web-components": "1.0.9-dev.0e699a5.0",
         "@next/bundle-analyzer": "9.5.5",

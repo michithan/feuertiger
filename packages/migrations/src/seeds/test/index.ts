@@ -32,6 +32,7 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
     fakerFn: FakeFn<T> | FakeFnWithConnectionNeeds<T, TConnectionNeeds>,
     number: number,
     delegate: TD,
+    client: PrismaClient,
     connectionNeeds?: TConnectionNeeds[]
 ) => {
     const fakes: Array<T> = Array.from(
@@ -41,16 +42,14 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
             : fakerFn
     );
     const upserts = fakes.map(fake => upsert(delegate, fake));
-    const results = await Promise.all(upserts);
+    const results = await client.$transaction(upserts);
     console.log(
         `Seeded ${results.length} ${fakes?.[0]?.id?.split(':').shift()}`
     );
     return fakes;
 };
 
-export default async (): Promise<void> => {
-    const client = new PrismaClient();
-
+export default async (client: PrismaClient): Promise<void> => {
     const PERSONS_COUNT = 118;
     const EXERCICES_COUNT = 32;
 
@@ -58,7 +57,8 @@ export default async (): Promise<void> => {
     const addressFakes = await upsertSome(
         createAddress,
         PERSONS_COUNT,
-        client.address
+        client.address,
+        client
     );
 
     // upsert some persons
@@ -66,6 +66,7 @@ export default async (): Promise<void> => {
         createPerson,
         PERSONS_COUNT,
         client.person,
+        client,
         addressFakes.map(address => ({ address }))
     );
 
@@ -74,6 +75,7 @@ export default async (): Promise<void> => {
         createMembership,
         PERSONS_COUNT,
         client.membership,
+        client,
         personsFakes.map(person => ({ person }))
     );
 
@@ -82,6 +84,7 @@ export default async (): Promise<void> => {
         createPromotion,
         PERSONS_COUNT,
         client.promotion,
+        client,
         personsFakes.map(person => ({ person }))
     );
 
@@ -89,7 +92,8 @@ export default async (): Promise<void> => {
     const timeslotFakes = await upsertSome(
         createTimeslot,
         EXERCICES_COUNT,
-        client.timeslot
+        client.timeslot,
+        client
     );
 
     // upsert some exercises
@@ -97,12 +101,11 @@ export default async (): Promise<void> => {
         createExercise,
         EXERCICES_COUNT,
         client.exercise,
+        client,
         timeslotFakes.map(timeslot => ({
             timeslot,
             leaders: personsFakes.slice(personsFakes.length - 5),
             participants: personsFakes.slice(20)
         }))
     );
-
-    client.$disconnect();
 };

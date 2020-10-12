@@ -1,7 +1,7 @@
 {
     "name": "@feuertiger/graphql",
     "description": "graphql backend",
-    "version": "1.0.0",
+    "version": "1.0.9-dev.fc5afdd.0",
     "private": true,
     "author": "Michael Thanei",
     "license": "MIT",
@@ -12,18 +12,17 @@
         "start": "node ./dist/startup.js --port 8080"
     },
     "dependencies": {
-        "@feuertiger/config": "1.0.9-dev.0e699a5.0",
-        "@feuertiger/migrations": "1.0.9-dev.49ab420.0",
+        "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
+        "@feuertiger/migrations": "1.0.9-dev.fc5afdd.0",
         "@feuertiger/ocr": "1.0.9-dev.0e699a5.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.0e699a5.0",
         "@feuertiger/schema-prisma": "1.0.9-dev.0e699a5.0",
-        "apollo-server": "2.13.1",
-        "apollo-server-express": "2.13.1",
+        "apollo-server": "2.18.2",
+        "apollo-server-express": "2.18.2",
         "express": "4.17.1",
         "firebase": "7.14.4",
         "firebase-admin": "8.12.1",
-        "graphql": "14.5.8",
-        "graphql-import": "1.0.2",
+        "graphql": "15.3.0",
         "lodash.merge": "4.6.2"
     },
     "devDependencies": {

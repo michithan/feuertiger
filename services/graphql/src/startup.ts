@@ -1,5 +1,4 @@
 import firebase from 'firebase-admin';
-import { migrateAndSeed } from '@feuertiger/migrations';
 import { firebaseAdminConfig, graphqlUri } from '@feuertiger/config';
 
 import * as server from './server';
@@ -8,24 +7,15 @@ const [arg, number] = process.argv.slice(2);
 const defaultPort = 4000;
 const port = (arg === '--port' && number) || defaultPort;
 
-(async () => {
-    try {
-        firebase.initializeApp({
-            credential: firebase.credential.cert(firebaseAdminConfig)
-        });
+firebase.initializeApp({
+    credential: firebase.credential.cert(firebaseAdminConfig)
+});
 
-        await migrateAndSeed();
-
-        server.gqlServer().listen({ port }, () =>
-            // eslint-disable-next-line no-console
-            console.log(
-                `🚀 Server ready at ${
-                    port === defaultPort ? graphqlUri : `port ${port}`
-                }`
-            )
-        );
-    } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log('error: ', error);
-    }
-})();
+server.gqlServer().listen({ port }, () =>
+    // eslint-disable-next-line no-console
+    console.log(
+        `🚀 Server ready at ${
+            port === defaultPort ? graphqlUri : `port ${port}`
+        }`
+    )
+);

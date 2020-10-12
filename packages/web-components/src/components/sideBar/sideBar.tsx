@@ -61,7 +61,7 @@ export interface SideBarProps {
 
 export const mainListItems = (
     <div>
-        <Link href="/index">
+        <Link href="/">
             <ListItem button>
                 <ListItemIcon>
                     <DashboardIcon />
