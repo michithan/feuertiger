@@ -26,7 +26,7 @@ export const webClient = service({
     env: {
         DEPLOY_DATE: new Date().toISOString(),
         FIREBASE_CONFIG: JSON.stringify(firebaseAppConfig, null, 2),
-        GRAPHQL_URI: `https://${subDomainPrefix}feuertiger.com/graphql`
+        GRAPHQL_URI: '/graphql'
     },
     cpu: 50,
     memory: 100

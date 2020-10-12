@@ -1,9 +1,15 @@
 import React from 'react';
-import NextApp, { AppInitialProps } from 'next/app';
+import NextApp, { AppContext, AppInitialProps } from 'next/app';
 import Head from 'next/head';
 import { Container } from '../container/container';
 
 export default class App extends NextApp<AppInitialProps> {
+    static async getInitialProps(
+        context: AppContext
+    ): Promise<AppInitialProps> {
+        return NextApp.getInitialProps(context);
+    }
+
     render(): JSX.Element {
         return (
             <>

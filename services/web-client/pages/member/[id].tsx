@@ -15,7 +15,7 @@ import {
     UpdatePersonExercisesConnectionDocument
 } from '@feuertiger/schema-graphql';
 
-const member = dynamic(
+const Member = dynamic(
     async () => () => {
         const router = useRouter();
         const { id } = router.query;
@@ -46,4 +46,4 @@ const member = dynamic(
     }
 );
 
-export default member;
+export default Member;

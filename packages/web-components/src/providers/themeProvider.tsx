@@ -1,6 +1,9 @@
 import React, { ReactNode } from 'react';
-import { createMuiTheme, CssBaseline } from '@material-ui/core';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/styles';
+import {
+    createMuiTheme,
+    CssBaseline,
+    ThemeProvider as MuiThemeProvider
+} from '@material-ui/core';
 import { ThemeProvider as StyledComponentThemeProvider } from 'styled-components';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';

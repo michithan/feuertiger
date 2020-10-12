@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { DashboardDocument } from '@feuertiger/schema-graphql';
 import { Dashboard, LoadingContainer } from '@feuertiger/web-components';
 
-export default dynamic(
+const Index = dynamic(
     async () => () => {
         const dashboardProps = useQuery(DashboardDocument);
         return (
@@ -18,3 +18,5 @@ export default dynamic(
         ssr: false
     }
 );
+
+export default Index;
