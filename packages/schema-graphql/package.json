@@ -1,6 +1,6 @@
 {
     "name": "@feuertiger/schema-graphql",
-    "version": "1.0.9-dev.835ab37.0",
+    "version": "1.0.9-dev.2478669.0",
     "description": "graphql schema",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,8 +20,8 @@
     "dependencies": {
         "@apollo/client": "3.2.3",
         "graphql": "15.3.0",
-        "graphql-tag": "2.11.0",
-        "graphql-scalars": "1.4.0"
+        "graphql-scalars": "1.4.0",
+        "graphql-tag": "2.11.0"
     },
     "devDependencies": {
         "@graphql-codegen/add": "1.15.4",
