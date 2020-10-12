@@ -23,7 +23,6 @@ generates:
             withResultType: true
             enumsAsTypes: true
             reactApolloVersion: 3
-            gqlImport: '@apollo/client#gql'
     ./dist/schema.json:
         config:
             minify: false

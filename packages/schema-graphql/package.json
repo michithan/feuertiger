@@ -20,6 +20,7 @@
     "dependencies": {
         "@apollo/client": "3.2.3",
         "graphql": "15.3.0",
+        "graphql-tag": "2.11.0",
         "graphql-scalars": "1.4.0"
     },
     "devDependencies": {
