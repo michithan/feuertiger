@@ -41,8 +41,8 @@ export const webApi = service({
         GOOGLE_CREDENTIALS,
         POSTGRES_URI: `postgresql://${postgresUser}:${postgresPassword}@postgres.${namespace}:5432/feuertiger`
     },
-    cpu: 50,
-    memory: 200
+    cpu: 120,
+    memory: 300
 });
 
 export const db = service({
