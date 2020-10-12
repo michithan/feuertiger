@@ -1,6 +1,5 @@
 import {
     projectName,
-    firebaseAppConfig,
     postgresUser,
     postgresPassword,
     env,
@@ -24,9 +23,7 @@ export const webClient = service({
     minReplicas: 1,
     ports: { http: 8080 },
     env: {
-        DEPLOY_DATE: new Date().toISOString(),
-        FIREBASE_CONFIG: JSON.stringify(firebaseAppConfig, null, 2),
-        GRAPHQL_URI: '/graphql'
+        DEPLOY_DATE: new Date().toISOString()
     },
     cpu: 50,
     memory: 100
