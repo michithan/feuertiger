@@ -7,10 +7,10 @@ import { Dashboard, LoadingContainer } from '@feuertiger/web-components';
 
 const Index = dynamic(
     async () => () => {
-        const dashboardProps = useQuery(DashboardDocument);
+        const { loading, error, data } = useQuery(DashboardDocument);
         return (
-            <LoadingContainer loading={dashboardProps.loading}>
-                <Dashboard {...dashboardProps} />
+            <LoadingContainer loading={loading} error={error}>
+                <Dashboard {...data} />
             </LoadingContainer>
         );
     },

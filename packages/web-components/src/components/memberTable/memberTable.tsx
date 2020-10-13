@@ -18,7 +18,7 @@ interface State {
     addDialogOpen: boolean;
 }
 
-export type MemberTableProps = AllPersonsQueryResult;
+export type MemberTableProps = AllPersonsQueryResult['data'];
 
 export class MemberTable extends React.Component<MemberTableProps, State> {
     constructor(props: MemberTableProps) {
@@ -34,9 +34,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
 
     render(): ReactNode {
         const { addDialogOpen } = this.state;
-        const {
-            data: { allPersons }
-        } = this.props;
+        const { allPersons } = this.props;
 
         return (
             <Grid container spacing={3}>

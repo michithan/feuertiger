@@ -4,14 +4,16 @@ import Skeleton from '@material-ui/lab/Skeleton';
 
 export interface LoadingContainerrProps {
     loading: boolean;
+    error?: Error;
     children: ReactElement;
 }
 
 export const LoadingContainer = ({
     loading,
+    error,
     children
 }: LoadingContainerrProps): ReactElement =>
-    loading ? (
+    loading || error ? (
         <Grid container spacing={3}>
             <Grid item xs={12}>
                 <Skeleton variant="rect" height={25} />

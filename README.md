@@ -11,12 +11,6 @@
 
 Feuertiger is an open source project to create a state-of-the-art platform for managing volunteer firefighting departments.
 
-The main benefits of using Feuertiger should be:
-
--   Easy adaption of real world paper forms into the digital world and vice versa using OCR and PDF export
--   Easy import and export functionality to existing solutions
--   Easy and cheap hosting through straight forward infrastructure as code
-
 ## How to start
 
 You can start coding by simply using [Visual Studio Code Remote - Containers ](https://code.visualstudio.com/docs/remote/containers)
@@ -29,15 +23,15 @@ You can start coding by simply using [Visual Studio Code Remote - Containers ](h
 
     ```
     export GOOGLE_CREDENTIALS=**********
-    export DIGITALOCEAN_TOKEN=**********
+    export FIREBASE_CONFIG=**********
     ```
 
 5. Run services in dev mode
     ```
-    yarn dev
+    feuertiger dev
     ```
 6. Start coding
-7. Login as Testuser
+7. Login as feuertiger
     ```
     User: feuertiger@feuertiger.com
     Password: feuertiger
@@ -45,29 +39,42 @@ You can start coding by simply using [Visual Studio Code Remote - Containers ](h
 
 ---
 
+## Environment Variables
+
+| Name                | Description                 | Stages                   |
+| ------------------- | --------------------------- | ------------------------ |
+| GOOGLE_CREDENTIALS  | firebase admin config       | develop, publish, deploy |
+| FIREBASE_CONFIG     | firebase web config         | develop, dockerize       |
+| DIGITALOCEAN_TOKEN  | digitalocean token          | infrastructure, deploy   |
+| GIT_TOKEN           | git token                   | publish, deploy          |
+| GIT_USER            | git user                    | publish, deploy          |
+| PULUMI_ACCESS_TOKEN | pulumi cloud access token   | infrastructure, deploy   |
+
+---
+
 ## Architecture
 
 Feuertiger is build with a nodejs backend and a react webapp.
-With this the howl application can run on any kind of serverless cloud functions, e.g. firebase-functions.
-Thous making it extremely cheap to operate.
-
-The git repo is set up as a mono-repository using Lerna and Gitlab npm package registry.
+With this the howl application runs on a Kubernetes cluster setup with pulumi on digital ocean.
+The git repo is set up as a mono-repository using Lerna, Gitlab npm package registry and Gitlab docker container registry.
+All develop, test, build and deploy steps are implemented though the @feuertiger/cli interface.
 
 ### Services
 
-| Name       | Description         | URL                             |
-| ---------- | ------------------- | ------------------------------- |
-| storybook  | view web-components | https://localhost:5000/         |
-| graphql    | graphql backend     | https://localhost:4000/graphiql |
-| web-client | webclient server    | https://localhost:3000/         |
+| Name       | Description         | URL - local                     | URL - dev                          |
+| ---------- | ------------------- | ------------------------------- | ---------------------------------- |
+| storybook  | view web-components | https://localhost:5000/         | https://dev.feuertiger.com/        |
+| graphql    | graphql backend     | https://localhost:4000/graphiql | https://dev.feuertiger.com/graphql |
+| web-client | webclient server    | https://localhost:3000/         |                                    |
 
 ### Packages
 
 | Name           | Description                                   |
 | -------------- | --------------------------------------------- |
 | orc            | ocr tooling                                   |
+| migrations     | functions to apply migrations and seeding     |
 | schema-graphql | backend api definiton source of truth         |
-| schema-prisma  | persited data definiton source of truth       |
+| schema-prisma  | database model definiton source of truth      |
 | web-components | component and page library used by web-client |
 
 ---
@@ -82,13 +89,13 @@ The git repo is set up as a mono-repository using Lerna and Gitlab npm package r
 
 #### Database
 
--   [Postgre](https://www.postgresql.org/)
+-   [Postgres](https://www.postgresql.org/)
 
 #### Services
 
 -   [Firebase Auth](https://firebase.google.com/)
--   [Firebase Functions](https://firebase.google.com/)
--   Google Vision AI
+-   [Digitalocean Managed Kubernetes Cluster](https://www.digitalocean.com/products/kubernetes/)
+-   [Pulumi infrastructure as code](https://app.pulumi.com/)
 
 ### Backend
 
@@ -101,6 +108,7 @@ The git repo is set up as a mono-repository using Lerna and Gitlab npm package r
 -   [Nodejs](https://nodejs.org/en/docs/)
 -   [Graphql](https://graphql.org/learn/)
 -   [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
+-   [GraphQL code generator](https://graphql-code-generator.com/)
 
 ### Web-Frontend
 

@@ -3,12 +3,10 @@ import { Breadcrumbs, Grid, Typography } from '@material-ui/core';
 import React, { ReactElement } from 'react';
 import { Link, Paper, PieChart } from '../../index';
 
-export type DashboardProps = DashboardQueryResult;
+export type DashboardProps = DashboardQueryResult['data'];
 
 export const Dashboard = ({
-    data: {
-        dashboard: { countMembersByGrade, countExerciseByCategory }
-    }
+    dashboard: { countMembersByGrade, countExerciseByCategory }
 }: DashboardProps): ReactElement => (
     <Grid container spacing={3}>
         <Grid item xs={12}>

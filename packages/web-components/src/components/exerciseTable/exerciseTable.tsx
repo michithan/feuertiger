@@ -6,10 +6,10 @@ import { AllExercisesQueryResult } from '@feuertiger/schema-graphql';
 
 import { Link } from '../index';
 
-export type ExerciseTableProps = AllExercisesQueryResult;
+export type ExerciseTableProps = AllExercisesQueryResult['data'];
 
 export const ExerciseTable = ({
-    data: { allExercises }
+    allExercises
 }: ExerciseTableProps): ReactElement => (
     <Grid container spacing={3}>
         <Grid item xs={12}>

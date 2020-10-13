@@ -25,17 +25,16 @@ export const ContainerWithAuth = ({
     isLoading: isSignInLoading,
     isSignedIn
 }: ContainerProps): ReactElement => {
-    const showLogin = !isSignedIn || isSignInLoading;
+    let content = <Component {...pageProps} />;
+    if (isSignedIn) {
+        content = <Component {...pageProps} />;
+    } else if (isSignInLoading) {
+        content = null;
+    }
     return (
         <ThemeProvider>
             <ApolloProvider client={apollo}>
-                <UiContainer auth={auth}>
-                    {showLogin ? (
-                        <Login auth={auth} />
-                    ) : (
-                        Component && <Component {...pageProps} />
-                    )}
-                </UiContainer>
+                <UiContainer auth={auth}>{content}</UiContainer>
             </ApolloProvider>
         </ThemeProvider>
     );

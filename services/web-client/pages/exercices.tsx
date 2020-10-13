@@ -11,18 +11,15 @@ import { AllExercisesDocument } from '@feuertiger/schema-graphql';
 
 const Exercices = dynamic(
     async () => () => {
-        const props = useQuery(AllExercisesDocument);
-        const exercisesProps: ExerciseTableProps = {
-            ...props,
-            data: {
-                allExercises: props?.data?.allExercises?.map(exercise => ({
-                    ...exercise
-                }))
-            }
+        const { loading, error, data } = useQuery(AllExercisesDocument);
+        const copy: ExerciseTableProps = {
+            allExercises: data?.allExercises?.map(exercise => ({
+                ...exercise
+            }))
         };
         return (
-            <LoadingContainer loading={props.loading}>
-                <ExerciseTable {...exercisesProps} />
+            <LoadingContainer loading={loading} error={error}>
+                <ExerciseTable {...copy} />
             </LoadingContainer>
         );
     },

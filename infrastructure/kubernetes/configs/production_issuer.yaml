@@ -5,7 +5,7 @@ metadata:
     namespace: cert-manager
 spec:
     acme:
-        email: michael.thanei@gmail.com
+        email: michael.thanei@googlemail.com
         server: https://acme-v02.api.letsencrypt.org/directory
         privateKeySecretRef:
             name: letsencrypt-prod

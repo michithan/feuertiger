@@ -11,18 +11,15 @@ import { AllPersonsDocument } from '@feuertiger/schema-graphql';
 
 const Member = dynamic(
     async () => () => {
-        const props = useQuery(AllPersonsDocument);
-        const memberProps: MemberTableProps = {
-            ...props,
-            data: {
-                allPersons: props?.data?.allPersons?.map(person => ({
-                    ...person
-                }))
-            }
+        const { loading, error, data } = useQuery(AllPersonsDocument);
+        const copy: MemberTableProps = {
+            allPersons: data?.allPersons?.map(person => ({
+                ...person
+            }))
         };
         return (
-            <LoadingContainer loading={props.loading}>
-                <MemberTable {...memberProps} />
+            <LoadingContainer loading={loading} error={error}>
+                <MemberTable {...copy} />
             </LoadingContainer>
         );
     },

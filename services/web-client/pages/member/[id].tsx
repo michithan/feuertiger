@@ -20,7 +20,7 @@ const Member = dynamic(
         const router = useRouter();
         const { id } = router.query;
 
-        const { data, loading } = useQuery(PersonDetailsDocument, {
+        const { data, loading, error } = useQuery(PersonDetailsDocument, {
             variables: { id }
         }) as PersonDetailsQueryResult;
 
@@ -36,7 +36,7 @@ const Member = dynamic(
             updatePersonExercisesConnection
         };
         return (
-            <LoadingContainer loading={loading || !member}>
+            <LoadingContainer loading={loading} error={error}>
                 <MemberDetails {...memberDetailsProps} />
             </LoadingContainer>
         );
