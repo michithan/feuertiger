@@ -6,7 +6,7 @@ import { SnackbarProvider } from 'notistack';
 import { AppBar, SideBar, AuthProps } from '../../index';
 
 export interface ContainerProps extends AuthProps {
-    children: ReactElement;
+    children: ReactElement | null;
 }
 
 interface State {

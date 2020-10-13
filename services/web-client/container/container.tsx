@@ -26,10 +26,10 @@ export const ContainerWithAuth = ({
     isSignedIn
 }: ContainerProps): ReactElement => {
     let content = <Component {...pageProps} />;
-    if (isSignedIn) {
-        content = <Component {...pageProps} />;
-    } else if (isSignInLoading) {
+    if (isSignInLoading) {
         content = null;
+    } else if (!isSignedIn) {
+        content = <Login auth={auth} />;
     }
     return (
         <ThemeProvider>
