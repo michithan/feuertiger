@@ -1,0 +1,7 @@
+# protected ci relevant files
+cli/**/* @Maintainer
+config/**/* @Maintainer
+.dev-env.Dockerfile @Maintainer
+.gitlab-ci.yml @Maintainer
+.eslintrc.js @Maintainer
+.prettierrc.js @Maintainer
