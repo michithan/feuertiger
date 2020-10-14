@@ -6,7 +6,7 @@ import {
     dockerRegistry,
     dockerRegistryRepository,
     gitlab
-} from '@feuertiger/config';
+} from '@feuertiger/config/src';
 
 import { exec } from './utils/exec';
 import { PackageInfo } from './utils/list';

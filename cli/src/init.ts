@@ -1,7 +1,7 @@
 import { execSync } from 'child_process';
 import { writeFileSync, existsSync } from 'fs';
 import execa from 'execa';
-import { env } from '@feuertiger/config';
+import { env } from '@feuertiger/config/src';
 import { root } from './paths';
 import linkdist from './linkdist';
 

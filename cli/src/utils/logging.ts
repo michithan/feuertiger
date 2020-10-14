@@ -20,7 +20,7 @@ export const addErrorPackagePrefix = (
     text: string,
     { prefix }: ExtendedPackageInfo
 ): string => {
-    const errorPrefix = prefix.replace('▷', '💥');
+    const errorPrefix = prefix.replace('▷', '▷⚠️');
     return `${errorPrefix}${text
         .trimRight()
         .replace(/\r?\n|\r/gi, `\r\n${errorPrefix}`)}\r\n`;

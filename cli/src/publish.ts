@@ -1,5 +1,5 @@
 import execa from 'execa';
-import { git, npmRegistry } from '@feuertiger/config';
+import { git, npmRegistry } from '@feuertiger/config/src';
 
 export default async (): Promise<void> => {
     const { branchSlug, commit } = git;
