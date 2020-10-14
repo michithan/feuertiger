@@ -1,12 +1,12 @@
 # developer as default codeowners
-*                   @Developer
+*                   @Owner @Maintainer @Developer @Reporter @Guest
 
 # protected ci relevant files
-cli/**/*            @Maintainer
-config/**/*         @Maintainer
-deployment/**/*     @Maintainer
-infrastructure/**/* @Maintainer
-.dev-env.Dockerfile @Maintainer
-.gitlab-ci.yml      @Maintainer
-.eslintrc.js        @Maintainer
-.prettierrc.js      @Maintainer
+cli/**/*            @Owner @Maintainer
+config/**/*         @Owner @Maintainer
+deployment/**/*     @Owner @Maintainer
+infrastructure/**/* @Owner @Maintainer
+.dev-env.Dockerfile @Owner @Maintainer
+.gitlab-ci.yml      @Owner @Maintainer
+.eslintrc.js        @Owner @Maintainer
+.prettierrc.js      @Owner @Maintainer
