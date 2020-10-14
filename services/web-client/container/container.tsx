@@ -4,7 +4,8 @@ import {
     Container as UiContainer,
     ThemeProvider,
     Login,
-    AuthProps
+    AuthProps,
+    LoadingSkeleton
 } from '@feuertiger/web-components';
 import { AppInitialProps, AppProps } from 'next/app';
 import withAuth, { AuthStateProps } from './withAuth';
@@ -27,7 +28,7 @@ export const ContainerWithAuth = ({
 }: ContainerProps): ReactElement => {
     let content = <Component {...pageProps} />;
     if (isSignInLoading) {
-        content = null;
+        content = <LoadingSkeleton />;
     } else if (!isSignedIn) {
         content = <Login auth={auth} />;
     }

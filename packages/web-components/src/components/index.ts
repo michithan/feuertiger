@@ -19,4 +19,5 @@ export * from './dashboard/dashboard';
 export * from './charts/pieChart';
 export * from './formikFields/formikFields';
 export * from './loadingContainer/loadingContainer';
+export * from './loadingSkeleton/loadingSkeleton';
 export * from './exerciseTable/exerciseTable';
