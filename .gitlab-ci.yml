@@ -61,7 +61,6 @@ Build:
     script:
         - lerna bootstrap --since
         - yarn build --since
-        - feuertiger linkdist --since
         - feuertiger lint --since
         - git diff-index --quiet HEAD || (git commit -am "fix" && git push -o ci.variable="CI_SKIP=true" -o ci.variable="DEPENDENCY_SCANNING_DISABLED=true" -o ci.variable="LICENSE_MANAGEMENT_DISABLED=true")
         - yarn test --since

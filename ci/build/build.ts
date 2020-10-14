@@ -47,7 +47,6 @@ const ensureFormat = async () => {
 
 const build = async () => {
     execSync('yarn build --since');
-    execSync('yarn linkdist');
 };
 
 const ensureLint = async () => {

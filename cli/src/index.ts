@@ -8,7 +8,6 @@ const cli = meow(
     Usage
       $ init            installs all dependencies and setups workspace
       $ list            lists all packages
-      $ linkdist        links all ./dist/index.js to ./src/index.js
       $ format          formats the code
       $ lint            lints the code
       $ test            tests the code  // TODO
@@ -55,11 +54,6 @@ export interface Flags {
             tiger('🎬 init 🎬');
             const init = await import('./init');
             await init.default();
-            break;
-        case 'linkdist':
-            tiger('🔗 linkdist 🔗');
-            const linkdist = await import('./linkdist');
-            await linkdist.default(cli.flags);
             break;
         case 'format':
             tiger('🧹 formats 🧹');

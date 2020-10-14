@@ -16,6 +16,11 @@
         "isolatedModules": true
     },
     "include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
+    "watchOptions": {
+        "watchFile": "useFsEvents",
+        "watchDirectory": "useFsEvents",
+        "fallbackPolling": "dynamicPriority"
+    },
     "exclude": [
         "node_modules",
         "**/node_modules/**",

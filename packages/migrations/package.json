@@ -7,7 +7,8 @@
     "author": "Michael Thanei",
     "license": "MIT",
     "scripts": {
-        "build": "tsc"
+        "build": "tsc",
+        "dev": "tsc --watch --pretty --noEmit | awk '{gsub(/\\033c/,\"\") system(\"\")}1'"
     },
     "repository": {
         "type": "git",

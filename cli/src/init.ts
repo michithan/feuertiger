@@ -3,7 +3,6 @@ import { writeFileSync, existsSync } from 'fs';
 import execa from 'execa';
 import { env } from '@feuertiger/config/src';
 import { root } from './paths';
-import linkdist from './linkdist';
 
 const asPostgres = (command: string): string => `su - postgres -c "${command}"`;
 
@@ -19,11 +18,6 @@ const installDependencies = async () => {
         cwd: root,
         stdout: 'inherit'
     });
-};
-
-const linkDistFolders = async () => {
-    console.log('linking dist folders');
-    await linkdist({});
 };
 
 const setupDb = async () => {
@@ -80,7 +74,6 @@ const syncEnv = async () => {
 
 export default async (): Promise<void> => {
     await installDependencies();
-    await linkDistFolders();
     await setupDb();
     await syncEnv();
 };
