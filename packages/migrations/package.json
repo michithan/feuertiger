@@ -8,7 +8,7 @@
     "license": "MIT",
     "scripts": {
         "build": "tsc",
-        "dev": "tsc --watch --pretty --noEmit | awk '{gsub(/\\033c/,\"\") system(\"\")}1'"
+        "dev": "tsc --watch | awk '{gsub(/\\033c/,\"\") system(\"\")}1'"
     },
     "repository": {
         "type": "git",
