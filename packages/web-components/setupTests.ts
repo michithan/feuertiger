@@ -1,4 +1,5 @@
 import 'jest-enzyme';
+import 'jest-canvas-mock';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 

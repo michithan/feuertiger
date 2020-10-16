@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
-        "@feuertiger/migrations": "1.0.9-dev.76d518c.0",
+        "@feuertiger/migrations": "1.0.9-dev.835ab37.0",
         "@feuertiger/ocr": "1.0.9-dev.835ab37.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.2478669.0",
         "@feuertiger/schema-prisma": "1.0.9-dev.76d518c.0",

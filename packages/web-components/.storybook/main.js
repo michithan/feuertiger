@@ -1,9 +1,15 @@
-const babelConfig = require('../babel.config');
-
 module.exports = {
     stories: ['../src/**/*.stories.tsx'],
     babel: async options => {
-        options.plugins.push(...babelConfig.plugins);
+        options.presets.push('next/babel');
+        options.plugins.push([
+            'styled-components',
+            {
+                ssr: true,
+                displayName: true,
+                preprocess: false
+            }
+        ]);
         return options;
     },
     webpackFinal: async config => {

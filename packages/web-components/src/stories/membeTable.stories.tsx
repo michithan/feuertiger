@@ -19,17 +19,12 @@ faker.locale = 'de';
 faker.seed(4);
 
 const defaultProps: MemberTableProps = Object.freeze({
-    networkStatus: null,
-    loading: false,
-    error: null,
-    data: {
-        allPersons: [
-            mockDefaultPerson(),
-            mockDefaultPerson(),
-            mockDefaultPerson(),
-            mockDefaultPerson()
-        ]
-    }
+    allPersons: [
+        mockDefaultPerson(),
+        mockDefaultPerson(),
+        mockDefaultPerson(),
+        mockDefaultPerson()
+    ]
 } as unknown) as MemberTableProps;
 
 storiesOf('MemberTable', module)
@@ -37,8 +32,6 @@ storiesOf('MemberTable', module)
         const props: MemberTableProps = {
             ...defaultProps
         };
-        props.loading = false;
-        props.error = null;
         return <MemberTable {...props} />;
     })
     .add('With Container', () => {
