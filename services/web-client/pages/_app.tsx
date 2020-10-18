@@ -1,5 +1,5 @@
 import React from 'react';
-import NextApp, { AppContext, AppInitialProps } from 'next/app';
+import NextApp, { AppInitialProps } from 'next/app';
 import Head from 'next/head';
 import { Container } from '../container/container';
 

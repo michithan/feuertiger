@@ -1,12 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test nextjs app should create _app 1`] = `
-<App
-  apollo={Object {}}
-  pageProps={Object {}}
->
-  <div>
-    test
-  </div>
-</App>
+<Fragment>
+  <Head>
+    <title>
+      Feuertiger
+    </title>
+    <link
+      href="/favicon.ico"
+      rel="icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </Head>
+  <WithApollo(AuthWrapper)
+    pageProps={Object {}}
+  >
+    <div>
+      test
+    </div>
+  </WithApollo(AuthWrapper)>
+</Fragment>
 `;
