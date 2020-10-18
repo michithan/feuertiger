@@ -35,12 +35,14 @@ export class ThemeProvider extends React.Component<ThemeProviderProps> {
 
         return (
             <MuiThemeProvider theme={theme}>
-                <CssBaseline />
-                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={de}>
-                    <StyledComponentThemeProvider theme={theme}>
-                        {children}
-                    </StyledComponentThemeProvider>
-                </MuiPickersUtilsProvider>
+                <>
+                    <CssBaseline />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={de}>
+                        <StyledComponentThemeProvider theme={theme}>
+                            {children}
+                        </StyledComponentThemeProvider>
+                    </MuiPickersUtilsProvider>
+                </>
             </MuiThemeProvider>
         );
     }
