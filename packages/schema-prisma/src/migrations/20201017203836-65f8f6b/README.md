@@ -68,12 +68,12 @@ PRIMARY KEY ("id")
 
 CREATE TABLE "public"."_Exercise_Leader" (
 "A" text   NOT NULL ,
-"B" text   NOT NULL 
+"B" text   NOT NULL
 )
 
 CREATE TABLE "public"."_Exercise_Participant" (
 "A" text   NOT NULL ,
-"B" text   NOT NULL 
+"B" text   NOT NULL
 )
 
 CREATE UNIQUE INDEX "_Exercise_Leader_AB_unique" ON "public"."_Exercise_Leader"("A", "B")
@@ -202,5 +202,3 @@ migration ..20201017203836-65f8f6b
 +  exercise Exercise[]
 +}
 ```
-
-
