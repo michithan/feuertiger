@@ -39,6 +39,9 @@ Build:
     image: $DEV_ENVIRONMENT_IMAGE_TAG
     services:
         - docker:dind
+    before_script:
+        - git remote set-url origin ${CI_REPOSITORY_URL}
+        - git checkout --track origin/${CI_COMMIT_REF_NAME}
     script:
         - pwd
         - yarn
