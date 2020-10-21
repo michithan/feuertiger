@@ -65,14 +65,20 @@ export class EditButtonGroup extends React.Component<
             afterReset
         );
 
-    handleClickConfirmSave = (): void =>
-        this.reset(this.props?.handleClickSave);
+    handleClickConfirmSave = (): void => {
+        const { handleClickSave } = this.props;
+        this.reset(handleClickSave);
+    };
 
-    handleClickConfirmDiscard = (): void =>
-        this.reset(this.props?.handleClickDiscard);
+    handleClickConfirmDiscard = (): void => {
+        const { handleClickDiscard } = this.props;
+        this.reset(handleClickDiscard);
+    };
 
-    handleClickConfirmBack = (): void =>
-        this.reset(this.props?.handleClickBack);
+    handleClickConfirmBack = (): void => {
+        const { handleClickBack } = this.props;
+        this.reset(handleClickBack);
+    };
 
     handleClickConfirmCancel = (): void => this.reset();
 

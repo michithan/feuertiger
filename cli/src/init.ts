@@ -68,7 +68,6 @@ const syncEnv = async () => {
         ''
     );
 
-    console.log(exports);
     writeFileSync(`/etc/profile.d/env.sh`, exports);
 };
 

@@ -2,7 +2,7 @@ overwrite: true
 schema: ./src/**/*.graphql
 documents: ./src/**/*.graphql
 hooks:
-    afterAllFileWrite:
+    beforeDone:
         - prettier --write
 generates:
     ./dist/index.ts:
@@ -10,7 +10,9 @@ generates:
             afterOneFileWrite:
                 - tsc && rm
         plugins:
-            - add: 'export { DateTimeResolver } from "graphql-scalars";'
+            - add:
+                  content:
+                      - 'export { DateTimeResolver } from "graphql-scalars";'
             - typescript
             - typescript-operations
             - typescript-resolvers

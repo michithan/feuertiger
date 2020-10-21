@@ -3,11 +3,11 @@ import { Table, TableBody, TableRow, TableCell } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { RawDataStructure } from './rawDataStructure';
 
-export interface FlattData {
+export interface FlattDataProps {
     dataStructure: RawDataStructure;
 }
 
-export const FlattData = (props: FlattData): ReactElement => {
+export const FlattData = (props: FlattDataProps): ReactElement => {
     const { dataStructure } = props;
     const { flattData } = dataStructure || {};
     return flattData ? (
