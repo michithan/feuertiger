@@ -18,7 +18,6 @@ Prepare:
     only:
         changes:
             - .dev-env.Dockerfile
-    interruptible: true
     tags:
         - docker
     image: docker:latest
