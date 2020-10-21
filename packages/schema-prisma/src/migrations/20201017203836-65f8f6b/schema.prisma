@@ -1,12 +1,13 @@
 datasource postgresql {
   url = "***"
-  provider        = "postgresql"
-  previewFeatures = ["transactionApi"]
+  provider = "postgresql"
 }
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../dist"
+  provider        = "prisma-client-js"
+  previewFeatures = ["transactionApi"]
+  binaryTargets   = ["native", "linux-musl"]
+  output          = "../dist"
 }
 
 model Exercise {

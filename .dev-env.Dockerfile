@@ -2,8 +2,10 @@
 FROM alpine:3.12.0
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
-ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/cli/bin:/root/google-cloud-sdk/bin:/
+ENV DENO_INSTALL=/root/.deno
+ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/cli/bin:/builds/workspaces/feuertiger/cli/bin:/root/google-cloud-sdk/bin:/:/root/.deno/bin
 ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
+ENV POSTGRES_URI="postgresql://feuertiger:feuertiger@localhost:5432/feuertiger"
 
 # Install basics
 RUN apk update && apk add --no-cache \
@@ -118,6 +120,9 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
 
 # Install lerna
 RUN npm i -g lerna typescript ts-node
+
+# Install deno
+RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0
 
 # Use Z shell
 ENTRYPOINT zsh

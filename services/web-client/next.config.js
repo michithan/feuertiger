@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const merge = require('lodash.merge');
 const { firebaseAppConfig, graphqlUri } = require('@feuertiger/config');
 const withTM = require('next-transpile-modules');
@@ -13,7 +14,7 @@ const {
 const compose = (...plugins) => config =>
     plugins.reduce((composedConfig, plugin) => plugin(composedConfig), config);
 
-module.exports = (phase, { defaultConfig }) =>
+module.exports = phase =>
     compose(
         withSourceMaps,
         withTM([

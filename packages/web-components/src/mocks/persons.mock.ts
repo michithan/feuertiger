@@ -43,6 +43,7 @@ export const mockDefaultPerson = (): Person => ({
         }
     ],
     exercisesParticipated: [defaultExerciseMock],
+    exercisesNotParticipated: [],
     exercisesLeaded: []
 });
 
@@ -82,5 +83,6 @@ export const mockLeaderPerson = (): Person => ({
         }
     ],
     exercisesParticipated: [],
+    exercisesNotParticipated: [],
     exercisesLeaded: [defaultExerciseMock]
 });

@@ -1,4 +1,12 @@
-import { addDecorator } from '@storybook/react';
+import { SnackbarProvider } from 'notistack';
 import { ThemeProvider } from '../src/providers/themeProvider';
 
-addDecorator(storyFn => <ThemeProvider>{storyFn()}</ThemeProvider>);
+export const decorators = [
+    Story => (
+        <ThemeProvider>
+            <SnackbarProvider maxSnack={3}>
+                <Story />
+            </SnackbarProvider>
+        </ThemeProvider>
+    )
+];

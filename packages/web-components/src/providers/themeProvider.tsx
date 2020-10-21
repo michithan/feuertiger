@@ -19,7 +19,7 @@ export const theme = createMuiTheme({
 });
 
 export interface ThemeProviderProps {
-    children: JSX.Element | (false | JSX.Element)[];
+    children: JSX.Element;
 }
 
 export class ThemeProvider extends React.Component<ThemeProviderProps> {
@@ -35,12 +35,14 @@ export class ThemeProvider extends React.Component<ThemeProviderProps> {
 
         return (
             <MuiThemeProvider theme={theme}>
-                <CssBaseline />
-                <MuiPickersUtilsProvider utils={DateFnsUtils} locale={de}>
-                    <StyledComponentThemeProvider theme={theme}>
-                        <>{children}</>
-                    </StyledComponentThemeProvider>
-                </MuiPickersUtilsProvider>
+                <>
+                    <CssBaseline />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={de}>
+                        <StyledComponentThemeProvider theme={theme}>
+                            {children}
+                        </StyledComponentThemeProvider>
+                    </MuiPickersUtilsProvider>
+                </>
             </MuiThemeProvider>
         );
     }

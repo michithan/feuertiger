@@ -33,7 +33,7 @@
                 "source": "postgresql"
             },
             "argument": "url",
-            "value": "\"postgresql://feuertiger:feuertiger@localhost:5432/feuertiger\""
+            "value": "\"***\""
         },
         {
             "tag": "CreateArgument",
@@ -800,7 +800,7 @@
         {
             "tag": "CreateField",
             "model": "Timeslot",
-            "field": "Exercise",
+            "field": "exercise",
             "type": "Exercise",
             "arity": "List"
         }

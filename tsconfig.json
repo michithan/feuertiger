@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "pretty": true,
         "skipLibCheck": true,
         /* Basic Options */
         // "incremental": true,                   /* Enable incremental compilation */
@@ -76,18 +77,11 @@
         "resolveJsonModule": true
     },
     "compileOnSave": true,
-    "watchOptions": {
-        "watchFile": "useFsEvents",
-        "watchDirectory": "useFsEvents",
-        "fallbackPolling": "dynamicPriority"
-    },
     "exclude": [
         "node_modules",
         "**/node_modules/**",
         "dist",
         "coverage",
-        "**/*.test.ts",
-        ".eslintrc.js",
-        "babel.config.js"
+        "**/*.test.ts"
     ]
 }
