@@ -12,6 +12,7 @@ import { FileInfo } from './fileInfo';
 import { TextData } from './textData';
 import { CleaningOptions } from './cleaningOptions';
 import { ParsingOptions } from './parsingOptions';
+import { FlattData } from './flattData';
 
 interface State {
     file: File | null | undefined;
