@@ -38,9 +38,7 @@ export type LoginProps = AuthProps;
 export class Login extends React.Component<LoginProps> {
     handleLogin = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
-        // @ts-ignore
         const email = event.target.email.value;
-        // @ts-ignore
         const password = event.target.password.value;
         const { auth } = this.props;
         auth.signInWithEmailAndPassword(email, password);
