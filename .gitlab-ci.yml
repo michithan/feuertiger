@@ -43,7 +43,6 @@ Build:
         - git remote set-url origin ${CI_REPOSITORY_URL}
         - git checkout --track origin/${CI_COMMIT_REF_NAME}
     script:
-        - pwd
         - yarn
         - feuertiger init
         - feuertiger build
