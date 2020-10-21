@@ -4,7 +4,15 @@ stages:
     - deploy
 
 variables:
+    GIT_CLONE_PATH: /workspaces/feuertiger
     DEV_ENVIRONMENT_IMAGE_TAG: $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME/dev-environment:latest
+    GOOGLE_CREDENTIALS: ${GOOGLE_CREDENTIALS}
+    FIREBASE_CONFIG: ${FIREBASE_CONFIG}
+    DIGITALOCEAN_TOKEN: ${DIGITALOCEAN_TOKEN}
+    GIT_TOKEN: ${CI_TOKEN}
+    GIT_USER: ${GITLAB_USER_EMAIL}
+    PULUMI_ACCESS_TOKEN: ${PULUMI_ACCESS_TOKEN}
+
 Prepare:
     stage: .pre
     only:
@@ -30,12 +38,8 @@ Build:
     tags:
         - docker
     image: $DEV_ENVIRONMENT_IMAGE_TAG
-    variables:
-        GOOGLE_CREDENTIALS: ${GOOGLE_CREDENTIALS}
-        FIREBASE_CONFIG: ${FIREBASE_CONFIG}
-        DIGITALOCEAN_TOKEN: ${DIGITALOCEAN_TOKEN}
-        GIT_TOKEN: ${CI_TOKEN}
-        GIT_USER: ${GITLAB_USER_EMAIL}
+    services:
+        - docker:dind
     script:
         - yarn
         - feuertiger init
@@ -45,26 +49,15 @@ Build:
         - feuertiger publish
         - feuertiger dockerize
 
-#######################################################
-# Deploy firebase functions                           #
-# - triggered by pushes on deploy branches made by ci #
-#######################################################
 Deploy:
     stage: deploy
-    needs: ['Build']
     only:
         refs:
             - dev
+    needs: ['Build']
     interruptible: true
     tags:
         - docker
     image: $DEV_ENVIRONMENT_IMAGE_TAG
-    variables:
-        GOOGLE_CREDENTIALS: ${GOOGLE_CREDENTIALS}
-        FIREBASE_CONFIG: ${FIREBASE_CONFIG}
-        DIGITALOCEAN_TOKEN: ${DIGITALOCEAN_TOKEN}
-        GIT_TOKEN: ${CI_TOKEN}
-        GIT_USER: ${GITLAB_USER_EMAIL}
-        PULUMI_ACCESS_TOKEN: ${PULUMI_ACCESS_TOKEN}
     script:
         - yarn
