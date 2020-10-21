@@ -5,6 +5,7 @@ ENV NODE_OPTIONS="--max-old-space-size=4096"
 ENV DENO_INSTALL=/root/.deno
 ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/cli/bin:/root/google-cloud-sdk/bin:/:/root/.deno/bin
 ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
+ENV POSTGRES_URI="postgresql://feuertiger:feuertiger@localhost:5432/feuertiger"
 
 # Install basics
 RUN apk update && apk add --no-cache \
