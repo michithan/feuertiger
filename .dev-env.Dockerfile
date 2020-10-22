@@ -1,5 +1,5 @@
 # Start from alpine
-FROM alpine:3.12.0
+FROM alpine:3.12.1
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 ENV DENO_INSTALL=/root/.deno
