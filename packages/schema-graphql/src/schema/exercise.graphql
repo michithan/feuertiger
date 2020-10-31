@@ -13,3 +13,7 @@ input _Exercise {
     leaders: [_Node]
     participants: [_Node]
 }
+
+extend type Query {
+    allExercises(filter: _Query): [Exercise]
+}

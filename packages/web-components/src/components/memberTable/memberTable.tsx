@@ -7,7 +7,7 @@ import {
     Breadcrumbs,
     Typography
 } from '@material-ui/core';
-import MaterialTable from 'material-table';
+import MaterialTable, { Query, QueryResult } from 'material-table';
 import FindInPage from '@material-ui/icons/FindInPage';
 import { startOcr } from '@feuertiger/ocr';
 import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
@@ -18,7 +18,14 @@ interface State {
     addDialogOpen: boolean;
 }
 
-export type MemberTableProps = AllPersonsQueryResult['data'];
+// eslint-disable-next-line @typescript-eslint/ban-types
+type FetchFunction<RowData extends object> = (
+    query: Query<RowData>
+) => Promise<QueryResult<RowData>>;
+
+export type MemberTableProps = {
+    fetchPersons: FetchFunction<AllPersonsQueryResult['data']>;
+};
 
 export class MemberTable extends React.Component<MemberTableProps, State> {
     constructor(props: MemberTableProps) {
@@ -34,7 +41,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
 
     render(): ReactNode {
         const { addDialogOpen } = this.state;
-        const { allPersons } = this.props;
+        const { fetchPersons } = this.props;
 
         return (
             <Grid container spacing={3}>
@@ -106,7 +113,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                                 )
                             }
                         ]}
-                        data={allPersons}
+                        data={fetchPersons}
                         title="Mitglieder"
                     />
                 </Grid>

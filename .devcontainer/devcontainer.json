@@ -87,6 +87,7 @@
         }
     },
     "extensions": [
+        "apollographql.vscode-apollo",
         "ms-vscode.vscode-typescript-next",
         "gitlab.gitlab-workflow",
         "Prisma.prisma",

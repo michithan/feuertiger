@@ -40,6 +40,10 @@ input PersonExerciseConnectionUpdate {
     changes: [ConnectionUpdate!]!
 }
 
+extend type Query {
+    allPersons(query: _Query): [Person]
+}
+
 extend type Mutation {
     createPerson(person: PersonUpdate!): Person
     updatePerson(person: PersonUpdate!): Person

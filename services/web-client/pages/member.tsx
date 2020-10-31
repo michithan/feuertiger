@@ -11,12 +11,27 @@ import { AllPersonsDocument } from '@feuertiger/schema-graphql';
 
 const Member = dynamic(
     async () => () => {
-        const { loading, error, data } = useQuery(AllPersonsDocument);
+        const { loading, error, refetch, data } = useQuery(AllPersonsDocument);
+
         const copy: MemberTableProps = {
-            allPersons: data?.allPersons?.map(person => ({
-                ...person
-            }))
+            fetchPersons: async query => {
+                await refetch({
+                    filters: query.filters,
+                    page: query.page,
+                    pageSize: query.pageSize,
+                    totalCount: query.totalCount,
+                    search: query.search,
+                    orderBy: query.orderBy.field.name,
+                    orderDirection: query.orderDirection
+                });
+                return {
+                    data,
+                    page: result.page - 1,
+                    totalCount: data.allPersons.length
+                };
+            }
         };
+
         return (
             <LoadingContainer loading={loading} error={error}>
                 <MemberTable {...copy} />
