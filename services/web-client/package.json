@@ -20,6 +20,7 @@
         "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.2478669.0",
         "@feuertiger/web-components": "1.0.9-dev.9daaf39.0",
+        "@feuertiger/pagination": "1.0.9-dev.76d518c.0",
         "@next/bundle-analyzer": "9.5.5",
         "@zeit/next-source-maps": "0.0.3",
         "body-parser": "1.19.0",

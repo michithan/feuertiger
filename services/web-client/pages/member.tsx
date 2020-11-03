@@ -8,30 +8,15 @@ import {
     LoadingContainer
 } from '@feuertiger/web-components';
 import { AllPersonsDocument } from '@feuertiger/schema-graphql';
+import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
 
 const Member = dynamic(
     async () => () => {
-        const { loading, error, refetch, data } = useQuery(AllPersonsDocument);
-
+        const query = useQuery(AllPersonsDocument);
+        const { loading, error } = query;
         const copy: MemberTableProps = {
-            fetchPersons: async query => {
-                await refetch({
-                    filters: query.filters,
-                    page: query.page,
-                    pageSize: query.pageSize,
-                    totalCount: query.totalCount,
-                    search: query.search,
-                    orderBy: query.orderBy.field.name,
-                    orderDirection: query.orderDirection
-                });
-                return {
-                    data,
-                    page: result.page - 1,
-                    totalCount: data.allPersons.length
-                };
-            }
+            fetchPersons: createMaterialTableFetchFunction(query)
         };
-
         return (
             <LoadingContainer loading={loading} error={error}>
                 <MemberTable {...copy} />

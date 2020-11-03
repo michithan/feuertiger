@@ -7,10 +7,11 @@ import {
     Breadcrumbs,
     Typography
 } from '@material-ui/core';
-import MaterialTable, { Query, QueryResult } from 'material-table';
+import MaterialTable from 'material-table';
 import FindInPage from '@material-ui/icons/FindInPage';
 import { startOcr } from '@feuertiger/ocr';
-import { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
+import type { MaterialTableFetchFunction } from '@feuertiger/pagination';
+import type { AllPersonsQueryResult } from '@feuertiger/schema-graphql';
 
 import { AddMember, Link } from '../index';
 
@@ -18,13 +19,8 @@ interface State {
     addDialogOpen: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type FetchFunction<RowData extends object> = (
-    query: Query<RowData>
-) => Promise<QueryResult<RowData>>;
-
 export type MemberTableProps = {
-    fetchPersons: FetchFunction<AllPersonsQueryResult['data']>;
+    fetchPersons: MaterialTableFetchFunction<AllPersonsQueryResult['data']>;
 };
 
 export class MemberTable extends React.Component<MemberTableProps, State> {

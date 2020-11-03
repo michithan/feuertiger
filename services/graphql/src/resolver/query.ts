@@ -1,7 +1,7 @@
-import { QueryResolvers, Node, _Query } from '@feuertiger/schema-graphql';
+import { QueryResolvers, Node } from '@feuertiger/schema-graphql';
+import { mapToPrismaQuery } from '@feuertiger/pagination';
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
-import { buildQuery } from '../utils/query';
 
 interface NodeResolver {
     findOne: (query: { where: { id: string } }) => Promise<Node>;
@@ -45,7 +45,7 @@ const Query: QueryResolvers = {
             'dateOfBirth',
             'membershipNumber'
         ];
-        const args = buildQuery(query, searchPropertys);
+        const args = mapToPrismaQuery(query, searchPropertys);
         return db.person.findMany(args);
     },
     allExercises: async (parent, args, context: Context) => {

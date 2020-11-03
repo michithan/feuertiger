@@ -1,4 +1,4 @@
-import { _Query } from '@feuertiger/schema-graphql';
+import type { _Query } from '@feuertiger/schema-graphql';
 
 export interface PrismaQuery {
     where: {
@@ -22,7 +22,7 @@ export interface PrismaQuery {
     skip: number;
 }
 
-export const buildQuery = (
+export const mapToPrismaQuery = (
     query: _Query,
     searchPropertys?: string[]
 ): PrismaQuery => {
