@@ -20,7 +20,9 @@ interface State {
 }
 
 export type MemberTableProps = {
-    fetchPersons: MaterialTableFetchFunction<AllPersonsQueryResult['data']>;
+    fetchPersons: MaterialTableFetchFunction<
+        AllPersonsQueryResult['data']['allPersons'][0]
+    >;
 };
 
 export class MemberTable extends React.Component<MemberTableProps, State> {

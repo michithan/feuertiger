@@ -7,15 +7,33 @@ import {
     MemberTableProps,
     LoadingContainer
 } from '@feuertiger/web-components';
-import { AllPersonsDocument } from '@feuertiger/schema-graphql';
+import {
+    AllPersonsQuery,
+    AllPersonsQueryVariables,
+    AllPersonsDocument
+} from '@feuertiger/schema-graphql';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
 
 const Member = dynamic(
     async () => () => {
-        const query = useQuery(AllPersonsDocument);
+        const query = useQuery<AllPersonsQuery, AllPersonsQueryVariables>(
+            AllPersonsDocument,
+            {
+                variables: {
+                    query: {
+                        page: 0,
+                        pageSize: 5
+                    }
+                }
+            }
+        );
         const { loading, error } = query;
         const copy: MemberTableProps = {
-            fetchPersons: createMaterialTableFetchFunction(query)
+            fetchPersons: createMaterialTableFetchFunction<
+                AllPersonsQuery,
+                AllPersonsQuery['allPersons'][0],
+                AllPersonsQueryVariables
+            >(query, ({ data: { allPersons } }) => allPersons)
         };
         return (
             <LoadingContainer loading={loading} error={error}>

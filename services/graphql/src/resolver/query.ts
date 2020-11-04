@@ -42,7 +42,6 @@ const Query: QueryResolvers = {
             'birthName',
             'placeOfBirth',
             'avatar',
-            'dateOfBirth',
             'membershipNumber'
         ];
         const args = mapToPrismaQuery(query, searchPropertys);

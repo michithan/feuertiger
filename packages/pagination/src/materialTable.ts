@@ -4,12 +4,20 @@ import type {
     _Query,
     _QueryFilter
 } from '@feuertiger/schema-graphql';
-import type { Filter, Query, QueryResult } from 'material-table';
-import type { ObservableQuery, OperationVariables } from '@apollo/client';
+import type {
+    Filter,
+    Query,
+    QueryResult as MaterialTableQueryResult
+} from 'material-table';
+import type {
+    QueryResult,
+    OperationVariables,
+    ApolloQueryResult
+} from '@apollo/client';
 
 export type MaterialTableFetchFunction<RowData extends object> = (
     query: Query<RowData>
-) => Promise<QueryResult<RowData>>;
+) => Promise<MaterialTableQueryResult<RowData>>;
 
 declare global {
     interface String {
@@ -33,7 +41,7 @@ const buildFilters = <RowData extends object>(
 ): _Query['filters'] | undefined =>
     queryFilter
         .map(({ value, operator, column }) => ({
-            column: column.field,
+            column: column?.field,
             operator: mapOperator(operator),
             value
         }))
@@ -53,19 +61,21 @@ const buildFilters = <RowData extends object>(
                 typeof value === 'string')
         );
 
-export const mapFromMaterialTableQuery = <RowData extends object>(
-    query: Query<RowData>
-): _Query => {
+export const mapFromMaterialTableQuery = <RowData extends object>({
+    page,
+    pageSize,
+    filters,
+    orderBy,
+    orderDirection,
+    search
+}: Query<RowData>): _Query => {
     return {
-        page: query.page,
-        pageSize: query.pageSize,
-        filters: buildFilters(query.filters),
-        orderBy:
-            typeof query.orderBy.field === 'string'
-                ? query.orderBy.field
-                : undefined,
-        orderDirection: query.orderDirection.toUpperCase() ?? 'ASC',
-        search: query.search
+        page,
+        pageSize,
+        filters: buildFilters(filters),
+        orderBy: typeof orderBy?.field === 'string' ? orderBy.field : undefined,
+        orderDirection: orderDirection?.toUpperCase() || 'ASC',
+        search: search || undefined
     };
 };
 
@@ -74,18 +84,32 @@ interface WithQuery {
 }
 
 export const createMaterialTableFetchFunction = <
+    Query extends object,
     RowData extends object,
     Variables extends WithQuery = OperationVariables & WithQuery
 >(
-    observableQuery: ObservableQuery<Array<RowData>, Variables>
-): MaterialTableFetchFunction<RowData> => async query =>
-    observableQuery
-        .refetch({
+    observableQuery: QueryResult<Query, Variables>,
+    mapResultToRowData: (result: ApolloQueryResult<Query>) => RowData[]
+): MaterialTableFetchFunction<RowData> => async query => {
+    console.log('doing the fetch');
+
+    let result: ApolloQueryResult<Query>;
+
+    try {
+        result = await observableQuery.refetch({
             ...observableQuery.variables,
             query: mapFromMaterialTableQuery(query)
-        } as Variables)
-        .then(({ data }) => ({
-            data,
-            page: query.page,
-            totalCount: data.length
-        }));
+        } as Variables);
+    } catch (error) {
+        result = observableQuery as ApolloQueryResult<Query>;
+        console.error(error);
+    }
+
+    const rows = mapResultToRowData(result).map(row => ({ ...row }));
+
+    return {
+        data: rows,
+        page: query.page,
+        totalCount: rows.length
+    };
+};

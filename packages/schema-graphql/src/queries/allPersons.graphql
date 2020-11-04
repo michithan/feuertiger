@@ -1,5 +1,5 @@
-query allPersons {
-    allPersons {
+query allPersons($query: _Query!) {
+    allPersons(query: $query) {
         id
         firstname
         lastname

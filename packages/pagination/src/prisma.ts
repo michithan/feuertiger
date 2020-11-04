@@ -9,7 +9,10 @@ export interface PrismaQuery {
             | undefined;
         OR?:
             | Array<{
-                  [key: string]: string;
+                  [key: string]: {
+                      contains: string;
+                      mode: 'insensitive';
+                  };
               }>
             | undefined;
     };
@@ -29,17 +32,17 @@ export const mapToPrismaQuery = (
     const { filters, page, pageSize, orderBy, orderDirection, search } = query;
     return {
         where: {
-            AND: filters
-                ? filters.map(({ column, value }) => ({
-                      [column]: value
-                  }))
-                : undefined,
+            AND:
+                filters && filters.length > 0
+                    ? filters.map(({ column, value }) => ({
+                          [column]: value
+                      }))
+                    : undefined,
             OR:
                 search && searchPropertys
-                    ? Object.assign(
-                          {},
-                          ...searchPropertys.map(key => ({ [key]: search }))
-                      )
+                    ? searchPropertys.map(key => ({
+                          [key]: { contains: search, mode: 'insensitive' }
+                      }))
                     : undefined
         },
         take: pageSize,
