@@ -1,0 +1,23 @@
+version: '3'
+services:
+    ide:
+        image: ./.dev-env.Dockerfile
+        command: sleep infinity
+        volumes:
+            - type: volume
+              target: /workspace/node_modules
+            - type: bind
+              source: /var/run/docker.sock
+              target: /var/run/docker.sock
+        privileged: true
+    postgres:
+        image: 'postgres:13'
+        environment:
+            - POSTGRES_DB=feuertiger
+            - POSTGRES_USER=feuertiger
+            - POSTGRES_PASSWORD=feuertiger
+        ports:
+            - target: 5432
+              published: 5432
+              protocol: tcp
+              mode: host

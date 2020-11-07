@@ -1,16 +1,10 @@
 {
     "name": "feuertiger",
-    "dockerFile": "../.dev-env.Dockerfile",
+    "dockerComposeFile": "../.dev-env.docker-compose.yml",
+    "workspaceFolder": "/workspaces/feuertiger",
+    "service": "ide",
     "postCreateCommand": "yarn init",
     "forwardPorts": [3000, 4000, 5000],
-    "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-    ],
-    "runArgs": [
-        "--privileged",
-        "--mount",
-        "type=volume,target=/workspace/node_modules"
-    ],
     "settings": {
         "window.zoomLevel": 1,
         "workbench.iconTheme": "material-icon-theme",
