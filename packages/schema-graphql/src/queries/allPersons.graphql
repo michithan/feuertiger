@@ -1,25 +1,37 @@
 query allPersons($query: _Query!) {
     allPersons(query: $query) {
-        id
-        firstname
-        lastname
-        sex
-        avatar
-        birthName
-        placeOfBirth
-        dateOfBirth
-        actualMembership {
-            active
-            entryDate
+        totalCount
+        edges {
+            node {
+                id
+                firstname
+                lastname
+                sex
+                avatar
+                birthName
+                placeOfBirth
+                dateOfBirth
+                actualMembership {
+                    active
+                    entryDate
+                }
+                grade
+                address {
+                    id
+                    street
+                    streetNumber
+                    postalCode
+                    city
+                    country
+                }
+            }
+            cursor
         }
-        grade
-        address {
-            id
-            street
-            streetNumber
-            postalCode
-            city
-            country
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
         }
     }
 }

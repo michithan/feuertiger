@@ -1,5 +1,5 @@
 import { QueryResolvers, Node } from '@feuertiger/schema-graphql';
-import { mapToPrismaQuery } from '@feuertiger/pagination';
+import { mapToPrismaQuery, resolveConnection } from '@feuertiger/pagination';
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
 
@@ -35,6 +35,11 @@ const Query: QueryResolvers = {
         if (!query) {
             return db.person.findMany();
         }
+        const personsConnectionResolver = resolveConnection(
+            db,
+            db.person.count,
+            db.person.findMany
+        );
         const searchPropertys = [
             'firstname',
             'lastname',
@@ -45,7 +50,7 @@ const Query: QueryResolvers = {
             'membershipNumber'
         ];
         const args = mapToPrismaQuery(query, searchPropertys);
-        return db.person.findMany(args);
+        return personsConnectionResolver(query, args);
     },
     allExercises: async (parent, args, context: Context) => {
         const exercises = await context.db.exercise.findMany();

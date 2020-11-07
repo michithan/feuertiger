@@ -1,4 +1,7 @@
-import type { _Query } from '@feuertiger/schema-graphql';
+import type { Node, _Query } from '@feuertiger/schema-graphql';
+import type { PrismaClient } from '@feuertiger/schema-prisma';
+
+import { createConnection, NodeConnection } from '.';
 
 export interface PrismaQuery {
     where: {
@@ -55,3 +58,14 @@ export const mapToPrismaQuery = (
         skip: page * pageSize
     };
 };
+
+export const createConnectionResolver = <TNode extends Node>(
+    db: PrismaClient,
+    count: (args: { where: PrismaQuery['where'] }) => Promise<number>,
+    findMany: (args: PrismaQuery) => Promise<Array<TNode>>
+) => (query: _Query, args: PrismaQuery): Promise<NodeConnection<TNode>> =>
+    db
+        .$transaction([count({ where: args.where }), findMany(args)])
+        .then(([totalCount, nodes]) =>
+            createConnection(query, nodes, totalCount)
+        );

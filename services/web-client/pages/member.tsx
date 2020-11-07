@@ -31,9 +31,11 @@ const Member = dynamic(
         const copy: MemberTableProps = {
             fetchPersons: createMaterialTableFetchFunction<
                 AllPersonsQuery,
-                AllPersonsQuery['allPersons'][0],
+                AllPersonsQuery['allPersons']['edges'][0]['node'],
                 AllPersonsQueryVariables
-            >(query, ({ data: { allPersons } }) => allPersons)
+            >(query, ({ data: { allPersons } }) =>
+                allPersons.edges.map(({ node }) => node)
+            )
         };
         return (
             <LoadingContainer loading={loading} error={error}>
