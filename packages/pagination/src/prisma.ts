@@ -29,10 +29,17 @@ export interface PrismaQuery {
 }
 
 export const mapToPrismaQuery = (
-    query: _Query,
-    searchPropertys?: string[]
+    query: _Query | null | undefined,
+    searchPropertys: string[] | null | undefined
 ): PrismaQuery => {
-    const { filters, page, pageSize, orderBy, orderDirection, search } = query;
+    const {
+        filters,
+        page = 0,
+        pageSize = Infinity,
+        orderBy,
+        orderDirection,
+        search
+    } = query ?? {};
     return {
         where: {
             AND:
@@ -63,7 +70,10 @@ export const createConnectionResolver = <TNode extends Node>(
     db: PrismaClient,
     count: (args: { where: PrismaQuery['where'] }) => Promise<number>,
     findMany: (args: PrismaQuery) => Promise<Array<TNode>>
-) => (query: _Query, args: PrismaQuery): Promise<NodeConnection<TNode>> =>
+) => (
+    query: _Query | null | undefined,
+    args: PrismaQuery
+): Promise<NodeConnection<TNode>> =>
     db
         .$transaction([count({ where: args.where }), findMany(args)])
         .then(([totalCount, nodes]) =>

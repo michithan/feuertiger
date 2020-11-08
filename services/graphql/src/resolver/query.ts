@@ -1,5 +1,8 @@
-import { QueryResolvers, Node } from '@feuertiger/schema-graphql';
-import { mapToPrismaQuery, resolveConnection } from '@feuertiger/pagination';
+import { QueryResolvers, Node, Person } from '@feuertiger/schema-graphql';
+import {
+    mapToPrismaQuery,
+    createConnectionResolver
+} from '@feuertiger/pagination';
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
 
@@ -31,11 +34,8 @@ const Query: QueryResolvers = {
     node: (_parent, { id }, context) => getNode({ id, context }),
     nodes: (_parent, args, context) =>
         Promise.all(args.ids.map(id => getNode({ id, context }))),
-    allPersons: async (parent, { query }, { db }: Context) => {
-        if (!query) {
-            return db.person.findMany();
-        }
-        const personsConnectionResolver = resolveConnection(
+    allPersons: (parent, { query }, { db }: Context) => {
+        const personsConnectionResolver = createConnectionResolver<Person>(
             db,
             db.person.count,
             db.person.findMany

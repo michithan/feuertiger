@@ -16,7 +16,7 @@ import type {
     ApolloQueryResult
 } from '@apollo/client';
 
-import { mapConnectionToNodes, NodeConnection } from '.';
+import { NodeConnection } from '.';
 
 declare global {
     interface String {
@@ -87,12 +87,12 @@ export const mapFromMaterialTableQuery = <TNode extends Node>({
 };
 
 export const mapNodesToQueryResult = <TNode extends Node>(
-    nodes: Array<TNode>,
+    connection: NodeConnection<TNode>,
     query: Query<TNode>
 ): MaterialTableQueryResult<TNode> => ({
-    data: nodes,
+    data: connection.edges.map(({ node }) => ({ ...node })),
     page: query.page,
-    totalCount: nodes.length
+    totalCount: connection.totalCount
 });
 
 export const createMaterialTableFetchFunction = <
@@ -113,5 +113,4 @@ export const createMaterialTableFetchFunction = <
             return observableQuery as ApolloQueryResult<TQuery>;
         })
         .then(getConnection)
-        .then(mapConnectionToNodes)
-        .then(nodes => mapNodesToQueryResult(nodes, query));
+        .then(connection => mapNodesToQueryResult(connection, query));

@@ -33,9 +33,7 @@ const Member = dynamic(
                 AllPersonsQuery,
                 AllPersonsQuery['allPersons']['edges'][0]['node'],
                 AllPersonsQueryVariables
-            >(query, ({ data: { allPersons } }) =>
-                allPersons.edges.map(({ node }) => node)
-            )
+            >(query, ({ data: { allPersons } }) => allPersons)
         };
         return (
             <LoadingContainer loading={loading} error={error}>

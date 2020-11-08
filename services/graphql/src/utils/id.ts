@@ -25,6 +25,9 @@ export const connectInput = (connections: _Node[]): Connection[] =>
         )
         .filter(connection => connection);
 
+export const toPascalCase = (text: string): string =>
+    `${text[0].toUpperCase()}${text.slice(1)}`;
+
 type Options = {
     connections: string[] | null;
 };

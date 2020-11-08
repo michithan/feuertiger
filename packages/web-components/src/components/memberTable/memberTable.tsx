@@ -21,7 +21,7 @@ interface State {
 
 export type MemberTableProps = {
     fetchPersons: MaterialTableFetchFunction<
-        AllPersonsQueryResult['data']['allPersons'][0]
+        AllPersonsQueryResult['data']['allPersons']['edges'][0]['node']
     >;
 };
 
