@@ -3,30 +3,36 @@ import { test, describe, expect } from '@jest/globals';
 
 import { createConnection } from '.';
 
+const DEFAULT_QUERY: Readonly<_Query> = Object.freeze({
+    pageSize: 5,
+    page: 0
+});
+
+const DEFAULT_NODES: Readonly<Array<Node>> = Object.freeze([
+    {
+        id: 'node:1'
+    },
+    {
+        id: 'node:2'
+    },
+    {
+        id: 'node:3'
+    },
+    {
+        id: 'node:4'
+    },
+    {
+        id: 'node:5'
+    }
+]);
+
+const DEFAULT_TOTAL_COUNT: Readonly<number> = Object.freeze(10);
+
 describe('Test relay pagination utils', () => {
     test('should create connection based on query with array of nodes', () => {
-        const query: _Query = {
-            pageSize: 5,
-            page: 0
-        };
-        const nodes: Array<Node> = [
-            {
-                id: 'node:1'
-            },
-            {
-                id: 'node:2'
-            },
-            {
-                id: 'node:3'
-            },
-            {
-                id: 'node:4'
-            },
-            {
-                id: 'node:5'
-            }
-        ];
-        const totalCount = 10;
+        const query: _Query = Object.create(DEFAULT_QUERY);
+        const nodes: Array<Node> = Object.create(DEFAULT_NODES);
+        const totalCount = DEFAULT_TOTAL_COUNT;
 
         const connection = createConnection(query, nodes, totalCount);
 
