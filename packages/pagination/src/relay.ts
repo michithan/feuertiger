@@ -16,15 +16,15 @@ export interface NodeConnection<TNode extends Node> extends Connection {
 export const createConnection = <TNode extends Node>(
     query: _Query | null | undefined,
     nodes: Array<TNode>,
-    count: number
+    totalCount: number
 ): NodeConnection<TNode> => ({
-    totalCount: count,
+    totalCount,
     edges: nodes.map(node => ({
         node,
         cursor: node.id
     })),
     pageInfo: {
-        hasNextPage: query ? query.pageSize * query.page < count : false,
+        hasNextPage: query ? query.pageSize * query.page < totalCount : false,
         hasPreviousPage: query ? query.page > 0 : false,
         startCursor: nodes[0]?.id,
         endCursor: nodes[nodes.length - 1]?.id
