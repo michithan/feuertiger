@@ -85,6 +85,8 @@
                 "password": "feuertiger"
             }
         ],
+        "jestTestExplorer.pathToJest": "/workspaces/feuertiger/node_modules/.bin/jest",
+        "jest.runAllTestsFirst": false,
         "files.watcherExclude": {
             "**/.git/objects/**": true,
             "**/.git/subtree-cache/**": true,
@@ -99,9 +101,12 @@
         "Prisma.vscode-graphql",
         "anseki.vscode-color",
         "dbaeumer.vscode-eslint",
+        "hbenl.vscode-test-explorer",
         "eamodio.gitlens",
+        "Orta.vscode-jest",
         "mtxr.sqltools",
         "mtxr.sqltools-driver-pg",
+        "kavod-io.vscode-jest-test-adapter",
         "eg2.vscode-npm-script",
         "esbenp.prettier-vscode",
         "jpoissonnier.vscode-styled-components",

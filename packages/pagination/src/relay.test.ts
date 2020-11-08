@@ -54,4 +54,46 @@ describe('Test relay pagination utils', () => {
         expect(connection.edges[3].node).toEqual(nodes[3]);
         expect(connection.edges[4].node).toEqual(nodes[4]);
     });
+    test('should create connection based on array of nodes without query', () => {
+        const nodes: Array<Node> = Object.create(DEFAULT_NODES);
+        const totalCount = DEFAULT_TOTAL_COUNT;
+
+        const connection = createConnection(undefined, nodes, totalCount);
+
+        expect(connection).toBeTruthy();
+
+        expect(connection.totalCount).toEqual(totalCount);
+
+        expect(connection.edges.length).toEqual(nodes.length);
+
+        expect(connection.pageInfo.hasPreviousPage).toBeFalsy();
+        expect(connection.pageInfo.hasNextPage).toBeFalsy();
+
+        expect(connection.pageInfo.startCursor).toEqual('node:1');
+        expect(connection.pageInfo.endCursor).toEqual('node:5');
+
+        expect(connection.edges[0].node).toEqual(nodes[0]);
+        expect(connection.edges[1].node).toEqual(nodes[1]);
+        expect(connection.edges[2].node).toEqual(nodes[2]);
+        expect(connection.edges[3].node).toEqual(nodes[3]);
+        expect(connection.edges[4].node).toEqual(nodes[4]);
+    });
+    test('should create connection based on array of nodes without elements', () => {
+        const nodes: Array<Node> = [];
+        const totalCount = DEFAULT_TOTAL_COUNT;
+
+        const connection = createConnection(undefined, nodes, totalCount);
+
+        expect(connection).toBeTruthy();
+
+        expect(connection.totalCount).toEqual(totalCount);
+
+        expect(connection.edges.length).toEqual(nodes.length);
+
+        expect(connection.pageInfo.hasPreviousPage).toBeFalsy();
+        expect(connection.pageInfo.hasNextPage).toBeFalsy();
+
+        expect(connection.pageInfo.startCursor).toBeUndefined();
+        expect(connection.pageInfo.endCursor).toBeUndefined();
+    });
 });
