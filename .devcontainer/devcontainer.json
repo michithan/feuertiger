@@ -73,6 +73,18 @@
         "typescript.tsserver.experimental.enableProjectDiagnostics": true,
         "typescript.tsserver.maxTsServerMemory": 4096,
         "typescript.workspaceSymbols.scope": "currentProject",
+        "sqltools.connections": [
+            {
+                "previewLimit": 50,
+                "server": "localhost",
+                "port": 5432,
+                "driver": "PostgreSQL",
+                "name": "feuertiger-db",
+                "database": "feuertiger",
+                "username": "feuertiger",
+                "password": "feuertiger"
+            }
+        ],
         "files.watcherExclude": {
             "**/.git/objects/**": true,
             "**/.git/subtree-cache/**": true,
@@ -88,6 +100,8 @@
         "anseki.vscode-color",
         "dbaeumer.vscode-eslint",
         "eamodio.gitlens",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
         "eg2.vscode-npm-script",
         "esbenp.prettier-vscode",
         "jpoissonnier.vscode-styled-components",
