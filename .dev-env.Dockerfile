@@ -118,6 +118,3 @@ RUN npm i -g lerna typescript ts-node
 
 # Install deno
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0
-
-# Use Z shell
-ENTRYPOINT zsh

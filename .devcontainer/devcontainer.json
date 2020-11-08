@@ -1,10 +1,10 @@
 {
     "name": "feuertiger",
     "dockerComposeFile": "../.dev-env.docker-compose.yml",
-    "workspaceFolder": "/workspaces/feuertiger",
-    "service": "ide",
+    "workspaceFolder": "/workspace",
+    "service": "dev-env",
     "postCreateCommand": "yarn init",
-    "forwardPorts": [3000, 4000, 5000],
+    "forwardPorts": [3000, 4000, 5000, 5432],
     "settings": {
         "window.zoomLevel": 1,
         "workbench.iconTheme": "material-icon-theme",
@@ -50,7 +50,6 @@
         "terminal.integrated.enableBell": true,
         "terminal.integrated.inheritEnv": true,
         "terminal.integrated.shell.linux": "/bin/zsh",
-        "terminal.integrated.shell.windows": "/bin/zsh",
         "typescript.updateImportsOnFileMove.enabled": "always",
         "javascript.updateImportsOnFileMove.enabled": "always",
         "files.eol": "\n",
