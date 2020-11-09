@@ -17,6 +17,7 @@
         "@feuertiger/ocr": "1.0.9-dev.835ab37.0",
         "@feuertiger/schema-graphql": "1.0.9-dev.2478669.0",
         "@feuertiger/schema-prisma": "1.0.9-dev.76d518c.0",
+        "@feuertiger/pagination": "1.0.9-dev.76d518c.0",
         "apollo-server": "2.18.2",
         "apollo-server-express": "2.18.2",
         "express": "4.17.1",

@@ -2,14 +2,19 @@ import React, { ReactElement } from 'react';
 import { Grid, Breadcrumbs, Typography, Fab } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import FindInPage from '@material-ui/icons/FindInPage';
-import { AllExercisesQueryResult } from '@feuertiger/schema-graphql';
+import { ExercisesQueryResult } from '@feuertiger/schema-graphql';
+import { MaterialTableFetchFunction } from '@feuertiger/pagination';
 
 import { Link } from '../index';
 
-export type ExerciseTableProps = AllExercisesQueryResult['data'];
+export interface ExerciseTableProps {
+    fetchExercises: MaterialTableFetchFunction<
+        ExercisesQueryResult['data']['exercises']['edges'][0]['node']
+    >;
+}
 
 export const ExerciseTable = ({
-    allExercises
+    fetchExercises
 }: ExerciseTableProps): ReactElement => (
     <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -61,7 +66,7 @@ export const ExerciseTable = ({
                         )
                     }
                 ]}
-                data={allExercises}
+                data={fetchExercises}
                 title="Übungen"
             />
         </Grid>

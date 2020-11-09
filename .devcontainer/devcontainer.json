@@ -1,16 +1,10 @@
 {
     "name": "feuertiger",
-    "dockerFile": "../.dev-env.Dockerfile",
-    "postCreateCommand": "yarn && feuertiger init",
-    "forwardPorts": [3000, 4000, 5000],
-    "mounts": [
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
-    ],
-    "runArgs": [
-        "--privileged",
-        "--mount",
-        "type=volume,target=/workspace/node_modules"
-    ],
+    "dockerComposeFile": "../.dev-env.docker-compose.yml",
+    "workspaceFolder": "/workspace",
+    "service": "dev-env",
+    "postCreateCommand": "yarn init",
+    "forwardPorts": [3000, 4000, 5000, 5432],
     "settings": {
         "window.zoomLevel": 1,
         "workbench.iconTheme": "material-icon-theme",
@@ -56,7 +50,6 @@
         "terminal.integrated.enableBell": true,
         "terminal.integrated.inheritEnv": true,
         "terminal.integrated.shell.linux": "/bin/zsh",
-        "terminal.integrated.shell.windows": "/bin/zsh",
         "typescript.updateImportsOnFileMove.enabled": "always",
         "javascript.updateImportsOnFileMove.enabled": "always",
         "files.eol": "\n",
@@ -80,6 +73,20 @@
         "typescript.tsserver.experimental.enableProjectDiagnostics": true,
         "typescript.tsserver.maxTsServerMemory": 4096,
         "typescript.workspaceSymbols.scope": "currentProject",
+        "sqltools.connections": [
+            {
+                "previewLimit": 50,
+                "server": "localhost",
+                "port": 5432,
+                "driver": "PostgreSQL",
+                "name": "feuertiger-db",
+                "database": "feuertiger",
+                "username": "feuertiger",
+                "password": "feuertiger"
+            }
+        ],
+        "jestTestExplorer.pathToJest": "/workspaces/feuertiger/node_modules/.bin/jest",
+        "jest.runAllTestsFirst": false,
         "files.watcherExclude": {
             "**/.git/objects/**": true,
             "**/.git/subtree-cache/**": true,
@@ -87,13 +94,19 @@
         }
     },
     "extensions": [
+        "apollographql.vscode-apollo",
         "ms-vscode.vscode-typescript-next",
         "gitlab.gitlab-workflow",
         "Prisma.prisma",
         "Prisma.vscode-graphql",
         "anseki.vscode-color",
         "dbaeumer.vscode-eslint",
+        "hbenl.vscode-test-explorer",
         "eamodio.gitlens",
+        "Orta.vscode-jest",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
+        "kavod-io.vscode-jest-test-adapter",
         "eg2.vscode-npm-script",
         "esbenp.prettier-vscode",
         "jpoissonnier.vscode-styled-components",

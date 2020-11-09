@@ -40,6 +40,21 @@ input PersonExerciseConnectionUpdate {
     changes: [ConnectionUpdate!]!
 }
 
+type PersonEdge implements Edge {
+    node: Person!
+    cursor: String!
+}
+
+type PersonConnection implements Connection {
+    totalCount: Int!
+    edges: [PersonEdge!]!
+    pageInfo: PageInfo!
+}
+
+extend type Query {
+    persons(query: _Query): PersonConnection
+}
+
 extend type Mutation {
     createPerson(person: PersonUpdate!): Person
     updatePerson(person: PersonUpdate!): Person
