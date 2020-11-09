@@ -7,15 +7,33 @@ import {
     ExerciseTable,
     ExerciseTableProps
 } from '@feuertiger/web-components';
-import { AllExercisesDocument } from '@feuertiger/schema-graphql';
+import {
+    ExercisesQueryVariables,
+    ExercisesQuery,
+    ExercisesDocument
+} from '@feuertiger/schema-graphql';
+import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
 
 const Exercices = dynamic(
     async () => () => {
-        const { loading, error, data } = useQuery(AllExercisesDocument);
+        const query = useQuery<ExercisesQuery, ExercisesQueryVariables>(
+            ExercisesDocument,
+            {
+                variables: {
+                    query: {
+                        page: 0,
+                        pageSize: 5
+                    }
+                }
+            }
+        );
+        const { loading, error } = query;
         const copy: ExerciseTableProps = {
-            allExercises: data?.allExercises?.map(exercise => ({
-                ...exercise
-            }))
+            fetchExercises: createMaterialTableFetchFunction<
+                ExercisesQuery,
+                ExercisesQuery['exercises']['edges'][0]['node'],
+                ExercisesQueryVariables
+            >(query, ({ data: { exercises } }) => exercises)
         };
         return (
             <LoadingContainer loading={loading} error={error}>

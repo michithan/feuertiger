@@ -2,8 +2,6 @@ type Query {
     node(id: ID!): Node
     nodes(ids: [ID!]!): [Node]
     ocr(image: String): String
-    allPersons(filter: _Filter): [Person]
-    allExercises(filter: _Filter): [Exercise]
 }
 
 type Mutation {

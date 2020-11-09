@@ -13,3 +13,18 @@ input _Exercise {
     leaders: [_Node]
     participants: [_Node]
 }
+
+type ExerciseEdge implements Edge {
+    node: Exercise!
+    cursor: String!
+}
+
+type ExerciseConnection implements Connection {
+    totalCount: Int!
+    edges: [ExerciseEdge!]!
+    pageInfo: PageInfo!
+}
+
+extend type Query {
+    exercises(query: _Query): ExerciseConnection
+}

@@ -51,8 +51,6 @@ RUN apk update && apk add --no-cache \
     openssl  \
     openssl-dev \
     openrc \
-    postgresql \
-    postgresql-contrib \
     # powerline-extra-symbols \
     py-pip \
     python2  \
@@ -91,9 +89,6 @@ RUN sudo apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache l
 # Install docker-compose
 RUN pip3 install docker-compose
 
-# Enable postgres openrc service
-RUN openrc || rc-update add postgresql
-
 # Install pulumi
 RUN curl -fsSL https://get.pulumi.com/ | sh
 RUN pulumi plugin install resource digitalocean v2.8.0 \
@@ -123,6 +118,3 @@ RUN npm i -g lerna typescript ts-node
 
 # Install deno
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0
-
-# Use Z shell
-ENTRYPOINT zsh
