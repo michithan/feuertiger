@@ -8,16 +8,16 @@ import {
     LoadingContainer
 } from '@feuertiger/web-components';
 import {
-    AllPersonsQuery,
-    AllPersonsQueryVariables,
-    AllPersonsDocument
+    PersonsQuery,
+    PersonsQueryVariables,
+    PersonsDocument
 } from '@feuertiger/schema-graphql';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
 
 const Member = dynamic(
     async () => () => {
-        const query = useQuery<AllPersonsQuery, AllPersonsQueryVariables>(
-            AllPersonsDocument,
+        const query = useQuery<PersonsQuery, PersonsQueryVariables>(
+            PersonsDocument,
             {
                 variables: {
                     query: {
@@ -30,10 +30,10 @@ const Member = dynamic(
         const { loading, error } = query;
         const copy: MemberTableProps = {
             fetchPersons: createMaterialTableFetchFunction<
-                AllPersonsQuery,
-                AllPersonsQuery['allPersons']['edges'][0]['node'],
-                AllPersonsQueryVariables
-            >(query, ({ data: { allPersons } }) => allPersons)
+                PersonsQuery,
+                PersonsQuery['persons']['edges'][0]['node'],
+                PersonsQueryVariables
+            >(query, ({ data: { persons } }) => persons)
         };
         return (
             <LoadingContainer loading={loading} error={error}>

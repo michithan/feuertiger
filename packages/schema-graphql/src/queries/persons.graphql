@@ -1,5 +1,5 @@
-query allPersons($query: _Query!) {
-    allPersons(query: $query) {
+query persons($query: _Query!) {
+    persons(query: $query) {
         totalCount
         edges {
             node {

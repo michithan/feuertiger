@@ -1,0 +1,23 @@
+query exercises($query: _Query!) {
+    exercises(query: $query) {
+        totalCount
+        edges {
+            node {
+                id
+                topic
+                timeslot {
+                    id
+                    start
+                    end
+                }
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+        }
+    }
+}

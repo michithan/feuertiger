@@ -52,7 +52,7 @@ type PersonConnection implements Connection {
 }
 
 extend type Query {
-    allPersons(query: _Query): PersonConnection
+    persons(query: _Query): PersonConnection
 }
 
 extend type Mutation {

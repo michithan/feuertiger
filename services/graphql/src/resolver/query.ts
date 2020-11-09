@@ -1,4 +1,9 @@
-import { QueryResolvers, Node, Person } from '@feuertiger/schema-graphql';
+import {
+    QueryResolvers,
+    Node,
+    Person,
+    Exercise
+} from '@feuertiger/schema-graphql';
 import {
     mapToPrismaQuery,
     createConnectionResolver
@@ -34,7 +39,7 @@ const Query: QueryResolvers = {
     node: (_parent, { id }, context) => getNode({ id, context }),
     nodes: (_parent, args, context) =>
         Promise.all(args.ids.map(id => getNode({ id, context }))),
-    allPersons: (parent, { query }, { db }: Context) => {
+    persons: (parent, { query }, { db }: Context) => {
         const personsConnectionResolver = createConnectionResolver<Person>(
             db,
             db.person.count,
@@ -52,9 +57,15 @@ const Query: QueryResolvers = {
         const args = mapToPrismaQuery(query, searchPropertys);
         return personsConnectionResolver(query, args);
     },
-    allExercises: async (parent, args, context: Context) => {
-        const exercises = await context.db.exercise.findMany();
-        return exercises;
+    exercises: async (parent, { query }, { db }: Context) => {
+        const exercisesConnectionResolver = createConnectionResolver<Exercise>(
+            db,
+            db.exercise.count,
+            db.exercise.findMany
+        );
+        const searchPropertys = ['topic'];
+        const args = mapToPrismaQuery(query, searchPropertys);
+        return exercisesConnectionResolver(query, args);
     },
     dashboard: async () => ({})
 };
