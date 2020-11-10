@@ -17,7 +17,7 @@ export const visionOCR = async (image: string): Promise<string> => {
     const client = new vision.ImageAnnotatorClient();
 
     // Performs label detection on the image file
-    // TODO implementd usecase specific detection and return objects
+    // TODO implement use case specific detection and return objects
     const [result] = await client.labelDetection(image);
     const labels = result.labelAnnotations;
     if (labels) {

@@ -14,7 +14,7 @@ export interface ParsingOptionsProps {
 
 export const ParsingOptions = (props: ParsingOptionsProps): ReactElement => {
     const { options } = props;
-    const { colSeperator, rowSeprator, rowLength } = options || {};
+    const { colSeparator: colSeparator, rowSeparator: rowSeparator, rowLength } = options || {};
     return (
         <Card>
             <CardContent>
@@ -27,19 +27,19 @@ export const ParsingOptions = (props: ParsingOptionsProps): ReactElement => {
                     <Grid item xs="auto">
                         <TextField
                             required={!rowLength}
-                            id="rowSeprator"
-                            name="Row Seperator"
-                            label="Row Seperator"
+                            id="rowSeparator"
+                            name="Row Separator"
+                            label="Row Separator"
                             InputLabelProps={{
                                 shrink: true
                             }}
                             variant="filled"
-                            value={rowSeprator}
+                            value={rowSeparator}
                         />
                     </Grid>
                     <Grid item xs="auto">
                         <TextField
-                            required={!rowSeprator}
+                            required={!rowSeparator}
                             id="rowLength"
                             type="number"
                             name="Row Length"
@@ -54,14 +54,14 @@ export const ParsingOptions = (props: ParsingOptionsProps): ReactElement => {
                     <Grid item xs="auto">
                         <TextField
                             required
-                            id="colSeperator"
-                            name="Cell Seperator"
-                            label="Cell Seperator"
+                            id="colSeparator"
+                            name="Cell Separator"
+                            label="Cell Separator"
                             InputLabelProps={{
                                 shrink: true
                             }}
                             variant="filled"
-                            value={colSeperator}
+                            value={colSeparator}
                         />
                     </Grid>
                 </Grid>

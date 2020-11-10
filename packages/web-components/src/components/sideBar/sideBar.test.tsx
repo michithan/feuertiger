@@ -32,12 +32,12 @@ describe('Test side bar', () => {
         expect(component).toMatchSnapshot();
     });
     test('should trigger handleDrawerClose', () => {
-        let triggerdClose = false;
+        let triggeredClose = false;
         const component = shallow(
             <SideBar
                 open={true}
                 handleDrawerClose={() => {
-                    triggerdClose = true;
+                    triggeredClose = true;
                 }}
             />,
             {
@@ -47,6 +47,6 @@ describe('Test side bar', () => {
         const closeButton = component.find('#sidebar-close-button');
         expect(closeButton).toBeTruthy();
         closeButton.simulate('click');
-        expect(triggerdClose).toBeTruthy();
+        expect(triggeredClose).toBeTruthy();
     });
 });

@@ -7,6 +7,9 @@ ENV PATH=$PATH:/root/.pulumi/bin:/:/workspaces/feuertiger/cli/bin:/builds/worksp
 ENV PULUMI_CONFIG_PASSPHRASE="feuertiger"
 ENV POSTGRES_URI="postgresql://feuertiger:feuertiger@localhost:5432/feuertiger"
 
+# Add legacy repo
+RUN echo 'http://dl-cdn.alpinelinux.org/alpine/v3.8/main' >> /etc/apk/repositories
+
 # Install basics
 RUN apk update && apk add --no-cache \
     # apt-transport-https \
@@ -17,21 +20,27 @@ RUN apk update && apk add --no-cache \
     # libnss3 \
     # libxss1 \
     # libxtst6 \
+    alpine-sdk \
     bash \
     binutils \
     ca-certificates \
     chromium \
     coreutils  \
     curl \
+    desktop-file-utils \
     docker \
     findutils \
     g++ \
     gcc \
     git \
+    gnome-keyring \
     gnupg \
     grep  \
     groff \
+    icu \
+    icu-dev \
     icu-libs \
+    krb5 \
     krb5-libs \
     less \
     libc-dev \
@@ -40,12 +49,15 @@ RUN apk update && apk add --no-cache \
     libgcc \
     libintl \
     libnotify-dev \
+    libsecret \
+    libssl1.0 \
     libssl1.1 \
     libstdc++ \
     linux-headers \
     make \
     ncurses  \
     ncurses-terminfo-base \
+    net-tools \
     nodejs-current \
     npm \
     openssl  \
@@ -63,10 +75,14 @@ RUN apk update && apk add --no-cache \
     wget \
     which \
     xauth \
+    xprop \
     xvfb \
     yarn \
     zlib \
     zsh
+
+# VSCode Live Share in DevContainers
+RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vsls-reqs && ~/vsls-reqs
 
 # Install zsh
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \

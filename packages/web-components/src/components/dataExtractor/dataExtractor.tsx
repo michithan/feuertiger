@@ -22,8 +22,8 @@ interface State {
 }
 
 const DEFAULT_OPTIONS = {
-    colSeperator: ';',
-    rowSeprator: '\n',
+    colSeparator: ';',
+    rowSeparator: '\n',
     rowLength: null,
     cleaningRules: []
 };

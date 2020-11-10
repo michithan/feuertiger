@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ExerciceIcon from '@material-ui/icons/SportsKabaddi';
+import ExerciseIcon from '@material-ui/icons/SportsKabaddi';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import OperationIcon from '@material-ui/icons/Whatshot';
 
@@ -77,10 +77,10 @@ export const mainListItems = (
                 <ListItemText primary="Mitglieder" />
             </ListItem>
         </Link>
-        <Link href="/exercices ">
+        <Link href="/exercises ">
             <ListItem button>
                 <ListItemIcon>
-                    <ExerciceIcon />
+                    <ExerciseIcon />
                 </ListItemIcon>
                 <ListItemText primary="Übungen" />
             </ListItem>

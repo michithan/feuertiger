@@ -14,7 +14,7 @@ import {
 } from '@feuertiger/schema-graphql';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
 
-const Exercices = dynamic(
+const Exercises = dynamic(
     async () => () => {
         const query = useQuery<ExercisesQuery, ExercisesQueryVariables>(
             ExercisesDocument,
@@ -46,4 +46,4 @@ const Exercices = dynamic(
     }
 );
 
-export default Exercices;
+export default Exercises;

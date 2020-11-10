@@ -94,8 +94,9 @@
         }
     },
     "extensions": [
-        "ms-vsliveshare.vsliveshare",
-        "ms-vsliveshare.vsliveshare-audio",
+        "streetsidesoftware.code-spell-checker",
+        "streetsidesoftware.code-spell-checker-german",
+        "ms-vsliveshare.vsliveshare-pack",
         "hediet.vscode-drawio",
         "apollographql.vscode-apollo",
         "ms-vscode.vscode-typescript-next",

@@ -71,8 +71,8 @@ const MemberExercisesDetailsWithSnackbar = ({
                 field: 'topic',
                 render: ({ id, topic }: Exercise) => (
                     <Link
-                        href="/exercices/[id]"
-                        as={`/exercices/${id}`}
+                        href="/exercises/[id]"
+                        as={`/exercises/${id}`}
                         inherit
                     >
                         {topic}

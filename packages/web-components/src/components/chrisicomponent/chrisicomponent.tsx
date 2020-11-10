@@ -42,7 +42,7 @@ export class ChrisComponent extends React.Component<
                     color="primary"
                     onClick={() => this.setState({ showName: true })}
                 >
-                    Shwo name
+                    Show name
                 </Button>
             </p>
         );

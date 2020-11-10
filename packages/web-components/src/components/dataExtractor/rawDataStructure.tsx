@@ -1,6 +1,6 @@
 export interface ExtractorOptions {
-    rowSeprator: string;
-    colSeperator: string | null | undefined;
+    rowSeparator: string;
+    colSeparator: string | null | undefined;
     rowLength: number | null | undefined;
     cleaningRules: Array<Record<string, unknown>>;
 }
@@ -39,13 +39,13 @@ export class RawDataStructure {
     }
 
     public async parse(): Promise<void> {
-        const { colSeperator, rowSeprator, rowLength } = this.options;
+        const { colSeparator: colSeparator, rowSeparator: rowSeparator, rowLength } = this.options;
 
-        if (rowSeprator) {
-            const rows = this.cleanText.split(rowSeprator);
-            this.flattData = rows.map(row => row.split(colSeperator));
+        if (rowSeparator) {
+            const rows = this.cleanText.split(rowSeparator);
+            this.flattData = rows.map(row => row.split(colSeparator));
         } else if (rowLength) {
-            const flattCells = this.cleanText.split(colSeperator);
+            const flattCells = this.cleanText.split(colSeparator);
             const rowCount = Math.ceil(flattCells.length / rowLength);
 
             const data: string[][] = createEmptyData(rowCount, rowLength);
