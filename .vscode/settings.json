@@ -43,5 +43,14 @@
         "upsert",
         "vsintellicode"
     ],
-    "cSpell.language": "en,de,de-DE"
+    "cSpell.language": "en,de,de-DE,en-GB",
+    "cSpell.ignorePaths": [
+        "**/package-lock.json",
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/objects/**",
+        "**/dist/**",
+        ".vscode",
+        ".vscode-insiders"
+    ]
 }
