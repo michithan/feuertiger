@@ -94,6 +94,9 @@
         }
     },
     "extensions": [
+        "ms-vsliveshare.vsliveshare",
+        "ms-vsliveshare.vsliveshare-audio",
+        "hediet.vscode-drawio",
         "apollographql.vscode-apollo",
         "ms-vscode.vscode-typescript-next",
         "gitlab.gitlab-workflow",
