@@ -12,7 +12,6 @@ const dev = ({
     if (hasDevScript) {
         return execa('yarn', [command], {
             cwd: location,
-            detached: true,
             stdout: 'pipe'
         });
     }

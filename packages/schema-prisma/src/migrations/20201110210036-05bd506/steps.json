@@ -20,7 +20,7 @@
         {
             "tag": "CreateEnum",
             "enum": "Sex",
-            "values": ["MALE", "FEMAL", "DIVERSE"]
+            "values": ["MALE", "FEMALE", "DIVERSE"]
         },
         {
             "tag": "CreateSource",

@@ -29,7 +29,6 @@ export const FileInfo = (props: FileInfoProps): ReactElement => {
             onChange={handleChangeDropzone}
             dropzoneText="Select File"
             acceptedFiles={['.csv', '.pdf']}
-            fileObjects={[]}
             filesLimit={1}
         />
     );

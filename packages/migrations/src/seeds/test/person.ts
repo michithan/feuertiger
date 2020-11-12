@@ -18,7 +18,7 @@ export const createPerson = ({
     lastname: faker.name.lastName(),
     avatar: faker.image.cats(),
     phone: faker.phone.phoneNumber(),
-    sex: Sex.FEMAL,
+    sex: Sex.FEMALE,
     address: {
         connect: {
             id: address.id

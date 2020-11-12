@@ -53,7 +53,7 @@ enum Grade {
 
 enum Sex {
   MALE
-  FEMAL
+  FEMALE
   DIVERSE
 }
 

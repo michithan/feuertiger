@@ -79,7 +79,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                                 field: 'avatar',
                                 filtering: false,
                                 render: ({ avatar }) => (
-                                    <Avatar alt="Remy Sharp" src={avatar} />
+                                    <Avatar alt="Profil" src={avatar} />
                                 )
                             },
                             { title: 'Vorname', field: 'firstname' },

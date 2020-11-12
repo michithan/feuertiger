@@ -63,9 +63,9 @@ All develop, test, build and deploy steps are implemented though the @feuertiger
 
 | Name       | Description         | URL - local                     | URL - dev                          |
 | ---------- | ------------------- | ------------------------------- | ---------------------------------- |
-| storybook  | view web-components | https://localhost:5000/         | https://dev.feuertiger.com/        |
+| storybook  | view web-components | https://localhost:5000/         |                                    |
 | graphql    | graphql backend     | https://localhost:4000/graphiql | https://dev.feuertiger.com/graphql |
-| web-client | webclient server    | https://localhost:3000/         |                                    |
+| web-client | webclient server    | https://localhost:3000/         | https://dev.feuertiger.com/        |
 
 ### Packages
 

@@ -10,13 +10,13 @@ const defaultProps: ChrisComponentProps = {
 };
 
 storiesOf('ChrisComponent', module)
-    .add('Michi', () => {
+    .add('michi', () => {
         const props: ChrisComponentProps = {
             ...defaultProps
         };
         return <ChrisComponent {...props} />;
     })
-    .add('Mina', () => {
+    .add('mina', () => {
         const props: ChrisComponentProps = {
             ...defaultProps,
             name: 'mina'

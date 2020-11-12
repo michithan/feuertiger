@@ -21,9 +21,9 @@
     "dependencies": {
         "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
         "@feuertiger/schema-prisma": "1.0.9-dev.76d518c.0",
-        "execa": "4.0.3",
+        "execa": "4.1.0",
         "faker": "5.1.0",
-        "typescript": "4.0.3"
+        "typescript": "4.0.5"
     },
     "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
 }

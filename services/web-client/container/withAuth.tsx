@@ -41,8 +41,8 @@ const withAuth = <
         }
 
         componentDidMount(): void {
-            const authSignleton = new AuthSingleton();
-            const { firebaseAuth } = authSignleton;
+            const authSingleton = new AuthSingleton();
+            const { firebaseAuth } = authSingleton;
 
             firebaseAuth.onAuthStateChanged(async user =>
                 this?.setState({ isSignedIn: !!user, isLoading: false })
