@@ -10,7 +10,7 @@ const defaultContainerProps: ContainerProps = {
 
 storiesOf('DataExtractor', module)
     .add('Default', () => <DataExtractor />)
-    .add('Contaienrd', () => (
+    .add('With container', () => (
         <Container {...defaultContainerProps}>
             <DataExtractor />
         </Container>

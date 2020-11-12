@@ -41,7 +41,7 @@ export const Dashboard = ({
             <Paper>
                 <Grid container spacing={3}>
                     <Grid container item xs={12} justify="center">
-                        <Link href="/exercices" inherit>
+                        <Link href="/exercises" inherit>
                             <Typography variant="h4" component="h4">
                                 Übungen
                             </Typography>

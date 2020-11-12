@@ -54,9 +54,9 @@ export class CleaningOptions extends React.Component<
                             <Grid container spacing={3}>
                                 <Grid item xs={12}>
                                     <TextField
-                                        id="rowSeprator"
-                                        name="Row Seperator"
-                                        label="Row Seperator"
+                                        id="rowSeparator"
+                                        name="Row Separator"
+                                        label="Row Separator"
                                         InputLabelProps={{
                                             shrink: true
                                         }}

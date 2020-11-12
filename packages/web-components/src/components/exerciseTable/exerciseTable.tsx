@@ -19,7 +19,7 @@ export const ExerciseTable = ({
     <Grid container spacing={3}>
         <Grid item xs={12}>
             <Breadcrumbs aria-label="breadcrumb">
-                <Link href="/exercices">Übungen</Link>
+                <Link href="/exercises">Übungen</Link>
                 <Typography color="textPrimary">Übersicht</Typography>
             </Breadcrumbs>
         </Grid>
@@ -56,8 +56,8 @@ export const ExerciseTable = ({
                         filtering: false,
                         render: ({ id }) => (
                             <Link
-                                href="/exercices/[id]"
-                                as={`/exercices/${id}`}
+                                href="/exercises/[id]"
+                                as={`/exercises/${id}`}
                             >
                                 <Fab color="primary" aria-label="edit">
                                     <FindInPage />
