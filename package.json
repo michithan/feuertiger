@@ -7,9 +7,9 @@
     "scripts": {
         "init": "yarn && feuertiger init",
         "format": "feuertiger format",
-        "build": "lerna run build --no-private --stream",
+        "build": "feuertiger build",
         "lint": "feuertiger lint",
-        "test": "lerna run test --no-private --stream",
+        "test": "feuertiger test",
         "e2e": "lerna run e2e --stream",
         "dev": "feuertiger dev",
         "dev:docker": "docker-compose up --build",

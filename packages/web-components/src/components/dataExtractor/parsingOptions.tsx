@@ -14,7 +14,7 @@ export interface ParsingOptionsProps {
 
 export const ParsingOptions = (props: ParsingOptionsProps): ReactElement => {
     const { options } = props;
-    const { colSeparator: colSeparator, rowSeparator: rowSeparator, rowLength } = options || {};
+    const { colSeparator, rowSeparator, rowLength } = options || {};
     return (
         <Card>
             <CardContent>

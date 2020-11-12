@@ -5,7 +5,6 @@ datasource postgresql {
 
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["transactionApi"]
   binaryTargets   = ["native", "linux-musl"]
   output          = "../dist"
 }

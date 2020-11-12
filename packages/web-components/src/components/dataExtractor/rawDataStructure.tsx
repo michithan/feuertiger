@@ -39,7 +39,7 @@ export class RawDataStructure {
     }
 
     public async parse(): Promise<void> {
-        const { colSeparator: colSeparator, rowSeparator: rowSeparator, rowLength } = this.options;
+        const { colSeparator, rowSeparator, rowLength } = this.options;
 
         if (rowSeparator) {
             const rows = this.cleanText.split(rowSeparator);

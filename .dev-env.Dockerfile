@@ -50,7 +50,7 @@ RUN apk update && apk add --no-cache \
     libintl \
     libnotify-dev \
     libsecret \
-    libssl1.0 \
+    # libssl1.0 \
     libssl1.1 \
     libstdc++ \
     linux-headers \
@@ -81,7 +81,7 @@ RUN apk update && apk add --no-cache \
     zlib \
     zsh
 
-# VSCode Live Share in DevContainers
+# VSCode live share
 RUN wget -O ~/vsls-reqs https://aka.ms/vsls-linux-prereq-script && chmod +x ~/vsls-reqs && ~/vsls-reqs
 
 # Install zsh
