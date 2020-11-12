@@ -208,5 +208,3 @@ migration ..20201110210036-05bd506
 +  exercise Exercise[]
 +}
 ```
-
-

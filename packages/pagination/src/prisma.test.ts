@@ -54,7 +54,7 @@ describe('Test prisma pagination utils', () => {
 
         expect(AND?.length).toEqual(filters?.length);
         expect(filter && AND?.[0]?.[filter?.column]).toEqual(filter?.value);
-        
+
         expect(search).toBeTruthy();
         expect(property && OR?.[0]?.[property]).toEqual({
             contains: search as string,

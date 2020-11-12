@@ -33,7 +33,6 @@ export default async (flags: Flags): Promise<void> => {
                         'log'
                     ],
                     {
-                        detached: true,
                         stdout: 'pipe'
                     }
                 ),
