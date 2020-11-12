@@ -1,3 +1,7 @@
+const docs = require.resolve('@feuertiger/docs');
+
+console.log('docs: ', docs);
+
 module.exports = {
     title: 'My Site',
     tagline: 'The tagline of my site',
