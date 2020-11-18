@@ -1,3 +1,10 @@
+---
+id: planning
+title: Planning
+sidebar_label: Planning
+slug: /dev/planning
+---
+
 # Feuertiger
 
 ## Vorgehen
@@ -45,6 +52,6 @@
 
 ---
 
-<div style="width:100%;display:flex;justify-content:center">
-    <img src="./example.drawio.svg">
+<div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+    <img src={'../../diagrams/example.drawio.svg'} />
 </div>

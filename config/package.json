@@ -17,6 +17,9 @@
     "publishConfig": {
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
+    "devDependencies": {
+        "@types/node": "14.14.7"
+    },
     "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0",
     "sideEffects": false
 }

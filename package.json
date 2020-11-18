@@ -13,7 +13,6 @@
         "e2e": "lerna run e2e --stream",
         "dev": "feuertiger dev",
         "dev:docker": "docker-compose up --build",
-        "clean:db": "su - postgres -c 'psql -U feuertiger --command \"DROP DATABASE IF EXISTS feuertiger;\"'",
         "clean:node_modules": "git clean -fdx -e !node_modules",
         "clean:all": "yarn clean:db && git clean -fdX"
     },

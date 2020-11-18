@@ -143,24 +143,20 @@ export const exec = async <
 
             return execution;
         } catch (error) {
-            console.log(
-                'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRORRRRR'
-            );
             if (typeof error === 'string') {
                 console.log(addErrorPackagePrefix(error, packageInfo));
             } else if (typeof error?.message === 'string') {
                 console.log(addErrorPackagePrefix(error?.message, packageInfo));
             }
-            return Promise.reject;
+            throw error;
         }
     });
 
     executions.forEach(execution => {
-        execution.catch(error => {
+        execution.catch(() => {
             cancelExecutions(
                 (execution as unknown) as Array<execa.ExecaChildProcess<string>>
             );
-            console.error(error);
             process.exit(1);
         });
     });
