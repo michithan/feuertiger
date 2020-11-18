@@ -7,7 +7,7 @@
     "license": "MIT",
     "scripts": {
         "docusaurus": "docusaurus",
-        "dev": "docusaurus start",
+        "dev": "docusaurus start --port 6000",
         "build": "docusaurus build",
         "swizzle": "docusaurus swizzle",
         "serve": "docusaurus serve"
