@@ -4,7 +4,7 @@
     "workspaceFolder": "/workspace",
     "service": "dev-env",
     "postCreateCommand": "yarn init",
-    "forwardPorts": [3000, 4000, 5000, 5432],
+    "forwardPorts": [3000, 4000, 5000, 6000, 5432],
     "extensions": [
         "silvenon.mdx",
         "streetsidesoftware.code-spell-checker",
