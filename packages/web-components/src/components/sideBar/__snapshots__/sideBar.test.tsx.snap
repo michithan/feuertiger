@@ -45,7 +45,7 @@ exports[`Test side bar should be closed 1`] = `
         </WithStyles(ForwardRef(ListItem))>
       </Link>
       <Link
-        href="/exercices "
+        href="/exercises "
       >
         <WithStyles(ForwardRef(ListItem))
           button={true}
@@ -126,7 +126,7 @@ exports[`Test side bar should be open 1`] = `
         </WithStyles(ForwardRef(ListItem))>
       </Link>
       <Link
-        href="/exercices "
+        href="/exercises "
       >
         <WithStyles(ForwardRef(ListItem))
           button={true}
@@ -207,7 +207,7 @@ exports[`Test side bar should create side bar 1`] = `
         </WithStyles(ForwardRef(ListItem))>
       </Link>
       <Link
-        href="/exercices "
+        href="/exercises "
       >
         <WithStyles(ForwardRef(ListItem))
           button={true}
