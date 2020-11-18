@@ -83,6 +83,7 @@
     ],
     "jestTestExplorer.pathToJest": "/workspaces/feuertiger/node_modules/.bin/jest",
     "jest.runAllTestsFirst": false,
+    "jest.autoEnable": false,
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
@@ -171,6 +172,7 @@
         "**/package-lock.json",
         "**/node_modules/**",
         "**/vscode-extension/**",
+        "**/.vscode-server/**",
         "**/.git/objects/**",
         "**/dist/**",
         ".vscode",
