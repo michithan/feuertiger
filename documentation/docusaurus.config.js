@@ -91,7 +91,6 @@ module.exports = {
         [
             '@docusaurus/plugin-content-blog',
             {
-                path: './blog',
                 showReadingTime: true,
                 editUrl: repositoryEditUrl
             }
@@ -99,7 +98,6 @@ module.exports = {
         [
             '@docusaurus/plugin-content-docs',
             {
-                path: './documents',
                 routeBasePath: 'docs',
                 sidebarPath: require.resolve('./sidebar'),
                 editUrl: repositoryEditUrl

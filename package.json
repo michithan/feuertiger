@@ -21,8 +21,8 @@
         "services/*",
         "infrastructure",
         "deployment",
+        "documentation",
         "config",
-        "docs",
         "cli"
     ],
     "workspaces": [
@@ -30,8 +30,8 @@
         "services/*",
         "infrastructure",
         "deployment",
+        "documentation",
         "config",
-        "docs",
         "cli"
     ],
     "dependencies": {
