@@ -41,7 +41,10 @@ module.exports = {
         Cypress: true
     },
     ignorePatterns: [
+        '.docusaurus',
+        '.cache-loader',
         'dist',
+        'build',
         'lib',
         'node_modules',
         'coverage',

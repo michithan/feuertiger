@@ -1,3 +1,7 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
@@ -91,7 +95,10 @@ function Home() {
                         <div className="container">
                             <div className="row">
                                 {features.map((props, idx) => (
-                                    <Feature key={idx} {...props} />
+                                    <Feature
+                                        key={`${idx}_${props.title}`}
+                                        {...props}
+                                    />
                                 ))}
                             </div>
                         </div>
