@@ -102,10 +102,6 @@ const transformOutputIfExecaExecution = async (
     }
 };
 
-export const cancelExecutions = (
-    executions: Array<execa.ExecaChildProcess<string>>
-): void => executions.forEach(execution => execution.cancel());
-
 export const exec = async <
     Result,
     FResult extends execa.ExecaChildProcess<string> | Promise<Result> | Result
@@ -143,24 +139,20 @@ export const exec = async <
 
             return execution;
         } catch (error) {
-            console.log(
-                'EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRORRRRR'
-            );
             if (typeof error === 'string') {
                 console.log(addErrorPackagePrefix(error, packageInfo));
             } else if (typeof error?.message === 'string') {
                 console.log(addErrorPackagePrefix(error?.message, packageInfo));
             }
-            return Promise.reject;
+            throw error;
         }
     });
 
     executions.forEach(execution => {
-        execution.catch(error => {
-            cancelExecutions(
-                (execution as unknown) as Array<execa.ExecaChildProcess<string>>
-            );
-            console.error(error);
+        execution.catch(() => {
+            executions
+                .map(exe => (exe as unknown) as execa.ExecaChildProcess<string>)
+                .forEach(async exe => exe?.cancel?.call(exe.cancel));
             process.exit(1);
         });
     });

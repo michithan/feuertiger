@@ -1,0 +1,25 @@
+{
+    "name": "@feuertiger/native-js-extensions",
+    "version": "1.0.9-dev.9daaf39.0",
+    "description": "native extensions",
+    "main": "./dist/index.js",
+    "sideEffects": false,
+    "author": "Michael Thanei",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch | awk '{gsub(/\\033c/,\"\") system(\"\")}1'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://gitlab.com/feuertiger/feuertiger",
+        "directory": "packages/native-js-extensions"
+    },
+    "publishConfig": {
+        "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
+    },
+    "dependencies": {
+        "typescript": "4.0.5"
+    },
+    "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
+}

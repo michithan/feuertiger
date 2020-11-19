@@ -1,9 +1,0 @@
-{
-    "name": "@feuertiger/docs",
-    "version": "1.0.9-dev.9daaf39.0",
-    "files": [
-        "./documents"
-    ],
-    "author": "Michael Thanei",
-    "license": "MIT"
-}

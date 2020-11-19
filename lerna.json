@@ -7,8 +7,9 @@
         "services/*",
         "infrastructure",
         "deployment",
+        "documentation",
         "config",
-        "docs",
         "cli"
-    ]
+    ],
+    "nohoist": ["html-minifier-terser"]
 }

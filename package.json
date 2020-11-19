@@ -13,38 +13,33 @@
         "e2e": "lerna run e2e --stream",
         "dev": "feuertiger dev",
         "dev:docker": "docker-compose up --build",
-        "clean:db": "su - postgres -c 'psql -U feuertiger --command \"DROP DATABASE IF EXISTS feuertiger;\"'",
         "clean:node_modules": "git clean -fdx -e !node_modules",
         "clean:all": "yarn clean:db && git clean -fdX"
     },
-    "packages": [
-        "packages/*",
-        "services/*",
-        "infrastructure",
-        "deployment",
-        "config",
-        "docs",
-        "cli"
-    ],
-    "workspaces": [
-        "packages/*",
-        "services/*",
-        "infrastructure",
-        "deployment",
-        "config",
-        "docs",
-        "cli"
-    ],
+    "workspaces": {
+        "packages": [
+            "packages/*",
+            "services/*",
+            "infrastructure",
+            "deployment",
+            "documentation",
+            "config",
+            "cli"
+        ],
+        "nohoist": [
+            "**/html-minifier-terser"
+        ]
+    },
     "dependencies": {
         "@lerna/package-graph": "3.18.5",
         "@lerna/project": "3.21.0",
-        "@typescript-eslint/eslint-plugin": "4.7.0",
-        "@typescript-eslint/parser": "4.7.0",
+        "@typescript-eslint/eslint-plugin": "4.8.1",
+        "@typescript-eslint/parser": "4.8.1",
         "babel-eslint": "10.1.0",
         "dotenv": "8.2.0",
         "eslint": "7.13.0",
         "eslint-config-airbnb-typescript": "12.0.0",
-        "eslint-config-airbnb-typescript-prettier": "3.1.0",
+        "eslint-config-airbnb-typescript-prettier": "4.0.0",
         "eslint-config-prettier": "6.15.0",
         "eslint-plugin-import": "2.22.1",
         "eslint-plugin-jsx-a11y": "6.4.1",
@@ -57,6 +52,6 @@
         "yarn": "1.22.10"
     },
     "devDependencies": {
-        "@types/eslint": "7.2.4"
+        "@types/eslint": "7.2.5"
     }
 }

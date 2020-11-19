@@ -30,7 +30,7 @@ export interface PrismaQuery {
 
 export const mapToPrismaQuery = (
     query: _Query | null | undefined,
-    searchPropertys: string[] | null | undefined
+    searchProperties: string[] | null | undefined
 ): PrismaQuery => {
     const {
         filters,
@@ -49,8 +49,8 @@ export const mapToPrismaQuery = (
                       }))
                     : undefined,
             OR:
-                search && searchPropertys
-                    ? searchPropertys.map(key => ({
+                search && searchProperties
+                    ? searchProperties.map(key => ({
                           [key]: { contains: search, mode: 'insensitive' }
                       }))
                     : undefined

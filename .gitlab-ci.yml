@@ -39,6 +39,12 @@ Build:
     image: $DEV_ENVIRONMENT_IMAGE_TAG
     services:
         - docker:dind
+        - postgres:12.2-alpine
+    variables:
+        POSTGRES_DB: feuertiger
+        POSTGRES_USER: feuertiger
+        POSTGRES_PASSWORD: feuertiger
+        POSTGRES_HOST_AUTH_METHOD: trust
     before_script:
         - git remote set-url origin ${CI_REPOSITORY_URL}
         - git checkout --track origin/${CI_COMMIT_REF_NAME}
