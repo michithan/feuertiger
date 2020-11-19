@@ -77,7 +77,6 @@ RUN apk update && apk add --no-cache \
     xauth \
     xprop \
     xvfb \
-    yarn \
     zlib \
     zsh
 
@@ -130,7 +129,10 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
     && ./get_helm.sh
 
 # Install lerna
-RUN npm i -g lerna typescript ts-node
+RUN npm i -g yarn lerna typescript ts-node
+
+# Install yarn 2
+RUN yarn set version berry
 
 # Install deno
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0

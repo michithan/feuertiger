@@ -26,3 +26,11 @@ report.*.json
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Yarn
+.yarn/*
+!.yarn/cache
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions

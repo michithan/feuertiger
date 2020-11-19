@@ -126,6 +126,7 @@
         "cloudvision",
         "clsx",
         "codeowners",
+        "compat",
         "datasources",
         "dbaeumer",
         "dind",
@@ -134,6 +135,7 @@
         "eamodio",
         "equinusocio",
         "esbenp",
+        "fsevents",
         "gitlens",
         "hbenl",
         "hediet",
@@ -180,7 +182,8 @@
         "visualstudioexptteam",
         "vscodeintellicode",
         "vsintellicode",
-        "vsliveshare"
+        "vsliveshare",
+        "yarnpkg"
     ],
     "cSpell.language": "en,de,de-DE,en-GB",
     "cSpell.ignorePaths": [

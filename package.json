@@ -16,20 +16,15 @@
         "clean:node_modules": "git clean -fdx -e !node_modules",
         "clean:all": "yarn clean:db && git clean -fdX"
     },
-    "workspaces": {
-        "packages": [
-            "packages/*",
-            "services/*",
-            "infrastructure",
-            "deployment",
-            "documentation",
-            "config",
-            "cli"
-        ],
-        "nohoist": [
-            "**/html-minifier-terser"
-        ]
-    },
+    "workspaces": [
+        "packages/*",
+        "services/*",
+        "infrastructure",
+        "deployment",
+        "documentation",
+        "config",
+        "cli"
+    ],
     "dependencies": {
         "@lerna/package-graph": "3.18.5",
         "@lerna/project": "3.21.0",
@@ -53,5 +48,10 @@
     },
     "devDependencies": {
         "@types/eslint": "7.2.5"
+    },
+    "peerDependenciesMeta": {
+        "fsevents": {
+            "optional": true
+        }
     }
 }
