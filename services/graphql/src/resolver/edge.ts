@@ -1,5 +1,6 @@
+import '@feuertiger/native-js-extensions';
 import { EdgeResolvers } from '@feuertiger/schema-graphql';
-import { parseGlobalId, toPascalCase } from '../utils/id';
+import { parseGlobalId } from '../utils/id';
 
 const Edge: EdgeResolvers = {
     __resolveType: parent => {
@@ -7,7 +8,7 @@ const Edge: EdgeResolvers = {
             node: { id }
         } = parent;
         const { type } = parseGlobalId(id);
-        return `${toPascalCase(type)}Edge` as ReturnType<
+        return `${type.toPascalCase()}Edge` as ReturnType<
             EdgeResolvers['__resolveType']
         >;
     }

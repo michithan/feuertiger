@@ -34,7 +34,9 @@ export const gitlab = {
     token: GIT_TOKEN,
     user: GIT_USER ?? tryGetGitUserName(),
     email: GIT_EMAIL ?? tryGetGitUserEmail(),
-    repositoryUrl: ''
+    repositoryUrl: 'https://gitlab.com/feuertiger/feuertiger',
+    repositoryEditUrl:
+        'https://gitlab.com/-/ide/project/feuertiger/feuertiger/tree/dev/-/'
 };
 
 export const git = {

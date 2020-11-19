@@ -1,0 +1,36 @@
+{
+    "name": "@feuertiger/documentation",
+    "private": true,
+    "sideEffects": false,
+    "author": "Michael Thanei",
+    "version": "1.0.9-dev.9daaf39.0",
+    "license": "MIT",
+    "scripts": {
+        "docusaurus": "docusaurus",
+        "dev": "docusaurus start --port 6000",
+        "build": "docusaurus build",
+        "swizzle": "docusaurus swizzle",
+        "serve": "docusaurus serve"
+    },
+    "dependencies": {
+        "@docusaurus/core": "2.0.0-alpha.68",
+        "@docusaurus/preset-classic": "2.0.0-alpha.68",
+        "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
+        "@mdx-js/react": "1.6.21",
+        "clsx": "1.1.1",
+        "react": "17.0.1",
+        "react-dom": "17.0.1"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

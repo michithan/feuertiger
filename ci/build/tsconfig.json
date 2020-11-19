@@ -1,9 +1,0 @@
-{
-    "compilerOptions": {
-        "target": "es2017",
-        "rootDir": "./"
-    },
-    "extends": "../../tsconfig.json",
-    "exclude": ["node_modules"],
-    "include": ["build.ts"]
-}

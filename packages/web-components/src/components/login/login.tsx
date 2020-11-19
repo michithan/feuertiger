@@ -33,13 +33,24 @@ const SubmitButton = styled(Button)`
     margin: ${({ theme }) => theme.spacing(3, 0, 2)};
 `;
 
+declare interface LoginFormEvent extends FormEvent<HTMLFormElement> {
+    target: {
+        email: {
+            value: string;
+        };
+        password: {
+            value: string;
+        };
+    } & FormEvent<HTMLFormElement>['target'];
+}
+
 export type LoginProps = AuthProps;
 
 export class Login extends React.Component<LoginProps> {
-    handleLogin = (event: FormEvent<HTMLFormElement>): void => {
+    handleLogin = (event: LoginFormEvent): void => {
         event.preventDefault();
-        const email = event.target['email'].value;
-        const password = event.target['password'].value;
+        const email = event.target.email.value;
+        const password = event.target.password.value;
         const { auth } = this.props;
         auth.signInWithEmailAndPassword(email, password);
     };

@@ -17,7 +17,7 @@
         "randomcolor": "0.6.2"
     },
     "devDependencies": {
-        "@types/eslint": "7.2.4",
+        "@types/eslint": "7.2.5",
         "@types/randomcolor": "0.5.5"
     }
 }

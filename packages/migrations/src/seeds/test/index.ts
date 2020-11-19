@@ -51,7 +51,7 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
 
 export default async (client: PrismaClient): Promise<void> => {
     const PERSONS_COUNT = 118;
-    const EXERCICES_COUNT = 32;
+    const EXERCISES_COUNT = 32;
 
     // upsert some addresses
     const addressFakes = await upsertSome(
@@ -91,7 +91,7 @@ export default async (client: PrismaClient): Promise<void> => {
     // upsert some timeslot
     const timeslotFakes = await upsertSome(
         createTimeslot,
-        EXERCICES_COUNT,
+        EXERCISES_COUNT,
         client.timeslot,
         client
     );
@@ -99,7 +99,7 @@ export default async (client: PrismaClient): Promise<void> => {
     // upsert some exercises
     await upsertSome(
         createExercise,
-        EXERCICES_COUNT,
+        EXERCISES_COUNT,
         client.exercise,
         client,
         timeslotFakes.map(timeslot => ({
