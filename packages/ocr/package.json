@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@google-cloud/vision": "2.1.2",
-        "firebase": "8.0.1",
+        "firebase": "8.0.2",
         "tesseract.js": "2.1.4"
     },
     "devDependencies": {

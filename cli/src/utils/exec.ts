@@ -102,10 +102,6 @@ const transformOutputIfExecaExecution = async (
     }
 };
 
-export const cancelExecutions = (
-    executions: Array<execa.ExecaChildProcess<string>>
-): void => executions.forEach(execution => execution.cancel());
-
 export const exec = async <
     Result,
     FResult extends execa.ExecaChildProcess<string> | Promise<Result> | Result
@@ -154,9 +150,9 @@ export const exec = async <
 
     executions.forEach(execution => {
         execution.catch(() => {
-            cancelExecutions(
-                (execution as unknown) as Array<execa.ExecaChildProcess<string>>
-            );
+            executions
+                .map(exe => (exe as unknown) as execa.ExecaChildProcess<string>)
+                .forEach(async exe => exe?.cancel?.call(exe.cancel));
             process.exit(1);
         });
     });
