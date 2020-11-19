@@ -157,6 +157,7 @@
         "musl",
         "nextjs",
         "nixos",
+        "nohoist",
         "notistack",
         "orta",
         "planbcoding",

@@ -10,5 +10,6 @@
         "documentation",
         "config",
         "cli"
-    ]
+    ],
+    "nohoist": ["html-minifier-terser"]
 }
