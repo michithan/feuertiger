@@ -2,6 +2,7 @@ type Query {
     node(id: ID!): Node
     nodes(ids: [ID!]!): [Node]
     ocr(image: String): String
+    viewer: Viewer
 }
 
 type Mutation {

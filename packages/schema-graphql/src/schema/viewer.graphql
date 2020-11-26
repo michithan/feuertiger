@@ -1,0 +1,14 @@
+enum UserRole {
+    GUEST
+    ADMIN
+}
+
+type Viewer {
+    id: ID!
+    uid: ID!
+    email: String
+    userRoles: [UserRole]
+    person: Person
+    departments: [Department]
+    mainDepartment: Department
+}

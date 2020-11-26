@@ -15,8 +15,8 @@ type Person implements Node {
     placeOfBirth: String
     dateOfBirth: DateTime!
     grade: Grade
-    actualMembership: Membership
-    memberships: [Membership]
+    mainDepartmentMembership: DepartmentMembership
+    departmentMembership: DepartmentMembershipConnection
     promotions: [Promotion]
     exercisesParticipated: [Exercise]
     exercisesNotParticipated: [Exercise]

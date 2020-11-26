@@ -11,7 +11,7 @@ query personDetails($id: ID!) {
             birthName
             placeOfBirth
             dateOfBirth
-            actualMembership {
+            mainDepartmentMembership {
                 active
                 entryDate
             }
@@ -24,10 +24,14 @@ query personDetails($id: ID!) {
                 city
                 country
             }
-            memberships {
-                id
-                active
-                entryDate
+            departmentMembership {
+                edges {
+                    node {
+                        id
+                        active
+                        entryDate
+                    }
+                }
             }
             ...personPromotions
             ...personExercisesLeaded

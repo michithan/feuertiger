@@ -1,0 +1,21 @@
+type Department implements Node {
+    id: ID!
+    name: String
+    memberships(query: _Query): DepartmentMembershipConnection
+    exercises(query: _Query): ExerciseConnection
+}
+
+type DepartmentEdge implements Edge {
+    node: Department!
+    cursor: String!
+}
+
+type DepartmentConnection implements Connection {
+    totalCount: Int!
+    edges: [DepartmentEdge!]!
+    pageInfo: PageInfo!
+}
+
+extend type Query {
+    departments(query: _Query): DepartmentConnection
+}

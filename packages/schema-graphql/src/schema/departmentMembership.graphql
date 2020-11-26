@@ -1,0 +1,26 @@
+type DepartmentMembership implements Node {
+    id: ID!
+    person: Person
+    active: Boolean
+    entryDate: DateTime
+    departureDate: DateTime
+}
+
+type DepartmentMembershipEdge implements Edge {
+    node: DepartmentMembership!
+    cursor: String!
+}
+
+type DepartmentMembershipConnection implements Connection {
+    totalCount: Int!
+    edges: [DepartmentMembershipEdge!]!
+    pageInfo: PageInfo!
+}
+
+
+input DepartmentMembershipUpdate {
+    id: ID!
+    active: Boolean
+    entryDate: DateTime
+    departureDate: DateTime
+}
