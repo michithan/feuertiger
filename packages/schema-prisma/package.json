@@ -9,6 +9,8 @@
         "build:schema": "prisma generate --schema=./src/schema.prisma",
         "build:migrations": "prisma migrate save --experimental --create-db --name=$(git rev-parse --short HEAD) --schema=./src/schema.prisma",
         "build": "yarn build:schema && yarn build:migrations",
+        "studio": "prisma studio --schema=./src/schema.prisma",
+        "format": "prisma format --schema=./src/schema.prisma",
         "dev": "yarn build:migrations && yarn build:schema --watch"
     },
     "repository": {
@@ -20,11 +22,11 @@
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
-        "@prisma/cli": "2.11.0",
-        "@prisma/client": "2.11.0",
+        "@prisma/client": "2.12.0",
         "faker": "5.1.0"
     },
     "devDependencies": {
+        "@prisma/cli": "2.12.0",
         "ts-node": "9.0.0"
     },
     "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
