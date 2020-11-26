@@ -4,13 +4,20 @@ import {
     Button,
     Avatar,
     Dialog,
-    DialogContent
+    DialogContent,
+    Grid,
+    FormControlLabel,
+    Checkbox
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import {
+    GoogleLoginButton,
+    MicrosoftLoginButton
+} from 'react-social-login-buttons';
 import styled from 'styled-components';
 
-import { AuthProps } from '../../index';
+import { AuthProps, Link } from '../../index';
 
 const PaperDiv = styled.div`
     margin: ${({ theme }) => theme.spacing(8, 4)};
@@ -20,17 +27,21 @@ const PaperDiv = styled.div`
 `;
 
 const StyledAvatar = styled(Avatar)`
-    margin: ${({ theme }) => theme.spacing(1)};
+    margin: ${({ theme }) => theme.spacing(1)} !important;
     background-color: ${({ theme }) => theme.palette.secondary.main};
 `;
 
 const StyledForm = styled.form`
     width: 100%;
-    margin-top: ${({ theme }) => theme.spacing(1)};
+    margin-top: ${({ theme }) => theme.spacing(1)} !important;
 `;
 
 const SubmitButton = styled(Button)`
-    margin: ${({ theme }) => theme.spacing(3, 0, 2)};
+    margin: ${({ theme }) => theme.spacing(3, 0, 2)} !important;
+`;
+
+const OptionButton = styled(Button)`
+    color: ${({ theme }) => theme.palette.primary.main} !important;
 `;
 
 declare interface LoginFormEvent extends FormEvent<HTMLFormElement> {
@@ -44,15 +55,29 @@ declare interface LoginFormEvent extends FormEvent<HTMLFormElement> {
     } & FormEvent<HTMLFormElement>['target'];
 }
 
+const forgotPasswordLabel = 'Passwort vergessen?';
+
+const singUpLabel = 'Neues konto erstellen';
+
 export type LoginProps = AuthProps;
 
 export class Login extends React.Component<LoginProps> {
-    handleLogin = (event: LoginFormEvent): void => {
+    handleEmailLogin = (event: LoginFormEvent): void => {
         event.preventDefault();
         const email = event.target.email.value;
         const password = event.target.password.value;
         const { auth } = this.props;
         auth.signInWithEmailAndPassword(email, password);
+    };
+
+    handleGoogleLogin = (): void => {
+        const { auth } = this.props;
+        auth.signInWithGoogle();
+    };
+
+    handleMicrosoftLogin = (): void => {
+        const { auth } = this.props;
+        auth.signInWithMicrosoft();
     };
 
     render(): ReactNode {
@@ -66,14 +91,14 @@ export class Login extends React.Component<LoginProps> {
                         <Typography component="h1" variant="h5">
                             Login
                         </Typography>
-                        <StyledForm noValidate onSubmit={this.handleLogin}>
+                        <StyledForm noValidate onSubmit={this.handleEmailLogin}>
                             <TextField
                                 variant="outlined"
                                 margin="normal"
                                 required
                                 fullWidth
                                 id="email"
-                                label="Email Address"
+                                label="E-Mail-Adresse"
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
@@ -83,13 +108,13 @@ export class Login extends React.Component<LoginProps> {
                                 margin="normal"
                                 required
                                 fullWidth
-                                name="password"
-                                label="Password"
+                                label="Passwort"
                                 type="password"
+                                name="password"
                                 id="password"
                                 autoComplete="current-password"
                             />
-                            {/* <FormControlLabel
+                            <FormControlLabel
                                 control={
                                     <Checkbox
                                         value="remember"
@@ -97,7 +122,7 @@ export class Login extends React.Component<LoginProps> {
                                     />
                                 }
                                 label="Remember me"
-                            /> */}
+                            />
                             <SubmitButton
                                 type="submit"
                                 fullWidth
@@ -105,21 +130,35 @@ export class Login extends React.Component<LoginProps> {
                                 color="primary"
                                 id="login-submit-button"
                             >
-                                Login
+                                Anmelden
                             </SubmitButton>
-                            {/* <Grid container>
+                            <Grid container>
                                 <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                        Forgot password?
-                                    </Link>
+                                    <OptionButton variant="text">
+                                        {forgotPasswordLabel}
+                                    </OptionButton>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Don't have an account? Sign Up"}
-                                    </Link>
+                                    <OptionButton variant="text">
+                                        {singUpLabel}
+                                    </OptionButton>
                                 </Grid>
-                            </Grid> */}
+                            </Grid>
                         </StyledForm>
+                    </PaperDiv>
+                    <PaperDiv>
+                        <Grid container>
+                            <Grid item xs>
+                                <GoogleLoginButton
+                                    onClick={this.handleGoogleLogin}
+                                />
+                            </Grid>
+                            <Grid item>
+                                <MicrosoftLoginButton
+                                    onClick={this.handleMicrosoftLogin}
+                                />
+                            </Grid>
+                        </Grid>
                     </PaperDiv>
                 </DialogContent>
             </Dialog>

@@ -1,6 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 import 'firebase/auth';
 import { AuthProps } from '@feuertiger/web-components';
+import type firebase from 'firebase';
 
 import AuthSingleton from './authSingleton';
 
@@ -9,8 +10,6 @@ export interface AuthStateProps {
     isLoading: boolean;
     error: unknown;
 }
-
-interface State extends AuthProps, AuthStateProps {}
 
 const withAuth = <
     P,
@@ -23,73 +22,101 @@ const withAuth = <
     >,
     C extends React.ClassType<
         P,
-        React.Component<P, State, SS>,
-        React.ComponentClass<P, State>
+        React.Component<P, AuthStateProps, SS>,
+        React.ComponentClass<P, AuthStateProps>
     >
 >(
     WrappedComponent: CA | ((props: P & AuthProps) => ReactElement)
 ): C =>
-    class AuthWrapper extends React.Component<P, State, SS> {
+    (class AuthWrapper extends React.Component<P, AuthStateProps, SS> {
+        private unsubscribeAuthState: firebase.Unsubscribe;
+
+        private authSingleton: AuthSingleton;
+
         constructor(props: P) {
             super(props);
             this.state = {
-                isSignedIn: true,
+                isSignedIn: false,
                 isLoading: true,
-                error: null,
-                auth: null
+                error: null
             };
         }
 
         componentDidMount(): void {
-            const authSingleton = new AuthSingleton();
-            const { firebaseAuth } = authSingleton;
-
-            firebaseAuth.onAuthStateChanged(async user =>
-                this?.setState({ isSignedIn: !!user, isLoading: false })
+            this.authSingleton = new AuthSingleton();
+            const { firebaseAuth } = this.authSingleton;
+            this.unsubscribeAuthState = firebaseAuth.onAuthStateChanged(user =>
+                this.setSignedInState(Boolean(user))
             );
-
-            this.setState({
-                auth: {
-                    signInWithEmailAndPassword: async (email, password) => {
-                        try {
-                            this.setState({ isLoading: true });
-                            const credential = await firebaseAuth.signInWithEmailAndPassword(
-                                email,
-                                password
-                            );
-                            this.setState({
-                                isLoading: false,
-                                isSignedIn: true
-                            });
-                            window.location.reload(true);
-                            return credential;
-                        } catch (error) {
-                            this.setState({ error });
-                            throw error;
-                        }
-                    },
-                    signOut: async () => {
-                        await firebaseAuth.signOut();
-                        window.location.reload(true);
-                    }
-                }
-            });
         }
 
+        componentWillUnmount(): void {
+            this.unsubscribeAuthState();
+        }
+
+        private signInWithEmailAndPassword = async (
+            email: string,
+            password: string
+        ): Promise<void> => {
+            const { firebaseAuth } = this.authSingleton;
+            try {
+                this.setState({ isLoading: true });
+                await firebaseAuth.signInWithEmailAndPassword(email, password);
+                this.setSignedInState(true);
+                window.location.reload();
+            } catch (error) {
+                this.setState({ error });
+                throw error;
+            }
+        };
+
+        private signInWithGoogle = async (): Promise<void> => {
+            const { firebaseAuth, googleAuthProvider } = this.authSingleton;
+            await firebaseAuth.signInWithRedirect(googleAuthProvider);
+        };
+
+        private signInWithMicrosoft = async (): Promise<void> => {
+            const { firebaseAuth, microsoftAuthProvider } = this.authSingleton;
+            await firebaseAuth.signInWithRedirect(microsoftAuthProvider);
+        };
+
+        private signOut = async (): Promise<void> => {
+            const { firebaseAuth } = this.authSingleton;
+            await firebaseAuth.signOut();
+            window.location.reload();
+        };
+
+        private setSignedInState = (isSignedIn: boolean): void =>
+            this.setState({
+                isSignedIn,
+                isLoading: false
+            });
+
         render(): ReactNode {
+            const {
+                signInWithEmailAndPassword,
+                signInWithGoogle,
+                signInWithMicrosoft,
+                signOut
+            } = this;
             const { ...props } = this.props;
-            const { auth, isSignedIn, isLoading, error } = this.state;
+            const { isSignedIn, isLoading, error } = this.state;
 
             return (
                 <WrappedComponent
                     {...props}
-                    auth={auth}
+                    auth={{
+                        signInWithEmailAndPassword,
+                        signInWithGoogle,
+                        signInWithMicrosoft,
+                        signOut
+                    }}
                     isSignedIn={isSignedIn}
                     isLoading={isLoading}
                     error={error}
                 />
             );
         }
-    } as C;
+    } as unknown) as C;
 
 export default withAuth;

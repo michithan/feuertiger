@@ -37,6 +37,7 @@
         "react": "17.0.1",
         "react-dom": "17.0.1",
         "react-lazylog": "4.5.3",
+        "react-social-login-buttons": "3.1.0",
         "react-webcam": "5.2.2",
         "recharts": "1.8.5",
         "styled-components": "5.2.1"
