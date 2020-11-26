@@ -3,12 +3,14 @@ enum UserRole {
     ADMIN
 }
 
-type Viewer {
+type Viewer implements Node {
     id: ID!
     uid: ID!
     email: String
     userRoles: [UserRole]
     person: Person
-    departments: [Department]
-    mainDepartment: Department
+}
+
+extend type Mutation {
+    connectUserToPerson(userId: ID!, personId: ID!): Viewer
 }

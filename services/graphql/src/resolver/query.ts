@@ -45,7 +45,7 @@ const Query: QueryResolvers = {
             db.person.count,
             db.person.findMany
         );
-        const searchPropertys = [
+        const searchProperties = [
             'firstname',
             'lastname',
             'phone',
@@ -54,7 +54,7 @@ const Query: QueryResolvers = {
             'avatar',
             'membershipNumber'
         ];
-        const args = mapToPrismaQuery(query, searchPropertys);
+        const args = mapToPrismaQuery(query, searchProperties);
         return personsConnectionResolver(query, args);
     },
     exercises: async (parent, { query }, { db }: Context) => {
@@ -63,8 +63,8 @@ const Query: QueryResolvers = {
             db.exercise.count,
             db.exercise.findMany
         );
-        const searchPropertys = ['topic'];
-        const args = mapToPrismaQuery(query, searchPropertys);
+        const searchProperties = ['topic'];
+        const args = mapToPrismaQuery(query, searchProperties);
         return exercisesConnectionResolver(query, args);
     },
     dashboard: async () => ({})

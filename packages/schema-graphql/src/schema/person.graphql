@@ -16,7 +16,7 @@ type Person implements Node {
     dateOfBirth: DateTime!
     grade: Grade
     mainDepartmentMembership: DepartmentMembership
-    departmentMembership: DepartmentMembershipConnection
+    departmentMemberships: DepartmentMembershipConnection
     promotions: [Promotion]
     exercisesParticipated: [Exercise]
     exercisesNotParticipated: [Exercise]

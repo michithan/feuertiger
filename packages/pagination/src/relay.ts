@@ -1,3 +1,4 @@
+import '@feuertiger/native-js-extensions';
 import type {
     Node,
     Edge,
@@ -30,5 +31,21 @@ export const createConnection = <TNode extends Node>(
         hasPreviousPage: query ? query.page > 0 : false,
         startCursor: nodes[0]?.id,
         endCursor: nodes[nodes.length - 1]?.id
+    }
+});
+
+export const createConnectionFromNodes = <TNode extends Node>(
+    nodes: Array<TNode>
+): NodeConnection<TNode> => ({
+    totalCount: nodes.length,
+    edges: nodes.map(node => ({
+        node,
+        cursor: node.id
+    })),
+    pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false,
+        startCursor: nodes.first()?.id,
+        endCursor: nodes.last()?.id
     }
 });

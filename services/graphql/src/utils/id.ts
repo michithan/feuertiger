@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { _Node } from '@feuertiger/schema-graphql';
 
 export const parseGlobalId = (
@@ -12,6 +13,9 @@ export const parseGlobalId = (
 
 export const buildGlobalId = (id: string, type: string): string =>
     `${type}:${id}`;
+
+export const createGlobalId = (type: string): string =>
+    buildGlobalId(uuidv4(), type);
 
 export const connectInput = (connections: _Node[]): Connection[] =>
     connections

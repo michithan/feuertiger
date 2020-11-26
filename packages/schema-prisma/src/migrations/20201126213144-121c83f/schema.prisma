@@ -1,5 +1,5 @@
 datasource postgresql {
-  url      = env("POSTGRES_URI")
+  url = "***"
   provider = "postgresql"
 }
 

@@ -1,9 +1,9 @@
+import { createConnectionFromNodes } from '@feuertiger/pagination';
 import { PersonResolvers } from '@feuertiger/schema-graphql';
-import { Context } from '../context';
 
 const Person: PersonResolvers = {
-    exercisesLeaded: async ({ id }, args, context: Context) => {
-        const persons = await context.db.person.findOne({
+    exercisesLeaded: async ({ id }, args, { db }) => {
+        const persons = await db.person.findFirst({
             where: {
                 id
             },
@@ -13,8 +13,8 @@ const Person: PersonResolvers = {
         });
         return persons?.exercisesLeaded ?? [];
     },
-    exercisesParticipated: async ({ id }, args, context: Context) => {
-        const persons = await context.db.person.findOne({
+    exercisesParticipated: async ({ id }, args, { db }) => {
+        const persons = await db.person.findFirst({
             where: {
                 id
             },
@@ -24,8 +24,8 @@ const Person: PersonResolvers = {
         });
         return persons?.exercisesParticipated ?? [];
     },
-    exercisesNotParticipated: async ({ id }, args, context: Context) => {
-        const exercises = await context.db.exercise.findMany({
+    exercisesNotParticipated: async ({ id }, args, { db }) => {
+        const exercises = await db.exercise.findMany({
             where: {
                 participants: {
                     none: {
@@ -36,8 +36,8 @@ const Person: PersonResolvers = {
         });
         return exercises ?? [];
     },
-    address: async ({ id }, args, context: Context) => {
-        const persons = await context.db.person.findOne({
+    address: async ({ id }, args, { db }) => {
+        const persons = await db.person.findFirst({
             where: {
                 id
             },
@@ -47,19 +47,16 @@ const Person: PersonResolvers = {
         });
         return persons?.address ?? null;
     },
-    memberships: async ({ id }, args, context: Context) => {
-        const persons = await context.db.person.findOne({
+    departmentMemberships: async ({ id }, _, { db }) => {
+        const departmentMemberships = await db.departmentMembership.findMany({
             where: {
-                id
-            },
-            select: {
-                memberships: true
+                personId: id
             }
         });
-        return persons?.memberships ?? [];
+        return createConnectionFromNodes(departmentMemberships);
     },
-    actualMembership: async ({ id }, args, context: Context) => {
-        const persons = await context.db.person.findOne({
+    mainDepartmentMembership: async ({ id }, args, { db }) => {
+        const persons = await db.person.findFirst({
             where: {
                 id
             },
@@ -74,8 +71,8 @@ const Person: PersonResolvers = {
         });
         return persons?.memberships?.[0] ?? null;
     },
-    grade: async ({ id }, args, context: Context) => {
-        const promotion = await context.db.promotion.findMany({
+    grade: async ({ id }, args, { db }) => {
+        const promotion = await db.promotion.findMany({
             where: {
                 personId: id
             },
@@ -89,8 +86,8 @@ const Person: PersonResolvers = {
         });
         return promotion?.[0]?.grade ?? null;
     },
-    promotions: async ({ id }, args, context: Context) => {
-        const persons = await context.db.person.findOne({
+    promotions: async ({ id }, args, { db }) => {
+        const persons = await db.person.findFirst({
             where: {
                 id
             },

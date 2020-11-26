@@ -24,7 +24,7 @@ query personDetails($id: ID!) {
                 city
                 country
             }
-            departmentMembership {
+            departmentMemberships {
                 edges {
                     node {
                         id
