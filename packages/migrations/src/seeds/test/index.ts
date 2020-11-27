@@ -1,12 +1,14 @@
 /* eslint-disable no-console */
+import '@feuertiger/native-js-extensions';
 import { PrismaClient } from '@feuertiger/schema-prisma';
 
 import { createPerson } from './person';
 import { createAddress } from './address';
-import { createMembership } from './membership';
+import { createDepartmentMembership } from './departmentMembership';
 import { createPromotion } from './promotions';
 import { createTimeslot } from './timeslot';
 import { createExercise } from './exercise';
+import { createDepartment } from './department';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const upsert = (delegate: any, { id, ...data }: { id: string }) => {
@@ -53,6 +55,14 @@ export default async (client: PrismaClient): Promise<void> => {
     const PERSONS_COUNT = 118;
     const EXERCISES_COUNT = 32;
 
+    // upsert the fake department
+    const departmentFakes = await upsertSome(
+        createDepartment,
+        1,
+        client.department,
+        client
+    );
+
     // upsert some addresses
     const addressFakes = await upsertSome(
         createAddress,
@@ -72,11 +82,14 @@ export default async (client: PrismaClient): Promise<void> => {
 
     // upsert some memberships
     await upsertSome(
-        createMembership,
+        createDepartmentMembership,
         PERSONS_COUNT,
-        client.membership,
+        client.departmentMembership,
         client,
-        personsFakes.map(person => ({ person }))
+        personsFakes.map(person => ({
+            person,
+            department: departmentFakes[0]
+        }))
     );
 
     // upsert some promotions

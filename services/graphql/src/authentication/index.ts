@@ -5,7 +5,7 @@ import { createGlobalId } from '../utils/id';
 
 export interface UserAuthInfo {
     uid: string;
-    email: string | null | undefined;
+    email: string;
 }
 
 export const tryGetUserInfo = async (
@@ -13,31 +13,35 @@ export const tryGetUserInfo = async (
     authProvider: ContextInitialization['authProvider']
 ): Promise<UserAuthInfo> => {
     const { uid } = await authProvider.verifyIdToken(token);
-    const { email } = await authProvider.getUser(uid);
+    const {
+        email,
+        providerData: [{ email: providerEmail }]
+    } = await authProvider.getUser(uid);
 
     return {
         uid,
-        email
+        email: email ?? providerEmail
     };
 };
 
 export const getOrCreateViewer = async ({
     db,
-    user: { uid }
+    user: { uid, email }
 }: Context): Promise<Viewer> => {
-    const user = await db.user.findFirst({
+    let user = await db.user.findFirst({
         where: {
             uid
         }
     });
 
-    if (user) {
-        return user;
+    if (!user) {
+        user = await db.user.create({
+            data: { id: createGlobalId('user'), uid }
+        });
     }
 
-    const newUser = db.user.create({
-        data: { id: createGlobalId('user'), uid }
-    });
-
-    return newUser;
+    return {
+        ...user,
+        email
+    };
 };

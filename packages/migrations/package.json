@@ -19,6 +19,7 @@
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
+        "@feuertiger/native-js-extensions": "1.0.9-dev.9daaf39.0",
         "@feuertiger/config": "1.0.9-dev.fc5afdd.0",
         "@feuertiger/schema-prisma": "1.0.9-dev.76d518c.0",
         "execa": "4.1.0",

@@ -24,6 +24,7 @@ export const migrate = async (): Promise<void> => {
             [
                 'migrate',
                 'up',
+                '--auto-approve',
                 '--experimental',
                 '--create-db',
                 `--schema=${schemaPath}`
