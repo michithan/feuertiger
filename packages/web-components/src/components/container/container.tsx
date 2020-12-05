@@ -7,6 +7,7 @@ import { AppBar, SideBar, AuthProps } from '../../index';
 
 export interface ContainerProps extends AuthProps {
     children: ReactElement;
+    departmentId: string;
 }
 
 interface State {
@@ -54,18 +55,22 @@ export class Container extends React.Component<ContainerProps, State> {
 
     render(): ReactNode {
         const { open } = this.state;
-        const { children, auth } = this.props;
+        const { children, auth, departmentId } = this.props;
         return (
             <RootDiv>
                 <AppBar
                     open={open}
                     handleDrawerOpen={this.handleDrawerOpen}
                     auth={auth}
+                    isSidebarDisabled={!departmentId}
                 />
-                <SideBar
-                    open={open}
-                    handleDrawerClose={this.handleDrawerClose}
-                />
+                {departmentId && (
+                    <SideBar
+                        departmentId={departmentId}
+                        open={open}
+                        handleDrawerClose={this.handleDrawerClose}
+                    />
+                )}
                 <StyledMain>
                     <SnackbarProvider maxSnack={3}>
                         <StyledContainer maxWidth="lg">

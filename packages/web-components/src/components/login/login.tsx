@@ -17,7 +17,7 @@ import {
 } from 'react-social-login-buttons';
 import styled from 'styled-components';
 
-import { AuthProps, Link } from '../../index';
+import { AuthProps } from '../../index';
 
 const PaperDiv = styled.div`
     margin: ${({ theme }) => theme.spacing(8, 4)};

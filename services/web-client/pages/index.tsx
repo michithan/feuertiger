@@ -1,16 +1,29 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
 import dynamic from 'next/dynamic';
-
-import { DashboardDocument } from '@feuertiger/schema-graphql';
-import { Dashboard, LoadingContainer } from '@feuertiger/web-components';
+import { useRouter } from 'next/router';
+import { useEntrypointQuery } from '@feuertiger/schema-graphql';
+import { EntrypointPage, LoadingContainer } from '@feuertiger/web-components';
 
 const Index = dynamic(
     async () => () => {
-        const { loading, error, data } = useQuery(DashboardDocument);
+        const { data, loading } = useEntrypointQuery();
+        const router = useRouter();
+
+        if (loading) {
+            return <LoadingContainer loading>{null}</LoadingContainer>;
+        }
+
+        const viewer = data?.viewer;
+        const departmentId =
+            viewer?.person?.mainDepartmentMembership?.department?.id;
+
+        if (departmentId) {
+            router.push(`/department/${departmentId}`);
+        }
+
         return (
-            <LoadingContainer loading={loading} error={error}>
-                <Dashboard {...data} />
+            <LoadingContainer loading={false}>
+                <EntrypointPage firstname={viewer?.person?.firstname} />
             </LoadingContainer>
         );
     },

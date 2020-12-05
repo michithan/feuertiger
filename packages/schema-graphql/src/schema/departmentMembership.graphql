@@ -4,6 +4,7 @@ type DepartmentMembership implements Node {
     active: Boolean
     entryDate: DateTime
     departureDate: DateTime
+    department: Department
 }
 
 type DepartmentMembershipEdge implements Edge {
@@ -16,7 +17,6 @@ type DepartmentMembershipConnection implements Connection {
     edges: [DepartmentMembershipEdge!]!
     pageInfo: PageInfo!
 }
-
 
 input DepartmentMembershipUpdate {
     id: ID!

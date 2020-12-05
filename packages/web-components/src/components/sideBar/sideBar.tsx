@@ -57,11 +57,18 @@ const StyledDiv = styled.div`
 export interface SideBarProps {
     open: boolean;
     handleDrawerClose: () => void;
+    departmentId: string | undefined;
 }
 
-export const mainListItems = (
+interface MainListItemsProps {
+    departmentId: string;
+}
+
+export const MainListItems = ({
+    departmentId
+}: MainListItemsProps): ReactElement => (
     <div>
-        <Link href="/">
+        <Link href={`/department/${departmentId}`}>
             <ListItem button>
                 <ListItemIcon>
                     <DashboardIcon />
@@ -69,7 +76,7 @@ export const mainListItems = (
                 <ListItemText primary="Dashboard" />
             </ListItem>
         </Link>
-        <Link href="/member">
+        <Link href={`/department/${departmentId}/member`}>
             <ListItem button>
                 <ListItemIcon>
                     <PeopleAltIcon />
@@ -77,7 +84,7 @@ export const mainListItems = (
                 <ListItemText primary="Mitglieder" />
             </ListItem>
         </Link>
-        <Link href="/exercises ">
+        <Link href={`/department/${departmentId}/exercises`}>
             <ListItem button>
                 <ListItemIcon>
                     <ExerciseIcon />
@@ -85,7 +92,7 @@ export const mainListItems = (
                 <ListItemText primary="Übungen" />
             </ListItem>
         </Link>
-        <Link href="/operations ">
+        <Link href={`/department/${departmentId}/operations`}>
             <ListItem button>
                 <ListItemIcon>
                     <OperationIcon />
@@ -100,6 +107,7 @@ export const secondaryListItems = <div />;
 
 export const SideBar = ({
     open,
+    departmentId,
     handleDrawerClose
 }: SideBarProps): ReactElement => (
     <StyledDrawer variant="permanent" open={open}>
@@ -109,7 +117,11 @@ export const SideBar = ({
             </IconButton>
         </StyledDiv>
         <Divider />
-        <List>{mainListItems}</List>
+        {departmentId && (
+            <List>
+                <MainListItems departmentId={departmentId} />
+            </List>
+        )}
         <Divider />
         <List>{secondaryListItems}</List>
     </StyledDrawer>

@@ -1,6 +1,7 @@
 import { Person } from '@feuertiger/schema-graphql';
+import { createConnectionFromNodes } from '@feuertiger/pagination';
 import faker from 'faker';
-import { defaultExerciseMock } from './exercises.mock';
+import { defaultExerciseMock } from '.';
 
 faker.locale = 'de';
 faker.seed(4);
@@ -22,7 +23,7 @@ export const mockDefaultPerson = (): Person => ({
     birthName: faker.name.lastName(),
     dateOfBirth: faker.date.past().toDateString(),
     grade: 'FM',
-    actualMembership: {
+    mainDepartmentMembership: {
         id: `membership:${faker.random.uuid()}`,
         entryDate: faker.date.past(),
         active: true
@@ -35,13 +36,13 @@ export const mockDefaultPerson = (): Person => ({
             dateOfPromotion: faker.date.past().toDateString()
         }
     ],
-    memberships: [
+    departmentMemberships: createConnectionFromNodes([
         {
             id: `membership:${faker.random.uuid()}`,
             active: true,
             entryDate: faker.date.past().toDateString()
         }
-    ],
+    ]),
     exercisesParticipated: [defaultExerciseMock],
     exercisesNotParticipated: [],
     exercisesLeaded: []
@@ -62,7 +63,7 @@ export const mockLeaderPerson = (): Person => ({
     birthName: faker.name.lastName(),
     dateOfBirth: faker.date.past().toDateString(),
     grade: 'LM',
-    actualMembership: {
+    mainDepartmentMembership: {
         id: `membership:${faker.random.uuid()}`,
         entryDate: faker.date.past(),
         active: true
@@ -75,13 +76,13 @@ export const mockLeaderPerson = (): Person => ({
             dateOfPromotion: faker.date.past().toDateString()
         }
     ],
-    memberships: [
+    departmentMemberships: createConnectionFromNodes([
         {
             id: `membership:${faker.random.uuid()}`,
             active: true,
             entryDate: faker.date.past().toDateString()
         }
-    ],
+    ]),
     exercisesParticipated: [],
     exercisesNotParticipated: [],
     exercisesLeaded: [defaultExerciseMock]

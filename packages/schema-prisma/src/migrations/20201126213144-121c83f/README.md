@@ -81,5 +81,3 @@ migration 20201126194934-4718ce4..20201126213144-121c83f
    departmentMemberships DepartmentMembership[] @relation("User_DepartmentMembership")
    userRoles             UserRole[]
 ```
-
-

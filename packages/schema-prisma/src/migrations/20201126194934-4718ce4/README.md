@@ -170,5 +170,3 @@ migration 20201110210036-05bd506..20201126194934-4718ce4
 +  userRoles             UserRole[]
 +}
 ```
-
-

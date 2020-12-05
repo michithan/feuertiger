@@ -15,8 +15,9 @@ import {
 
 const Member = dynamic(
     async () => () => {
-        const router = useRouter();
-        const { id } = router.query;
+        const {
+            query: { id }
+        } = useRouter();
 
         const { data, loading, error } = useQuery(PersonDetailsDocument, {
             variables: { id }

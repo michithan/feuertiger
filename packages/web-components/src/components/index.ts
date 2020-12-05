@@ -21,3 +21,6 @@ export * from './formikFields/formikFields';
 export * from './loadingContainer/loadingContainer';
 export * from './loadingSkeleton/loadingSkeleton';
 export * from './exerciseTable/exerciseTable';
+export * from './entrypoint/entrypoint';
+export * from './departmentJoinPage/departmentJoinPage';
+export * from './departmentRegisterPage/departmentRegisterPage';

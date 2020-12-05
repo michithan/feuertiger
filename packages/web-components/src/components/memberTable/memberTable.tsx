@@ -11,7 +11,7 @@ import MaterialTable from 'material-table';
 import FindInPage from '@material-ui/icons/FindInPage';
 import { startOcr } from '@feuertiger/ocr';
 import type { MaterialTableFetchFunction } from '@feuertiger/pagination';
-import type { PersonsQueryResult } from '@feuertiger/schema-graphql';
+import type { DepartmentMembershipsQueryResult } from '@feuertiger/schema-graphql';
 
 import { AddMember, Link } from '../index';
 
@@ -20,8 +20,8 @@ interface State {
 }
 
 export interface MemberTableProps {
-    fetchPersons: MaterialTableFetchFunction<
-        PersonsQueryResult['data']['persons']['edges'][0]['node']
+    fetchDepartmentMembers: MaterialTableFetchFunction<
+        DepartmentMembershipsQueryResult['data']['department']['memberships']['edges'][0]['node']
     >;
 }
 
@@ -39,7 +39,7 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
 
     render(): ReactNode {
         const { addDialogOpen } = this.state;
-        const { fetchPersons } = this.props;
+        const { fetchDepartmentMembers: fetchPersons } = this.props;
 
         return (
             <Grid container spacing={3}>

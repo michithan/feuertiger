@@ -4,11 +4,12 @@ import faker from 'faker';
 import {
     MemberTable,
     MemberTableProps,
-    mockDefaultPerson,
     authPropsMock,
     Container,
-    ContainerProps
+    ContainerProps,
+    mockFetchConnection
 } from '../index';
+import { mockDefaultDepartmentMember } from '../mocks/departmentMembers.mock';
 
 const defaultContainerProps: ContainerProps = {
     ...authPropsMock,
@@ -18,14 +19,14 @@ const defaultContainerProps: ContainerProps = {
 faker.locale = 'de';
 faker.seed(4);
 
-const defaultProps: MemberTableProps = Object.freeze({
-    allPersons: [
-        mockDefaultPerson(),
-        mockDefaultPerson(),
-        mockDefaultPerson(),
-        mockDefaultPerson()
-    ]
-} as unknown) as MemberTableProps;
+const defaultProps: MemberTableProps = {
+    fetchDepartmentMembers: mockFetchConnection([
+        mockDefaultDepartmentMember(),
+        mockDefaultDepartmentMember(),
+        mockDefaultDepartmentMember(),
+        mockDefaultDepartmentMember()
+    ])
+};
 
 storiesOf('MemberTable', module)
     .add('Default', () => {

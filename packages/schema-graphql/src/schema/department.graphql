@@ -17,5 +17,6 @@ type DepartmentConnection implements Connection {
 }
 
 extend type Query {
+    department(id: ID!): Department
     departments(query: _Query): DepartmentConnection
 }

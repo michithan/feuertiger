@@ -1,0 +1,19 @@
+query entrypoint {
+    viewer {
+        id
+        uid
+        email
+        userRoles
+        person {
+            id
+            firstname
+            lastname
+            mainDepartmentMembership {
+                department {
+                    id
+                    name
+                }
+            }
+        }
+    }
+}

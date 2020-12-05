@@ -1,0 +1,42 @@
+query departmentMemberships($id: ID!, $query: _Query!) {
+    department(id: $id) {
+        memberships(query: $query) {
+            totalCount
+            edges {
+                node {
+                    id
+                    person {
+                        id
+                        firstname
+                        lastname
+                        sex
+                        avatar
+                        birthName
+                        placeOfBirth
+                        dateOfBirth
+                        mainDepartmentMembership {
+                            active
+                            entryDate
+                        }
+                        grade
+                        address {
+                            id
+                            street
+                            streetNumber
+                            postalCode
+                            city
+                            country
+                        }
+                    }
+                }
+                cursor
+            }
+            pageInfo {
+                hasNextPage
+                hasPreviousPage
+                startCursor
+                endCursor
+            }
+        }
+    }
+}

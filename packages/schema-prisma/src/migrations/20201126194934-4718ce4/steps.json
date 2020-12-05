@@ -1,457 +1,451 @@
 {
-  "version": "0.3.14-fixed",
-  "steps": [
-    {
-      "tag": "CreateEnum",
-      "enum": "UserRole",
-      "values": [
-        "USER",
-        "ADMIN"
-      ]
-    },
-    {
-      "tag": "CreateEnum",
-      "enum": "DepartmentUserRole",
-      "values": [
-        "GUEST",
-        "ADMIN"
-      ]
-    },
-    {
-      "tag": "CreateModel",
-      "model": "Department"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Department",
-      "field": "id",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Department",
-          "field": "id"
+    "version": "0.3.14-fixed",
+    "steps": [
+        {
+            "tag": "CreateEnum",
+            "enum": "UserRole",
+            "values": ["USER", "ADMIN"]
         },
-        "directive": "id"
-      }
-    },
-    {
-      "tag": "CreateField",
-      "model": "Department",
-      "field": "name",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Department",
-      "field": "memberships",
-      "type": "DepartmentMembership",
-      "arity": "List"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "Department",
-          "field": "memberships"
+        {
+            "tag": "CreateEnum",
+            "enum": "DepartmentUserRole",
+            "values": ["GUEST", "ADMIN"]
         },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Department",
-          "field": "memberships"
+        {
+            "tag": "CreateModel",
+            "model": "Department"
         },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"Department_DepartmentMembership\""
-    },
-    {
-      "tag": "CreateModel",
-      "model": "DepartmentMembership"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "id",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "id"
+        {
+            "tag": "CreateField",
+            "model": "Department",
+            "field": "id",
+            "type": "String",
+            "arity": "Required"
         },
-        "directive": "id"
-      }
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "active",
-      "type": "Boolean",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "entryDate",
-      "type": "DateTime",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "departureDate",
-      "type": "DateTime",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "userRoles",
-      "type": "DepartmentUserRole",
-      "arity": "List"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "personId",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "person",
-      "type": "Person",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "person"
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "Department",
+                    "field": "id"
+                },
+                "directive": "id"
+            }
         },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "person"
+        {
+            "tag": "CreateField",
+            "model": "Department",
+            "field": "name",
+            "type": "String",
+            "arity": "Required"
         },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"Person_DepartmentMembership\""
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "person"
+        {
+            "tag": "CreateField",
+            "model": "Department",
+            "field": "memberships",
+            "type": "DepartmentMembership",
+            "arity": "List"
         },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[personId]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "userId",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "user",
-      "type": "User",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "user"
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "Department",
+                    "field": "memberships"
+                },
+                "directive": "relation"
+            }
         },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "user"
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "Department",
+                    "field": "memberships"
+                },
+                "directive": "relation"
+            },
+            "argument": "",
+            "value": "\"Department_DepartmentMembership\""
         },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"User_DepartmentMembership\""
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "user"
+        {
+            "tag": "CreateModel",
+            "model": "DepartmentMembership"
         },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[userId]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "departmentId",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "DepartmentMembership",
-      "field": "department",
-      "type": "Department",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "department"
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "id",
+            "type": "String",
+            "arity": "Required"
         },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "department"
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "id"
+                },
+                "directive": "id"
+            }
         },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"Department_DepartmentMembership\""
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "DepartmentMembership",
-          "field": "department"
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "active",
+            "type": "Boolean",
+            "arity": "Required"
         },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[departmentId]"
-    },
-    {
-      "tag": "CreateModel",
-      "model": "User"
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "id",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "id"
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "entryDate",
+            "type": "DateTime",
+            "arity": "Required"
         },
-        "directive": "id"
-      }
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "uid",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "firstname",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "lastname",
-      "type": "String",
-      "arity": "Required"
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "personId",
-      "type": "String",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "person",
-      "type": "Person",
-      "arity": "Optional"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "person"
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "departureDate",
+            "type": "DateTime",
+            "arity": "Optional"
         },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "person"
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "userRoles",
+            "type": "DepartmentUserRole",
+            "arity": "List"
         },
-        "directive": "relation"
-      },
-      "argument": "fields",
-      "value": "[personId]"
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "person"
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "personId",
+            "type": "String",
+            "arity": "Required"
         },
-        "directive": "relation"
-      },
-      "argument": "references",
-      "value": "[id]"
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "departmentMemberships",
-      "type": "DepartmentMembership",
-      "arity": "List"
-    },
-    {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "departmentMemberships"
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "person",
+            "type": "Person",
+            "arity": "Required"
         },
-        "directive": "relation"
-      }
-    },
-    {
-      "tag": "CreateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "departmentMemberships"
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "person"
+                },
+                "directive": "relation"
+            }
         },
-        "directive": "relation"
-      },
-      "argument": "",
-      "value": "\"User_DepartmentMembership\""
-    },
-    {
-      "tag": "CreateField",
-      "model": "User",
-      "field": "userRoles",
-      "type": "UserRole",
-      "arity": "List"
-    },
-    {
-      "tag": "DeleteModel",
-      "model": "Membership"
-    },
-    {
-      "tag": "CreateField",
-      "model": "Person",
-      "field": "User",
-      "type": "User",
-      "arity": "List"
-    },
-    {
-      "tag": "UpdateField",
-      "model": "Person",
-      "field": "memberships",
-      "type": "DepartmentMembership"
-    },
-    {
-      "tag": "UpdateArgument",
-      "location": {
-        "tag": "Directive",
-        "path": {
-          "tag": "Field",
-          "model": "Person",
-          "field": "memberships"
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "person"
+                },
+                "directive": "relation"
+            },
+            "argument": "",
+            "value": "\"Person_DepartmentMembership\""
         },
-        "directive": "relation"
-      },
-      "argument": "",
-      "newValue": "\"Person_DepartmentMembership\""
-    }
-  ]
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "person"
+                },
+                "directive": "relation"
+            },
+            "argument": "fields",
+            "value": "[personId]"
+        },
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "userId",
+            "type": "String",
+            "arity": "Optional"
+        },
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "user",
+            "type": "User",
+            "arity": "Optional"
+        },
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "user"
+                },
+                "directive": "relation"
+            }
+        },
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "user"
+                },
+                "directive": "relation"
+            },
+            "argument": "",
+            "value": "\"User_DepartmentMembership\""
+        },
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "user"
+                },
+                "directive": "relation"
+            },
+            "argument": "fields",
+            "value": "[userId]"
+        },
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "departmentId",
+            "type": "String",
+            "arity": "Required"
+        },
+        {
+            "tag": "CreateField",
+            "model": "DepartmentMembership",
+            "field": "department",
+            "type": "Department",
+            "arity": "Required"
+        },
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "department"
+                },
+                "directive": "relation"
+            }
+        },
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "department"
+                },
+                "directive": "relation"
+            },
+            "argument": "",
+            "value": "\"Department_DepartmentMembership\""
+        },
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "DepartmentMembership",
+                    "field": "department"
+                },
+                "directive": "relation"
+            },
+            "argument": "fields",
+            "value": "[departmentId]"
+        },
+        {
+            "tag": "CreateModel",
+            "model": "User"
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "id",
+            "type": "String",
+            "arity": "Required"
+        },
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "User",
+                    "field": "id"
+                },
+                "directive": "id"
+            }
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "uid",
+            "type": "String",
+            "arity": "Required"
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "firstname",
+            "type": "String",
+            "arity": "Required"
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "lastname",
+            "type": "String",
+            "arity": "Required"
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "personId",
+            "type": "String",
+            "arity": "Optional"
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "person",
+            "type": "Person",
+            "arity": "Optional"
+        },
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "User",
+                    "field": "person"
+                },
+                "directive": "relation"
+            }
+        },
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "User",
+                    "field": "person"
+                },
+                "directive": "relation"
+            },
+            "argument": "fields",
+            "value": "[personId]"
+        },
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "User",
+                    "field": "person"
+                },
+                "directive": "relation"
+            },
+            "argument": "references",
+            "value": "[id]"
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "departmentMemberships",
+            "type": "DepartmentMembership",
+            "arity": "List"
+        },
+        {
+            "tag": "CreateDirective",
+            "location": {
+                "path": {
+                    "tag": "Field",
+                    "model": "User",
+                    "field": "departmentMemberships"
+                },
+                "directive": "relation"
+            }
+        },
+        {
+            "tag": "CreateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "User",
+                    "field": "departmentMemberships"
+                },
+                "directive": "relation"
+            },
+            "argument": "",
+            "value": "\"User_DepartmentMembership\""
+        },
+        {
+            "tag": "CreateField",
+            "model": "User",
+            "field": "userRoles",
+            "type": "UserRole",
+            "arity": "List"
+        },
+        {
+            "tag": "DeleteModel",
+            "model": "Membership"
+        },
+        {
+            "tag": "CreateField",
+            "model": "Person",
+            "field": "User",
+            "type": "User",
+            "arity": "List"
+        },
+        {
+            "tag": "UpdateField",
+            "model": "Person",
+            "field": "memberships",
+            "type": "DepartmentMembership"
+        },
+        {
+            "tag": "UpdateArgument",
+            "location": {
+                "tag": "Directive",
+                "path": {
+                    "tag": "Field",
+                    "model": "Person",
+                    "field": "memberships"
+                },
+                "directive": "relation"
+            },
+            "argument": "",
+            "newValue": "\"Person_DepartmentMembership\""
+        }
+    ]
 }

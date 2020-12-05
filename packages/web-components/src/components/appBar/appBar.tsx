@@ -53,6 +53,7 @@ const StyledTypography = styled(Typography)`
 
 export interface AppBarProps extends AuthProps {
     open: boolean;
+    isSidebarDisabled: boolean;
     handleDrawerOpen: () => void;
 }
 
@@ -63,7 +64,7 @@ export class AppBar extends React.Component<AppBarProps> {
     };
 
     render(): ReactNode {
-        const { open, handleDrawerOpen } = this.props;
+        const { open, isSidebarDisabled, handleDrawerOpen } = this.props;
         return (
             <StyledAppBar open={open}>
                 <StyledToolbar>
@@ -71,10 +72,11 @@ export class AppBar extends React.Component<AppBarProps> {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
+                        disabled={isSidebarDisabled}
                         onClick={handleDrawerOpen}
-                        open={open}
+                        open={!isSidebarDisabled && open}
                     >
-                        <MenuIcon />
+                        {!isSidebarDisabled && <MenuIcon />}
                     </StyledIconButton>
                     <StyledTypography variant="h6" color="inherit" noWrap>
                         <span role="img" aria-label="Feuer">

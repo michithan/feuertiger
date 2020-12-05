@@ -124,7 +124,7 @@ class MemberBasicDetailsWithForm extends React.Component<
             dirty,
             member: {
                 grade,
-                actualMembership: { entryDate, active }
+                mainDepartmentMembership: { entryDate, active }
             },
             values: {
                 firstname,

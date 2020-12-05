@@ -39,7 +39,8 @@ const Query: QueryResolvers = {
     node: (_parent, { id }, context) => getNode({ id, context }),
     nodes: (_parent, args, context) =>
         Promise.all(args.ids.map(id => getNode({ id, context }))),
-    persons: (parent, { query }, { db }: Context) => {
+    department: (_parent, { id }, context) => getNode({ id, context }),
+    persons: (_parent, { query }, { db }) => {
         const personsConnectionResolver = createConnectionResolver<Person>(
             db,
             db.person.count,
@@ -57,7 +58,7 @@ const Query: QueryResolvers = {
         const args = mapToPrismaQuery(query, searchProperties);
         return personsConnectionResolver(query, args);
     },
-    exercises: async (parent, { query }, { db }: Context) => {
+    exercises: async (_parent, { query }, { db }) => {
         const exercisesConnectionResolver = createConnectionResolver<Exercise>(
             db,
             db.exercise.count,

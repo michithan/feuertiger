@@ -19,7 +19,7 @@ generates:
             - typescript-react-apollo
         config:
             minify: false
-            withHooks: false
+            withHooks: true
             withComponent: false
             withHOC: false
             withResultType: true
