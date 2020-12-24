@@ -1,0 +1,16 @@
+type MembershipRequest implements Node {
+    id: ID!
+    user: Viewer
+    department: Department
+}
+
+input _MembershipRequest {
+    userId: ID!
+    departmentId: ID!
+}
+
+extend type Mutation {
+    createMembershipRequest(
+        membershipRequest: _MembershipRequest
+    ): MembershipRequest
+}

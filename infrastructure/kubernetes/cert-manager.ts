@@ -8,8 +8,7 @@ export const certNamespace = new k8s.core.v1.Namespace(
     'cert-manager-namespace',
     {
         metadata: {
-            name: 'cert-manager',
-            labels: { 'certmanager.k8s.io/disable-validation': 'true' }
+            name: 'cert-manager'
         }
     },
     { provider, dependsOn: [provider] }
@@ -39,15 +38,13 @@ export const cert = new k8s.helm.v3.Chart(
     'certificate',
     {
         chart: 'cert-manager',
-        version: '1.0.3',
+        version: '1.1.0',
         fetchOpts: {
             repo: 'https://charts.jetstack.io'
         },
         values: {
             installCRDs: 'true',
             ingressShim: {
-                defaultACMEChallengeType: 'dns01',
-                defaultACMEDNS01ChallengeProvider: 'digitalocean',
                 defaultIssuerName: 'letsencrypt-prod',
                 defaultIssuerKind: 'ClusterIssuer'
             }

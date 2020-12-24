@@ -21,7 +21,7 @@ export const cluster = new digitalocean.KubernetesCluster(
             maxNodes: 2
         },
         region: digitalocean.Regions.FRA1,
-        version: '1.18.8-do.1'
+        version: '1.19.3-do.2'
     },
     {
         provider,

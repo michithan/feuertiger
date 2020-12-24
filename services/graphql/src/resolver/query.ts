@@ -10,6 +10,7 @@ import {
 } from '@feuertiger/pagination';
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
+import { Department } from '@feuertiger/schema-prisma';
 
 interface NodeResolver {
     findOne: (query: { where: { id: string } }) => Promise<Node>;
@@ -40,6 +41,14 @@ const Query: QueryResolvers = {
     nodes: (_parent, args, context) =>
         Promise.all(args.ids.map(id => getNode({ id, context }))),
     department: (_parent, { id }, context) => getNode({ id, context }),
+    departments: (_parent, { query }, { db }) => {
+        const departmentsConnectionResolver = createConnectionResolver<
+            Department
+        >(db, db.department.count, db.department.findMany);
+        const searchProperties = ['name'];
+        const args = mapToPrismaQuery(query, searchProperties);
+        return departmentsConnectionResolver(query, args);
+    },
     persons: (_parent, { query }, { db }) => {
         const personsConnectionResolver = createConnectionResolver<Person>(
             db,

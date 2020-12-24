@@ -1,0 +1,16 @@
+enum ConnectionUpdateAction {
+    ADD
+    DELETE
+}
+
+input ConnectionUpdate {
+    id: ID!
+    action: ConnectionUpdateAction!
+}
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPreviousPage: Boolean!
+    startCursor: String
+    endCursor: String
+}

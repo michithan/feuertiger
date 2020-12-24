@@ -93,9 +93,11 @@ enum DepartmentUserRole {
 }
 
 model Department {
-  id          String                 @id
-  name        String
-  memberships DepartmentMembership[] @relation("Department_DepartmentMembership")
+  id                String                 @id
+  name              String
+  memberships       DepartmentMembership[] @relation("Department_DepartmentMembership")
+  MembershipRequest MembershipRequest[]
+  MembershipInvite  MembershipInvite[]
 }
 
 model DepartmentMembership {
@@ -121,4 +123,20 @@ model User {
   person                Person?                @relation(fields: [personId], references: [id])
   departmentMemberships DepartmentMembership[] @relation("User_DepartmentMembership")
   userRoles             UserRole[]
+  MembershipRequest     MembershipRequest[]
+}
+
+model MembershipRequest {
+  id           String     @id
+  userId       String
+  user         User       @relation(fields: [userId], references: [id])
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
+}
+
+model MembershipInvite {
+  id           String     @id
+  email        String
+  departmentId String
+  department   Department @relation(fields: [departmentId], references: [id])
 }

@@ -1,0 +1,18 @@
+query departments($query: _Query!) {
+    departments(query: $query) {
+        totalCount
+        edges {
+            node {
+                id
+                name
+            }
+            cursor
+        }
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+        }
+    }
+}

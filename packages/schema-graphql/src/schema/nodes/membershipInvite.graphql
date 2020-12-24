@@ -1,0 +1,16 @@
+type MembershipInvite implements Node {
+    id: ID!
+    email: String!
+    department: Department
+}
+
+input _MembershipInvite {
+    email: String!
+    departmentId: ID!
+}
+
+extend type Mutation {
+    createMembershipInvite(
+        membershipInvite: _MembershipInvite
+    ): MembershipInvite
+}

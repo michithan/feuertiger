@@ -1,0 +1,5 @@
+type Timeslot implements Node {
+    id: ID!
+    start: DateTime
+    end: DateTime
+}

@@ -1,11 +1,6 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
-
-import {
-    MemberTable,
-    MemberTableProps,
-    LoadingContainer
-} from '@feuertiger/web-components';
+import { MemberTable, LoadingContainer } from '@feuertiger/web-components';
 import {
     useDepartmentMembershipsQuery,
     DepartmentMembershipsQuery,
@@ -29,23 +24,22 @@ const Member = dynamic(
             }
         });
         const { loading, error } = queryResult;
-        const copy: MemberTableProps = {
-            fetchDepartmentMembers: createMaterialTableFetchFunction<
-                DepartmentMembershipsQuery,
-                DepartmentMembershipsQuery['department']['memberships']['edges'][0]['node'],
-                DepartmentMembershipsQueryVariables
-            >(
-                queryResult,
-                ({
-                    data: {
-                        department: { memberships }
-                    }
-                }) => memberships
-            )
-        };
         return (
             <LoadingContainer loading={loading} error={error}>
-                <MemberTable {...copy} />
+                <MemberTable
+                    fetchDepartmentMembers={createMaterialTableFetchFunction<
+                        DepartmentMembershipsQuery,
+                        DepartmentMembershipsQuery['department']['memberships']['edges'][0]['node'],
+                        DepartmentMembershipsQueryVariables
+                    >(
+                        queryResult,
+                        ({
+                            data: {
+                                department: { memberships }
+                            }
+                        }) => memberships
+                    )}
+                />
             </LoadingContainer>
         );
     },
