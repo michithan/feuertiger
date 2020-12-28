@@ -13,7 +13,7 @@ const { branchSlug } = git;
 const { GOOGLE_CREDENTIALS } = env;
 
 const namespace = `${branchSlug}-${projectName}`;
-const subDomainPrefix = branchSlug === 'main' ? '' : `${branchSlug}.`;
+const subDomainPrefix = branchSlug === 'main' ? '' : 'dev.';
 
 export const webClient = service({
     namespace,
