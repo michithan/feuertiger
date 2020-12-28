@@ -12,8 +12,9 @@ import { ingress } from './kubernetes/ingress';
 const { branchSlug } = git;
 const { GOOGLE_CREDENTIALS } = env;
 
-const namespace = `${branchSlug}-${projectName}`;
-const subDomainPrefix = branchSlug === 'main' ? '' : 'dev.';
+const isDev = branchSlug !== 'main';
+const namespace = `${isDev ? 'dev' : 'main'}-${projectName}`;
+const subDomainPrefix = isDev ? 'dev.' : '';
 
 export const webClient = service({
     namespace,
