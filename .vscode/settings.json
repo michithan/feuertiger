@@ -131,6 +131,7 @@
         "dind",
         "dockerconfigjson",
         "doctl",
+        "doks",
         "drawio",
         "eamodio",
         "entrypoint",

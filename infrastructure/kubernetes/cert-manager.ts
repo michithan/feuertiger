@@ -35,7 +35,7 @@ export const certToken = new k8s.core.v1.Secret(
     }
 );
 
-export const cert = new k8s.helm.v3.Chart(
+export const certManager = new k8s.helm.v3.Chart(
     'certificate',
     {
         chart: 'cert-manager',
@@ -60,5 +60,5 @@ export const certClusterIssuer = new k8s.yaml.ConfigFile(
     {
         file: path.resolve(__dirname, 'configs', 'production_issuer.yaml')
     },
-    { provider }
+    { provider, dependsOn: [certManager] }
 );
