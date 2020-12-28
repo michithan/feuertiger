@@ -22,14 +22,15 @@ const Join = dynamic(
             }
         });
         const { loading, error } = queryResult;
+        const fetchDepartments = createMaterialTableFetchFunction<
+            DepartmentsQuery,
+            DepartmentsQuery['departments']['edges'][0]['node'],
+            DepartmentsQueryVariables
+        >(queryResult, ({ data: { departments } }) => departments);
         return (
             <LoadingContainer loading={loading} error={error}>
                 <DepartmentJoinPage
-                    fetchDepartments={createMaterialTableFetchFunction<
-                        DepartmentsQuery,
-                        DepartmentsQuery['departments']['edges'][0]['node'],
-                        DepartmentsQueryVariables
-                    >(queryResult, ({ data: { departments } }) => departments)}
+                    fetchDepartments={fetchDepartments}
                     fetchDepartmentMembers={null}
                     joinDepartmentMutation={null}
                 />

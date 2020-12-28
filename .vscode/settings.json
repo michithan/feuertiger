@@ -130,6 +130,7 @@
         "dbaeumer",
         "dind",
         "dockerconfigjson",
+        "doctl",
         "drawio",
         "eamodio",
         "entrypoint",

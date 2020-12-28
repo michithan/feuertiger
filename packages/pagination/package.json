@@ -24,9 +24,9 @@
     },
     "devDependencies": {
         "@apollo/client": "3.2.7",
-        "@babel/core": "7.12.3",
-        "@babel/preset-env": "7.12.1",
-        "@babel/preset-typescript": "7.12.1",
+        "@babel/core": "7.12.10",
+        "@babel/preset-env": "7.12.11",
+        "@babel/preset-typescript": "7.12.7",
         "@feuertiger/schema-graphql": "1.0.9-dev.2478669.0",
         "@feuertiger/schema-prisma": "1.0.9-dev.76d518c.0",
         "@jest/globals": "26.6.2",

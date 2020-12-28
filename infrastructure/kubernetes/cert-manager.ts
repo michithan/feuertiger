@@ -8,7 +8,8 @@ export const certNamespace = new k8s.core.v1.Namespace(
     'cert-manager-namespace',
     {
         metadata: {
-            name: 'cert-manager'
+            name: 'cert-manager',
+            labels: { 'certmanager.k8s.io/disable-validation': 'true' }
         }
     },
     { provider, dependsOn: [provider] }
