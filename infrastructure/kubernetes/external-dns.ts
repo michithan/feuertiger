@@ -26,5 +26,5 @@ export const dns = new k8s.helm.v3.Chart(
             domainFilters: [hostname]
         }
     },
-    { provider, dependsOn: [provider, domain] }
+    { provider, dependsOn: [domain] }
 );

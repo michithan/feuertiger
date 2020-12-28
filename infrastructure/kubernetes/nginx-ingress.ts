@@ -38,7 +38,7 @@ export const ingress = new k8s.helm.v3.Chart(
             }
         }
     },
-    { provider, dependsOn: [provider] }
+    { provider }
 );
 
 export const address = ingress.getResource(

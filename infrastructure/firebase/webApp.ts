@@ -10,5 +10,5 @@ export const webApp = new gcp.firebase.WebApp(
         displayName: projectName,
         project: project.id
     },
-    { dependsOn: [project], provider }
+    { provider, dependsOn: [project] }
 );

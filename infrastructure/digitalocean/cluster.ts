@@ -15,7 +15,7 @@ export const cluster = new digitalocean.KubernetesCluster(
         nodePool: {
             name: droplet.name,
             tags: [droplet.id],
-            size: digitalocean.DropletSlugs.DropletS1VCPU2GB,
+            size: digitalocean.DropletSlugs.DropletS2VCPU2GB,
             autoScale: true,
             minNodes: 1,
             maxNodes: 2

@@ -10,5 +10,5 @@ export const droplet = new digitalocean.Tag(
     {
         name
     },
-    { provider, dependsOn: [provider] }
+    { provider }
 );

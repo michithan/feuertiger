@@ -12,7 +12,7 @@ export const certNamespace = new k8s.core.v1.Namespace(
             labels: { 'certmanager.k8s.io/disable-validation': 'true' }
         }
     },
-    { provider, dependsOn: [provider] }
+    { provider }
 );
 
 export const certToken = new k8s.core.v1.Secret(
