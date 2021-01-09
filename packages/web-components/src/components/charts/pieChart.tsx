@@ -24,7 +24,6 @@ export const PieChart = (props: PieChartProps): ReactElement => {
     return (
         <RechartsPieChart width={730} height={250}>
             <Pie
-                {...props}
                 data={data}
                 animationDuration={500}
                 paddingAngle={5}
