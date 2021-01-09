@@ -19,14 +19,14 @@
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
-        "@google-cloud/vision": "2.1.2",
-        "firebase": "8.0.2",
+        "@google-cloud/vision": "2.2.0",
+        "firebase": "8.2.2",
         "tesseract.js": "2.1.4"
     },
     "devDependencies": {
         "@types/node-fetch": "2.5.7",
         "@types/uuid": "8.3.0",
-        "typescript": "4.0.5"
+        "typescript": "4.1.3"
     },
     "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
 }
