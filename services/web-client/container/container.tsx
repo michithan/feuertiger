@@ -35,7 +35,9 @@ export const ContainerWithAuth = ({
     return (
         <ThemeProvider>
             <ApolloProvider client={apollo}>
-                <UiContainer auth={auth}>{content}</UiContainer>
+                <UiContainer auth={auth} departmentId={null}>
+                    {content}
+                </UiContainer>
             </ApolloProvider>
         </ThemeProvider>
     );

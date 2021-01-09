@@ -7,7 +7,7 @@ import { AppBar, SideBar, AuthProps } from '../../index';
 
 export interface ContainerProps extends AuthProps {
     children: ReactElement;
-    departmentId: string;
+    departmentId?: string;
 }
 
 interface State {

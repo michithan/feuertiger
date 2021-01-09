@@ -78,28 +78,28 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                                 title: '',
                                 field: 'avatar',
                                 filtering: false,
-                                render: ({ avatar }) => (
+                                render: ({ person: { avatar } }) => (
                                     <Avatar alt="Profil" src={avatar} />
                                 )
                             },
-                            { title: 'Vorname', field: 'firstname' },
-                            { title: 'Nachname', field: 'lastname' },
+                            { title: 'Vorname', field: 'person.firstname' },
+                            { title: 'Nachname', field: 'person.lastname' },
                             {
                                 title: 'Geburtsdatum',
-                                field: 'dateOfBirth',
+                                field: 'person.dateOfBirth',
                                 type: 'date'
                             },
-                            { title: 'Dienstgrad', field: 'grade' },
-                            { title: 'Straße', field: 'address.street' },
+                            { title: 'Dienstgrad', field: 'person.grade' },
+                            { title: 'Straße', field: 'person.address.street' },
                             {
                                 title: 'Hausnummer',
-                                field: 'address.streetNumber'
+                                field: 'person.address.streetNumber'
                             },
                             {
                                 title: '',
                                 field: 'edit',
                                 filtering: false,
-                                render: ({ id }) => (
+                                render: ({ person: { id } }) => (
                                     <Link
                                         href="/member/[id]"
                                         as={`/member/${id}`}

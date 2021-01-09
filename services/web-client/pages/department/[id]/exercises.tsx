@@ -24,7 +24,6 @@ const Exercises = dynamic(
             ExercisesDocument,
             {
                 variables: {
-                    id,
                     query: {
                         page: 0,
                         pageSize: 5
