@@ -13,13 +13,13 @@ import {
     ExercisesDocument
 } from '@feuertiger/schema-graphql';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 const Exercises = dynamic(
     async () => () => {
-        const {
-            query: { id }
-        } = useRouter();
+        // const {
+        //     query: { id }
+        // } = useRouter();
         const query = useQuery<ExercisesQuery, ExercisesQueryVariables>(
             ExercisesDocument,
             {

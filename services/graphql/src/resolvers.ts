@@ -7,8 +7,10 @@ import Mutation from './resolver/mutation';
 import Person from './resolver/person';
 import Dashboard from './resolver/dashboard';
 import Exercise from './resolver/exercise';
+import Viewer from './resolver/viewer';
+import { Context } from './context';
 
-const resolvers: Resolvers = {
+const resolvers: Resolvers<Context> = {
     DateTime: DateTimeResolver,
     Query,
     Node,
@@ -17,7 +19,8 @@ const resolvers: Resolvers = {
     Mutation,
     Person,
     Dashboard,
-    Exercise
+    Exercise,
+    Viewer
 };
 
 export default resolvers;

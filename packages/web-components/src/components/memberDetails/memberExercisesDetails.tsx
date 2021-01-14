@@ -11,7 +11,8 @@ import { DetailEditTable, Update, Link } from '../index';
 
 export interface MemberExercisesDetailsProps
     extends PersonExercisesParticipatedFragment,
-        PersonExercisesNotParticipatedFragment {
+        PersonExercisesNotParticipatedFragment,
+        ProviderContext {
     personId: string;
     updatePersonExercisesConnection: UpdatePersonExercisesConnectionMutationFn;
 }

@@ -23,10 +23,8 @@ export const migrate = async (): Promise<void> => {
             bin,
             [
                 'migrate',
-                'up',
-                '--auto-approve',
-                '--experimental',
-                '--create-db',
+                'deploy',
+                '--preview-feature',
                 `--schema=${schemaPath}`
             ],
             {

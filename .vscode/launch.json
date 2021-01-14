@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "attach to graphql",
+            "port": 9222,
+            "request": "attach",
+            "type": "pwa-chrome",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

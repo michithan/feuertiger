@@ -1,6 +1,6 @@
 import { MaterialTableFetchFunction } from '@feuertiger/pagination';
 import { DepartmentsQueryResult } from '@feuertiger/schema-graphql';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import React, { ReactElement } from 'react';
 import { Paper } from '..';

@@ -1,9 +1,4 @@
-import {
-    ApolloClient,
-    ApolloLink,
-    createHttpLink,
-    InMemoryCache
-} from '@apollo/client';
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import getConfig from 'next/config';
 import nextWithApollo, { WithApolloState } from 'next-with-apollo';

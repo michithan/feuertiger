@@ -25,7 +25,6 @@ model Address {
   postalCode   String
   city         String
   country      String
-  Person       Person[]
 }
 
 enum Grade {
@@ -95,6 +94,8 @@ enum DepartmentUserRole {
 model Department {
   id                String                 @id
   name              String
+  addressId         String
+  address           Address                @relation(fields: [addressId], references: [id])
   memberships       DepartmentMembership[] @relation("Department_DepartmentMembership")
   MembershipRequest MembershipRequest[]
   MembershipInvite  MembershipInvite[]

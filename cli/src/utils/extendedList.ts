@@ -34,9 +34,9 @@ export const extendedList = async (
                     .map(dependency =>
                         packages.find(pgk => pgk.name === dependency.name)
                     )
-                    .filter(dependency => dependency) as Array<
-                    ExtendedPackageInfo
-                >;
+                    .filter(
+                        dependency => dependency
+                    ) as Array<ExtendedPackageInfo>;
                 const color = colors[index];
                 const distance = new Array(longestName - name.length).join('═');
                 const prefix = chalk.hex(color)(`${name} ${distance}═▷ `);
