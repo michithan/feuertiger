@@ -16,23 +16,16 @@ export interface AddDepartmentFormData {
 
 export interface AddDepartmentProps {
     handleSubmit: (data: AddDepartmentFormData) => void;
+    initialValues: AddDepartmentFormData;
 }
 
 export const AddDepartment = ({
-    handleSubmit
+    handleSubmit,
+    initialValues
 }: AddDepartmentProps): ReactElement => {
     const { enqueueSnackbar } = useSnackbar();
     const formik = useFormik<AddDepartmentFormData>({
-        initialValues: {
-            name: '',
-            address: {
-                city: '',
-                street: '',
-                streetNumber: '',
-                postalCode: '',
-                country: ''
-            }
-        },
+        initialValues,
         onSubmit: values => {
             enqueueSnackbar('Saved!', { variant: 'success' });
             handleSubmit(values);

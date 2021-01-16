@@ -8,6 +8,16 @@ import {
 const defaultProps: AddDepartmentProps = {
     handleSubmit: data => {
         console.log('data: ', data);
+    },
+    initialValues: {
+        name: 'FF Test',
+        address: {
+            city: 'Testhausen',
+            street: 'Teststrasse',
+            streetNumber: '42',
+            postalCode: '4224',
+            country: 'Testland'
+        }
     }
 };
 
