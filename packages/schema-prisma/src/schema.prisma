@@ -97,8 +97,8 @@ model Department {
   addressId         String
   address           Address                @relation(fields: [addressId], references: [id])
   memberships       DepartmentMembership[] @relation("Department_DepartmentMembership")
-  MembershipRequest MembershipRequest[]
-  MembershipInvite  MembershipInvite[]
+  membershipRequest MembershipRequest[]
+  membershipInvite  MembershipInvite[]
 }
 
 model DepartmentMembership {

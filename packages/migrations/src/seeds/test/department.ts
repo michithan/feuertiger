@@ -1,8 +1,22 @@
-import { DepartmentCreateInput } from '@feuertiger/schema-prisma';
+import {
+    AddressCreateInput,
+    DepartmentCreateInput
+} from '@feuertiger/schema-prisma';
 
 import faker from './faker';
 
-export const createDepartment = (): DepartmentCreateInput => ({
+export interface DepartmentConnectionNeeds {
+    address: AddressCreateInput;
+}
+
+export const createDepartment = ({
+    address
+}: DepartmentConnectionNeeds): DepartmentCreateInput => ({
     id: `department:${faker.random.uuid()}`,
-    name: 'ff feuertiger'
+    name: 'ff feuertiger',
+    address: {
+        connect: {
+            id: address.id
+        }
+    }
 });

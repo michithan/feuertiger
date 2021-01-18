@@ -71,6 +71,7 @@ CREATE TABLE "Timeslot" (
 CREATE TABLE "Department" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "addressId" TEXT NOT NULL,
 
     PRIMARY KEY ("id")
 );
@@ -151,6 +152,9 @@ ALTER TABLE "Promotion" ADD FOREIGN KEY("personId")REFERENCES "Person"("id") ON 
 
 -- AddForeignKey
 ALTER TABLE "Person" ADD FOREIGN KEY("addressId")REFERENCES "Address"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Department" ADD FOREIGN KEY("addressId")REFERENCES "Address"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "DepartmentMembership" ADD FOREIGN KEY("personId")REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;

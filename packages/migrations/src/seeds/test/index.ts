@@ -55,20 +55,21 @@ export default async (client: PrismaClient): Promise<void> => {
     const PERSONS_COUNT = 118;
     const EXERCISES_COUNT = 32;
 
-    // upsert the fake department
-    const departmentFakes = await upsertSome(
-        createDepartment,
-        1,
-        client.department,
-        client
-    );
-
     // upsert some addresses
     const addressFakes = await upsertSome(
         createAddress,
         PERSONS_COUNT,
         client.address,
         client
+    );
+
+    // upsert the fake department
+    const departmentFakes = await upsertSome(
+        createDepartment,
+        1,
+        client.department,
+        client,
+        addressFakes.map(address => ({ address }))
     );
 
     // upsert some persons
