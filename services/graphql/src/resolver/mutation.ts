@@ -4,10 +4,7 @@ import {
     PersonUpdate,
     _Node
 } from '@feuertiger/schema-graphql';
-import {
-    PersonCreateInput,
-    PersonUpdateInput
-} from '@feuertiger/schema-prisma';
+import { Prisma } from '@feuertiger/schema-prisma';
 import { Context } from '../context';
 import { mapInput, parseGlobalId } from '../utils/id';
 
@@ -28,9 +25,12 @@ export const deleteNode = ({
 const Mutation: MutationResolvers = {
     delete: (_parent, { id }, context) => deleteNode({ id, context }),
     createPerson: async (_parent, args, context: Context) => {
-        const data = mapInput<PersonUpdate, PersonCreateInput>(args.person, {
-            connections: ['exercisesParticipated', 'exercisesLeaded']
-        });
+        const data = mapInput<PersonUpdate, Prisma.PersonCreateInput>(
+            args.person,
+            {
+                connections: ['exercisesParticipated', 'exercisesLeaded']
+            }
+        );
         const created = await context.db.person.create({ data });
         return created;
     },
@@ -82,7 +82,7 @@ const Mutation: MutationResolvers = {
             .filter(({ action }) => action === 'DELETE')
             .map(({ id }) => ({ id }));
 
-        const data: PersonUpdateInput = {
+        const data: Prisma.PersonUpdateInput = {
             exercisesParticipated: {}
         };
 

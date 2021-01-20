@@ -1,18 +1,14 @@
-import {
-    Grade,
-    PromotionCreateInput,
-    PersonCreateInput
-} from '@feuertiger/schema-prisma';
+import { Grade, Prisma } from '@feuertiger/schema-prisma';
 
 import faker from './faker';
 
 export interface PromotionConnectionNeeds {
-    person: PersonCreateInput;
+    person: Prisma.PersonCreateInput;
 }
 
 export const createPromotion = ({
     person
-}: PromotionConnectionNeeds): PromotionCreateInput => ({
+}: PromotionConnectionNeeds): Prisma.PromotionCreateInput => ({
     id: `promotion:${faker.random.uuid()}`,
     person: {
         connect: {

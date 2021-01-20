@@ -1,18 +1,14 @@
-import {
-    PersonCreateInput,
-    AddressCreateInput,
-    Sex
-} from '@feuertiger/schema-prisma';
+import { Prisma, Sex } from '@feuertiger/schema-prisma';
 
 import faker from './faker';
 
 export interface PersonConnectionNeeds {
-    address: AddressCreateInput;
+    address: Prisma.AddressCreateInput;
 }
 
 export const createPerson = ({
     address
-}: PersonConnectionNeeds): PersonCreateInput => ({
+}: PersonConnectionNeeds): Prisma.PersonCreateInput => ({
     id: `person:${faker.random.uuid()}`,
     firstname: faker.name.firstName(),
     lastname: faker.name.lastName(),

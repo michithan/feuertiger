@@ -198,6 +198,7 @@
         "**/.git/objects/**",
         "**/dist/**",
         ".vscode",
-        ".vscode-insiders"
+        ".vscode-insiders",
+        "yarn.lock"
     ]
 }

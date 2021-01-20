@@ -1,8 +1,8 @@
-import { AddressCreateInput } from '@feuertiger/schema-prisma';
+import { Prisma } from '@feuertiger/schema-prisma';
 
 import faker from './faker';
 
-export const createAddress = (): AddressCreateInput => ({
+export const createAddress = (): Prisma.AddressCreateInput => ({
     id: `address:${faker.random.uuid()}`,
     city: faker.address.city(),
     country: faker.address.country(),

@@ -1,20 +1,16 @@
-import {
-    PersonCreateInput,
-    DepartmentMembershipCreateInput,
-    DepartmentCreateInput
-} from '@feuertiger/schema-prisma';
+import { Prisma } from '@feuertiger/schema-prisma';
 
 import faker from './faker';
 
 export interface DepartmentMembershipConnectionNeeds {
-    person: PersonCreateInput;
-    department: DepartmentCreateInput;
+    person: Prisma.PersonCreateInput;
+    department: Prisma.DepartmentCreateInput;
 }
 
 export const createDepartmentMembership = ({
     person,
     department
-}: DepartmentMembershipConnectionNeeds): DepartmentMembershipCreateInput => ({
+}: DepartmentMembershipConnectionNeeds): Prisma.DepartmentMembershipCreateInput => ({
     id: `departmentMembership:${faker.random.uuid()}`,
     active: true,
     department: {
