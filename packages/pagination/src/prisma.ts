@@ -35,7 +35,7 @@ export const mapToPrismaQuery = (
     const {
         filters,
         page = 0,
-        pageSize = Infinity,
+        pageSize = 50,
         orderBy,
         orderDirection,
         search

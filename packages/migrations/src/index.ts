@@ -3,7 +3,7 @@ import execa from 'execa';
 import { isMainBranch } from '@feuertiger/config';
 import { PrismaClient } from '@feuertiger/schema-prisma';
 
-import { test } from './seeds';
+import { test, base } from './seeds';
 
 const getPrismaBinary = async (): Promise<string> => {
     const { stdout } = await execa('yarn', ['bin', 'prisma']);
@@ -39,12 +39,19 @@ export const migrate = async (): Promise<void> => {
 };
 
 export const seed = async (client: PrismaClient): Promise<void> => {
+    try {
+        await base(client);
+        console.log('finished seeding base data!');
+    } catch (error) {
+        console.log('error seeding test data: ', error);
+    }
+
     if (!isMainBranch) {
         try {
             await test(client);
-            console.log('finished seeding!');
+            console.log('finished seeding test data!');
         } catch (error) {
-            console.log(error);
+            console.log('error seeding test data: ', error);
         }
     }
 };

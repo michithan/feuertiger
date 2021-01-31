@@ -1,36 +1,45 @@
 import React, { ReactElement } from 'react';
-import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
+import MaterialTable from 'material-table';
+import { MaterialTableFetchFunction } from '@feuertiger/pagination';
+import { DepartmentsQueryResult } from '@feuertiger/schema-graphql';
 
-import { Link, Paper } from '..';
-
-const PointabelPaper = styled(Paper)`
-    cursor: pointer;
-    :hover {
-        background-color: grey;
-    }
-`;
+import { Paper } from '..';
 
 export interface EntrypointPageProps {
     firstname: string;
+    fetchDepartments: MaterialTableFetchFunction<
+        DepartmentsQueryResult['data']['departments']['edges'][0]['node']
+    >;
+    fetchDepartmentMembers: null;
+    joinDepartmentMutation: null;
 }
 
 export const EntrypointPage = ({
-    firstname
-}: EntrypointPageProps): ReactElement => (
-    <Grid container spacing={3}>
-        <Grid item xs={12}>
-            <Paper>{firstname ? `Hallo ${firstname}` : 'Hallo'}</Paper>
+    firstname,
+    fetchDepartments
+}: EntrypointPageProps): ReactElement => {
+    return (
+        <Grid container spacing={3}>
+            <Grid item xs={12}>
+                <Paper>{firstname ? `Hallo ${firstname}` : 'Hallo'}</Paper>
+            </Grid>
+            <Grid item xs={12}>
+                <Paper>
+                    <MaterialTable
+                        title="Welche ist deine Feuerwehr?"
+                        components={{
+                            Container: Box
+                        }}
+                        options={{
+                            search: true,
+                            sorting: true
+                        }}
+                        columns={[{ title: 'Name', field: 'name' }]}
+                        data={fetchDepartments}
+                    />
+                </Paper>
+            </Grid>
         </Grid>
-        <Grid item xs={12} sm={6}>
-            <Link href="/department/join">
-                <PointabelPaper>Einer Feuerwehr beitreten</PointabelPaper>
-            </Link>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-            <Link href="/department/register">
-                <PointabelPaper>Eine Feuerwehr registrieren</PointabelPaper>
-            </Link>
-        </Grid>
-    </Grid>
-);
+    );
+};

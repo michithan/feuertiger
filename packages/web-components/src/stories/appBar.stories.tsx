@@ -5,7 +5,14 @@ import { AppBar, AppBarProps, authPropsMock } from '../index';
 const defaultProps: AppBarProps = {
     ...authPropsMock,
     handleDrawerOpen: () => {},
-    open: true
+    open: true,
+    isSidebarDisabled: false,
+    auth: {
+        signOut: () => {},
+        signInWithEmailAndPassword: async () => {},
+        signInWithGoogle: async () => {},
+        signInWithMicrosoft: async () => {}
+    }
 };
 
 storiesOf('AppBar', module)

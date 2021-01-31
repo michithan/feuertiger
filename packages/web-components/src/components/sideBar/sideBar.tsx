@@ -57,7 +57,7 @@ const StyledDiv = styled.div`
 export interface SideBarProps {
     open: boolean;
     handleDrawerClose: () => void;
-    departmentId: string | undefined;
+    departmentId?: string | undefined;
 }
 
 interface MainListItemsProps {

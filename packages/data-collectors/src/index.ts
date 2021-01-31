@@ -6,11 +6,10 @@ const backups = {
     lfv: resolve(__dirname, '..', 'backup', 'lvf-locations.json')
 };
 
-const addBackupFallback = <T>(
-    func: () => Promise<T>,
-    path: string
-) => async (): Promise<T> => {
-    let data = await func();
+const addBackupFallback = <T>(func: () => Promise<T>, path: string) => async (
+    useBackup = false
+): Promise<T> => {
+    let data = useBackup ? null : await func();
     if (!data) {
         const raw = readFileSync(path, 'utf8');
         data = JSON.parse(raw) as T;

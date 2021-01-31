@@ -8,17 +8,17 @@ import { createDepartmentMembership } from './departmentMembership';
 import { createPromotion } from './promotions';
 import { createTimeslot } from './timeslot';
 import { createExercise } from './exercise';
-import { createDepartment } from './department';
+import { createDepartment } from '../base/department';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const upsert = (delegate: any, { id, ...data }: { id: string }) => {
+export const create = <T extends Record<string, any>>(
+    delegate: T,
+    { id, ...data }: { id: string }
+): // eslint-disable-next-line @typescript-eslint/no-explicit-any
+any => {
     try {
-        return delegate.upsert({
-            where: {
-                id
-            },
-            create: { id, ...data },
-            update: data
+        return delegate.create({
+            data: { id, ...data }
         });
     } catch (error) {
         console.log('Seeding error: ', error);
@@ -30,10 +30,11 @@ export type FakeFnWithConnectionNeeds<T, TConnectionNeeds> = (
     connectionNeeds: TConnectionNeeds
 ) => T;
 
-const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
+const createSome = async <T extends { id: string }, TConnectionNeeds>(
     fakerFn: FakeFn<T> | FakeFnWithConnectionNeeds<T, TConnectionNeeds>,
     number: number,
-    delegate: TD,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    delegate: any,
     client: PrismaClient,
     connectionNeeds?: TConnectionNeeds[]
 ) => {
@@ -43,11 +44,17 @@ const upsertSome = async <T extends { id: string }, TD, TConnectionNeeds>(
             ? (_, index) => fakerFn(connectionNeeds[index])
             : fakerFn
     );
-    const upserts = fakes.map(fake => upsert(delegate, fake));
-    const results = await client.$transaction(upserts);
-    console.log(
-        `Seeded ${results.length} ${fakes?.[0]?.id?.split(':').shift()}`
-    );
+
+    try {
+        const creates = fakes.map(fake => create(delegate, fake));
+        const results = await client.$transaction(creates);
+        console.log(
+            `Seeded ${results.length} ${fakes?.[0]?.id?.split(':').shift()}`
+        );
+    } catch (error) {
+        console.log(`Seeded 0 ${fakes?.[0]?.id?.split(':').shift()}`);
+    }
+
     return fakes;
 };
 
@@ -56,7 +63,7 @@ export default async (client: PrismaClient): Promise<void> => {
     const EXERCISES_COUNT = 32;
 
     // upsert some addresses
-    const addressFakes = await upsertSome(
+    const addressFakes = await createSome(
         createAddress,
         PERSONS_COUNT,
         client.address,
@@ -64,7 +71,7 @@ export default async (client: PrismaClient): Promise<void> => {
     );
 
     // upsert the fake department
-    const departmentFakes = await upsertSome(
+    const departmentFakes = await createSome(
         createDepartment,
         1,
         client.department,
@@ -73,7 +80,7 @@ export default async (client: PrismaClient): Promise<void> => {
     );
 
     // upsert some persons
-    const personsFakes = await upsertSome(
+    const personsFakes = await createSome(
         createPerson,
         PERSONS_COUNT,
         client.person,
@@ -82,7 +89,7 @@ export default async (client: PrismaClient): Promise<void> => {
     );
 
     // upsert some memberships
-    await upsertSome(
+    await createSome(
         createDepartmentMembership,
         PERSONS_COUNT,
         client.departmentMembership,
@@ -94,7 +101,7 @@ export default async (client: PrismaClient): Promise<void> => {
     );
 
     // upsert some promotions
-    await upsertSome(
+    await createSome(
         createPromotion,
         PERSONS_COUNT,
         client.promotion,
@@ -103,7 +110,7 @@ export default async (client: PrismaClient): Promise<void> => {
     );
 
     // upsert some timeslot
-    const timeslotFakes = await upsertSome(
+    const timeslotFakes = await createSome(
         createTimeslot,
         EXERCISES_COUNT,
         client.timeslot,
@@ -111,7 +118,7 @@ export default async (client: PrismaClient): Promise<void> => {
     );
 
     // upsert some exercises
-    await upsertSome(
+    await createSome(
         createExercise,
         EXERCISES_COUNT,
         client.exercise,
