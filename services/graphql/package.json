@@ -6,7 +6,7 @@
     "author": "Michael Thanei",
     "license": "MIT",
     "scripts": {
-        "dev": "ts-node-dev --debounce -- ./src/startup.ts",
+        "dev": "tsnd --deps --debounce --respawn ./src/startup.ts",
         "test": "jest --collect-coverage",
         "build": "tsc",
         "start": "node ./dist/startup.js --port 8080"

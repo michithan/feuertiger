@@ -129,7 +129,7 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
     && ./get_helm.sh
 
 # Install lerna
-RUN npm i -g lerna typescript ts-node @prisma/cli
+RUN npm i -g lerna typescript ts-node prisma
 
 # Install deno
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0

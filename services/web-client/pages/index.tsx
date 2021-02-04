@@ -10,8 +10,8 @@ import {
 import { EntrypointPage, LoadingContainer } from '@feuertiger/web-components';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
 
-const checkViewer = ({ data, loading }, router) => {
-    if (loading) {
+const checkViewer = ({ data }, router) => {
+    if (!data) {
         return <LoadingContainer loading>{null}</LoadingContainer>;
     }
 
@@ -37,11 +37,11 @@ const Index = dynamic(
             variables: {
                 query: {
                     page: 0,
-                    pageSize: 5
+                    pageSize: 10
                 }
-            }
+            },
+            fetchPolicy: 'standby'
         });
-        const { loading } = queryResult;
         const fetchDepartments = createMaterialTableFetchFunction<
             DepartmentsQuery,
             DepartmentsQuery['departments']['edges'][0]['node'],
@@ -49,14 +49,12 @@ const Index = dynamic(
         >(queryResult, ({ data: { departments } }) => departments);
 
         return (
-            <LoadingContainer loading={loading}>
-                <EntrypointPage
-                    firstname={viewer?.person?.firstname}
-                    fetchDepartments={fetchDepartments}
-                    fetchDepartmentMembers={null}
-                    joinDepartmentMutation={null}
-                />
-            </LoadingContainer>
+            <EntrypointPage
+                firstname={viewer?.person?.firstname}
+                fetchDepartments={fetchDepartments}
+                fetchDepartmentMembers={null}
+                joinDepartmentMutation={null}
+            />
         );
     },
     {

@@ -33,7 +33,8 @@ export const EntrypointPage = ({
                         }}
                         options={{
                             search: true,
-                            sorting: true
+                            sorting: true,
+                            pageSize: 10
                         }}
                         columns={[{ title: 'Name', field: 'name' }]}
                         data={fetchDepartments}

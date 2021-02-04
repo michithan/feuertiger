@@ -77,6 +77,11 @@
         "resolveJsonModule": true
     },
     "compileOnSave": true,
+    "watchOptions": {
+        "watchFile": "useFsEvents",
+        "watchDirectory": "useFsEvents",
+        "fallbackPolling": "dynamicPriority"
+    },
     "exclude": [
         "node_modules",
         "**/node_modules/**",
