@@ -1,6 +1,11 @@
 type Department implements Node {
     id: ID!
     name: String
+    federation: String
+    phone: String
+    email: String
+    homepage: String
+    address: Address
     memberships(query: _Query): DepartmentMembershipConnection
     exercises(query: _Query): ExerciseConnection
 }

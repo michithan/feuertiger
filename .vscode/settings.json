@@ -1,7 +1,7 @@
 {
     "window.zoomLevel": 1,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "2077",
+    "workbench.colorTheme": "Community Material Theme Darker High Contrast",
     "workbench.preferredDarkColorTheme": "Material Theme",
     "files.autoSave": "off",
     "files.associations": {

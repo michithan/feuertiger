@@ -31,6 +31,10 @@ export const createLfvDepartments = async (
                     (department): Prisma.DepartmentCreateInput => ({
                         id: `department:${faker.random.uuid()}`,
                         name: department.name ?? '',
+                        federation: department.federation,
+                        email: department.email,
+                        homepage: department.homepage,
+                        phone: department.phone,
                         address: {
                             create: {
                                 id: `address:${faker.random.uuid()}`,
@@ -39,7 +43,9 @@ export const createLfvDepartments = async (
                                 street: department.adress.street ?? '',
                                 streetNumber:
                                     department.adress.streetNumber ?? '',
-                                country: 'Deutschland'
+                                country: 'Deutschland',
+                                lat: department.cords.lat,
+                                long: department.cords.long
                             }
                         }
                     })

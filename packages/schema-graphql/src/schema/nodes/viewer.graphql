@@ -9,6 +9,7 @@ type Viewer implements Node {
     email: String!
     userRoles: [UserRole!]
     person: Person
+    openMembershipRequest: MembershipRequest
 }
 
 extend type Mutation {

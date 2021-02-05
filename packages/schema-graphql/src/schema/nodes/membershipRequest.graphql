@@ -1,11 +1,17 @@
+enum MembershipRequestState {
+    Pending
+    Approved
+    Disapproved
+}
+
 type MembershipRequest implements Node {
     id: ID!
-    user: Viewer
     department: Department
+    status: MembershipRequestState
 }
 
 input _MembershipRequest {
-    userId: ID!
+    userId: ID
     departmentId: ID!
 }
 

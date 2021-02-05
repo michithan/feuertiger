@@ -5,6 +5,8 @@ type Address implements Node {
     postalCode: String
     city: String
     country: String
+    lat: Float
+    long: Float
 }
 
 input AddressUpdate {

@@ -8,6 +8,7 @@ import Person from './resolver/person';
 import Dashboard from './resolver/dashboard';
 import Exercise from './resolver/exercise';
 import Viewer from './resolver/viewer';
+import Department from './resolver/department';
 import { Context } from './context';
 
 const resolvers: Resolvers<Context> = {
@@ -20,6 +21,7 @@ const resolvers: Resolvers<Context> = {
     Person,
     Dashboard,
     Exercise,
+    Department,
     Viewer
 };
 

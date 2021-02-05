@@ -5,6 +5,20 @@ query departments($query: _Query!) {
             node {
                 id
                 name
+                federation
+                phone
+                email
+                homepage
+                address {
+                    id
+                    street
+                    streetNumber
+                    postalCode
+                    city
+                    country
+                    lat
+                    long
+                }
             }
             cursor
         }

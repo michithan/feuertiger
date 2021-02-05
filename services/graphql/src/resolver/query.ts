@@ -48,7 +48,7 @@ const Query: QueryResolvers<Context> = {
             db.department.count,
             db.department.findMany
         );
-        const searchProperties = ['name'];
+        const searchProperties = ['name', 'federation'];
         const args = mapToPrismaQuery(query, searchProperties);
         return departmentsConnectionResolver(query, args);
     },

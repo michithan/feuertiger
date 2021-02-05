@@ -27,6 +27,8 @@ CREATE TABLE "Address" (
     "postalCode" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "country" TEXT NOT NULL,
+    "lat" DECIMAL(65,30),
+    "long" DECIMAL(65,30),
 
     PRIMARY KEY ("id")
 );
@@ -71,6 +73,10 @@ CREATE TABLE "Timeslot" (
 CREATE TABLE "Department" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "federation" TEXT,
+    "phone" TEXT,
+    "email" TEXT,
+    "homepage" TEXT,
     "addressId" TEXT NOT NULL,
 
     PRIMARY KEY ("id")
@@ -145,46 +151,46 @@ CREATE UNIQUE INDEX "_Exercise_Participant_AB_unique" ON "_Exercise_Participant"
 CREATE INDEX "_Exercise_Participant_B_index" ON "_Exercise_Participant"("B");
 
 -- AddForeignKey
-ALTER TABLE "Exercise" ADD FOREIGN KEY("timeslotId")REFERENCES "Timeslot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Exercise" ADD FOREIGN KEY ("timeslotId") REFERENCES "Timeslot"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Promotion" ADD FOREIGN KEY("personId")REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Promotion" ADD FOREIGN KEY ("personId") REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Person" ADD FOREIGN KEY("addressId")REFERENCES "Address"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Person" ADD FOREIGN KEY ("addressId") REFERENCES "Address"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Department" ADD FOREIGN KEY("addressId")REFERENCES "Address"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "Department" ADD FOREIGN KEY ("addressId") REFERENCES "Address"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "DepartmentMembership" ADD FOREIGN KEY("personId")REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "DepartmentMembership" ADD FOREIGN KEY ("personId") REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "DepartmentMembership" ADD FOREIGN KEY("userId")REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "DepartmentMembership" ADD FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "DepartmentMembership" ADD FOREIGN KEY("departmentId")REFERENCES "Department"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "DepartmentMembership" ADD FOREIGN KEY ("departmentId") REFERENCES "Department"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "User" ADD FOREIGN KEY("personId")REFERENCES "Person"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "User" ADD FOREIGN KEY ("personId") REFERENCES "Person"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MembershipRequest" ADD FOREIGN KEY("userId")REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "MembershipRequest" ADD FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MembershipRequest" ADD FOREIGN KEY("departmentId")REFERENCES "Department"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "MembershipRequest" ADD FOREIGN KEY ("departmentId") REFERENCES "Department"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "MembershipInvite" ADD FOREIGN KEY("departmentId")REFERENCES "Department"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "MembershipInvite" ADD FOREIGN KEY ("departmentId") REFERENCES "Department"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_Exercise_Leader" ADD FOREIGN KEY("A")REFERENCES "Exercise"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_Exercise_Leader" ADD FOREIGN KEY ("A") REFERENCES "Exercise"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_Exercise_Leader" ADD FOREIGN KEY("B")REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_Exercise_Leader" ADD FOREIGN KEY ("B") REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_Exercise_Participant" ADD FOREIGN KEY("A")REFERENCES "Exercise"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_Exercise_Participant" ADD FOREIGN KEY ("A") REFERENCES "Exercise"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_Exercise_Participant" ADD FOREIGN KEY("B")REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_Exercise_Participant" ADD FOREIGN KEY ("B") REFERENCES "Person"("id") ON DELETE CASCADE ON UPDATE CASCADE;

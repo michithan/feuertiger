@@ -5,10 +5,12 @@ import {
     DepartmentsQuery,
     DepartmentsQueryVariables,
     useDepartmentsQuery,
-    useEntrypointQuery
+    useEntrypointQuery,
+    CreateMembershipRequestDocument
 } from '@feuertiger/schema-graphql';
 import { EntrypointPage, LoadingContainer } from '@feuertiger/web-components';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
+import { useMutation } from '@apollo/client';
 
 const checkViewer = ({ data }, router) => {
     if (!data) {
@@ -21,6 +23,11 @@ const checkViewer = ({ data }, router) => {
 
     if (departmentId) {
         router.push(`/department/${departmentId}`);
+    }
+
+    const openMembershipRequest = viewer?.openMembershipRequest;
+    if (openMembershipRequest) {
+        return 'waiting for join';
     }
 
     return viewer;
@@ -48,12 +55,15 @@ const Index = dynamic(
             DepartmentsQueryVariables
         >(queryResult, ({ data: { departments } }) => departments);
 
+        const [createMembershipRequest] = useMutation(
+            CreateMembershipRequestDocument
+        );
+
         return (
             <EntrypointPage
                 firstname={viewer?.person?.firstname}
                 fetchDepartments={fetchDepartments}
-                fetchDepartmentMembers={null}
-                joinDepartmentMutation={null}
+                createMembershipRequest={createMembershipRequest}
             />
         );
     },

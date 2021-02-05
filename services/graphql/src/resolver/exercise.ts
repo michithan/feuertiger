@@ -2,8 +2,8 @@ import { ExerciseResolvers } from '@feuertiger/schema-graphql';
 import { Context } from '../context';
 
 const Exercise: ExerciseResolvers = {
-    timeslot: async ({ id }, args, context: Context) => {
-        const [{ timeslot }] = await context.db.exercise.findMany({
+    timeslot: async ({ id }, args, { db }: Context) => {
+        const [{ timeslot }] = await db.exercise.findMany({
             where: {
                 id
             },
