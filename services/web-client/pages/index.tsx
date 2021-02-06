@@ -12,59 +12,52 @@ import { EntrypointPage, LoadingContainer } from '@feuertiger/web-components';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
 import { useMutation } from '@apollo/client';
 
-const checkViewer = ({ data }, router) => {
-    if (!data) {
-        return <LoadingContainer loading>{null}</LoadingContainer>;
-    }
-
-    const viewer = data?.viewer;
-    const departmentId =
-        viewer?.person?.mainDepartmentMembership?.department?.id;
-
-    if (departmentId) {
-        router.push(`/department/${departmentId}`);
-    }
-
-    const openMembershipRequest = viewer?.openMembershipRequest;
-    if (openMembershipRequest) {
-        return 'waiting for join';
-    }
-
-    return viewer;
-};
-
 const Index = dynamic(
     async () => () => {
-        const entrypointQueryResult = useEntrypointQuery();
+        const {
+            loading,
+            data: { viewer: { openMembershipRequest, person } = {} } = {}
+        } = useEntrypointQuery();
         const router = useRouter();
 
-        const viewer = checkViewer(entrypointQueryResult, router);
+        const departmentId = person?.mainDepartmentMembership?.department?.id;
+        const membershipRequestId = openMembershipRequest?.id;
 
-        const queryResult = useDepartmentsQuery({
-            variables: {
-                query: {
-                    page: 0,
-                    pageSize: 10
-                }
-            },
-            fetchPolicy: 'standby'
-        });
-        const fetchDepartments = createMaterialTableFetchFunction<
-            DepartmentsQuery,
-            DepartmentsQuery['departments']['edges'][0]['node'],
-            DepartmentsQueryVariables
-        >(queryResult, ({ data: { departments } }) => departments);
-
-        const [createMembershipRequest] = useMutation(
-            CreateMembershipRequestDocument
-        );
+        if (departmentId) {
+            router.push(`/department/${departmentId}`);
+        } else if (membershipRequestId) {
+            router.push(`/membership-request/${membershipRequestId}`);
+        } else if (!loading) {
+            const queryResult = useDepartmentsQuery({
+                variables: {
+                    query: {
+                        page: 0,
+                        pageSize: 10
+                    }
+                },
+                fetchPolicy: 'standby'
+            });
+            const fetchDepartments = createMaterialTableFetchFunction<
+                DepartmentsQuery,
+                DepartmentsQuery['departments']['edges'][0]['node'],
+                DepartmentsQueryVariables
+            >(queryResult, ({ data: { departments } }) => departments);
+            const [createMembershipRequest] = useMutation(
+                CreateMembershipRequestDocument
+            );
+            return (
+                <EntrypointPage
+                    firstname={person?.firstname}
+                    fetchDepartments={fetchDepartments}
+                    createMembershipRequest={createMembershipRequest}
+                />
+            );
+        }
 
         return (
-            <EntrypointPage
-                firstname={viewer?.person?.firstname}
-                fetchDepartments={fetchDepartments}
-                createMembershipRequest={createMembershipRequest}
-            />
+            <LoadingContainer loading={loading}>
+                <></>
+            </LoadingContainer>
         );
     },
     {

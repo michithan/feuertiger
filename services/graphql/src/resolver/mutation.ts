@@ -2,10 +2,9 @@ import {
     MutationResolvers,
     Person,
     PersonUpdate,
-    _MembershipRequest,
     _Node
 } from '@feuertiger/schema-graphql';
-import { Prisma } from '@feuertiger/schema-prisma';
+import { MembershipRequestStatus, Prisma } from '@feuertiger/schema-prisma';
 import { Context } from '../context';
 import { createGlobalId, mapInput, parseGlobalId } from '../utils/id';
 
@@ -123,7 +122,8 @@ const Mutation: MutationResolvers = {
                     connect: {
                         id: membershipRequest?.departmentId
                     }
-                }
+                },
+                status: MembershipRequestStatus.PENDING
             }
         });
         return created;

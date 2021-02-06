@@ -80,6 +80,18 @@ const Query: QueryResolvers<Context> = {
         return exercisesConnectionResolver(query, args);
     },
     dashboard: async () => ({}),
+    membershipRequest: async (
+        _parent,
+        { id },
+        { db, viewer: { id: userId } }: Context
+    ) => {
+        const membershipRequest = await db.membershipRequest.findFirst({
+            where: {
+                AND: [{ id }, { userId }]
+            }
+        });
+        return membershipRequest;
+    },
     viewer: (_parent, _, { viewer }) => viewer
 };
 

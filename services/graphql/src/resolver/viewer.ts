@@ -1,4 +1,6 @@
+import { MembershipRequestStatus } from '@feuertiger/schema-prisma';
 import { ViewerResolvers } from '@feuertiger/schema-graphql';
+import { Context } from '../context';
 
 const Viewer: ViewerResolvers = {
     userRoles: async ({ id }, _, { db }) => {
@@ -18,6 +20,17 @@ const Viewer: ViewerResolvers = {
             }
         });
         return person;
+    },
+    openMembershipRequest: async ({ id }, _, { db }: Context) => {
+        const membershipRequest = await db.membershipRequest.findFirst({
+            where: {
+                AND: [
+                    { userId: id },
+                    { status: MembershipRequestStatus.PENDING }
+                ]
+            }
+        });
+        return membershipRequest;
     }
 };
 

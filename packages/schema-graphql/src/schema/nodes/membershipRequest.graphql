@@ -1,18 +1,22 @@
-enum MembershipRequestState {
-    Pending
-    Approved
-    Disapproved
+enum MembershipRequestStatus {
+    PENDING
+    APPROVED
+    DISAPPROVED
 }
 
 type MembershipRequest implements Node {
     id: ID!
     department: Department
-    status: MembershipRequestState
+    status: MembershipRequestStatus
 }
 
 input _MembershipRequest {
     userId: ID
     departmentId: ID!
+}
+
+extend type Query {
+    membershipRequest(id: ID!): MembershipRequest
 }
 
 extend type Mutation {

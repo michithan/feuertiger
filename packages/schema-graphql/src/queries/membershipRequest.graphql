@@ -1,0 +1,10 @@
+query membershipRequest($id: ID!) {
+    membershipRequest(id: $id) {
+        id
+        department {
+            id
+            name
+        }
+        status
+    }
+}

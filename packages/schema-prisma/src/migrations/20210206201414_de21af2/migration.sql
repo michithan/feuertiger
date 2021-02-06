@@ -10,6 +10,9 @@ CREATE TYPE "UserRole" AS ENUM ('USER', 'ADMIN');
 -- CreateEnum
 CREATE TYPE "DepartmentUserRole" AS ENUM ('GUEST', 'ADMIN');
 
+-- CreateEnum
+CREATE TYPE "MembershipRequestStatus" AS ENUM ('PENDING', 'APPROVED', 'DISAPPROVED');
+
 -- CreateTable
 CREATE TABLE "Exercise" (
     "id" TEXT NOT NULL,
@@ -113,6 +116,7 @@ CREATE TABLE "MembershipRequest" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "departmentId" TEXT NOT NULL,
+    "status" "MembershipRequestStatus" NOT NULL,
 
     PRIMARY KEY ("id")
 );

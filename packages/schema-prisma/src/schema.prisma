@@ -19,7 +19,7 @@ model Exercise {
 }
 
 model Address {
-  id           String   @id
+  id           String       @id
   street       String
   streetNumber String
   postalCode   String
@@ -27,6 +27,8 @@ model Address {
   country      String
   lat          Float?
   long         Float?
+  Person       Person[]
+  Department   Department[]
 }
 
 enum Grade {
@@ -133,12 +135,19 @@ model User {
   MembershipRequest     MembershipRequest[]
 }
 
+enum MembershipRequestStatus {
+  PENDING
+  APPROVED
+  DISAPPROVED
+}
+
 model MembershipRequest {
-  id           String     @id
+  id           String                  @id
   userId       String
-  user         User       @relation(fields: [userId], references: [id])
+  user         User                    @relation(fields: [userId], references: [id])
   departmentId String
-  department   Department @relation(fields: [departmentId], references: [id])
+  department   Department              @relation(fields: [departmentId], references: [id])
+  status       MembershipRequestStatus
 }
 
 model MembershipInvite {
