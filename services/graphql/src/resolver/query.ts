@@ -11,7 +11,6 @@ import {
 } from '@feuertiger/pagination';
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
-import { getOrCreateViewer } from '../authentication';
 
 interface NodeResolver {
     findOne: (query: { where: { id: string } }) => Promise<Node>;
@@ -81,7 +80,7 @@ const Query: QueryResolvers<Context> = {
         return exercisesConnectionResolver(query, args);
     },
     dashboard: async () => ({}),
-    viewer: (_parent, _, { db, user }) => getOrCreateViewer({ db, user })
+    viewer: (_parent, _, { viewer }) => viewer
 };
 
 export default Query;

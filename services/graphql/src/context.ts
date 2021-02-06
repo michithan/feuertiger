@@ -1,9 +1,10 @@
 import { AuthenticationError } from 'apollo-server';
 import { ExpressContext } from 'apollo-server-express/dist/ApolloServer';
 import { PrismaClient } from '@feuertiger/schema-prisma';
+import type { Viewer } from '@feuertiger/schema-graphql';
 import type firebase from 'firebase-admin';
 
-import { tryGetUserInfo, UserAuthInfo } from './authentication';
+import { tryGetUserInfo } from './authentication';
 
 export interface ContextInitialization {
     prisma: PrismaClient;
@@ -12,7 +13,7 @@ export interface ContextInitialization {
 
 export interface Context {
     db: PrismaClient;
-    user: UserAuthInfo;
+    viewer: Viewer;
 }
 
 export default ({ prisma, authProvider }: ContextInitialization) => async ({
@@ -20,10 +21,10 @@ export default ({ prisma, authProvider }: ContextInitialization) => async ({
 }: ExpressContext): Promise<Context | void> => {
     const token = req.headers.authorization || '';
     try {
-        const user = await tryGetUserInfo(token, authProvider);
+        const user = await tryGetUserInfo(token, authProvider, prisma);
         const context: Context = {
             db: prisma,
-            user
+            viewer: user
         };
         return context;
     } catch (error) {

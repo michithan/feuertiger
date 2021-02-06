@@ -2,11 +2,12 @@ import {
     MutationResolvers,
     Person,
     PersonUpdate,
+    _MembershipRequest,
     _Node
 } from '@feuertiger/schema-graphql';
 import { Prisma } from '@feuertiger/schema-prisma';
 import { Context } from '../context';
-import { mapInput, parseGlobalId } from '../utils/id';
+import { createGlobalId, mapInput, parseGlobalId } from '../utils/id';
 
 export const deleteNode = ({
     id,
@@ -25,13 +26,15 @@ export const deleteNode = ({
 const Mutation: MutationResolvers = {
     delete: (_parent, { id }, context) => deleteNode({ id, context }),
     createPerson: async (_parent, args, context: Context) => {
-        const data = mapInput<PersonUpdate, Prisma.PersonCreateInput>(
-            args.person,
-            {
-                connections: ['exercisesParticipated', 'exercisesLeaded']
-            }
-        );
-        const created = await context.db.person.create({ data });
+        const { id, ...data } = mapInput<
+            PersonUpdate,
+            Prisma.PersonCreateInput
+        >(args.person, {
+            connections: ['exercisesParticipated', 'exercisesLeaded']
+        });
+        const created = await context.db.person.create({
+            data: { id: id ?? createGlobalId('person'), ...data }
+        });
         return created;
     },
     updatePerson: async (_parent, { person }, context: Context) => {
@@ -102,6 +105,28 @@ const Mutation: MutationResolvers = {
         });
 
         return personUpdate;
+    },
+    createMembershipRequest: async (
+        _parent,
+        { membershipRequest },
+        { db, viewer }: Context
+    ) => {
+        const created = await db.membershipRequest.create({
+            data: {
+                id: createGlobalId('membershipRequest'),
+                user: {
+                    connect: {
+                        id: membershipRequest?.userId ?? viewer.id
+                    }
+                },
+                department: {
+                    connect: {
+                        id: membershipRequest?.departmentId
+                    }
+                }
+            }
+        });
+        return created;
     }
 };
 
