@@ -6,12 +6,17 @@ import {
     IconButton,
     Typography,
     Menu,
-    MenuItem
+    MenuItem,
+    ListItemIcon,
+    ListItemText,
+    Divider
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 
-import { AuthProps } from '../../index';
+import { AuthProps, Link } from '../../index';
 
 const drawerWidth = 240;
 
@@ -53,6 +58,16 @@ const StyledTypography = styled(Typography)`
     justify-content: center;
 `;
 
+const StyledMenuItem = styled(MenuItem)`
+    &:focus {
+        background-color: ${({ theme }) => theme.palette.primary.main};
+        & .MuiListItemIcon-root,
+        & .MuiListItemText-primary {
+            color: ${({ theme }) => theme.palette.common.white};
+        }
+    }
+`;
+
 export interface AppBarProps extends AuthProps {
     open: boolean;
     isSidebarDisabled: boolean;
@@ -91,13 +106,15 @@ export const AppBar = ({
                     {!isSidebarDisabled && <MenuIcon />}
                 </StyledIconButton>
                 <StyledTypography variant="h6" color="inherit" noWrap>
-                    <span role="img" aria-label="Feuer">
-                        🔥
-                    </span>
-                    <span>Feuertiger</span>
-                    <span role="img" aria-label="Tiger">
-                        🐯
-                    </span>
+                    <Link href="/" inherit>
+                        <span role="img" aria-label="Feuer">
+                            🔥
+                        </span>
+                        <span>Feuertiger</span>
+                        <span role="img" aria-label="Tiger">
+                            🐯
+                        </span>
+                    </Link>
                 </StyledTypography>
                 <IconButton
                     color="inherit"
@@ -107,13 +124,27 @@ export const AppBar = ({
                     <AccountCircleIcon />
                 </IconButton>
                 <Menu
-                    id="simple-menu"
+                    id="profile-menu"
                     anchorEl={anchorEl}
                     keepMounted
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
-                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                    <StyledMenuItem onClick={handleLogout}>
+                        <ListItemIcon>
+                            <ExitToAppIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText primary="Logout" />
+                    </StyledMenuItem>
+                    <Divider />
+                    <Link href="/admin" inherit>
+                        <StyledMenuItem onClick={handleClose}>
+                            <ListItemIcon>
+                                <SupervisorAccountIcon fontSize="small" />
+                            </ListItemIcon>
+                            <ListItemText primary="Admin" />
+                        </StyledMenuItem>
+                    </Link>
                 </Menu>
             </StyledToolbar>
         </StyledAppBar>
