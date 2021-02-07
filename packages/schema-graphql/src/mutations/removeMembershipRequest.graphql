@@ -1,0 +1,3 @@
+mutation removeMembershipRequest($membershipRequestId: ID!) {
+    removeMembershipRequest(membershipRequestId: $membershipRequestId)
+}

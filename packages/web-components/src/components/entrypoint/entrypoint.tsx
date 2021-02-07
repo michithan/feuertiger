@@ -3,10 +3,7 @@ import { Grid, Box, Button, Typography } from '@material-ui/core';
 import MaterialTable from 'material-table';
 import { useSnackbar } from 'notistack';
 import { MaterialTableFetchFunction } from '@feuertiger/pagination';
-import {
-    DepartmentsQueryResult,
-    CreateMembershipRequestMutationFn
-} from '@feuertiger/schema-graphql';
+import { DepartmentsQueryResult } from '@feuertiger/schema-graphql';
 
 import { Link, Paper } from '..';
 
@@ -15,28 +12,19 @@ type Department = DepartmentsQueryResult['data']['departments']['edges'][0]['nod
 export interface EntrypointPageProps {
     firstname: string;
     fetchDepartments: MaterialTableFetchFunction<Department>;
-    createMembershipRequest: CreateMembershipRequestMutationFn;
+    requestMembership: (departmentId: string) => Promise<boolean>;
 }
 
 export const EntrypointPage = ({
     firstname,
     fetchDepartments,
-    createMembershipRequest
+    requestMembership
 }: EntrypointPageProps): ReactElement => {
     const { enqueueSnackbar } = useSnackbar();
     const SubmitJoinDepartmentRequest = async ({
         id
     }: Department): Promise<void> => {
-        const {
-            data: { createMembershipRequest: success }
-        } = await createMembershipRequest({
-            variables: {
-                membershipRequest: {
-                    departmentId: id
-                }
-            }
-        });
-        console.log(success);
+        const success = await requestMembership(id);
         enqueueSnackbar(
             success
                 ? 'Beitritt beantragt'
@@ -103,6 +91,7 @@ export const EntrypointPage = ({
                                 render: department => (
                                     <Button
                                         color="primary"
+                                        variant="contained"
                                         onClick={() =>
                                             SubmitJoinDepartmentRequest(
                                                 department

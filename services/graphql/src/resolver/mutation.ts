@@ -127,6 +127,18 @@ const Mutation: MutationResolvers = {
             }
         });
         return created;
+    },
+    removeMembershipRequest: async (
+        _parent,
+        { membershipRequestId },
+        { db }: Context
+    ) => {
+        const removed = await db.membershipRequest.delete({
+            where: {
+                id: membershipRequestId
+            }
+        });
+        return Boolean(removed);
     }
 };
 

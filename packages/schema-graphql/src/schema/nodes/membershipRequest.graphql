@@ -23,4 +23,5 @@ extend type Mutation {
     createMembershipRequest(
         membershipRequest: _MembershipRequest
     ): MembershipRequest
+    removeMembershipRequest(membershipRequestId: ID!): Boolean
 }

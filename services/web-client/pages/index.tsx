@@ -6,57 +6,81 @@ import {
     DepartmentsQueryVariables,
     useDepartmentsQuery,
     useEntrypointQuery,
-    CreateMembershipRequestDocument
+    useCreateMembershipRequestMutation
 } from '@feuertiger/schema-graphql';
 import { EntrypointPage, LoadingContainer } from '@feuertiger/web-components';
 import { createMaterialTableFetchFunction } from '@feuertiger/pagination';
-import { useMutation } from '@apollo/client';
 
 const Index = dynamic(
     async () => () => {
         const {
             loading,
             data: { viewer: { openMembershipRequest, person } = {} } = {}
-        } = useEntrypointQuery();
-        const router = useRouter();
+        } = useEntrypointQuery({
+            fetchPolicy: 'network-only'
+        });
+        const { push } = useRouter();
 
         const departmentId = person?.mainDepartmentMembership?.department?.id;
         const membershipRequestId = openMembershipRequest?.id;
 
         if (departmentId) {
-            router.push(`/department/${departmentId}`);
+            push(`/department/${departmentId}`);
         } else if (membershipRequestId) {
-            router.push(`/membership-request/${membershipRequestId}`);
-        } else if (!loading) {
-            const queryResult = useDepartmentsQuery({
+            push(`/membership-request/${membershipRequestId}`);
+        }
+
+        const queryResult = useDepartmentsQuery({
+            variables: {
+                query: {
+                    page: 0,
+                    pageSize: 10
+                }
+            },
+            fetchPolicy: 'standby'
+        });
+        const fetchDepartments = createMaterialTableFetchFunction<
+            DepartmentsQuery,
+            DepartmentsQuery['departments']['edges'][0]['node'],
+            DepartmentsQueryVariables
+        >(queryResult, ({ data: { departments } }) => departments);
+
+        const [createMembershipRequest] = useCreateMembershipRequestMutation();
+        const requestMembership = async (selectedDepartmentId: string) => {
+            const {
+                data: {
+                    createMembershipRequest: { id }
+                }
+            } = await createMembershipRequest({
                 variables: {
-                    query: {
-                        page: 0,
-                        pageSize: 10
+                    membershipRequest: {
+                        departmentId: selectedDepartmentId
                     }
-                },
-                fetchPolicy: 'standby'
+                }
             });
-            const fetchDepartments = createMaterialTableFetchFunction<
-                DepartmentsQuery,
-                DepartmentsQuery['departments']['edges'][0]['node'],
-                DepartmentsQueryVariables
-            >(queryResult, ({ data: { departments } }) => departments);
-            const [createMembershipRequest] = useMutation(
-                CreateMembershipRequestDocument
-            );
-            return (
+
+            const success = Boolean(id);
+
+            if (success) {
+                setTimeout(() => push(`/membership-request/${id}`), 1000);
+            }
+
+            return success;
+        };
+
+        return (
+            <LoadingContainer
+                loading={
+                    loading ||
+                    Boolean(departmentId) ||
+                    Boolean(membershipRequestId)
+                }
+            >
                 <EntrypointPage
                     firstname={person?.firstname}
                     fetchDepartments={fetchDepartments}
-                    createMembershipRequest={createMembershipRequest}
+                    requestMembership={requestMembership}
                 />
-            );
-        }
-
-        return (
-            <LoadingContainer loading={loading}>
-                <></>
             </LoadingContainer>
         );
     },
