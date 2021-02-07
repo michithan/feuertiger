@@ -139,7 +139,8 @@ const Mutation: MutationResolvers = {
             }
         });
         return Boolean(removed);
-    }
+    },
+    admin: () => ({})
 };
 
 export default Mutation;

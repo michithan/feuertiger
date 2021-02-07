@@ -10,12 +10,16 @@ import Exercise from './resolver/exercise';
 import Viewer from './resolver/viewer';
 import Department from './resolver/department';
 import MembershipRequest from './resolver/membershipRequest';
+import Admin from './resolver/admin';
+import AdminMutation from './resolver/adminMutation';
 import { Context } from './context';
 
 const resolvers: Resolvers<Context> = {
     DateTime: DateTimeResolver,
     Query,
     Node,
+    Admin,
+    AdminMutation,
     Connection,
     Edge,
     Mutation,

@@ -1,0 +1,15 @@
+type Admin {
+    unresolvableMembershipRequests: [MembershipRequest!]
+}
+
+extend type Query {
+    admin: Admin
+}
+
+type AdminMutation {
+    resolveMembershipRequest(membershipRequestId: ID!): Boolean
+}
+
+extend type Mutation {
+    admin: AdminMutation
+}

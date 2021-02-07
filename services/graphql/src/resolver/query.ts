@@ -87,7 +87,8 @@ const Query: QueryResolvers<Context> = {
         });
         return membershipRequest;
     },
-    viewer: (_parent, _, { viewer }) => viewer
+    viewer: (_parent, _, { viewer }) => viewer,
+    admin: () => ({})
 };
 
 export default Query;
