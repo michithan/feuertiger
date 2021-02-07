@@ -49,7 +49,7 @@
     "typescript.updateImportsOnFileMove.enabled": "always",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "files.eol": "\n",
-    "diffEditor.renderSideBySide": false,
+    "diffEditor.renderSideBySide": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "vs-kubernetes": {
         "vs-kubernetes.minikube-path.linux": "/root/.vs-kubernetes/tools/minikube/linux-amd64/minikube",

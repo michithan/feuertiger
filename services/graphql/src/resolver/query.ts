@@ -12,23 +12,18 @@ import {
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
 
-interface NodeResolver {
-    findOne: (query: { where: { id: string } }) => Promise<Node>;
-}
+type NodeResolver = (query: { where: { id: string } }) => Promise<Node>;
 
 export const getNode = async ({
     id,
-    context
+    context: { db }
 }: {
     id: string;
     context: Context;
 }): Promise<Node> => {
     const { type } = parseGlobalId(id);
-    const resolver = ((context?.db as unknown) as Record<
-        string,
-        NodeResolver
-    >)?.[type];
-    const node = await resolver.findOne({
+    const resolve = (db[type].findFirst as unknown) as NodeResolver;
+    const node = await resolve({
         where: {
             id
         }

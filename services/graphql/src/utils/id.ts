@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { PrismaClient } from '@feuertiger/schema-prisma';
 import { _Node } from '@feuertiger/schema-graphql';
 
-const notDelegates = [
+const notDelegateKeys = [
     '$use',
     '$executeRaw',
     '$queryRaw',
@@ -11,18 +11,20 @@ const notDelegates = [
     '$connect',
     '$disconnect'
 ] as const;
-type NotDelegat = typeof notDelegates;
+type NotDelegatKeys = typeof notDelegateKeys;
 
-const delegates = Object.getOwnPropertyNames(PrismaClient).filter(
-    name => !notDelegates.includes(name as typeof notDelegates[number])
-) as Array<Exclude<keyof PrismaClient, NotDelegat[number]>>;
+const delegateKeys = Object.getOwnPropertyNames(PrismaClient).filter(
+    name => !notDelegateKeys.includes(name as typeof notDelegateKeys[number])
+) as Array<Exclude<keyof PrismaClient, NotDelegatKeys[number]>>;
 
-type Delegate = Exclude<keyof PrismaClient, NotDelegat[number]>;
+type DelegateKey = Exclude<keyof PrismaClient, NotDelegatKeys[number]>;
 
-export type GlobalId = `${Delegate}:${string}`;
+export type Delegate = PrismaClient[DelegateKey];
 
-export const isDelegateType = (type: string): type is Delegate =>
-    Boolean(type && delegates.includes(type as Delegate));
+export type GlobalId = `${DelegateKey}:${string}`;
+
+export const isDelegateType = (type: string): type is DelegateKey =>
+    Boolean(type && delegateKeys.includes(type as DelegateKey));
 
 export const isGlobalId = (id: string): id is GlobalId => {
     const [type] = id?.split(':') ?? [];
@@ -31,7 +33,7 @@ export const isGlobalId = (id: string): id is GlobalId => {
 
 export const parseGlobalId = (
     globalId: GlobalId | string
-): { id: string; type: Delegate } => {
+): { id: string; type: DelegateKey } => {
     const [type, id] = globalId.split(':');
 
     if (isDelegateType(type)) {
@@ -44,10 +46,10 @@ export const parseGlobalId = (
     throw new Error('no valid global id');
 };
 
-export const buildGlobalId = (id: string, type: Delegate): GlobalId =>
+export const buildGlobalId = (id: string, type: DelegateKey): GlobalId =>
     `${type}:${id}` as GlobalId;
 
-export const createGlobalId = (type: Delegate): GlobalId =>
+export const createGlobalId = (type: DelegateKey): GlobalId =>
     buildGlobalId(uuidv4(), type);
 
 export const connectInput = (connections: _Node[]): Connection[] =>
