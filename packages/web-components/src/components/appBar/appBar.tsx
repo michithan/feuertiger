@@ -1,13 +1,15 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, useState } from 'react';
 import styled from 'styled-components';
 import {
     AppBar as MuiAppBar,
     Toolbar,
     IconButton,
-    Typography
+    Typography,
+    Menu,
+    MenuItem
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import { AuthProps } from '../../index';
 
@@ -57,45 +59,63 @@ export interface AppBarProps extends AuthProps {
     handleDrawerOpen: () => void;
 }
 
-export class AppBar extends React.Component<AppBarProps> {
-    handleLogout = (): void => {
-        const { auth } = this.props;
-        auth.signOut();
+export const AppBar = ({
+    auth,
+    open,
+    isSidebarDisabled,
+    handleDrawerOpen
+}: AppBarProps): ReactElement => {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
     };
 
-    render(): ReactNode {
-        const { open, isSidebarDisabled, handleDrawerOpen } = this.props;
-        return (
-            <StyledAppBar open={open}>
-                <StyledToolbar>
-                    <StyledIconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        disabled={isSidebarDisabled}
-                        onClick={handleDrawerOpen}
-                        open={!isSidebarDisabled && open}
-                    >
-                        {!isSidebarDisabled && <MenuIcon />}
-                    </StyledIconButton>
-                    <StyledTypography variant="h6" color="inherit" noWrap>
-                        <span role="img" aria-label="Feuer">
-                            🔥
-                        </span>
-                        <span>Feuertiger</span>
-                        <span role="img" aria-label="Tiger">
-                            🐯
-                        </span>
-                    </StyledTypography>
-                    <IconButton
-                        color="inherit"
-                        onClick={this.handleLogout}
-                        id="app-bar-exit-button"
-                    >
-                        <ExitToAppIcon />
-                    </IconButton>
-                </StyledToolbar>
-            </StyledAppBar>
-        );
-    }
-}
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const handleLogout = (): void => auth.signOut();
+
+    return (
+        <StyledAppBar open={open}>
+            <StyledToolbar>
+                <StyledIconButton
+                    edge="start"
+                    color="inherit"
+                    aria-label="open drawer"
+                    disabled={isSidebarDisabled}
+                    onClick={handleDrawerOpen}
+                    open={!isSidebarDisabled && open}
+                >
+                    {!isSidebarDisabled && <MenuIcon />}
+                </StyledIconButton>
+                <StyledTypography variant="h6" color="inherit" noWrap>
+                    <span role="img" aria-label="Feuer">
+                        🔥
+                    </span>
+                    <span>Feuertiger</span>
+                    <span role="img" aria-label="Tiger">
+                        🐯
+                    </span>
+                </StyledTypography>
+                <IconButton
+                    color="inherit"
+                    onClick={handleClick}
+                    id="app-bar-exit-button"
+                >
+                    <AccountCircleIcon />
+                </IconButton>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                >
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                </Menu>
+            </StyledToolbar>
+        </StyledAppBar>
+    );
+};
