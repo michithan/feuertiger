@@ -1,32 +1,68 @@
 import { v4 as uuidv4 } from 'uuid';
+import { PrismaClient } from '@feuertiger/schema-prisma';
 import { _Node } from '@feuertiger/schema-graphql';
 
-export const parseGlobalId = (
-    globalId: string
-): { id: string; type: string } => {
-    const [type, id] = globalId.split(':');
-    return {
-        id,
-        type
-    };
+const notDelegates = [
+    '$use',
+    '$executeRaw',
+    '$queryRaw',
+    '$transaction',
+    '$on',
+    '$connect',
+    '$disconnect'
+] as const;
+type NotDelegat = typeof notDelegates;
+
+const delegates = Object.getOwnPropertyNames(PrismaClient).filter(
+    name => !notDelegates.includes(name as typeof notDelegates[number])
+) as Array<Exclude<keyof PrismaClient, NotDelegat[number]>>;
+
+type Delegate = Exclude<keyof PrismaClient, NotDelegat[number]>;
+
+export type GlobalId = `${Delegate}:${string}`;
+
+export const isDelegateType = (type: string): type is Delegate =>
+    Boolean(type && delegates.includes(type as Delegate));
+
+export const isGlobalId = (id: string): id is GlobalId => {
+    const [type] = id?.split(':') ?? [];
+    return isDelegateType(type);
 };
 
-export const buildGlobalId = (id: string, type: string): string =>
-    `${type}:${id}`;
+export const parseGlobalId = (
+    globalId: GlobalId | string
+): { id: string; type: Delegate } => {
+    const [type, id] = globalId.split(':');
 
-export const createGlobalId = (type: string): string =>
+    if (isDelegateType(type)) {
+        return {
+            id,
+            type
+        };
+    }
+
+    throw new Error('no valid global id');
+};
+
+export const buildGlobalId = (id: string, type: Delegate): GlobalId =>
+    `${type}:${id}` as GlobalId;
+
+export const createGlobalId = (type: Delegate): GlobalId =>
     buildGlobalId(uuidv4(), type);
 
 export const connectInput = (connections: _Node[]): Connection[] =>
     connections
-        ?.map(
-            connection =>
-                connection && {
+        ?.map(({ id }) => id)
+        .map(id => {
+            if (isGlobalId(id)) {
+                return {
                     upsert: {
-                        id: connection.id
+                        id
                     }
-                }
-        )
+                };
+            }
+            throw new Error('no valid global id');
+        })
         .filter(connection => connection);
 
 type Options = {
@@ -35,7 +71,7 @@ type Options = {
 
 type Connection = {
     upsert: {
-        id: string;
+        id: GlobalId;
     };
 };
 
