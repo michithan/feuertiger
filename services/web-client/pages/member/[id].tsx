@@ -13,7 +13,7 @@ import {
     UpdatePersonExercisesConnectionDocument
 } from '@feuertiger/schema-graphql';
 
-const Member = dynamic(
+const MemberPage = dynamic(
     async () => () => {
         const {
             query: { id }
@@ -50,4 +50,4 @@ const Member = dynamic(
     }
 );
 
-export default Member;
+export default MemberPage;
