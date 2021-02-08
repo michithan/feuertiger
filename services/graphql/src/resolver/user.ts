@@ -1,8 +1,8 @@
 import { MembershipRequestStatus } from '@feuertiger/schema-prisma';
-import { ViewerResolvers } from '@feuertiger/schema-graphql';
+import { UserResolvers } from '@feuertiger/schema-graphql';
 import { Context } from '../context';
 
-const Viewer: ViewerResolvers = {
+const User: UserResolvers = {
     userRoles: async ({ id }, _, { db }) => {
         const { userRoles } = await db.user.findFirst({
             where: { id },
@@ -34,4 +34,4 @@ const Viewer: ViewerResolvers = {
     }
 };
 
-export default Viewer;
+export default User;

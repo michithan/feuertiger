@@ -108,14 +108,14 @@ const Mutation: MutationResolvers = {
     createMembershipRequest: async (
         _parent,
         { membershipRequest },
-        { db, viewer }: Context
+        { db, user }: Context
     ) => {
         const created = await db.membershipRequest.create({
             data: {
                 id: createGlobalId('membershipRequest'),
                 user: {
                     connect: {
-                        id: membershipRequest?.userId ?? viewer.id
+                        id: membershipRequest?.userId ?? user.id
                     }
                 },
                 department: {

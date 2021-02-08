@@ -1,0 +1,5 @@
+mutation resolveMembershipRequest($membershipRequestId: ID!) {
+    admin {
+        resolveMembershipRequest(membershipRequestId: $membershipRequestId)
+    }
+}

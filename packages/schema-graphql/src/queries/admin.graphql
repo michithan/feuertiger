@@ -1,0 +1,22 @@
+query admin {
+    admin {
+        unresolvableMembershipRequests {
+            id
+            status
+            department {
+                id
+                name
+            }
+            user {
+                id
+                uid
+                email
+                userRoles
+                person {
+                    firstname
+                    lastname
+                }
+            }
+        }
+    }
+}

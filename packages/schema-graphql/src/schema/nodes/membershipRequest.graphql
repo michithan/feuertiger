@@ -8,6 +8,7 @@ type MembershipRequest implements Node {
     id: ID!
     department: Department
     status: MembershipRequestStatus
+    user: User
 }
 
 input _MembershipRequest {

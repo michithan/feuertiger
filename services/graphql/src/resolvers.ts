@@ -7,7 +7,7 @@ import Mutation from './resolver/mutation';
 import Person from './resolver/person';
 import Dashboard from './resolver/dashboard';
 import Exercise from './resolver/exercise';
-import Viewer from './resolver/viewer';
+import User from './resolver/user';
 import Department from './resolver/department';
 import MembershipRequest from './resolver/membershipRequest';
 import Admin from './resolver/admin';
@@ -28,7 +28,7 @@ const resolvers: Resolvers<Context> = {
     Exercise,
     Department,
     MembershipRequest,
-    Viewer
+    User
 };
 
 export default resolvers;

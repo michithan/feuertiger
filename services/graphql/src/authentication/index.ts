@@ -1,4 +1,4 @@
-import { Viewer } from '@feuertiger/schema-graphql';
+import { User } from '@feuertiger/schema-graphql';
 import { PrismaClient } from '@feuertiger/schema-prisma';
 
 import { ContextInitialization } from '../context';
@@ -8,7 +8,7 @@ export const tryGetUserInfo = async (
     token: string,
     authProvider: ContextInitialization['authProvider'],
     db: PrismaClient
-): Promise<Viewer> => {
+): Promise<User> => {
     const { uid } = await authProvider.verifyIdToken(token);
     const {
         email,

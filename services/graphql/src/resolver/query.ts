@@ -78,7 +78,7 @@ const Query: QueryResolvers<Context> = {
     membershipRequest: async (
         _parent,
         { id },
-        { db, viewer: { id: userId } }: Context
+        { db, user: { id: userId } }: Context
     ) => {
         const membershipRequest = await db.membershipRequest.findFirst({
             where: {
@@ -87,7 +87,7 @@ const Query: QueryResolvers<Context> = {
         });
         return membershipRequest;
     },
-    viewer: (_parent, _, { viewer }) => viewer,
+    viewer: (_parent, _, { user }) => user,
     admin: () => ({})
 };
 
