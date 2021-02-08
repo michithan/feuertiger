@@ -2,31 +2,20 @@ import { v4 as uuidv4 } from 'uuid';
 import { PrismaClient } from '@feuertiger/schema-prisma';
 import { _Node } from '@feuertiger/schema-graphql';
 
-const notDelegateKeys = [
-    '$use',
-    '$executeRaw',
-    '$queryRaw',
-    '$transaction',
-    '$on',
-    '$connect',
-    '$disconnect'
-] as const;
-type NotDelegatKeys = typeof notDelegateKeys;
-
-const delegateKeys = Object.getOwnPropertyNames(PrismaClient).filter(
-    name => !notDelegateKeys.includes(name as typeof notDelegateKeys[number])
-) as Array<Exclude<keyof PrismaClient, NotDelegatKeys[number]>>;
-
-type DelegateKey = Exclude<keyof PrismaClient, NotDelegatKeys[number]>;
+type DelegateKey = Exclude<keyof PrismaClient, `$${string}`>;
 
 export type Delegate = PrismaClient[DelegateKey];
 
 export type GlobalId = `${DelegateKey}:${string}`;
 
-export const isDelegateType = (type: string): type is DelegateKey =>
-    Boolean(type && delegateKeys.includes(type as DelegateKey));
+const delegateKeys = Object.getOwnPropertyNames(PrismaClient).filter(
+    name => !name.startsWith('$')
+);
 
-export const isGlobalId = (id: string): id is GlobalId => {
+const isDelegateType = (type: string): type is DelegateKey =>
+    delegateKeys.includes(type);
+
+const isGlobalId = (id: string): id is GlobalId => {
     const [type] = id?.split(':') ?? [];
     return isDelegateType(type);
 };
