@@ -27,8 +27,8 @@ const Exercises = dynamic(
                         page: 0,
                         pageSize: 5
                     }
-                },
-                fetchPolicy: departmentId ? 'cache-and-network' : 'standby'
+                }
+                //fetchPolicy: departmentId ? 'cache-and-network' : 'standby'
             }
         );
         const { loading, error } = query;
