@@ -1,4 +1,8 @@
-import { Sex, UserRole } from '@feuertiger/schema-prisma';
+import {
+    MembershipRequestStatus,
+    Sex,
+    UserRole
+} from '@feuertiger/schema-prisma';
 import { AdminMutationResolvers } from '@feuertiger/schema-graphql';
 import { Context } from '../context';
 import { createGlobalId } from '../utils/id';
@@ -47,7 +51,7 @@ const AdminMutation: AdminMutationResolvers = {
                       lastname: user.lastname ?? '',
                       avatar: '',
                       birthName: '',
-                      dateOfBirth: '',
+                      dateOfBirth: new Date(1970, 1, 1),
                       membershipNumber: '',
                       placeOfBirth: '',
                       phone: '',
@@ -95,6 +99,15 @@ const AdminMutation: AdminMutationResolvers = {
                         id: person.id
                     }
                 }
+            }
+        });
+
+        await db.membershipRequest.update({
+            where: {
+                id: membershipRequestId
+            },
+            data: {
+                status: MembershipRequestStatus.APPROVED
             }
         });
 

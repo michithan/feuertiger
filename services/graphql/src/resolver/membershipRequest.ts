@@ -12,6 +12,17 @@ const MembershipRequest: MembershipRequestResolvers = {
             }
         });
         return result?.department ?? null;
+    },
+    user: async ({ id }, args, { db }: Context) => {
+        const result = await db.membershipRequest.findFirst({
+            where: {
+                id
+            },
+            select: {
+                user: true
+            }
+        });
+        return result?.user ?? null;
     }
 };
 

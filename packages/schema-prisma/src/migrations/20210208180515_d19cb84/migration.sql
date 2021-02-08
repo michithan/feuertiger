@@ -103,6 +103,7 @@ CREATE TABLE "DepartmentMembership" (
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "uid" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
     "firstname" TEXT,
     "lastname" TEXT,
     "personId" TEXT,

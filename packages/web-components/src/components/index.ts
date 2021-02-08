@@ -23,3 +23,4 @@ export * from './loadingSkeleton/loadingSkeleton';
 export * from './exerciseTable/exerciseTable';
 export * from './entrypoint/entrypoint';
 export * from './membershipRequest/membershipRequest';
+export * from './adminDashboard/adminDashboard';

@@ -10,6 +10,7 @@ import Exercise from './resolver/exercise';
 import User from './resolver/user';
 import Department from './resolver/department';
 import MembershipRequest from './resolver/membershipRequest';
+import DepartmentMembership from './resolver/departmentMembership';
 import Admin from './resolver/admin';
 import AdminMutation from './resolver/adminMutation';
 import { Context } from './context';
@@ -27,6 +28,7 @@ const resolvers: Resolvers<Context> = {
     Dashboard,
     Exercise,
     Department,
+    DepartmentMembership,
     MembershipRequest,
     User
 };

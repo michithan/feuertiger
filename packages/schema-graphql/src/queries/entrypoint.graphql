@@ -9,6 +9,7 @@ query entrypoint {
             firstname
             lastname
             mainDepartmentMembership {
+                id
                 department {
                     id
                     name

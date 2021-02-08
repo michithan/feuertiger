@@ -14,15 +14,20 @@ export const tryGetUserInfo = async (
         email,
         providerData: [{ email: providerEmail }]
     } = await authProvider.getUser(uid);
-    let user = await db.user.findFirst({
-        where: {
-            uid
-        }
-    });
-    if (!user) {
-        user = await db.user.create({
-            data: { id: createGlobalId('user'), uid }
-        });
-    }
-    return { email: email ?? providerEmail, ...user };
+
+    const user =
+        (await db.user.findFirst({
+            where: {
+                uid
+            }
+        })) ??
+        (await db.user.create({
+            data: {
+                id: createGlobalId('user'),
+                uid,
+                email: email ?? providerEmail
+            }
+        }));
+
+    return user;
 };

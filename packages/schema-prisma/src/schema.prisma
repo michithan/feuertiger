@@ -126,6 +126,7 @@ model DepartmentMembership {
 model User {
   id                    String                 @id
   uid                   String
+  email                 String
   firstname             String?
   lastname              String?
   personId              String?
