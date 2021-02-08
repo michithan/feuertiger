@@ -1,5 +1,6 @@
+import '@feuertiger/native-js-extensions';
 import { v4 as uuidv4 } from 'uuid';
-import { PrismaClient } from '@feuertiger/schema-prisma';
+import { PrismaClient, Prisma } from '@feuertiger/schema-prisma';
 import { _Node } from '@feuertiger/schema-graphql';
 
 type DelegateKey = Exclude<keyof PrismaClient, `$${string}`>;
@@ -8,8 +9,8 @@ export type Delegate = PrismaClient[DelegateKey];
 
 export type GlobalId = `${DelegateKey}:${string}`;
 
-const delegateKeys = Object.getOwnPropertyNames(PrismaClient).filter(
-    name => !name.startsWith('$')
+const delegateKeys = Object.values(Prisma.ModelName).map(name =>
+    name.toCamelCase()
 );
 
 const isDelegateType = (type: string): type is DelegateKey =>

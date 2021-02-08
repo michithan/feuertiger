@@ -11,10 +11,17 @@ export interface ExerciseTableProps {
     fetchExercises: MaterialTableFetchFunction<
         ExercisesQueryResult['data']['exercises']['edges'][0]['node']
     >;
+    linkToExercise: (
+        exercise: ExercisesQueryResult['data']['exercises']['edges'][0]['node']
+    ) => {
+        href: string;
+        as: string;
+    };
 }
 
 export const ExerciseTable = ({
-    fetchExercises
+    fetchExercises,
+    linkToExercise
 }: ExerciseTableProps): ReactElement => (
     <Grid container spacing={3}>
         <Grid item xs={12}>
@@ -54,11 +61,8 @@ export const ExerciseTable = ({
                         title: '',
                         field: 'edit',
                         filtering: false,
-                        render: ({ id }) => (
-                            <Link
-                                href="/exercises/[id]"
-                                as={`/exercises/${id}`}
-                            >
+                        render: exercise => (
+                            <Link {...linkToExercise(exercise)}>
                                 <Fab color="primary" aria-label="edit">
                                     <FindInPage />
                                 </Fab>

@@ -8,6 +8,7 @@ import {
     LoadingSkeleton
 } from '@feuertiger/web-components';
 import { AppInitialProps, AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import withAuth, { AuthStateProps } from './withAuth';
 import withApollo, { ApolloProps } from './withApollo';
 
@@ -26,6 +27,10 @@ export const ContainerWithAuth = ({
     isLoading: isSignInLoading,
     isSignedIn
 }: ContainerProps): ReactElement => {
+    const {
+        query: { departmentId }
+    } = useRouter();
+
     let content = <Component {...pageProps} />;
     if (isSignInLoading) {
         content = <LoadingSkeleton />;
@@ -35,7 +40,7 @@ export const ContainerWithAuth = ({
     return (
         <ThemeProvider>
             <ApolloProvider client={apollo}>
-                <UiContainer auth={auth} departmentId={null}>
+                <UiContainer auth={auth} departmentId={departmentId as string}>
                     {content}
                 </UiContainer>
             </ApolloProvider>

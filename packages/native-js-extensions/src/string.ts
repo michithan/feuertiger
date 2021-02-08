@@ -5,6 +5,7 @@
 declare interface String {
     remove(subString: string): string;
     toPascalCase(): string;
+    toCamelCase(): string;
 }
 
 String.prototype.remove = function (subString: string): string {
@@ -12,5 +13,9 @@ String.prototype.remove = function (subString: string): string {
 };
 
 String.prototype.toPascalCase = function (): string {
-    return `${this.toUpperCase()}${this.slice(1)}`;
+    return `${this[0].toUpperCase()}${this.slice(1)}`;
+};
+
+String.prototype.toCamelCase = function (): string {
+    return `${this[0].toLowerCase()}${this.slice(1)}`;
 };

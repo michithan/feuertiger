@@ -12,21 +12,31 @@ import { useRouter } from 'next/router';
 const Member = dynamic(
     async () => () => {
         const {
-            query: { id }
+            query: { departmentId }
         } = useRouter();
         const queryResult = useDepartmentMembershipsQuery({
             variables: {
-                id: id as string,
+                id: departmentId as string,
                 query: {
                     page: 0,
                     pageSize: 5
                 }
-            }
+            },
+            fetchPolicy: departmentId ? 'cache-and-network' : 'standby'
         });
         const { loading, error } = queryResult;
+
+        const linkToMember = (
+            member: DepartmentMembershipsQuery['department']['memberships']['edges'][0]['node']['person']
+        ) => ({
+            href: '/department/[departmentId]/member/[memberId]',
+            as: `/department/${departmentId}/member/${member.id}`
+        });
+
         return (
             <LoadingContainer loading={loading} error={error}>
                 <MemberTable
+                    linkToMember={linkToMember}
                     fetchDepartmentMembers={createMaterialTableFetchFunction<
                         DepartmentMembershipsQuery,
                         DepartmentMembershipsQuery['department']['memberships']['edges'][0]['node'],

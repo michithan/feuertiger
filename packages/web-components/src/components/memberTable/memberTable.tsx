@@ -23,6 +23,12 @@ export interface MemberTableProps {
     fetchDepartmentMembers: MaterialTableFetchFunction<
         DepartmentMembershipsQueryResult['data']['department']['memberships']['edges'][0]['node']
     >;
+    linkToMember: (
+        member: DepartmentMembershipsQueryResult['data']['department']['memberships']['edges'][0]['node']['person']
+    ) => {
+        href: string;
+        as: string;
+    };
 }
 
 export class MemberTable extends React.Component<MemberTableProps, State> {
@@ -39,7 +45,10 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
 
     render(): ReactNode {
         const { addDialogOpen } = this.state;
-        const { fetchDepartmentMembers: fetchPersons } = this.props;
+        const {
+            linkToMember,
+            fetchDepartmentMembers: fetchPersons
+        } = this.props;
 
         return (
             <Grid container spacing={3}>
@@ -99,11 +108,8 @@ export class MemberTable extends React.Component<MemberTableProps, State> {
                                 title: '',
                                 field: 'edit',
                                 filtering: false,
-                                render: ({ person: { id } }) => (
-                                    <Link
-                                        href="/member/[id]"
-                                        as={`/member/${id}`}
-                                    >
+                                render: ({ person }) => (
+                                    <Link {...linkToMember(person)}>
                                         <Fab color="primary" aria-label="edit">
                                             <FindInPage />
                                         </Fab>

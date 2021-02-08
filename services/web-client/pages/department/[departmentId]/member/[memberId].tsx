@@ -16,11 +16,11 @@ import {
 const MemberPage = dynamic(
     async () => () => {
         const {
-            query: { id }
+            query: { memberId }
         } = useRouter();
 
         const { data, loading, error } = useQuery(PersonDetailsDocument, {
-            variables: { id }
+            variables: { id: memberId }
         });
 
         const [updatePerson, { data: personUpdate }] = useMutation(
