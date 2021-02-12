@@ -3,79 +3,53 @@ import type { PrismaClient } from '@feuertiger/schema-prisma';
 
 import { createConnection, NodeConnection } from '.';
 
-export interface PrismaQuery {
-    where: {
-        AND?:
-            | Array<{
-                  [key: string]: string;
-              }>
-            | undefined;
-        OR?:
-            | Array<{
-                  [key: string]: {
-                      contains: string;
-                      mode: 'insensitive';
-                  };
-              }>
-            | undefined;
-    };
-    take: number;
-    orderBy:
-        | {
-              [key: string]: string;
-          }
-        | undefined;
-    skip: number;
-}
+type AnyDelegateKey = Exclude<keyof PrismaClient, `$${string}`>;
+type AnyDelegate = PrismaClient[AnyDelegateKey];
 
-export const mapToPrismaQuery = (
+export type PrismaQuery<TDelegate extends AnyDelegate> = Parameters<
+    TDelegate['findMany']
+>[0];
+
+type ConnectionResolver<TArgs> = <TNode extends Node>(
     query: _Query | null | undefined,
-    searchProperties: string[] | null | undefined
-): PrismaQuery => {
+    args: TArgs
+) => Promise<NodeConnection<TNode>>;
+
+export const createConnectionResolver = <TDelegateKey extends AnyDelegateKey>(
+    db: PrismaClient,
+    delegateKey: TDelegateKey
+): ConnectionResolver<PrismaQuery<PrismaClient[TDelegateKey]>> => {
     const {
-        filters,
-        page = 0,
-        pageSize = 50,
-        orderBy,
-        orderDirection,
-        search
-    } = query ?? {};
-    return {
-        where: {
-            AND:
-                filters && filters.length > 0
-                    ? filters.map(({ column, value }) => ({
-                          [column]: value
-                      }))
-                    : undefined,
-            OR:
-                search && searchProperties
-                    ? searchProperties.map(key => ({
-                          [key]: { contains: search, mode: 'insensitive' }
-                      }))
-                    : undefined
-        },
-        take: pageSize,
-        orderBy:
-            orderBy && orderDirection
-                ? {
-                      [orderBy]: orderDirection.toLocaleLowerCase()
-                  }
-                : undefined,
-        skip: page * pageSize
+        [delegateKey]: { count, findMany }
+    } = db;
+
+    type Args = Parameters<typeof findMany>[0];
+    type Count = (args: Args) => ReturnType<typeof count>;
+    type FindMany = (args: Args) => ReturnType<typeof findMany>;
+
+    return <TNode extends Node>(
+        query: _Query | null | undefined,
+        args: Args
+    ): Promise<NodeConnection<TNode>> => {
+        const getCount = (count as Count)(args);
+        const getNodes = (findMany as FindMany)(args);
+
+        const transaction = [getCount, getNodes] as Parameters<
+            typeof db.$transaction
+        >[0];
+
+        return db
+            .$transaction(transaction)
+            .then(([totalCount, nodes]) =>
+                createConnection(query, nodes as TNode[], totalCount as number)
+            );
     };
 };
 
-export const createConnectionResolver = <TNode extends Node>(
-    db: PrismaClient,
-    count: (args: { where: PrismaQuery['where'] }) => Promise<number>,
-    findMany: (args: PrismaQuery) => Promise<Array<TNode>>
-) => (
-    query: _Query | null | undefined,
-    args: PrismaQuery
-): Promise<NodeConnection<TNode>> =>
-    db
-        .$transaction([count({ where: args.where }), findMany(args)])
-        .then(([totalCount, nodes]) =>
-            createConnection(query, nodes, totalCount)
-        );
+export const buildPrismaFilter = (filter: string | number, keys: string[]) =>
+    keys.map(key => ({
+        [key]: {
+            contains: filter,
+            mode: 'insensitive'
+        }
+    }));

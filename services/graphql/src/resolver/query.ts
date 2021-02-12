@@ -6,8 +6,8 @@ import {
 } from '@feuertiger/schema-graphql';
 import { Department } from '@feuertiger/schema-prisma';
 import {
-    mapToPrismaQuery,
-    createConnectionResolver
+    createConnectionResolver,
+    buildPrismaFilter
 } from '@feuertiger/pagination';
 import { Context } from '../context';
 import { parseGlobalId } from '../utils/id';
@@ -37,42 +37,84 @@ const Query: QueryResolvers<Context> = {
         Promise.all(args.ids.map(id => getNode({ id, context }))),
     department: (_parent, { id }, context) => getNode({ id, context }),
     departments: (_parent, { query }, { db }) => {
-        const departmentsConnectionResolver = createConnectionResolver<Department>(
+        const departmentsConnectionResolver = createConnectionResolver(
             db,
-            db.department.count,
-            db.department.findMany
+            'department'
         );
-        const searchProperties = ['name', 'federation'];
-        const args = mapToPrismaQuery(query, searchProperties);
-        return departmentsConnectionResolver(query, args);
+
+        const { search, page, pageSize, orderBy, orderDirection } = query ?? {};
+        const searchFilter =
+            search && buildPrismaFilter(search, ['name', 'federation']);
+
+        return departmentsConnectionResolver<Department>(query, {
+            where: {
+                OR: searchFilter || undefined
+            },
+            orderBy:
+                (orderBy &&
+                    orderDirection && {
+                        [orderBy]: orderDirection
+                    }) ||
+                undefined,
+            take: pageSize,
+            skip: page && pageSize && page * pageSize
+        });
     },
     persons: (_parent, { query }, { db }) => {
-        const personsConnectionResolver = createConnectionResolver<Person>(
+        const personsConnectionResolver = createConnectionResolver(
             db,
-            db.person.count,
-            db.person.findMany
+            'person'
         );
-        const searchProperties = [
-            'firstname',
-            'lastname',
-            'phone',
-            'birthName',
-            'placeOfBirth',
-            'avatar',
-            'membershipNumber'
-        ];
-        const args = mapToPrismaQuery(query, searchProperties);
-        return personsConnectionResolver(query, args);
+
+        const { search, page, pageSize, orderBy, orderDirection } = query ?? {};
+        const searchFilter =
+            search &&
+            buildPrismaFilter(search, [
+                'firstname',
+                'lastname',
+                'phone',
+                'birthName',
+                'placeOfBirth',
+                'avatar',
+                'membershipNumber'
+            ]);
+
+        return personsConnectionResolver<Person>(query, {
+            where: {
+                OR: searchFilter || undefined
+            },
+            orderBy:
+                (orderBy &&
+                    orderDirection && {
+                        [orderBy]: orderDirection
+                    }) ||
+                undefined,
+            take: pageSize,
+            skip: page && pageSize && page * pageSize
+        });
     },
     exercises: async (_parent, { query }, { db }) => {
-        const exercisesConnectionResolver = createConnectionResolver<Exercise>(
+        const exercisesConnectionResolver = createConnectionResolver(
             db,
-            db.exercise.count,
-            db.exercise.findMany
+            'exercise'
         );
-        const searchProperties = ['topic'];
-        const args = mapToPrismaQuery(query, searchProperties);
-        return exercisesConnectionResolver(query, args);
+
+        const { search, page, pageSize, orderBy, orderDirection } = query ?? {};
+        const searchFilter = search && buildPrismaFilter(search, ['topic']);
+
+        return exercisesConnectionResolver<Exercise>(query, {
+            where: {
+                OR: searchFilter || undefined
+            },
+            orderBy:
+                (orderBy &&
+                    orderDirection && {
+                        [orderBy]: orderDirection
+                    }) ||
+                undefined,
+            take: pageSize,
+            skip: page && pageSize && page * pageSize
+        });
     },
     dashboard: async () => ({}),
     membershipRequest: async (

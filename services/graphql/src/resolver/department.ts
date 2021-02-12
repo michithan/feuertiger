@@ -3,7 +3,7 @@ import {
     DepartmentMembership
 } from '@feuertiger/schema-graphql';
 import {
-    mapToPrismaQuery,
+    buildPrismaFilter,
     createConnectionResolver
 } from '@feuertiger/pagination';
 import { Context } from '../context';
@@ -21,44 +21,45 @@ const Department: DepartmentResolvers = {
         return department?.address ?? null;
     },
     memberships: async ({ id }, { query }, { db }: Context) => {
-        const findMany = (
-            args: Parameters<Parameters<typeof createConnectionResolver>[2]>[0]
-        ) =>
-            db.departmentMembership.findMany({
+        const departmentMembershipConnectionResolver = createConnectionResolver(
+            db,
+            'departmentMembership'
+        );
+
+        const { search, page, pageSize, orderBy, orderDirection } = query ?? {};
+        const searchFilter =
+            search &&
+            buildPrismaFilter(search, [
+                'firstname',
+                'lastname',
+                'phone',
+                'birthName',
+                'placeOfBirth',
+                'avatar'
+            ]);
+
+        return departmentMembershipConnectionResolver<DepartmentMembership>(
+            query,
+            {
                 where: {
                     departmentId: id,
-                    person: args.where
+                    person: {
+                        OR: searchFilter || undefined
+                    }
                 },
                 include: {
                     person: true
-                }
-            });
-
-        const count = (
-            args: Parameters<Parameters<typeof createConnectionResolver>[1]>[0]
-        ) =>
-            db.departmentMembership.count({
-                where: {
-                    departmentId: id,
-                    person: args.where
-                }
-            });
-
-        const departmentMembershipConnectionResolver = createConnectionResolver<DepartmentMembership>(
-            db,
-            count,
-            findMany
+                },
+                orderBy:
+                    (orderBy &&
+                        orderDirection && {
+                            [orderBy]: orderDirection
+                        }) ||
+                    undefined,
+                take: pageSize,
+                skip: page && pageSize && page * pageSize
+            }
         );
-        const searchProperties = [
-            'firstname',
-            'lastname',
-            'phone',
-            'birthName',
-            'placeOfBirth',
-            'avatar'
-        ];
-        const args = mapToPrismaQuery(query, searchProperties);
-        return departmentMembershipConnectionResolver(query, args);
     }
 };
 
