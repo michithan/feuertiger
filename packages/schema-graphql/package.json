@@ -18,21 +18,21 @@
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
-        "@apollo/client": "3.3.7",
-        "graphql": "15.5.0",
-        "graphql-scalars": "1.7.0",
-        "graphql-tag": "2.11.0"
+        "@apollo/client": "3.4.17",
+        "graphql": "16.0.1",
+        "graphql-scalars": "1.13.6",
+        "graphql-tag": "2.12.6"
     },
     "devDependencies": {
-        "@graphql-codegen/add": "2.0.2",
-        "@graphql-codegen/cli": "1.20.1",
-        "@graphql-codegen/introspection": "1.18.1",
-        "@graphql-codegen/schema-ast": "1.18.1",
-        "@graphql-codegen/typescript": "1.20.2",
-        "@graphql-codegen/typescript-operations": "1.17.14",
-        "@graphql-codegen/typescript-react-apollo": "2.2.1",
-        "@graphql-codegen/typescript-resolvers": "1.18.1",
-        "prettier": "2.2.1"
+        "@graphql-codegen/add": "3.1.0",
+        "@graphql-codegen/cli": "2.3.0",
+        "@graphql-codegen/introspection": "2.1.0",
+        "@graphql-codegen/schema-ast": "2.4.0",
+        "@graphql-codegen/typescript": "2.4.1",
+        "@graphql-codegen/typescript-operations": "2.2.1",
+        "@graphql-codegen/typescript-react-apollo": "3.2.2",
+        "@graphql-codegen/typescript-resolvers": "2.4.2",
+        "prettier": "2.4.1"
     },
     "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
 }

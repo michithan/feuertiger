@@ -1,5 +1,5 @@
 # Start from alpine
-FROM alpine:3.12.1
+FROM alpine:3.14.3
 
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 ENV DENO_INSTALL=/root/.deno
@@ -23,6 +23,7 @@ RUN apk update && apk add --no-cache \
     alpine-sdk \
     bash \
     binutils \
+    cargo \
     ca-certificates \
     chromium \
     coreutils  \
@@ -55,11 +56,11 @@ RUN apk update && apk add --no-cache \
     libstdc++ \
     linux-headers \
     make \
+    musl-dev \
     ncurses  \
     ncurses-terminfo-base \
     net-tools \
     nodejs-current \
-    npm \
     openssl  \
     openssl-dev \
     openrc \
@@ -129,7 +130,7 @@ RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master
     && ./get_helm.sh
 
 # Install lerna
-RUN npm i -g lerna typescript ts-node prisma
+RUN yarn global add lerna typescript ts-node prisma
 
 # Install deno
 RUN curl -fsSL https://deno.land/x/install/install.sh | sh -s v1.0.0

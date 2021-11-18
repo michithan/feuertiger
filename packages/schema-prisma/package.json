@@ -22,12 +22,12 @@
         "@feuertiger:registry": "https://gitlab.com/api/v4/projects/18726494/packages/npm/"
     },
     "dependencies": {
-        "@prisma/client": "2.16.0",
-        "faker": "5.3.1"
+        "@prisma/client": "3.5.0",
+        "faker": "5.5.3"
     },
     "devDependencies": {
-        "prisma": "2.16.0",
-        "ts-node": "9.1.1"
+        "prisma": "3.5.0",
+        "ts-node": "10.4.0"
     },
     "gitHead": "05e4076488965ce7af8aec66f20dae4fb035d3b0"
 }
