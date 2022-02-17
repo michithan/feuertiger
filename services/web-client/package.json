@@ -30,7 +30,7 @@
         "graphql-tag": "2.11.0",
         "isomorphic-unfetch": "3.1.0",
         "lodash.merge": "4.6.2",
-        "next": "10.0.2",
+        "next": "12.1.0",
         "next-transpile-modules": "4.1.0",
         "next-with-apollo": "5.1.0",
         "node-fetch": "2.6.1",
