@@ -2,26 +2,5 @@
   "name": "feuertiger",
   "dockerComposeFile": "../.dev-env.docker-compose.yml",
   "workspaceFolder": "/workspace",
-  "service": "dev-env",
-  "extensions": [
-    "streetsidesoftware.code-spell-checker",
-    "ms-vsliveshare.vsliveshare-pack",
-    "prisma.prisma",
-    "anseki.vscode-color",
-    "eamodio.gitlens",
-    "esbenp.prettier-vscode",
-    "equinusocio.vsc-material-theme",
-    "ms-azuretools.vscode-docker",
-    "rvest.vs-code-prettier-eslint",
-    "ms-kubernetes-tools.vscode-kubernetes-tools",
-    "msjsdiag.debugger-for-chrome",
-    "tomoki1207.pdf",
-    "visualstudioexptteam.vscodeintellicode",
-    "PKief.material-icon-theme",
-    "jasonnutter.vscode-codeowners",
-    "nrwl.angular-console",
-    "esbenp.prettier-vscode",
-    "firsttris.vscode-jest-runner",
-    "dbaeumer.vscode-eslint"
-  ]
+  "service": "dev-env"
 }
