@@ -1,7 +1,0 @@
-fragment personPromotions on Person {
-    promotions {
-        id
-        grade
-        dateOfPromotion
-    }
-}

@@ -1,17 +1,1 @@
 node_modules
-dist
-lib
-coverage
-videos
-screenshots
-
-package-lock.json
-secrets.json
-
-*.en
-*.log
-*.code-workspace
-*.env
-*.traineddata
-
-report.*.json

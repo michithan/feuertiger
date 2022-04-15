@@ -22,8 +22,6 @@
         "planbcoding.vscode-react-refactor": false
     },
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "vscode-postgres.defaultDatabase": "feuertiger",
-    "vscode-postgres.defaultConnection": "feuertiger",
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },

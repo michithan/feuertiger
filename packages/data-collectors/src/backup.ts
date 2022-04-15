@@ -1,3 +1,0 @@
-import { createBackup } from '.';
-
-createBackup();

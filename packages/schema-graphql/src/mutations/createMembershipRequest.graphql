@@ -1,6 +1,0 @@
-mutation createMembershipRequest($membershipRequest: _MembershipRequest!) {
-    createMembershipRequest(membershipRequest: $membershipRequest) {
-        id
-        status
-    }
-}
