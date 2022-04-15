@@ -10,6 +10,17 @@ RUN apt-get update \
   apt-transport-https \
   ca-certificates \
   sudo \
+  libgtk2.0-0 \
+  libgtk-3-0 \
+  libgbm-dev \ 
+  libnotify-dev \
+  libgconf-2-4 \
+  libnss3 \
+  libxss1 \
+  libasound2 \
+  libxtst6 \
+  xauth \
+  xvfb \
   # Add repos
   && curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash - \
   && sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg \
