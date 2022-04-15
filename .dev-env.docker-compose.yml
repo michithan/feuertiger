@@ -1,21 +1,21 @@
-version: '3'
+version: "3"
 services:
-    dev-env:
-        # Using a Dockerfile is optional, but included for completeness.
-        build:
-            context: .
-            dockerfile: .dev-env.Dockerfile
-        volumes:
-            # This is where VS Code should expect to find your project's source code and the value of "workspaceFolder" in .devcontainer/devcontainer.json
-            - feuertiger-workspace:/workspace
-            # Use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
-            - /var/run/docker.sock:/var/run/docker.sock
-        # Overrides default command so things don't shut down after the process ends.
-        command: sh -c 'while sleep 3600; do :; done'
-        # use a ptrace-based debugger like C++, Go, and Rust.
-        cap_add:
-            - SYS_PTRACE
-        security_opt:
-            - seccomp:unconfined
+  dev-env:
+    # Using a Dockerfile is optional, but included for completeness.
+    build:
+      context: .
+      dockerfile: .dev-env.Dockerfile
+    volumes:
+      # This is where VS Code should expect to find your project's source code and the value of "workspaceFolder" in .devcontainer/devcontainer.json
+      - feuertiger-workspace:/workspace
+      # Use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
+      - /var/run/docker.sock:/var/run/docker.sock
+    # Overrides default command so things don't shut down after the process ends.
+    command: sh -c 'while sleep 3600; do :; done'
+    # use a ptrace-based debugger like C++, Go, and Rust.
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
 volumes:
-    feuertiger-workspace:
+  feuertiger-workspace:
