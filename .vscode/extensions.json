@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "vscode-icons-team.vscode-icons",
+        "ms-dotnettools.csharp",
+        "eamodio.gitlens",
+        "ms-dotnettools.blazorwasm-companion"
+    ]
+}
