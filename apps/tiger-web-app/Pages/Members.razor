@@ -1,0 +1,69 @@
+@page "/members"
+
+
+<PageTitle>Members</PageTitle>
+
+<h1>Members</h1>
+
+<RadzenDataGrid 
+    AllowFiltering="true" 
+    AllowColumnResize="true"
+    AllowAlternatingRows="false"
+    FilterMode="FilterMode.Advanced"
+    AllowSorting="true"
+    PageSize="5"
+    AllowPaging="true"
+    PagerHorizontalAlign="HorizontalAlign.Left"
+    ShowPagingSummary="true"
+    Data="@members"
+    TItem="Member"
+    ColumnWidth="300px"
+    LogicalFilterOperator="LogicalFilterOperator.Or"
+>
+    <Columns>
+        <RadzenDataGridColumn TItem="Member" Property="FirstName" Title="First Name" Frozen="true" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="LastName" Title="Last Name" Width="160px"/>
+        <RadzenDataGridColumn TItem="Member" Property="Title" Title="Job Title" Width="200px" />
+        <RadzenDataGridColumn TItem="Member" Property="TitleOfCourtesy" Title="Title" Width="120px" />
+        <RadzenDataGridColumn TItem="Member" Property="BirthDate" Title="Birth Date" FormatString="{0:d}" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="HireDate" Title="Hire Date" FormatString="{0:d}" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="Address" Title="Address" Width="200px" />
+        <RadzenDataGridColumn TItem="Member" Property="City" Title="City" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="Region" Title="Region" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="PostalCode" Title="Postal Code" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="Country" Title="Country" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="HomePhone" Title="Home Phone" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="Extension" Title="Extension" Width="160px" />
+        <RadzenDataGridColumn TItem="Member" Property="Notes" Title="Notes" Width="300px" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+
+    public class Member {
+        public int MemberID { get; set; } 
+        public string FirstName { get; set; } 
+        public string LastName { get; set; } 
+        public string Title { get; set; } 
+        public string TitleOfCourtesy { get; set; } 
+        public string BirthDate { get; set; } 
+        public string HireDate { get; set; }
+        public string Address { get; set; } 
+        public string City { get; set; } 
+        public string Region { get; set; } 
+        public string PostalCode { get; set; } 
+        public string Country { get; set; } 
+        public string HomePhone { get; set; }  
+        public string Extension { get; set; } 
+        public string Notes { get; set; } 
+    }
+
+    IEnumerable<Member> members;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+ 
+        members = new List<Member>().AsEnumerable();
+    }
+}

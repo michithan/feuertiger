@@ -1,28 +1,16 @@
 ﻿<RadzenPanelMenu>
   <RadzenPanelMenuItem Text="People" Icon="people">
-    <RadzenPanelMenuItem Text="Members" Icon="assignment_ind"/>
-    <RadzenPanelMenuItem Text="Jobs" Icon="engineering"/>
-    <RadzenLink Path="fetchdata">
-      <RadzenPanelMenuItem Text="Statistics" Icon="trending_up"/>
-    </RadzenLink>
+    <RadzenPanelMenuItem Text="Members" Icon="assignment_ind" Path="members" />
+    <RadzenPanelMenuItem Text="Jobs" Icon="engineering" Path="counter" />
+    <RadzenPanelMenuItem Text="Statistics" Icon="trending_up" Path="fetchdata" />
   </RadzenPanelMenuItem>
   <RadzenPanelMenuItem Text="Events" Icon="event" >
-    <RadzenLink Path="counter">
-      <RadzenPanelMenuItem Text="Practice" Icon="school"/>
-    </RadzenLink>
-    <RadzenLink Path="counter">
-      <RadzenPanelMenuItem Text="Work" Icon="work"/>
-    </RadzenLink>
-    <RadzenLink Path="fetchdata">
-      <RadzenPanelMenuItem Text="Statistics" Icon="trending_up"/>
-    </RadzenLink>
+    <RadzenPanelMenuItem Text="Practice" Icon="school" Path="/"/>
+    <RadzenPanelMenuItem Text="Work" Icon="work" Path="counter"/>
+    <RadzenPanelMenuItem Text="Statistics" Icon="trending_up" Path="fetchdata"/>
   </RadzenPanelMenuItem>
   <RadzenPanelMenuItem Text="Operations" Icon="run_circle">
-    <RadzenLink Path="fetchdata">
-      <RadzenPanelMenuItem Text="Reports" Icon="article"/>
-    </RadzenLink>
-    <RadzenLink Path="fetchdata">
-      <RadzenPanelMenuItem Text="Statistics" Icon="trending_up"/>
-    </RadzenLink>
+    <RadzenPanelMenuItem Text="Reports" Icon="article" Path="counter"/>
+    <RadzenPanelMenuItem Text="Statistics" Icon="trending_up" Path="fetchdata"/>
   </RadzenPanelMenuItem>
 </RadzenPanelMenu>
