@@ -1,0 +1,74 @@
+﻿@using Microsoft.Extensions.Logging 
+@using Microsoft.AspNetCore.Components
+@using System.Collections.Generic
+@implements IDisposable
+@inject ILogger<NavSubMenu> Logger
+@inject NavigationManager Navigation
+
+<RadzenStack 
+  Orientation="Orientation.Horizontal"
+  AlignItems="AlignItems.Center"
+  Wrap="FlexWrap.Wrap"
+  JustifyContent="JustifyContent.Center"
+>
+  <RadzenMenu>
+    @foreach (var item in MenuItemAttributes)
+    {
+      <RadzenMenuItem Text="@item.Text" Icon="@item.Icon" Path="@item.Path"/>
+    }
+  </RadzenMenu>
+</RadzenStack>
+
+@code {
+
+  protected class MenuItemAttribute {
+    public required string Path { get; init; }
+    public required string Icon { get; init; }
+    public required string Text { get; init; } 
+  }
+
+  private string Path { get; set; } = "";
+
+  protected List<MenuItemAttribute> MenuItemAttributes { get; set; } = new List<MenuItemAttribute>();
+
+  protected override void OnInitialized()
+  {
+    UpdatePath();
+    Navigation.LocationChanged += HandleLocationChanged;
+    base.OnInitialized();
+  }
+
+  private void UpdatePath() {
+    Path = Navigation.Uri.Replace(Navigation.BaseUri,"");
+    Logger.LogInformation($"Path {Path}");
+    MenuItemAttributes = Path switch
+    {      
+      "people" => new List<MenuItemAttribute>() {
+        new MenuItemAttribute { Text = "Members", Icon = "assignment_ind", Path = "members" },
+        new MenuItemAttribute { Text = "Jobs", Icon = "engineering", Path = "counter" },
+        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = "fetchdata" }
+      },
+      "events" => new List<MenuItemAttribute>() {
+        new MenuItemAttribute { Text = "Practice", Icon = "school", Path = "/" },
+        new MenuItemAttribute { Text = "Work", Icon = "work", Path = "counter" },
+        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = "fetchdata" }
+      },
+      "operations" => new List<MenuItemAttribute>() {
+        new MenuItemAttribute { Text = "Reports", Icon = "article", Path = "counter" },
+        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = "fetchdata" },
+      },
+      _ => new List<MenuItemAttribute>()
+    };
+  }
+
+  private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+  {
+    UpdatePath();
+    StateHasChanged();
+  }
+
+  public void Dispose()
+  {
+    Navigation.LocationChanged -= HandleLocationChanged;
+  }
+}

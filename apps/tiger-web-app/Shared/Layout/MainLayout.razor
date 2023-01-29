@@ -6,22 +6,24 @@
   <RadzenNotification />
   <RadzenTooltip />
   <RadzenHeader>
-    <div class="d-flex align-items-center">
-      <RadzenSidebarToggle Click="@(() => sidebarExpanded = !sidebarExpanded)"/>
-      <RadzenLabel Text="Floriantine"/>
-    </div>
+    <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">      
+      <RadzenColumn Size="2" class="p-2">
+        <RadzenLabel Text="Floriantine"/>
+      </RadzenColumn>
+      <RadzenColumn Size="8">
+        <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">      
+          <NavMenu />
+        </RadzenRow>
+      </RadzenColumn>
+      <RadzenColumn Size="2">
+      </RadzenColumn>
+    </RadzenRow>
   </RadzenHeader>
-  <RadzenSidebar @bind-Expanded="@sidebarExpanded">
-    <NavMenu />
-  </RadzenSidebar>
   <RadzenBody>
+    <NavSubMenu />
     <div class="p-2">
       @Body
     </div>
   </RadzenBody>
   <RadzenFooter>Feuertiger Floriantine Test</RadzenFooter>
 </RadzenLayout>
-
-@code {
-    bool sidebarExpanded = true;
-}
