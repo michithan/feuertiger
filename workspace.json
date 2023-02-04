@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "projects": {
-    "feuertiger-web": "apps/feuertiger-web",
-    "feuertiger-web-e2e": "apps/feuertiger-web-e2e"
-  }
-}

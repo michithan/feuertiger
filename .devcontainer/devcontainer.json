@@ -1,6 +1,5 @@
 {
-  "name": "feuertiger",
-  "dockerComposeFile": "../.dev-env.docker-compose.yml",
-  "workspaceFolder": "/workspace",
-  "service": "dev-env"
+    "build": {
+        "dockerfile": "."
+    }
 }

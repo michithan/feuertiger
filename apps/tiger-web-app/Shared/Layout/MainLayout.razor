@@ -1,0 +1,29 @@
+﻿@inherits LayoutComponentBase
+
+<RadzenLayout class="rz-shadow-3">
+  <RadzenContextMenu />
+  <RadzenDialog />
+  <RadzenNotification />
+  <RadzenTooltip />
+  <RadzenHeader>
+    <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">      
+      <RadzenColumn Size="2" class="p-2">
+        <RadzenLabel Text="Floriantine"/>
+      </RadzenColumn>
+      <RadzenColumn Size="8">
+        <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">      
+          <NavMenu />
+        </RadzenRow>
+      </RadzenColumn>
+      <RadzenColumn Size="2">
+      </RadzenColumn>
+    </RadzenRow>
+  </RadzenHeader>
+  <RadzenBody>
+    <NavSubMenu />
+    <div class="p-2">
+      @Body
+    </div>
+  </RadzenBody>
+  <RadzenFooter>Feuertiger Floriantine Test</RadzenFooter>
+</RadzenLayout>
