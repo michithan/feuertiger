@@ -39,23 +39,22 @@
   }
 
   private void UpdatePath() {
-    Path = Navigation.Uri.Replace(Navigation.BaseUri,"");
-    Logger.LogInformation($"Path {Path}");
+    Path = Navigation.Uri.Replace(Navigation.BaseUri,"").Split("/").First();
     MenuItemAttributes = Path switch
     {      
       "people" => new List<MenuItemAttribute>() {
-        new MenuItemAttribute { Text = "Members", Icon = "assignment_ind", Path = "members" },
-        new MenuItemAttribute { Text = "Jobs", Icon = "engineering", Path = "counter" },
-        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = "fetchdata" }
+        new MenuItemAttribute { Text = "Members", Icon = "assignment_ind", Path = $"{Path}/members" },
+        new MenuItemAttribute { Text = "Jobs", Icon = "engineering", Path = $"{Path}/jobs" },
+        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = $"{Path}/statistics" }
       },
       "events" => new List<MenuItemAttribute>() {
-        new MenuItemAttribute { Text = "Practice", Icon = "school", Path = "/" },
-        new MenuItemAttribute { Text = "Work", Icon = "work", Path = "counter" },
-        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = "fetchdata" }
+        new MenuItemAttribute { Text = "Practice", Icon = "school", Path = $"{Path}/practice" },
+        new MenuItemAttribute { Text = "Work", Icon = "work", Path = $"{Path}/work" },
+        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = $"{Path}/statistics" }
       },
       "operations" => new List<MenuItemAttribute>() {
-        new MenuItemAttribute { Text = "Reports", Icon = "article", Path = "counter" },
-        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = "fetchdata" },
+        new MenuItemAttribute { Text = "Reports", Icon = "article", Path = $"{Path}/reports" },
+        new MenuItemAttribute { Text = "Statistics", Icon = "trending_up", Path = $"{Path}/statistics" },
       },
       _ => new List<MenuItemAttribute>()
     };
