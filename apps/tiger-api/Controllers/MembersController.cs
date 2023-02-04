@@ -4,16 +4,16 @@ namespace tiger_api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class MembersController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<MembersController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public MembersController(ILogger<MembersController> logger)
     {
         _logger = logger;
     }
