@@ -1,1 +1,19 @@
-{}
+{
+    "editor.insertSpaces": false,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        ".git": true,
+        "**/bin": true,
+        "**/obj": true,
+    },
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+    },
+    "explorer.confirmDelete": false,
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "[aspnetcorerazor]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    }
+}
