@@ -1,30 +1,21 @@
-version: '3'
+version: "3"
 services:
-    dev-env:
-        # Using a Dockerfile is optional, but included for completeness.
-        build:
-            context: .
-            dockerfile: .dev-env.Dockerfile
-        volumes:
-            # This is where VS Code should expect to find your project's source code and the value of "workspaceFolder" in .devcontainer/devcontainer.json
-            - feuertiger-workspace:/workspace
-            # Use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
-            - /var/run/docker.sock:/var/run/docker.sock
-        # Overrides default command so things don't shut down after the process ends.
-        command: sh -c 'while sleep 3600; do :; done'
-        # Runs app on the same network as the service container, allows "forwardPorts" in devcontainer.json function.
-        network_mode: service:postgres
-        # use a ptrace-based debugger like C++, Go, and Rust.
-        cap_add:
-            - SYS_PTRACE
-        security_opt:
-            - seccomp:unconfined
-    postgres:
-        image: 'postgres:13'
-        restart: unless-stopped
-        environment:
-            - POSTGRES_DB=feuertiger
-            - POSTGRES_USER=feuertiger
-            - POSTGRES_PASSWORD=feuertiger
+  dev-env:
+    # Using a Dockerfile is optional, but included for completeness.
+    build:
+      context: .
+      dockerfile: .dev-env.Dockerfile
+    volumes:
+      # This is where VS Code should expect to find your project's source code and the value of "workspaceFolder" in .devcontainer/devcontainer.json
+      - feuertiger-workspace:/workspace
+      # Use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
+      - /var/run/docker.sock:/var/run/docker.sock
+    # Overrides default command so things don't shut down after the process ends.
+    command: sh -c 'while sleep 3600; do :; done'
+    # use a ptrace-based debugger like C++, Go, and Rust.
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
 volumes:
-    feuertiger-workspace:
+  feuertiger-workspace:

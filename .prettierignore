@@ -1,10 +1,4 @@
-secrets.json
+# Add files here to ignore them from prettier formatting
 
-node_modules
-dist
-
-package-lock.json
-
-*.log
-*.code-workspace
-.next
+/dist
+/coverage
