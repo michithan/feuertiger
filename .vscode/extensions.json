@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "eamodio.gitlens",
+    "foxundermoon.shell-format",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode.powershell",
+    "tyriar.sort-lines",
+    "vscode-icons-team.vscode-icons",
+    "xaver.clang-format",
+    "rust-lang.rust-analyzer",
+    "tamasfe.even-better-toml"
+  ]
+}

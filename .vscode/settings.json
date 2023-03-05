@@ -1,0 +1,26 @@
+{
+    "editor.insertSpaces": false,
+    "files.trimTrailingWhitespace": true,
+    "files.exclude": {
+        ".git": true,
+        "**/bin": true,
+        "**/obj": true,
+    },
+    "search.exclude": {
+        "**/bin": true,
+        "**/obj": true,
+    },
+    "explorer.confirmDelete": false,
+    "workbench.iconTheme": "vscode-icons",
+    "vsicons.dontShowNewVersionMessage": true,
+    "[aspnetcorerazor]": {
+        "editor.defaultFormatter": "ms-dotnettools.csharp"
+    },
+    "git.confirmSync": false,
+    "terminal.integrated.defaultProfile.linux": "pwsh",
+    "terminal.integrated.fontFamily": "'FiraCode Nerd Font Mono'",
+    "editor.fontFamily": "'FiraCode Nerd Font Mono'",
+    "editor.fontLigatures": true,
+    "editor.fontWeight": "400",
+    "powershell.scriptAnalysis.settingsPath": "./PSScriptAnalyzerSettings.psd1"
+}

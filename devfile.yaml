@@ -1,0 +1,15 @@
+schemaVersion: 2.1.0
+
+metadata:
+  name: feuertiger
+
+components:
+  - name: workspace
+    container:
+      image: docker.io/feuertiger/feuertiger:latest
+      endpoints:
+        - exposure: public
+          name: aspnet
+          protocol: http
+          targetPort: 5000
+

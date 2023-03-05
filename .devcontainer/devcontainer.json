@@ -1,0 +1,24 @@
+{
+	"containerUser": "tiger",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"bungcip.better-toml",
+				"eamodio.gitlens",
+				"foxundermoon.shell-format",
+				"ms-dotnettools.blazorwasm-companion",
+				"ms-dotnettools.csharp",
+				"ms-vscode-remote.remote-containers",
+				"ms-vscode.powershell",
+				"tyriar.sort-lines",
+				"vscode-icons-team.vscode-icons",
+				"xaver.clang-format"
+			]
+		}
+	},
+	"image": "docker.io/feuertiger/feuertiger:latest",
+	"privileged": true,
+	"updateRemoteUserUID": false,
+	"workspaceFolder": "/workspace",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind"
+}
